@@ -1,0 +1,15 @@
+# Frontend
+frontend/node_modules
+frontend/.next
+frontend/.env.local
+frontend/tsconfig.tsbuildinfo
+
+# Backend
+backend/node_modules
+backend/.medusa
+backend/.env
+
+# General
+.DS_Store
+Thumbs.db
+*.log
