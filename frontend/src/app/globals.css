@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+/* ── Design Tokens — White Theme ── */
+@theme {
+  --color-primary:     #ffffff;
+  --color-secondary:   #111111;
+  --color-accent:      #111111;
+  --color-gold:        #e8a000;
+  --color-bg:          #ffffff;
+  --color-bg-soft:     #f7f7f7;
+  --color-bg-muted:    #f0f0f0;
+  --color-surface:     #ffffff;
+  --color-border:      #e5e5e5;
+  --color-border-dark: #d0d0d0;
+  --color-text:        #111111;
+  --color-text-muted:  #666666;
+  --color-text-dim:    #999999;
+  --color-red:         #dc2626;
+  --color-green:       #16a34a;
+
+  --font-epilogue: var(--font-epilogue-var), "Epilogue", sans-serif;
+  --font-inter:    var(--font-inter-var), "Inter", sans-serif;
+  --font-space:    var(--font-space-var), "Space Grotesk", sans-serif;
+}
+
+/* ── Keyframes ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: #ffffff;
+  color: #111111;
+  font-family: var(--font-inter-var, "Inter", sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 3px; }
+::-webkit-scrollbar-track { background: #f0f0f0; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #111; }
+
+/* ── Selection ── */
+::selection { background: #111; color: #fff; }
+
+/* ── Utilities ── */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+.marquee { animation: marquee 35s linear infinite; }
+.marquee:hover { animation-play-state: paused; }
+.marquee-track { animation: marquee 35s linear infinite; }

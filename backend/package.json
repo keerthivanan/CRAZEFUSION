@@ -1,0 +1,19 @@
+{
+  "name": "posterking-backend",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "medusa build",
+    "start": "medusa start",
+    "dev": "medusa develop"
+  },
+  "dependencies": {
+    "@medusajs/medusa": "^2.7.0",
+    "@medusajs/dashboard": "^2.7.0"
+  },
+  "devDependencies": {
+    "@medusajs/types": "^2.7.0",
+    "@swc/core": "1.5.7",
+    "typescript": "^5.6.3"
+  }
+}
