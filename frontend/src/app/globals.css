@@ -23,6 +23,7 @@
 
 /* ── CSS Variables — Light (default) ── */
 :root {
+  color-scheme: light;
   --c-bg:          #ffffff;
   --c-bg-soft:     #f7f7f7;
   --c-bg-card:     #fafafa;
@@ -40,6 +41,7 @@
 
 /* ── CSS Variables — Dark ── */
 [data-theme="dark"] {
+  color-scheme: dark;
   --c-bg:          #0a0a0a;
   --c-bg-soft:     #111111;
   --c-bg-card:     #141414;
@@ -107,6 +109,44 @@ body {
 [data-theme="dark"] h2,
 [data-theme="dark"] h3 {
   color: #f0f0f0 !important;
+}
+
+/* ══════════════════════════════════════════
+   DARK MODE — catch-all for hardcoded values
+   ══════════════════════════════════════════ */
+
+/* Any h1/h2/h3/h4 still using hardcoded #111 */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4 {
+  color: var(--c-text) !important;
+}
+
+/* Any p still hardcoded */
+[data-theme="dark"] p {
+  color: var(--c-text-muted) !important;
+}
+
+/* Borders that use hardcoded light values */
+[data-theme="dark"] .border-light {
+  border-color: var(--c-border) !important;
+}
+
+/* View All links and section subheadings using hardcoded #111 */
+[data-theme="dark"] a.view-all-link {
+  color: var(--c-text) !important;
+  border-color: var(--c-text) !important;
+}
+
+/* Cart/checkout order summary boxes */
+[data-theme="dark"] .order-box {
+  border-color: var(--c-border) !important;
+}
+
+/* Newsletter heading (uses hardcoded #111) */
+[data-theme="dark"] .newsletter-heading {
+  color: var(--c-text) !important;
 }
 
 /* ══════════════════════════════════════════

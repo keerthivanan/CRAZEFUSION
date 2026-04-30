@@ -53,7 +53,7 @@ function ProductCard({ p }: { p: typeof products[0] }) {
           <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 5, lineHeight: 1.3, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{p.title}</div>
           <div style={{ fontFamily: FO, fontSize: 10, color: "#aaa", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.04em" }}>{p.sub}</div>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontFamily: FO, fontSize: 15, fontWeight: 900, color: "#111" }}>₹{p.price}</span>
+            <span style={{ fontFamily: FO, fontSize: 15, fontWeight: 900, color: "var(--c-text)" }}>₹{p.price}</span>
             <span style={{ fontFamily: FO, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>
             <span style={{ fontFamily: FO, fontSize: 10, fontWeight: 800, color: "#dc2626", marginLeft: "auto" }}>
               -{Math.round((1 - p.price / p.original) * 100)}%
@@ -78,13 +78,13 @@ export default function BestSelling() {
             <span style={{ color: "#e8a000" }}><BlurText text="Selling" delay={160} animateBy="words" direction="bottom" /></span>
           </h2>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <Link href="/collection" style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#111", textDecoration: "none", borderBottom: "1.5px solid #111" }}>View All</Link>
+            <Link href="/collection" style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-text)", textDecoration: "none", borderBottom: "1.5px solid var(--c-text)" }}>View All</Link>
             <div style={{ display: "flex", gap: 6 }}>
               {["←", "→"].map((d, i) => (
                 <button key={d} onClick={() => scroll(i === 0 ? "l" : "r")}
-                  style={{ width: 34, height: 34, border: "1px solid #e0e0e0", background: "var(--c-bg)", cursor: "pointer", fontSize: 14, color: "#111", transition: "all 0.2s" }}
+                  style={{ width: 34, height: 34, border: "1px solid #e0e0e0", background: "var(--c-bg)", cursor: "pointer", fontSize: 14, color: "var(--c-text)", transition: "all 0.2s" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = "#111"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "#fff"; (e.currentTarget as HTMLButtonElement).style.color = "#111"; }}>
+                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "var(--c-bg)"; (e.currentTarget as HTMLButtonElement).style.color = "var(--c-text)"; }}>
                   {d}
                 </button>
               ))}

@@ -39,7 +39,7 @@ export default function SignupPage() {
       {/* Top logo — centered */}
       <div style={{ padding: "28px 32px", borderBottom: "1px solid var(--c-border)", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Link href="/">
-          <img src="/logo.png" alt="PosterKing" style={{ height: 44, objectFit: "contain" }} />
+          <img src="/logo.png" alt="PosterKing" className="pk-logo" style={{ height: 52, objectFit: "contain", display: "block" }} />
         </Link>
       </div>
 
@@ -71,7 +71,7 @@ export default function SignupPage() {
             <div>
               <label style={labelStyle}>Phone Number</label>
               <div style={{ display: "flex" }}>
-                <div style={{ padding: "13px 14px", border: "1px solid #e0e0e0", borderRight: "none", background: "#f9f9f9", fontFamily: F, fontSize: 14, color: "var(--c-text-muted)", flexShrink: 0 }}>+91</div>
+                <div style={{ padding: "13px 14px", border: "1px solid var(--c-border)", borderRight: "none", background: "var(--c-bg-soft)", fontFamily: F, fontSize: 14, color: "var(--c-text-muted)", flexShrink: 0 }}>+91</div>
                 <input type="tel" placeholder="10-digit mobile" value={phone}
                   onChange={e => setPhone(e.target.value)} maxLength={10}
                   style={{ ...inputStyle, flex: 1 }}
@@ -120,7 +120,7 @@ export default function SignupPage() {
         </div>
       </div>
 
-      <div style={{ borderTop: "1px solid #f0f0f0", padding: "14px 32px", display: "flex", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
+      <div style={{ borderTop: "1px solid var(--c-border)", padding: "14px 32px", display: "flex", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
         {["Secured by Razorpay", "4.9 Rating", "Free Delivery on Prepaid", "7-Day Returns"].map(t => (
           <span key={t} style={{ fontFamily: F, fontSize: 11, color: "#bbb" }}>{t}</span>
         ))}

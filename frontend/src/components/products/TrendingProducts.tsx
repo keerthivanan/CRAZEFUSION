@@ -53,7 +53,7 @@ function TCard({ p }: { p: typeof products[0] }) {
         <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 3, overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}>{p.title}</div>
         <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.04em" }}>{p.sub}</div>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "#111" }}>From ₹{p.price}</span>
+          <span style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "var(--c-text)" }}>From ₹{p.price}</span>
           <span style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>
         </div>
       </Link>
@@ -74,13 +74,13 @@ export default function TrendingProducts() {
             <span style={{ color: "#e8a000" }}><BlurText text="Now" delay={160} animateBy="words" direction="bottom" /></span>
           </h2>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <Link href="/collection" style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#111", textDecoration: "none", borderBottom: "1.5px solid #111" }}>View All</Link>
+            <Link href="/collection" style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-text)", textDecoration: "none", borderBottom: "1.5px solid var(--c-text)" }}>View All</Link>
             <div style={{ display: "flex", gap: 6 }}>
               {["←", "→"].map((d, i) => (
                 <button key={d} onClick={() => scroll(i === 0 ? "l" : "r")}
-                  style={{ width: 34, height: 34, border: "1px solid #e0e0e0", background: "var(--c-bg)", cursor: "pointer", fontSize: 14, transition: "all 0.2s" }}
+                  style={{ width: 34, height: 34, border: "1px solid #e0e0e0", background: "var(--c-bg)", cursor: "pointer", fontSize: 14, color: "var(--c-text)", transition: "all 0.2s" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = "#111"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; (e.currentTarget as HTMLButtonElement).style.borderColor = "#111"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "#fff"; (e.currentTarget as HTMLButtonElement).style.color = "#111"; (e.currentTarget as HTMLButtonElement).style.borderColor = "#e0e0e0"; }}>
+                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "var(--c-bg)"; (e.currentTarget as HTMLButtonElement).style.color = "var(--c-text)"; (e.currentTarget as HTMLButtonElement).style.borderColor = "#e0e0e0"; }}>
                   {d}
                 </button>
               ))}
