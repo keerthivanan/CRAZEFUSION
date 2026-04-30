@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 
@@ -38,9 +38,9 @@ export default function Newsletter() {
               type="email" required value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="your@email.com"
-              style={{ flex: 1, padding: "14px 18px", background: "var(--c-bg)", border: "1.5px solid #e0e0e0", borderRight: "none", color: "#111", fontFamily: F, fontSize: 13, outline: "none", transition: "border-color 0.2s" }}
+              style={{ flex: 1, padding: "14px 18px", background: "var(--c-bg)", border: "1.5px solid var(--c-border)", borderRight: "none", color: "var(--c-text)", fontFamily: F, fontSize: 13, outline: "none", transition: "border-color 0.2s" }}
               onFocus={e => (e.currentTarget.style.borderColor = "#111")}
-              onBlur={e => (e.currentTarget.style.borderColor = "#e0e0e0")}
+              onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")}
             />
             <ClickSpark sparkColor="#e8a000" sparkCount={8} sparkRadius={20}>
               <button type="submit" style={{ padding: "14px 24px", background: "#111", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", whiteSpace: "nowrap", transition: "background 0.2s" }}

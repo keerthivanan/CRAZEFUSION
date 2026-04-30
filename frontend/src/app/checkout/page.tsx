@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
@@ -34,18 +34,18 @@ export default function CheckoutPage() {
     <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 40 }}>
       <div style={{ textAlign: "center", maxWidth: 500 }}>
         <div style={{ width: 80, height: 80, background: "#16a34a", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 36, margin: "0 auto 24px", color: "#fff" }}>✓</div>
-        <h1 style={{ fontFamily: FE, fontSize: 36, fontWeight: 900, color: "#111", textTransform: "uppercase", marginBottom: 12 }}>Order Placed!</h1>
+        <h1 style={{ fontFamily: FE, fontSize: 36, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 12 }}>Order Placed!</h1>
         <p style={{ fontFamily: F, fontSize: 14, color: "#666", lineHeight: 1.7, marginBottom: 8 }}>
           Thank you, <strong>{form.name || "Customer"}</strong>! Your order has been confirmed. You'll receive a confirmation email shortly.
         </p>
-        <div style={{ background: "#f9f9f9", border: "1px solid #f0f0f0", padding: 20, margin: "24px 0", textAlign: "left" }}>
+        <div style={{ background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", padding: 20, margin: "24px 0", textAlign: "left" }}>
           <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 8 }}>Order ID</div>
-          <div style={{ fontFamily: FE, fontSize: 22, fontWeight: 900, color: "#111" }}>{orderIdRef.current}</div>
+          <div style={{ fontFamily: FE, fontSize: 22, fontWeight: 900, color: "var(--c-text)" }}>{orderIdRef.current}</div>
         </div>
         <p style={{ fontFamily: F, fontSize: 12, color: "#aaa", marginBottom: 28 }}>Expected delivery: 5–7 business days</p>
         <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
           <Link href="/tracking"
-            style={{ display: "inline-block", padding: "14px 28px", border: "1px solid #111", color: "#111", fontFamily: F, fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}>
+            style={{ display: "inline-block", padding: "14px 28px", border: "1px solid #111", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}>
             Track Order
           </Link>
           <Link href="/"
@@ -62,7 +62,7 @@ export default function CheckoutPage() {
     <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, paddingTop: 64 }}>
       <Navbar />
       <div style={{ textAlign: "center" }}>
-        <h2 style={{ fontFamily: FE, fontSize: 28, fontWeight: 900, color: "#111", textTransform: "uppercase" }}>Your cart is empty</h2>
+        <h2 style={{ fontFamily: FE, fontSize: 28, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase" }}>Your cart is empty</h2>
         <p style={{ fontFamily: F, fontSize: 14, color: "#aaa", marginBottom: 24 }}>Add products to your cart before checking out.</p>
         <Link href="/collection" style={{ display: "inline-block", padding: "14px 36px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}>Shop Now</Link>
       </div>
@@ -74,7 +74,7 @@ export default function CheckoutPage() {
       <Navbar />
       <main style={{ paddingTop: 56 }}>
         {/* Steps Header */}
-        <div style={{ background: "#f9f9f9", borderBottom: "1px solid #f0f0f0", padding: "20px 32px" }}>
+        <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "20px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: 0 }}>
             {steps.map((s, i) => (
               <div key={s} style={{ display: "flex", alignItems: "center" }}>
@@ -95,7 +95,7 @@ export default function CheckoutPage() {
           <div>
             {step === 0 && (
               <div>
-                <h2 style={{ fontFamily: FE, fontSize: 24, fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", marginBottom: 28 }}>Delivery Details</h2>
+                <h2 style={{ fontFamily: FE, fontSize: 24, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", marginBottom: 28 }}>Delivery Details</h2>
                 <div className="checkout-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
                   {[["name", "Full Name"], ["email", "Email Address"]].map(([k, l]) => (
                     <div key={k}>
@@ -131,7 +131,7 @@ export default function CheckoutPage() {
 
             {step === 1 && (
               <div>
-                <h2 style={{ fontFamily: FE, fontSize: 24, fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", marginBottom: 28 }}>Payment Method</h2>
+                <h2 style={{ fontFamily: FE, fontSize: 24, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", marginBottom: 28 }}>Payment Method</h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
                   {[["upi", "UPI / Google Pay / PhonePe", "Instant · Most Popular"], ["card", "Credit / Debit Card", "Secured by Razorpay"], ["netbanking", "Net Banking", "All major banks supported"], ["cod", "Cash on Delivery", "+₹49 handling charge"]].map(([val, label, desc]) => (
                     <label key={val} onClick={() => setPayMethod(val)}
@@ -140,14 +140,14 @@ export default function CheckoutPage() {
                         {payMethod === val && <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#111" }} />}
                       </div>
                       <div>
-                        <div style={{ fontFamily: F, fontSize: 13, fontWeight: 700, color: "#111" }}>{label}</div>
+                        <div style={{ fontFamily: F, fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>{label}</div>
                         <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginTop: 2 }}>{desc}</div>
                       </div>
                     </label>
                   ))}
                 </div>
                 <div style={{ display: "flex", gap: 12 }}>
-                  <button onClick={() => setStep(0)} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "#111", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid #e0e0e0", cursor: "pointer" }}>← Back</button>
+                  <button onClick={() => setStep(0)} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid var(--c-border)", cursor: "pointer" }}>← Back</button>
                   <button onClick={() => setStep(2)} style={{ flex: 1, padding: "15px 24px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer" }}>
                     Review Order →
                   </button>
@@ -157,19 +157,19 @@ export default function CheckoutPage() {
 
             {step === 2 && (
               <div>
-                <h2 style={{ fontFamily: FE, fontSize: 24, fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", marginBottom: 28 }}>Confirm Order</h2>
+                <h2 style={{ fontFamily: FE, fontSize: 24, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", marginBottom: 28 }}>Confirm Order</h2>
                 {[["Deliver To", `${form.name || "—"}, ${form.address || "—"}, ${form.city || "—"} ${form.pincode || ""}`],
                   ["Payment", payMethod.toUpperCase()],
                   ["Expected", "5–7 Business Days"],
                   ["Items", `${items.reduce((s, i) => s + i.qty, 0)} items`],
                 ].map(([label, val]) => (
-                  <div key={label} style={{ display: "flex", gap: 20, padding: "16px 0", borderBottom: "1px solid #f0f0f0" }}>
+                  <div key={label} style={{ display: "flex", gap: 20, padding: "16px 0", borderBottom: "1px solid var(--c-border)" }}>
                     <div style={{ fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#aaa", width: 100, flexShrink: 0 }}>{label}</div>
-                    <div style={{ fontFamily: F, fontSize: 13, color: "#111" }}>{val}</div>
+                    <div style={{ fontFamily: F, fontSize: 13, color: "var(--c-text)" }}>{val}</div>
                   </div>
                 ))}
                 <div style={{ display: "flex", gap: 12, marginTop: 28 }}>
-                  <button onClick={() => setStep(1)} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "#111", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid #e0e0e0", cursor: "pointer" }}>← Back</button>
+                  <button onClick={() => setStep(1)} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid var(--c-border)", cursor: "pointer" }}>← Back</button>
                   <button onClick={handlePlaceOrder}
                     style={{ flex: 1, padding: "15px 24px", background: "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 900, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer" }}>
                     Place Order · ₹{total}
@@ -181,8 +181,8 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div>
-            <div style={{ border: "1px solid #f0f0f0", padding: 24, position: "sticky", top: 80 }}>
-              <h3 style={{ fontFamily: FE, fontSize: 16, fontWeight: 900, color: "#111", textTransform: "uppercase", marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid #f0f0f0" }}>Order Summary</h3>
+            <div style={{ border: "1px solid var(--c-border)", padding: 24, position: "sticky", top: 80 }}>
+              <h3 style={{ fontFamily: FE, fontSize: 16, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid var(--c-border)" }}>Order Summary</h3>
               <div style={{ maxHeight: 300, overflowY: "auto" }}>
                 {items.map(item => (
                   <div key={`${item.id}-${item.size}-${item.finish}`} style={{ display: "flex", gap: 12, marginBottom: 16 }}>
@@ -190,14 +190,14 @@ export default function CheckoutPage() {
                       <img src={item.img} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     </div>
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontFamily: FE, fontSize: 11, fontWeight: 700, color: "#111", textTransform: "uppercase", marginBottom: 2, lineHeight: 1.3 }}>{item.title}</div>
+                      <div style={{ fontFamily: FE, fontSize: 11, fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 2, lineHeight: 1.3 }}>{item.title}</div>
                       <div style={{ fontFamily: F, fontSize: 10, color: "#aaa" }}>{item.size} · {item.finish} · Qty: {item.qty}</div>
                     </div>
-                    <div style={{ fontFamily: FE, fontSize: 14, fontWeight: 800, color: "#111" }}>₹{item.price * item.qty}</div>
+                    <div style={{ fontFamily: FE, fontSize: 14, fontWeight: 800, color: "var(--c-text)" }}>₹{item.price * item.qty}</div>
                   </div>
                 ))}
               </div>
-              <div style={{ borderTop: "1px solid #f0f0f0", paddingTop: 16, marginTop: 8 }}>
+              <div style={{ borderTop: "1px solid var(--c-border)", paddingTop: 16, marginTop: 8 }}>
                 {[["Subtotal", `₹${subtotal}`], ["Shipping", shipping === 0 ? "FREE" : `₹${shipping}`], ["Total", `₹${total}`]].map(([label, val], i) => (
                   <div key={label} style={{ display: "flex", justifyContent: "space-between", marginBottom: i < 2 ? 8 : 0 }}>
                     <span style={{ fontFamily: F, fontSize: i === 2 ? 14 : 12, fontWeight: i === 2 ? 800 : 400, color: "#555" }}>{label}</span>

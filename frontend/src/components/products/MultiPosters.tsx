@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useRef } from "react";
 import Link from "next/link";
 import ClickSpark from "@/components/reactbits/ClickSpark";
@@ -74,7 +74,7 @@ export default function MultiPosters() {
             <div style={{ display: "flex", gap: 6 }}>
               {["←", "→"].map((d, i) => (
                 <button key={d} onClick={() => scroll(i === 0 ? "l" : "r")}
-                  style={{ width: 36, height: 36, border: "1px solid #e0e0e0", background: "var(--c-bg)", cursor: "pointer", fontSize: 14, color: "var(--c-text)", transition: "all 0.2s" }}
+                  style={{ width: 36, height: 36, border: "1px solid var(--c-border)", background: "var(--c-bg)", cursor: "pointer", fontSize: 14, color: "var(--c-text)", transition: "all 0.2s" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = "#111"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "var(--c-bg)"; (e.currentTarget as HTMLButtonElement).style.color = "var(--c-text)"; }}>
                   {d}

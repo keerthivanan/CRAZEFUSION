@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import BlurText from "@/components/reactbits/BlurText";
 import AnimatedContent from "@/components/reactbits/AnimatedContent";
@@ -58,7 +58,7 @@ export default function ReviewsMarquee() {
                 flexShrink: 0,
                 width: 300,
                 background: "var(--c-bg-card)",
-                border: "1px solid #efefef",
+                border: "1px solid var(--c-card-border)",
                 borderRadius: 14,
                 padding: 24,
                 cursor: "default",

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Link from "next/link";
 import AnimatedContent from "@/components/reactbits/AnimatedContent";
 import BlurText from "@/components/reactbits/BlurText";
@@ -26,7 +26,7 @@ export default function SectionHeader({ label, title, highlight, subtitle, viewA
             {label}
           </div>
         )}
-        <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,42px)", fontWeight: 900, letterSpacing: "-0.03em", lineHeight: 1.1, color: "#111", textTransform: "uppercase", margin: 0, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.25em" }}>
+        <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,42px)", fontWeight: 900, letterSpacing: "-0.03em", lineHeight: 1.1, color: "var(--c-text)", textTransform: "uppercase", margin: 0, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.25em" }}>
           <BlurText text={title} delay={80} animateBy="words" direction="bottom" />
           {highlight && (
             <span style={{ color: "#e8a000" }}>
@@ -41,7 +41,7 @@ export default function SectionHeader({ label, title, highlight, subtitle, viewA
       {viewAllHref && (
         <Magnet padding={16} magnetStrength={2}>
           <Link href={viewAllHref}
-            style={{ fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#111", textDecoration: "none", borderBottom: "1.5px solid #111", paddingBottom: 2, whiteSpace: "nowrap", transition: "opacity 0.2s, color 0.2s" }}
+            style={{ fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text)", textDecoration: "none", borderBottom: "1.5px solid #111", paddingBottom: 2, whiteSpace: "nowrap", transition: "opacity 0.2s, color 0.2s" }}
             onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#e8a000"; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = "#e8a000"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#111"; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = "#111"; }}>
             View All →

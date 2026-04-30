@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Link from "next/link";
 
 const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
@@ -42,7 +42,7 @@ export default function CategoryIcons() {
               height: 72,
               borderRadius: "50%",
               overflow: "hidden",
-              border: "1px solid #eee",
+              border: "1px solid var(--c-border)",
               boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
               transition: "all 0.25s ease",
             }}

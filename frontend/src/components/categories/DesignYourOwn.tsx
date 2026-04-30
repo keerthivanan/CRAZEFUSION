@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Link from "next/link";
 import TiltedCard from "@/components/reactbits/TiltedCard";
 import AnimatedContent from "@/components/reactbits/AnimatedContent";
@@ -40,7 +40,7 @@ export default function DesignYourOwn() {
           {options.map((opt, i) => (
             <AnimatedContent key={opt.label} distance={20} delay={i * 0.07} duration={0.5} threshold={0.05}>
               <Link href={opt.href} style={{ textDecoration: "none", display: "block" }}>
-                <div style={{ borderRadius: 8, overflow: "hidden", background: "var(--c-bg)", border: "1px solid #efefef", transition: "all 0.25s ease", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+                <div style={{ borderRadius: 8, overflow: "hidden", background: "var(--c-bg)", border: "1px solid var(--c-card-border)", transition: "all 0.25s ease", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "#e8a000"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 24px rgba(232,160,0,0.1)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)"; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "#efefef"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}>
 
