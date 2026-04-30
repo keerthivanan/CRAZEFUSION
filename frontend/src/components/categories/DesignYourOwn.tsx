@@ -42,7 +42,7 @@ export default function DesignYourOwn() {
               <Link href={opt.href} style={{ textDecoration: "none", display: "block" }}>
                 <div style={{ borderRadius: 8, overflow: "hidden", background: "var(--c-bg)", border: "1px solid var(--c-card-border)", transition: "all 0.25s ease", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "#e8a000"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 24px rgba(232,160,0,0.1)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "#efefef"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}>
+                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "var(--c-card-border)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}>
 
                   <TiltedCard
                     imageSrc={opt.img}

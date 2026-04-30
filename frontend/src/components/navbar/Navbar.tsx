@@ -140,25 +140,25 @@ export default function Navbar() {
                     position: "absolute", top: "100%", left: "50%",
                     transform: "translateX(-50%)",
                     background: "var(--c-bg)",
-                    border: "1px solid #ebebeb",
+                    border: "1px solid var(--c-border)",
                     minWidth: 220,
                     boxShadow: "0 12px 40px rgba(0,0,0,0.10)",
                     zIndex: 200,
                     paddingTop: 4, paddingBottom: 4,
                   }}>
                     <div style={{ position: "absolute", top: -5, left: "50%", transform: "translateX(-50%)", width: 10, height: 5, overflow: "hidden" }}>
-                      <div style={{ width: 10, height: 10, background: "var(--c-bg)", border: "1px solid #ebebeb", transform: "rotate(45deg) translate(2px,2px)" }} />
+                      <div style={{ width: 10, height: 10, background: "var(--c-bg)", border: "1px solid var(--c-border)", transform: "rotate(45deg) translate(2px,2px)" }} />
                     </div>
                     {item.children.map(child => (
                       <Link key={child.label} href={child.href} style={{
                         display: "block", padding: "9px 18px",
                         fontFamily: F, fontSize: 12, fontWeight: 500,
-                        color: "#555", textDecoration: "none",
+                        color: "var(--c-text-muted)", textDecoration: "none",
                         transition: "all 0.12s",
                         borderBottom: "1px solid var(--c-border)",
                       }}
-                        onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = "#fafafa"; el.style.color = "#111"; el.style.paddingLeft = "22px"; }}
-                        onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = ""; el.style.color = "#555"; el.style.paddingLeft = "18px"; }}
+                        onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = "var(--c-bg-soft)"; el.style.color = "var(--c-text)"; el.style.paddingLeft = "22px"; }}
+                        onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = ""; el.style.color = "var(--c-text-muted)"; el.style.paddingLeft = "18px"; }}
                       >
                         {child.label}
                       </Link>
@@ -203,7 +203,7 @@ export default function Navbar() {
             <Link href="/auth/login" style={{
               fontFamily: FO, fontSize: 11, fontWeight: 700,
               letterSpacing: "0.08em", textTransform: "uppercase",
-              color: "#fff", background: "var(--c-btn-bg)",
+              color: "var(--c-btn-text)", background: "var(--c-btn-bg)",
               textDecoration: "none", padding: "9px 20px",
               transition: "opacity 0.2s", lineHeight: 1,
             }}

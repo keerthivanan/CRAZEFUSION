@@ -69,7 +69,7 @@ export default function ReviewsMarquee() {
                 e.currentTarget.style.boxShadow = "0 8px 32px rgba(232,160,0,0.1)";
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = "#efefef";
+                e.currentTarget.style.borderColor = "var(--c-card-border)";
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
@@ -77,12 +77,12 @@ export default function ReviewsMarquee() {
               <div style={{ color: "#e8a000", fontSize: 13, marginBottom: 12, letterSpacing: 3 }}>★★★★★</div>
 
               {/* Review text */}
-              <p style={{ fontFamily: F, fontSize: 13, color: "#444", lineHeight: 1.7, marginBottom: 20, minHeight: 60 }}>
+              <p style={{ fontFamily: F, fontSize: 13, color: "var(--c-text-muted)", lineHeight: 1.7, marginBottom: 20, minHeight: 60 }}>
                 &ldquo;{r.text}&rdquo;
               </p>
 
               {/* Divider */}
-              <div style={{ height: 1, background: "#f0f0f0", marginBottom: 16 }} />
+              <div style={{ height: 1, background: "var(--c-border)", marginBottom: 16 }} />
 
               {/* Name + Product */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
