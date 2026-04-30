@@ -9,12 +9,12 @@ const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
 
 const layouts = [
-  { id: "single",   label: "Single Poster",     pieces: "1 Piece",  img: "https://www.posterized.in/cdn/shop/files/custom_36a826e7-a7e6-4025-9e24-1cddaa3eb898.webp?v=1767176286&width=600" },
-  { id: "3piece",   label: "3 Piece Split",      pieces: "3 Pieces", img: "https://www.posterized.in/cdn/shop/files/FINAL.png?v=1767068039&width=600" },
-  { id: "4piece",   label: "4 Piece 2×2 Grid",   pieces: "4 Pieces", img: "https://www.posterized.in/cdn/shop/files/Custom_2X2_bc646270-f489-424f-9268-137650d0ebb4.jpg?v=1771995000&width=600" },
-  { id: "retro",    label: "Retro Photo Prints",  pieces: "Custom",   img: "https://www.posterized.in/cdn/shop/files/a6_0378f882-0c62-4116-83b8-90619198b73f.webp?v=1767173575&width=600" },
-  { id: "pocket",   label: "Pocket Photos",       pieces: "Set",      img: "https://www.posterized.in/cdn/shop/files/mini.webp?v=1756821198&width=600" },
-  { id: "strip",    label: "Photobooth Strip",    pieces: "Strip",    img: "https://www.posterized.in/cdn/shop/files/strip_6a6180c0-06d1-4cb5-9d97-4e427f308d75.webp?v=1756821798&width=600" },
+  { id: "single",  label: "Single Poster",    pieces: "1 Piece"  },
+  { id: "3piece",  label: "3 Piece Split",     pieces: "3 Pieces" },
+  { id: "4piece",  label: "4 Piece 2×2 Grid",  pieces: "4 Pieces" },
+  { id: "retro",   label: "Retro Photo Prints", pieces: "Custom"   },
+  { id: "pocket",  label: "Pocket Photos",      pieces: "Set"      },
+  { id: "strip",   label: "Photobooth Strip",   pieces: "Strip"    },
 ];
 
 const sizes = ["A4 (21×30 cm)", "A3 (30×42 cm)", "A2 (42×60 cm)", "13×19 inch"];
@@ -57,8 +57,13 @@ export default function CustomBuilderPage() {
               {layouts.map(l => (
                 <button key={l.id} onClick={() => setSelectedLayout(l.id)}
                   style={{ border: `2px solid ${selectedLayout === l.id ? "#111" : "#e0e0e0"}`, background: selectedLayout === l.id ? "#fafafa" : "#fff", cursor: "pointer", overflow: "hidden", transition: "all 0.15s", padding: 0 }}>
-                  <div style={{ aspectRatio: "16/9", overflow: "hidden" }}>
-                    <img src={l.img} alt={l.label} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <div style={{ padding: "18px 16px", background: "#f5f5f5", display: "flex", gap: 4, alignItems: "center", justifyContent: "center", minHeight: 64 }}>
+                    {l.id === "single"  && <div style={{ width: 40, height: 52, background: selectedLayout === l.id ? "#111" : "#ccc", borderRadius: 1 }} />}
+                    {l.id === "3piece"  && [1,2,3].map(i => <div key={i} style={{ width: 18, height: 52, background: selectedLayout === l.id ? "#111" : "#ccc", borderRadius: 1 }} />)}
+                    {l.id === "4piece"  && <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 3 }}>{[1,2,3,4].map(i => <div key={i} style={{ width: 22, height: 26, background: selectedLayout === l.id ? "#111" : "#ccc", borderRadius: 1 }} />)}</div>}
+                    {l.id === "retro"   && <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 2 }}>{[1,2,3,4,5,6].map(i => <div key={i} style={{ width: 16, height: 20, background: selectedLayout === l.id ? "#111" : "#ccc", borderRadius: 1 }} />)}</div>}
+                    {l.id === "pocket"  && [1,2,3,4].map(i => <div key={i} style={{ width: 14, height: 20, background: selectedLayout === l.id ? "#111" : "#ccc", borderRadius: 1 }} />)}
+                    {l.id === "strip"   && <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>{[1,2,3,4].map(i => <div key={i} style={{ width: 28, height: 12, background: selectedLayout === l.id ? "#111" : "#ccc", borderRadius: 1 }} />)}</div>}
                   </div>
                   <div style={{ padding: "10px 12px", textAlign: "left" }}>
                     <div style={{ fontFamily: FE, fontSize: 12, fontWeight: 800, color: selectedLayout === l.id ? "#111" : "#555", textTransform: "uppercase", marginBottom: 2 }}>{l.label}</div>

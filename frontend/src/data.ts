@@ -137,7 +137,7 @@ export const products = [
 
 export const reviews = [
   { name: "Arjun K.", city: "Mumbai", text: "Absolutely stunning quality! My room looks like a magazine shoot. The panels align perfectly and the print quality is unreal.", stars: 5, product: "BMW M4 Poster", date: "Mar 2025" },
-  { name: "Priya S.", city: "Delhi", text: "The 9-piece split poster is incredible. Everyone who visits asks about it. I've recommended PosterKing to all my friends!", stars: 5, product: "Naruto 9-Piece Split", date: "Feb 2025" },
+  { name: "Priya S.", city: "Delhi", text: "The 9-piece split poster is incredible. Everyone who visits asks about it. I've recommended CrazeFusion to all my friends!", stars: 5, product: "Naruto 9-Piece Split", date: "Feb 2025" },
   { name: "Rahul M.", city: "Bangalore", text: "Ordered the 50-piece collage kit. Best purchase of my life honestly. Packaging was perfect, no damage whatsoever.", stars: 5, product: "Anime Collage Kit", date: "Jan 2025" },
   { name: "Sneha R.", city: "Chennai", text: "Custom portrait of my pet dog came out perfectly. So emotional when I saw it. Will definitely order again!", stars: 5, product: "Custom Print", date: "Mar 2025" },
   { name: "Vikram T.", city: "Hyderabad", text: "Delivery super fast, packaging excellent. 10/10 recommend. The colors are so vibrant and true to what I saw online.", stars: 5, product: "F1 Collection", date: "Apr 2025" },

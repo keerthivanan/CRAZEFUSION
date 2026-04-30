@@ -7,7 +7,9 @@ import Footer from "@/components/footer/Footer";
 import Newsletter from "@/components/footer/Newsletter";
 import { products } from "@/data";
 import { useCart } from "@/context/CartContext";
+import ClickSpark from "@/components/reactbits/ClickSpark";
 
+const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
 
@@ -59,7 +61,7 @@ export default function ProductPage() {
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
       <Navbar />
-      <main style={{ paddingTop: 64 }}>
+      <main style={{ paddingTop: 56 }}>
 
         {/* Breadcrumb */}
         <div style={{ borderBottom: "1px solid #f0f0f0", padding: "16px 32px" }}>
@@ -73,7 +75,7 @@ export default function ProductPage() {
         </div>
 
         {/* Product Layout */}
-        <div style={{ maxWidth: 1400, margin: "0 auto", padding: "48px 32px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
+        <div className="product-detail-layout" style={{ maxWidth: 1400, margin: "0 auto", padding: "48px 32px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
 
           {/* Images */}
           <div>
@@ -103,33 +105,33 @@ export default function ProductPage() {
 
           {/* Details */}
           <div>
-            <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>{p.sub}</div>
-            <h1 style={{ fontFamily: FE, fontSize: "clamp(22px,3vw,36px)", fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.03em", marginBottom: 16, lineHeight: 1.1 }}>
+            <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 500, color: "#999", letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 10 }}>{p.sub}</div>
+            <h1 style={{ fontFamily: FO, fontSize: "clamp(20px,2.6vw,36px)", fontWeight: 700, color: "#111", textTransform: "uppercase", letterSpacing: "0.01em", marginBottom: 14, lineHeight: 1.15 }}>
               {p.title}
             </h1>
 
             {/* Rating */}
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-              <div style={{ color: "#e8a000", fontSize: 14, letterSpacing: 2 }}>★★★★★</div>
-              <span style={{ fontFamily: F, fontSize: 12, color: "#aaa" }}>4.9 (2,400+ reviews)</span>
+              <div style={{ color: "#e8a000", fontSize: 13, letterSpacing: 2 }}>★★★★★</div>
+              <span style={{ fontFamily: FO, fontSize: 12, fontWeight: 500, color: "#aaa" }}>4.9 (2,400+ reviews)</span>
             </div>
 
             {/* Price */}
             <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 24, paddingBottom: 24, borderBottom: "1px solid #f0f0f0" }}>
-              <span style={{ fontFamily: FE, fontSize: 36, fontWeight: 900, color: "#111" }}>₹{p.price}</span>
-              <span style={{ fontFamily: F, fontSize: 18, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>
-              <span style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "#dc2626", background: "rgba(220,38,38,0.08)", padding: "3px 8px" }}>{discount}% OFF</span>
+              <span style={{ fontFamily: FO, fontSize: 40, fontWeight: 800, color: "#111" }}>₹{p.price}</span>
+              <span style={{ fontFamily: FO, fontSize: 20, fontWeight: 400, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>
+              <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "#dc2626", background: "rgba(220,38,38,0.06)", padding: "4px 12px", borderRadius: 4 }}>{discount}% OFF</span>
             </div>
 
             {/* Size Selector */}
             <div style={{ marginBottom: 20 }}>
-              <div style={{ fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#555", marginBottom: 10 }}>
-                Size: <span style={{ color: "#111" }}>{p.sizes[selectedSize]}</span>
+              <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#777", marginBottom: 10 }}>
+                Size: <span style={{ color: "#111", fontWeight: 700 }}>{p.sizes[selectedSize]}</span>
               </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {p.sizes.map((s, i) => (
                   <button key={s} onClick={() => setSelectedSize(i)}
-                    style={{ padding: "9px 18px", border: `1.5px solid ${selectedSize === i ? "#111" : "#e0e0e0"}`, background: selectedSize === i ? "#111" : "#fff", color: selectedSize === i ? "#fff" : "#555", fontFamily: F, fontSize: 12, fontWeight: 700, cursor: "pointer", transition: "all 0.15s" }}>
+                    style={{ padding: "10px 22px", border: `1.5px solid ${selectedSize === i ? "#111" : "#e0e0e0"}`, background: selectedSize === i ? "#111" : "#fff", color: selectedSize === i ? "#fff" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }}>
                     {s}
                   </button>
                 ))}
@@ -138,13 +140,13 @@ export default function ProductPage() {
 
             {/* Finish Selector */}
             <div style={{ marginBottom: 24 }}>
-              <div style={{ fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#555", marginBottom: 10 }}>
-                Finish: <span style={{ color: "#111" }}>{p.finishes[selectedFinish]}</span>
+              <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#777", marginBottom: 10 }}>
+                Finish: <span style={{ color: "#111", fontWeight: 700 }}>{p.finishes[selectedFinish]}</span>
               </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {p.finishes.map((f, i) => (
                   <button key={f} onClick={() => setSelectedFinish(i)}
-                    style={{ padding: "9px 18px", border: `1.5px solid ${selectedFinish === i ? "#111" : "#e0e0e0"}`, background: selectedFinish === i ? "#111" : "#fff", color: selectedFinish === i ? "#fff" : "#555", fontFamily: F, fontSize: 12, fontWeight: 700, cursor: "pointer", transition: "all 0.15s" }}>
+                    style={{ padding: "10px 22px", border: `1.5px solid ${selectedFinish === i ? "#111" : "#e0e0e0"}`, background: selectedFinish === i ? "#111" : "#fff", color: selectedFinish === i ? "#fff" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }}>
                     {f}
                   </button>
                 ))}
@@ -153,16 +155,20 @@ export default function ProductPage() {
 
             {/* CTA Buttons */}
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 24 }}>
-              <button onClick={handleAddToCart}
-                style={{ width: "100%", padding: "16px 0", background: added ? "#16a34a" : "#111", color: "#fff", fontFamily: F, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "background 0.2s" }}>
-                {added ? "✓ Added to Cart!" : "Add to Cart"}
-              </button>
-              <button onClick={handleBuyNow}
-                style={{ width: "100%", padding: "16px 0", background: "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "background 0.2s" }}
-                onMouseEnter={e => (e.currentTarget.style.background = "#d09800")}
-                onMouseLeave={e => (e.currentTarget.style.background = "#e8a000")}>
-                Buy Now — ₹{p.price}
-              </button>
+              <ClickSpark sparkColor="#fff" sparkCount={10} sparkRadius={28}>
+                <button onClick={handleAddToCart}
+                  style={{ width: "100%", padding: "16px 0", background: added ? "#16a34a" : "#111", color: "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.3s", boxShadow: "0 4px 16px rgba(0,0,0,0.12)" }}>
+                  {added ? "Added to Cart!" : "Add to Cart"}
+                </button>
+              </ClickSpark>
+              <ClickSpark sparkColor="#111" sparkCount={10} sparkRadius={28}>
+                <button onClick={handleBuyNow}
+                  style={{ width: "100%", padding: "16px 0", background: "#e8a000", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.3s", boxShadow: "0 4px 16px rgba(232,160,0,0.2)" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = "#d09800")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "#e8a000")}>
+                  Buy Now — ₹{p.price}
+                </button>
+              </ClickSpark>
             </div>
 
             {/* Trust badges */}
@@ -218,6 +224,11 @@ export default function ProductPage() {
       </main>
       <Newsletter />
       <Footer />
+      <style>{`
+        @media (max-width: 768px) {
+          .product-detail-layout { grid-template-columns: 1fr !important; padding: 24px 16px !important; gap: 32px !important; }
+        }
+      `}</style>
     </div>
   );
 }

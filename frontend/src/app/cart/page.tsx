@@ -6,6 +6,7 @@ import Footer from "@/components/footer/Footer";
 import Newsletter from "@/components/footer/Newsletter";
 import { useCart } from "@/context/CartContext";
 
+const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
 
@@ -19,9 +20,9 @@ export default function CartPage() {
   const total     = subtotal - discount + shipping;
 
   return (
-    <div style={{ background: "#fff", minHeight: "100vh" }}>
+    <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <main style={{ paddingTop: 64 }}>
+      <main style={{ paddingTop: 56 }}>
         {/* Header */}
         <div style={{ borderBottom: "1px solid #f0f0f0", padding: "28px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
@@ -30,13 +31,13 @@ export default function CartPage() {
               <span style={{ margin: "0 8px" }}>›</span>
               <span style={{ color: "#111" }}>Cart</span>
             </div>
-            <h1 style={{ fontFamily: FE, fontSize: "clamp(24px,4vw,42px)", fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>
+            <h1 style={{ fontFamily: FO, fontSize: "clamp(24px,4vw,42px)", fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>
               Your Cart <span style={{ color: "#aaa", fontWeight: 400, fontSize: "0.5em" }}>({items.reduce((s, i) => s + i.qty, 0)} items)</span>
             </h1>
           </div>
         </div>
 
-        <div style={{ maxWidth: 1400, margin: "0 auto", padding: "40px 32px", display: "grid", gridTemplateColumns: "1fr 380px", gap: 48 }}>
+        <div className="cart-layout" style={{ maxWidth: 1400, margin: "0 auto", padding: "40px 32px", display: "grid", gridTemplateColumns: "1fr 380px", gap: 48 }}>
           {/* Cart Items */}
           <div>
             {/* Free delivery banner */}
@@ -61,9 +62,10 @@ export default function CartPage() {
               <div style={{ display: "flex", flexDirection: "column" }}>
                 {items.map(item => (
                   <div key={`${item.id}-${item.size}-${item.finish}`}
+                    className="cart-item-row"
                     style={{ display: "grid", gridTemplateColumns: "100px 1fr auto", gap: 20, padding: "24px 0", borderBottom: "1px solid #f0f0f0", alignItems: "start" }}>
                     <Link href={`/product/${item.id}`}>
-                      <div style={{ aspectRatio: "1/1", overflow: "hidden", background: "#f7f7f7" }}>
+                      <div style={{ aspectRatio: "1/1", overflow: "hidden", background: "var(--c-bg-soft)" }}>
                         <img src={item.img} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
                     </Link>
@@ -75,10 +77,10 @@ export default function CartPage() {
                       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                         <div style={{ display: "flex", alignItems: "center", border: "1px solid #e0e0e0" }}>
                           <button onClick={() => updateQty(item.id, item.size, item.finish, -1)}
-                            style={{ width: 34, height: 34, background: "#fff", border: "none", fontSize: 18, cursor: "pointer", color: "#111" }}>−</button>
+                            style={{ width: 34, height: 34, background: "var(--c-bg)", border: "none", fontSize: 18, cursor: "pointer", color: "#111" }}>−</button>
                           <span style={{ width: 34, textAlign: "center", fontFamily: FE, fontSize: 14, fontWeight: 700 }}>{item.qty}</span>
                           <button onClick={() => updateQty(item.id, item.size, item.finish, +1)}
-                            style={{ width: 34, height: 34, background: "#fff", border: "none", fontSize: 18, cursor: "pointer", color: "#111" }}>+</button>
+                            style={{ width: 34, height: 34, background: "var(--c-bg)", border: "none", fontSize: 18, cursor: "pointer", color: "#111" }}>+</button>
                         </div>
                         <button onClick={() => removeItem(item.id, item.size, item.finish)}
                           style={{ background: "none", border: "none", fontFamily: F, fontSize: 11, color: "#dc2626", cursor: "pointer", textDecoration: "underline" }}>
@@ -139,7 +141,7 @@ export default function CartPage() {
               </div>
 
               <Link href="/checkout"
-                style={{ display: "block", width: "100%", padding: "16px 0", background: "#111", color: "#fff", textAlign: "center", fontFamily: F, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", transition: "background 0.2s", marginBottom: 12 }}
+                style={{ display: "block", width: "100%", padding: "16px 0", background: "#111", color: "#fff", textAlign: "center", fontFamily: FO, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", transition: "background 0.2s", marginBottom: 12 }}
                 onMouseEnter={e => (e.currentTarget.style.background = "#333")}
                 onMouseLeave={e => (e.currentTarget.style.background = "#111")}>
                 Proceed to Checkout →
@@ -158,6 +160,13 @@ export default function CartPage() {
       </main>
       <Newsletter />
       <Footer />
+      <style>{`
+        @media (max-width: 768px) {
+          .cart-layout { grid-template-columns: 1fr !important; padding: 24px 16px !important; }
+          .cart-item-row { grid-template-columns: 80px 1fr !important; }
+          .cart-item-row > div:last-child { grid-column: 2; text-align: left !important; }
+        }
+      `}</style>
     </div>
   );
 }

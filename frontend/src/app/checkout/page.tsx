@@ -4,6 +4,7 @@ import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
 import { useCart } from "@/context/CartContext";
 
+const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
 
@@ -21,8 +22,8 @@ export default function CheckoutPage() {
   const total    = subtotal + shipping;
 
   const handleField = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }));
-  const inputStyle = (val: string) => ({ width: "100%", padding: "12px 16px", border: `1px solid ${val ? "#111" : "#e0e0e0"}`, background: "#fff", fontFamily: F, fontSize: 13, color: "#111", outline: "none", transition: "border-color 0.15s", boxSizing: "border-box" as const });
-  const labelStyle = { fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const, color: "#555", marginBottom: 6, display: "block" };
+  const inputStyle = (val: string) => ({ width: "100%", padding: "14px 18px", border: `1.5px solid ${val ? "#111" : "#ebebeb"}`, background: "var(--c-bg)", fontFamily: FO, fontSize: 13, color: "#111", outline: "none", transition: "all 0.2s", boxSizing: "border-box" as const });
+  const labelStyle = { fontFamily: FO, fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: "#999", marginBottom: 8, display: "block" };
 
   const handlePlaceOrder = () => {
     setOrdered(true);
@@ -30,7 +31,7 @@ export default function CheckoutPage() {
   };
 
   if (ordered) return (
-    <div style={{ background: "#fff", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 40 }}>
+    <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 40 }}>
       <div style={{ textAlign: "center", maxWidth: 500 }}>
         <div style={{ width: 80, height: 80, background: "#16a34a", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 36, margin: "0 auto 24px", color: "#fff" }}>✓</div>
         <h1 style={{ fontFamily: FE, fontSize: 36, fontWeight: 900, color: "#111", textTransform: "uppercase", marginBottom: 12 }}>Order Placed!</h1>
@@ -58,7 +59,7 @@ export default function CheckoutPage() {
 
   // Empty cart redirect hint
   if (items.length === 0 && !ordered) return (
-    <div style={{ background: "#fff", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, paddingTop: 64 }}>
+    <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, paddingTop: 64 }}>
       <Navbar />
       <div style={{ textAlign: "center" }}>
         <h2 style={{ fontFamily: FE, fontSize: 28, fontWeight: 900, color: "#111", textTransform: "uppercase" }}>Your cart is empty</h2>
@@ -69,9 +70,9 @@ export default function CheckoutPage() {
   );
 
   return (
-    <div style={{ background: "#fff", minHeight: "100vh" }}>
+    <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <main style={{ paddingTop: 64 }}>
+      <main style={{ paddingTop: 56 }}>
         {/* Steps Header */}
         <div style={{ background: "#f9f9f9", borderBottom: "1px solid #f0f0f0", padding: "20px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: 0 }}>
@@ -89,13 +90,13 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 32px", display: "grid", gridTemplateColumns: "1fr 360px", gap: 48 }}>
+        <div className="checkout-layout" style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 32px", display: "grid", gridTemplateColumns: "1fr 360px", gap: 48 }}>
           {/* Form */}
           <div>
             {step === 0 && (
               <div>
                 <h2 style={{ fontFamily: FE, fontSize: 24, fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.02em", marginBottom: 28 }}>Delivery Details</h2>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+                <div className="checkout-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
                   {[["name", "Full Name"], ["email", "Email Address"]].map(([k, l]) => (
                     <div key={k}>
                       <label style={labelStyle}>{l}</label>
@@ -111,7 +112,7 @@ export default function CheckoutPage() {
                   <label style={labelStyle}>Delivery Address</label>
                   <input type="text" placeholder="House no., Street, Area" value={form.address} onChange={e => handleField("address", e.target.value)} style={inputStyle(form.address)} />
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginBottom: 32 }}>
+                <div className="checkout-3col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginBottom: 32 }}>
                   {[["city", "City"], ["state", "State"], ["pincode", "Pincode"]].map(([k, l]) => (
                     <div key={k}>
                       <label style={labelStyle}>{l}</label>
@@ -146,7 +147,7 @@ export default function CheckoutPage() {
                   ))}
                 </div>
                 <div style={{ display: "flex", gap: 12 }}>
-                  <button onClick={() => setStep(0)} style={{ padding: "15px 24px", background: "#fff", color: "#111", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid #e0e0e0", cursor: "pointer" }}>← Back</button>
+                  <button onClick={() => setStep(0)} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "#111", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid #e0e0e0", cursor: "pointer" }}>← Back</button>
                   <button onClick={() => setStep(2)} style={{ flex: 1, padding: "15px 24px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer" }}>
                     Review Order →
                   </button>
@@ -168,7 +169,7 @@ export default function CheckoutPage() {
                   </div>
                 ))}
                 <div style={{ display: "flex", gap: 12, marginTop: 28 }}>
-                  <button onClick={() => setStep(1)} style={{ padding: "15px 24px", background: "#fff", color: "#111", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid #e0e0e0", cursor: "pointer" }}>← Back</button>
+                  <button onClick={() => setStep(1)} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "#111", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid #e0e0e0", cursor: "pointer" }}>← Back</button>
                   <button onClick={handlePlaceOrder}
                     style={{ flex: 1, padding: "15px 24px", background: "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 900, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer" }}>
                     Place Order · ₹{total}
@@ -185,7 +186,7 @@ export default function CheckoutPage() {
               <div style={{ maxHeight: 300, overflowY: "auto" }}>
                 {items.map(item => (
                   <div key={`${item.id}-${item.size}-${item.finish}`} style={{ display: "flex", gap: 12, marginBottom: 16 }}>
-                    <div style={{ width: 56, height: 56, flexShrink: 0, overflow: "hidden", background: "#f7f7f7" }}>
+                    <div style={{ width: 56, height: 56, flexShrink: 0, overflow: "hidden", background: "var(--c-bg-soft)" }}>
                       <img src={item.img} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     </div>
                     <div style={{ flex: 1 }}>
@@ -208,6 +209,13 @@ export default function CheckoutPage() {
           </div>
         </div>
       </main>
+      <style>{`
+        @media (max-width: 768px) {
+          .checkout-layout  { grid-template-columns: 1fr !important; padding: 24px 16px !important; }
+          .checkout-2col    { grid-template-columns: 1fr !important; }
+          .checkout-3col    { grid-template-columns: 1fr 1fr !important; }
+        }
+      `}</style>
     </div>
   );
 }
