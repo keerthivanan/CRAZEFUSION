@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import Newsletter from "@/components/footer/Newsletter";
@@ -38,9 +38,9 @@ export default function ReviewsPage() {
       <main style={{ paddingTop: 64 }}>
 
         {/* Hero */}
-        <div style={{ background: "#f9f9f9", borderBottom: "1px solid #f0f0f0", padding: "64px 32px", textAlign: "center" }}>
+        <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "64px 32px", textAlign: "center" }}>
           <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#e8a000", marginBottom: 12 }}>Customer Love</div>
-          <h1 style={{ fontFamily: FE, fontSize: "clamp(32px,5vw,72px)", fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>
+          <h1 style={{ fontFamily: FE, fontSize: "clamp(32px,5vw,72px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>
             10,000+ Happy <span style={{ color: "#e8a000" }}>Walls</span>
           </h1>
           <p style={{ fontFamily: F, fontSize: 15, color: "#888", maxWidth: 440, margin: "0 auto 36px" }}>
@@ -48,7 +48,7 @@ export default function ReviewsPage() {
           </p>
           {/* Rating Summary */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
-            <div style={{ fontFamily: FE, fontSize: 56, fontWeight: 900, color: "#111", lineHeight: 1 }}>4.9</div>
+            <div style={{ fontFamily: FE, fontSize: 56, fontWeight: 900, color: "var(--c-text)", lineHeight: 1 }}>4.9</div>
             <div>
               <div style={{ color: "#e8a000", fontSize: 24, letterSpacing: 4, marginBottom: 4 }}>★★★★★</div>
               <div style={{ fontFamily: F, fontSize: 12, color: "#aaa", letterSpacing: "0.1em", textTransform: "uppercase" }}>2,400+ Reviews</div>
@@ -77,12 +77,12 @@ export default function ReviewsPage() {
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 40, flexWrap: "wrap", gap: 16 }}>
             <div>
               <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#aaa", marginBottom: 8 }}>What They Say</div>
-              <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,40px)", fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>Verified Reviews</h2>
+              <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,40px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>Verified Reviews</h2>
             </div>
             <div style={{ display: "flex", gap: 8 }}>
               {["All", "5★", "4★", "Cars", "Anime", "Custom"].map(f => (
                 <button key={f}
-                  style={{ padding: "7px 14px", border: "1px solid #e0e0e0", background: "var(--c-bg)", color: "#555", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.05em", cursor: "pointer", transition: "all 0.15s" }}
+                  style={{ padding: "7px 14px", border: "1px solid var(--c-border)", background: "var(--c-bg)", color: "#555", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.05em", cursor: "pointer", transition: "all 0.15s" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = "#111"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "#fff"; (e.currentTarget as HTMLButtonElement).style.color = "#555"; }}>
                   {f}
@@ -95,7 +95,7 @@ export default function ReviewsPage() {
             {reviews.map((r, i) => (
               <AnimatedContent key={i} distance={20} delay={i * 0.06} duration={0.5} threshold={0.05}>
                 <SpotlightCard spotlightColor="rgba(232,160,0,0.1)"
-                  style={{ padding: 24, background: "var(--c-bg-card)", border: "1px solid #efefef", borderRadius: 12, cursor: "default", transition: "border-color 0.25s, box-shadow 0.25s, transform 0.25s" }}
+                  style={{ padding: 24, background: "var(--c-bg-card)", border: "1px solid var(--c-card-border)", borderRadius: 12, cursor: "default", transition: "border-color 0.25s, box-shadow 0.25s, transform 0.25s" }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = "#e8a000"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(232,160,0,0.1)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = "#efefef"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.transform = "translateY(0)"; }}>
                   <div style={{ color: "#e8a000", fontSize: 13, marginBottom: 12, letterSpacing: 2 }}>{"★".repeat(r.stars)}</div>
@@ -103,7 +103,7 @@ export default function ReviewsPage() {
                   <div style={{ height: 1, background: "#f0f0f0", marginBottom: 16 }} />
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
                     <div>
-                      <div style={{ fontFamily: FE, fontSize: 13, fontWeight: 700, color: "#111" }}>{r.name}</div>
+                      <div style={{ fontFamily: FE, fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>{r.name}</div>
                       <div style={{ fontFamily: F, fontSize: 11, color: "#aaa" }}>{r.city} · {r.date}</div>
                     </div>
                     <div style={{ fontFamily: F, fontSize: 9, color: "#e8a000", background: "rgba(232,160,0,0.08)", border: "1px solid rgba(232,160,0,0.2)", padding: "3px 8px", borderRadius: 20, fontWeight: 700, textTransform: "uppercase" }}>{r.product}</div>

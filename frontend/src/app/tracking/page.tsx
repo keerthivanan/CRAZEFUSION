@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
@@ -44,16 +44,16 @@ export default function TrackingPage() {
       <Navbar />
       <main style={{ paddingTop: 64 }}>
         {/* Header */}
-        <div style={{ background: "#f9f9f9", borderBottom: "1px solid #f0f0f0", padding: "56px 32px", textAlign: "center" }}>
+        <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "56px 32px", textAlign: "center" }}>
           <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#e8a000", marginBottom: 12 }}>Real-Time Updates</div>
-          <h1 style={{ fontFamily: FE, fontSize: "clamp(28px,5vw,56px)", fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>Track Your Order</h1>
+          <h1 style={{ fontFamily: FE, fontSize: "clamp(28px,5vw,56px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>Track Your Order</h1>
           <p style={{ fontFamily: F, fontSize: 14, color: "#888", maxWidth: 380, margin: "0 auto 32px" }}>Enter your Order ID to see real-time shipping updates.</p>
 
           {/* Search Bar */}
           <div style={{ display: "flex", maxWidth: 480, margin: "0 auto", gap: 0 }}>
             <input type="text" placeholder="Enter Order ID (e.g. PK-A8X2C1)" value={orderId} onChange={e => setOrderId(e.target.value)}
               onKeyDown={e => e.key === "Enter" && handleTrack()}
-              style={{ flex: 1, padding: "14px 20px", border: "1.5px solid #e0e0e0", borderRight: "none", fontFamily: F, fontSize: 13, color: "#111", outline: "none", background: "var(--c-bg)" }} />
+              style={{ flex: 1, padding: "14px 20px", border: "1.5px solid var(--c-border)", borderRight: "none", fontFamily: F, fontSize: 13, color: "var(--c-text)", outline: "none", background: "var(--c-bg)" }} />
             <button onClick={handleTrack}
               style={{ padding: "14px 28px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "background 0.2s" }}
               onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.background = "#333"}
@@ -73,7 +73,7 @@ export default function TrackingPage() {
         {tracked && (
           <div style={{ maxWidth: 900, margin: "48px auto", padding: "0 32px" }}>
             {/* Order Info Card */}
-            <div style={{ border: "1px solid #f0f0f0", marginBottom: 32, overflow: "hidden" }}>
+            <div style={{ border: "1px solid var(--c-border)", marginBottom: 32, overflow: "hidden" }}>
               <div style={{ background: "#111", padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
                 <div>
                   <div style={{ fontFamily: F, fontSize: 10, color: "#666", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 4 }}>Order ID</div>
@@ -89,26 +89,26 @@ export default function TrackingPage() {
                   <img src={mockOrder.img} alt={mockOrder.product} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontFamily: FE, fontSize: 14, fontWeight: 800, color: "#111", textTransform: "uppercase", lineHeight: 1.3, marginBottom: 8 }}>{mockOrder.product}</div>
+                  <div style={{ fontFamily: FE, fontSize: 14, fontWeight: 800, color: "var(--c-text)", textTransform: "uppercase", lineHeight: 1.3, marginBottom: 8 }}>{mockOrder.product}</div>
                   <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
                     {[["Placed", mockOrder.placed], ["Expected", mockOrder.expected], ["Carrier", mockOrder.carrier], ["AWB", mockOrder.awb]].map(([label, val]) => (
                       <div key={label as string}>
                         <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 2 }}>{label as string}</div>
-                        <div style={{ fontFamily: F, fontSize: 13, fontWeight: 700, color: "#111" }}>{val as string}</div>
+                        <div style={{ fontFamily: F, fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>{val as string}</div>
                       </div>
                     ))}
                   </div>
                 </div>
                 <div style={{ textAlign: "right" }}>
                   <div style={{ fontFamily: F, fontSize: 11, color: "#aaa" }}>Order Total</div>
-                  <div style={{ fontFamily: FE, fontSize: 24, fontWeight: 900, color: "#111" }}>₹{mockOrder.price}</div>
+                  <div style={{ fontFamily: FE, fontSize: 24, fontWeight: 900, color: "var(--c-text)" }}>₹{mockOrder.price}</div>
                 </div>
               </div>
             </div>
 
             {/* Timeline */}
-            <div style={{ border: "1px solid #f0f0f0", padding: "32px", marginBottom: 32 }}>
-              <h2 style={{ fontFamily: FE, fontSize: 20, fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.01em", marginBottom: 32 }}>Shipment Timeline</h2>
+            <div style={{ border: "1px solid var(--c-border)", padding: "32px", marginBottom: 32 }}>
+              <h2 style={{ fontFamily: FE, fontSize: 20, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.01em", marginBottom: 32 }}>Shipment Timeline</h2>
               <div style={{ position: "relative", paddingLeft: 40 }}>
                 {/* Vertical line */}
                 <div style={{ position: "absolute", left: 12, top: 0, bottom: 0, width: 2, background: "#f0f0f0" }} />
@@ -121,7 +121,7 @@ export default function TrackingPage() {
                     </div>
                     <div style={{ opacity: step.done ? 1 : 0.4 }}>
                       <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
-                        <div style={{ fontFamily: FE, fontSize: 15, fontWeight: 800, color: "#111", textTransform: "uppercase" }}>{step.label}</div>
+                        <div style={{ fontFamily: FE, fontSize: 15, fontWeight: 800, color: "var(--c-text)", textTransform: "uppercase" }}>{step.label}</div>
                         <div style={{ fontFamily: F, fontSize: 11, color: step.done ? "#e8a000" : "#aaa" }}>{step.date}</div>
                       </div>
                       <div style={{ fontFamily: F, fontSize: 13, color: "#666", marginTop: 2 }}>{step.desc}</div>
@@ -132,9 +132,9 @@ export default function TrackingPage() {
             </div>
 
             {/* Help */}
-            <div style={{ background: "#f9f9f9", border: "1px solid #f0f0f0", padding: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
+            <div style={{ background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", padding: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
               <div>
-                <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 800, color: "#111", marginBottom: 4 }}>Need Help?</div>
+                <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 800, color: "var(--c-text)", marginBottom: 4 }}>Need Help?</div>
                 <div style={{ fontFamily: F, fontSize: 13, color: "#666" }}>Contact us at <strong>support@crazefusion.in</strong> with your Order ID.</div>
               </div>
               <a href="mailto:support@crazefusion.in"
@@ -155,9 +155,9 @@ export default function TrackingPage() {
               ["03", "Shipped Fast", "Handed to courier within 24 hours of order placement."],
               ["04", "5–7 Day Delivery", "Delivered to your doorstep across India."]
             ].map(([num, title, desc]) => (
-              <div key={title as string} style={{ padding: 24, border: "1px solid #f0f0f0", textAlign: "center" }}>
+              <div key={title as string} style={{ padding: 24, border: "1px solid var(--c-border)", textAlign: "center" }}>
                 <div style={{ fontFamily: FE, fontSize: 28, fontWeight: 900, color: "#e8a000", marginBottom: 12 }}>{num}</div>
-                <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 800, color: "#111", textTransform: "uppercase", marginBottom: 8 }}>{title as string}</div>
+                <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 800, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 8 }}>{title as string}</div>
                 <div style={{ fontFamily: F, fontSize: 13, color: "#888", lineHeight: 1.6 }}>{desc as string}</div>
               </div>
             ))}

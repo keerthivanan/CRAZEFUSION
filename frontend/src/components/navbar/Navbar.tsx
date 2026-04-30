@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
@@ -155,7 +155,7 @@ export default function Navbar() {
                         fontFamily: F, fontSize: 12, fontWeight: 500,
                         color: "#555", textDecoration: "none",
                         transition: "all 0.12s",
-                        borderBottom: "1px solid #f5f5f5",
+                        borderBottom: "1px solid var(--c-border)",
                       }}
                         onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = "#fafafa"; el.style.color = "#111"; el.style.paddingLeft = "22px"; }}
                         onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = ""; el.style.color = "#555"; el.style.paddingLeft = "18px"; }}
@@ -193,9 +193,9 @@ export default function Navbar() {
             </Link>
 
             <button onClick={toggle} aria-label="Toggle theme"
-              style={{ background: "none", border: "1px solid #e0e0e0", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.2s", color: "var(--c-text)" }}
+              style={{ background: "none", border: "1px solid var(--c-border)", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.2s", color: "var(--c-text)" }}
               onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--c-text)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#e0e0e0"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--c-border)"; }}
             >
               {theme === "light" ? <IconMoon /> : <IconSun />}
             </button>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -21,7 +21,7 @@ export default function SignupPage() {
 
   const inputStyle: React.CSSProperties = {
     width: "100%", padding: "13px 16px",
-    border: "1px solid #e0e0e0", background: "var(--c-bg)",
+    border: "1px solid var(--c-border)", background: "var(--c-bg)",
     fontFamily: F, fontSize: 14, color: "var(--c-text)",
     outline: "none", boxSizing: "border-box",
     transition: "border-color 0.15s",
@@ -57,7 +57,7 @@ export default function SignupPage() {
               <input type="text" placeholder="Your name" value={name}
                 onChange={e => setName(e.target.value)} style={inputStyle}
                 onFocus={e => (e.currentTarget.style.borderColor = "#111")}
-                onBlur={e => (e.currentTarget.style.borderColor = "#e0e0e0")} />
+                onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")} />
             </div>
 
             <div>
@@ -65,7 +65,7 @@ export default function SignupPage() {
               <input type="email" placeholder="your@email.com" value={email}
                 onChange={e => setEmail(e.target.value)} style={inputStyle}
                 onFocus={e => (e.currentTarget.style.borderColor = "#111")}
-                onBlur={e => (e.currentTarget.style.borderColor = "#e0e0e0")} />
+                onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")} />
             </div>
 
             <div>
@@ -76,7 +76,7 @@ export default function SignupPage() {
                   onChange={e => setPhone(e.target.value)} maxLength={10}
                   style={{ ...inputStyle, flex: 1 }}
                   onFocus={e => (e.currentTarget.style.borderColor = "#111")}
-                  onBlur={e => (e.currentTarget.style.borderColor = "#e0e0e0")} />
+                  onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")} />
               </div>
             </div>
 
@@ -93,7 +93,7 @@ export default function SignupPage() {
                     onChange={e => setOtp(e.target.value)} maxLength={6}
                     style={{ ...inputStyle, textAlign: "center", fontSize: 20, letterSpacing: "0.3em", fontWeight: 700 }}
                     onFocus={e => (e.currentTarget.style.borderColor = "#111")}
-                    onBlur={e => (e.currentTarget.style.borderColor = "#e0e0e0")} />
+                    onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")} />
                   <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginTop: 6 }}>
                     Sent to +91 {phone}.{" "}
                     <button onClick={() => setOtpSent(false)} style={{ background: "none", border: "none", fontFamily: F, fontSize: 11, color: "var(--c-text)", cursor: "pointer", textDecoration: "underline" }}>Change?</button>

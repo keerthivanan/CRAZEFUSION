@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
@@ -24,12 +24,12 @@ export default function CartPage() {
       <Navbar />
       <main style={{ paddingTop: 56 }}>
         {/* Header */}
-        <div style={{ borderBottom: "1px solid #f0f0f0", padding: "28px 32px" }}>
+        <div style={{ borderBottom: "1px solid var(--c-border)", padding: "28px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>
               <Link href="/" style={{ color: "#aaa", textDecoration: "none" }}>Home</Link>
               <span style={{ margin: "0 8px" }}>›</span>
-              <span style={{ color: "#111" }}>Cart</span>
+              <span style={{ color: "var(--c-text)" }}>Cart</span>
             </div>
             <h1 style={{ fontFamily: FO, fontSize: "clamp(24px,4vw,42px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>
               Your Cart <span style={{ color: "#aaa", fontWeight: 400, fontSize: "0.5em" }}>({items.reduce((s, i) => s + i.qty, 0)} items)</span>
@@ -51,7 +51,7 @@ export default function CartPage() {
 
             {items.length === 0 ? (
               <div style={{ textAlign: "center", padding: "80px 20px" }}>
-                <h2 style={{ fontFamily: FE, fontSize: 28, fontWeight: 900, color: "#111", textTransform: "uppercase", marginBottom: 8 }}>Your cart is empty</h2>
+                <h2 style={{ fontFamily: FE, fontSize: 28, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 8 }}>Your cart is empty</h2>
                 <p style={{ fontFamily: F, fontSize: 14, color: "#aaa", marginBottom: 24 }}>Browse our collection and find something you love.</p>
                 <Link href="/collection"
                   style={{ display: "inline-block", padding: "14px 36px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}>
@@ -63,7 +63,7 @@ export default function CartPage() {
                 {items.map(item => (
                   <div key={`${item.id}-${item.size}-${item.finish}`}
                     className="cart-item-row"
-                    style={{ display: "grid", gridTemplateColumns: "100px 1fr auto", gap: 20, padding: "24px 0", borderBottom: "1px solid #f0f0f0", alignItems: "start" }}>
+                    style={{ display: "grid", gridTemplateColumns: "100px 1fr auto", gap: 20, padding: "24px 0", borderBottom: "1px solid var(--c-border)", alignItems: "start" }}>
                     <Link href={`/product/${item.id}`}>
                       <div style={{ aspectRatio: "1/1", overflow: "hidden", background: "var(--c-bg-soft)" }}>
                         <img src={item.img} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
@@ -75,12 +75,12 @@ export default function CartPage() {
                         {item.sub} · Size: {item.size} · {item.finish}
                       </div>
                       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                        <div style={{ display: "flex", alignItems: "center", border: "1px solid #e0e0e0" }}>
+                        <div style={{ display: "flex", alignItems: "center", border: "1px solid var(--c-border)" }}>
                           <button onClick={() => updateQty(item.id, item.size, item.finish, -1)}
-                            style={{ width: 34, height: 34, background: "var(--c-bg)", border: "none", fontSize: 18, cursor: "pointer", color: "#111" }}>−</button>
+                            style={{ width: 34, height: 34, background: "var(--c-bg)", border: "none", fontSize: 18, cursor: "pointer", color: "var(--c-text)" }}>−</button>
                           <span style={{ width: 34, textAlign: "center", fontFamily: FE, fontSize: 14, fontWeight: 700 }}>{item.qty}</span>
                           <button onClick={() => updateQty(item.id, item.size, item.finish, +1)}
-                            style={{ width: 34, height: 34, background: "var(--c-bg)", border: "none", fontSize: 18, cursor: "pointer", color: "#111" }}>+</button>
+                            style={{ width: 34, height: 34, background: "var(--c-bg)", border: "none", fontSize: 18, cursor: "pointer", color: "var(--c-text)" }}>+</button>
                         </div>
                         <button onClick={() => removeItem(item.id, item.size, item.finish)}
                           style={{ background: "none", border: "none", fontFamily: F, fontSize: 11, color: "#dc2626", cursor: "pointer", textDecoration: "underline" }}>
@@ -110,7 +110,7 @@ export default function CartPage() {
 
           {/* Order Summary */}
           <div>
-            <div style={{ border: "1px solid #f0f0f0", padding: 28, position: "sticky", top: 80 }}>
+            <div style={{ border: "1px solid var(--c-border)", padding: 28, position: "sticky", top: 80 }}>
               <h2 style={{ fontFamily: FE, fontSize: 20, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.01em", marginBottom: 24, paddingBottom: 20, borderBottom: "1px solid var(--c-border)" }}>Order Summary</h2>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 24 }}>
@@ -126,7 +126,7 @@ export default function CartPage() {
               <div style={{ marginBottom: 20 }}>
                 <div style={{ display: "flex" }}>
                   <input type="text" placeholder="Promo code" value={promoCode} onChange={e => setPromoCode(e.target.value)}
-                    style={{ flex: 1, padding: "10px 14px", border: "1px solid #e0e0e0", borderRight: "none", fontFamily: F, fontSize: 12, color: "#111", outline: "none" }} />
+                    style={{ flex: 1, padding: "10px 14px", border: "1px solid var(--c-border)", borderRight: "none", fontFamily: F, fontSize: 12, color: "var(--c-text)", outline: "none" }} />
                   <button onClick={() => { if (promoCode.trim()) setPromoApplied(true); }}
                     style={{ padding: "10px 16px", background: "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", border: "none", cursor: "pointer" }}>
                     Apply

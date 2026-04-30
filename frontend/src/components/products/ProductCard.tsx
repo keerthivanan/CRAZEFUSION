@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import Link from "next/link";
 import TiltedCard from "@/components/reactbits/TiltedCard";
@@ -53,11 +53,11 @@ export default function ProductCard({ p }: { p: typeof products[0] }) {
       <Link href={`/product/${p.id}`} style={{ textDecoration: "none" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontFamily: FE, fontSize: 13, fontWeight: 800, color: "#111", textTransform: "uppercase", marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.title}</div>
+            <div style={{ fontFamily: FE, fontSize: 13, fontWeight: 800, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.title}</div>
             <div style={{ fontFamily: F, fontSize: 11, color: "#999" }}>{p.sub}</div>
           </div>
           <div style={{ textAlign: "right", flexShrink: 0, marginLeft: 10 }}>
-            <div style={{ fontFamily: F, fontSize: 14, fontWeight: 800, color: "#111" }}>₹<CountUp to={p.price} from={0} duration={1} /></div>
+            <div style={{ fontFamily: F, fontSize: 14, fontWeight: 800, color: "var(--c-text)" }}>₹<CountUp to={p.price} from={0} duration={1} /></div>
             {p.price < p.original && <div style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</div>}
           </div>
         </div>

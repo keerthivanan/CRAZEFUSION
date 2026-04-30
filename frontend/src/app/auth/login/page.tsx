@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -19,7 +19,7 @@ export default function LoginPage() {
 
   const inputStyle: React.CSSProperties = {
     width: "100%", padding: "13px 16px",
-    border: "1px solid #e0e0e0", background: "var(--c-bg)",
+    border: "1px solid var(--c-border)", background: "var(--c-bg)",
     fontFamily: F, fontSize: 14, color: "var(--c-text)",
     outline: "none", boxSizing: "border-box",
     transition: "border-color 0.15s",
@@ -54,7 +54,7 @@ export default function LoginPage() {
                   onChange={e => setPhone(e.target.value)} maxLength={10}
                   style={{ ...inputStyle, flex: 1 }}
                   onFocus={e => (e.currentTarget.style.borderColor = "#111")}
-                  onBlur={e => (e.currentTarget.style.borderColor = "#e0e0e0")} />
+                  onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")} />
               </div>
             </div>
 
@@ -71,7 +71,7 @@ export default function LoginPage() {
                     onChange={e => setOtp(e.target.value)} maxLength={6}
                     style={{ ...inputStyle, textAlign: "center", fontSize: 20, letterSpacing: "0.3em", fontWeight: 700 }}
                     onFocus={e => (e.currentTarget.style.borderColor = "#111")}
-                    onBlur={e => (e.currentTarget.style.borderColor = "#e0e0e0")} />
+                    onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")} />
                   <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginTop: 6 }}>
                     Sent to +91 {phone}.{" "}
                     <button onClick={() => setOtpSent(false)} style={{ background: "none", border: "none", fontFamily: F, fontSize: 11, color: "var(--c-text)", cursor: "pointer", textDecoration: "underline" }}>Change?</button>
@@ -90,9 +90,9 @@ export default function LoginPage() {
             <div style={{ flex: 1, height: 1, background: "#f0f0f0" }} />
           </div>
 
-          <Link href="/collection" style={{ display: "block", padding: "13px 0", background: "var(--c-bg)", color: "var(--c-text-muted)", border: "1px solid #e0e0e0", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none", textAlign: "center", transition: "all 0.2s" }}
+          <Link href="/collection" style={{ display: "block", padding: "13px 0", background: "var(--c-bg)", color: "var(--c-text-muted)", border: "1px solid var(--c-border)", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none", textAlign: "center", transition: "all 0.2s" }}
             onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#111"; (e.currentTarget as HTMLAnchorElement).style.color = "#111"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#e0e0e0"; (e.currentTarget as HTMLAnchorElement).style.color = "#555"; }}>
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--c-border)"; (e.currentTarget as HTMLAnchorElement).style.color = "#555"; }}>
             Continue as Guest
           </Link>
 
