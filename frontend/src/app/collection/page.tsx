@@ -30,7 +30,7 @@ function ProductCard({ p }: { p: typeof products[0] }) {
 
   return (
     <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ cursor: "pointer" }}>
-      <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", border: `1px solid ${hovered ? "#ccc" : "#f0f0f0"}`, transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}>
+      <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", border: `1px solid ${hovered ? "var(--c-text-muted)" : "var(--c-border)"}`, transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}>
         <img src={hovered ? p.img2 : p.img} alt={p.title}
           style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.5s ease", transform: hovered ? "scale(1.1)" : "scale(1)" }} />
         {p.badge && (
@@ -118,7 +118,7 @@ export default function CollectionPage() {
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <button onClick={() => setFiltersOpen(!filtersOpen)}
-                  style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: filtersOpen ? "#111" : "#fff", color: filtersOpen ? "#fff" : "#111", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", transition: "all 0.2s" }}>
+                  style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: filtersOpen ? "var(--c-btn-bg)" : "transparent", color: filtersOpen ? "var(--c-btn-text)" : "var(--c-text)", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", transition: "all 0.2s" }}>
                   Filters {filtersOpen ? "↑" : "↓"}
                 </button>
                 <select value={sortBy} onChange={e => setSortBy(e.target.value)}
@@ -138,7 +138,7 @@ export default function CollectionPage() {
           <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 8 }}>
             {categories.map(cat => (
               <button key={cat} onClick={() => setActiveCategory(cat)}
-                style={{ flexShrink: 0, padding: "7px 18px", border: `1px solid ${activeCategory === cat ? "#111" : "#e0e0e0"}`, background: activeCategory === cat ? "#111" : "#fff", color: activeCategory === cat ? "#fff" : "#666", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", cursor: "pointer", transition: "all 0.15s", whiteSpace: "nowrap" }}>
+                style={{ flexShrink: 0, padding: "7px 18px", border: `1px solid ${activeCategory === cat ? "var(--c-btn-bg)" : "var(--c-border)"}`, background: activeCategory === cat ? "var(--c-btn-bg)" : "transparent", color: activeCategory === cat ? "var(--c-btn-text)" : "var(--c-text-muted)", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", cursor: "pointer", transition: "all 0.15s", whiteSpace: "nowrap" }}>
                 {cat}
               </button>
             ))}
@@ -153,7 +153,7 @@ export default function CollectionPage() {
                 <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--c-text)", marginBottom: 12 }}>Size</div>
                 {["A4 (21×30cm)", "A3 (30×42cm)", "A2 (42×60cm)", "12×18 inch", "18×24 inch"].map(opt => (
                   <label key={opt} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, cursor: "pointer" }}>
-                    <input type="checkbox" style={{ accentcolor: "var(--c-text)", width: 14, height: 14 }} />
+                    <input type="checkbox" style={{ accentColor: "var(--c-text)", width: 14, height: 14 }} />
                     <span style={{ fontFamily: F, fontSize: 12, color: "#555" }}>{opt}</span>
                   </label>
                 ))}
@@ -162,7 +162,7 @@ export default function CollectionPage() {
                 <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--c-text)", marginBottom: 12 }}>Pieces</div>
                 {["Single Poster", "3-Piece Set", "4-Piece Set", "8-Panel Set"].map(opt => (
                   <label key={opt} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, cursor: "pointer" }}>
-                    <input type="checkbox" style={{ accentcolor: "var(--c-text)", width: 14, height: 14 }} />
+                    <input type="checkbox" style={{ accentColor: "var(--c-text)", width: 14, height: 14 }} />
                     <span style={{ fontFamily: F, fontSize: 12, color: "#555" }}>{opt}</span>
                   </label>
                 ))}
@@ -171,7 +171,7 @@ export default function CollectionPage() {
                 <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--c-text)", marginBottom: 12 }}>Finish</div>
                 {["Matte", "Glossy", "Framed", "Canvas"].map(opt => (
                   <label key={opt} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, cursor: "pointer" }}>
-                    <input type="checkbox" style={{ accentcolor: "var(--c-text)", width: 14, height: 14 }} />
+                    <input type="checkbox" style={{ accentColor: "var(--c-text)", width: 14, height: 14 }} />
                     <span style={{ fontFamily: F, fontSize: 12, color: "#555" }}>{opt}</span>
                   </label>
                 ))}
@@ -180,7 +180,7 @@ export default function CollectionPage() {
                 <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--c-text)", marginBottom: 12 }}>Price Range</div>
                 {["Under ₹299", "₹299–₹399", "₹399–₹499", "₹499+"].map(opt => (
                   <label key={opt} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, cursor: "pointer" }}>
-                    <input type="checkbox" checked={priceFilter.includes(opt)} onChange={() => togglePrice(opt)} style={{ accentcolor: "var(--c-text)", width: 14, height: 14 }} />
+                    <input type="checkbox" checked={priceFilter.includes(opt)} onChange={() => togglePrice(opt)} style={{ accentColor: "var(--c-text)", width: 14, height: 14 }} />
                     <span style={{ fontFamily: F, fontSize: 12, color: "#555" }}>{opt}</span>
                   </label>
                 ))}
