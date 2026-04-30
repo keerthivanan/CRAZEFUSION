@@ -59,18 +59,18 @@ export default function ProductPage() {
   const related = products.filter(x => x.cat === p.cat && x.id !== p.id).slice(0, 4);
 
   return (
-    <div style={{ background: "#fff", minHeight: "100vh" }}>
+    <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
       <main style={{ paddingTop: 56 }}>
 
         {/* Breadcrumb */}
-        <div style={{ borderBottom: "1px solid #f0f0f0", padding: "16px 32px" }}>
+        <div style={{ borderBottom: "1px solid var(--c-border)", padding: "16px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto", fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase" }}>
             <Link href="/" style={{ color: "#aaa", textDecoration: "none" }}>Home</Link>
             <span style={{ margin: "0 8px" }}>›</span>
             <Link href="/collection" style={{ color: "#aaa", textDecoration: "none" }}>Collection</Link>
             <span style={{ margin: "0 8px" }}>›</span>
-            <span style={{ color: "#111" }}>{p.title}</span>
+            <span style={{ color: "var(--c-text)" }}>{p.title}</span>
           </div>
         </div>
 
@@ -79,7 +79,7 @@ export default function ProductPage() {
 
           {/* Images */}
           <div>
-            <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", background: "#f7f7f7", marginBottom: 12 }}>
+            <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", background: "var(--c-bg-soft)", marginBottom: 12 }}>
               <img src={imgs[activeImg]} alt={p.title}
                 style={{ width: "100%", height: "100%", objectFit: "cover", transition: "opacity 0.3s" }} />
               {p.badge && (
@@ -96,7 +96,7 @@ export default function ProductPage() {
             <div style={{ display: "flex", gap: 8 }}>
               {imgs.map((src, i) => (
                 <button key={i} onClick={() => setActiveImg(i)}
-                  style={{ width: 72, height: 72, overflow: "hidden", border: `2px solid ${activeImg === i ? "#111" : "#f0f0f0"}`, background: "none", padding: 0, cursor: "pointer", transition: "border-color 0.2s" }}>
+                  style={{ width: 72, height: 72, overflow: "hidden", border: `2px solid ${activeImg === i ? "var(--c-text)" : "var(--c-border)"}`, background: "none", padding: 0, cursor: "pointer", transition: "border-color 0.2s" }}>
                   <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </button>
               ))}
@@ -106,7 +106,7 @@ export default function ProductPage() {
           {/* Details */}
           <div>
             <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 500, color: "#999", letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 10 }}>{p.sub}</div>
-            <h1 style={{ fontFamily: FO, fontSize: "clamp(20px,2.6vw,36px)", fontWeight: 700, color: "#111", textTransform: "uppercase", letterSpacing: "0.01em", marginBottom: 14, lineHeight: 1.15 }}>
+            <h1 style={{ fontFamily: FO, fontSize: "clamp(20px,2.6vw,36px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "0.01em", marginBottom: 14, lineHeight: 1.15 }}>
               {p.title}
             </h1>
 
@@ -117,8 +117,8 @@ export default function ProductPage() {
             </div>
 
             {/* Price */}
-            <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 24, paddingBottom: 24, borderBottom: "1px solid #f0f0f0" }}>
-              <span style={{ fontFamily: FO, fontSize: 40, fontWeight: 800, color: "#111" }}>₹{p.price}</span>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 24, paddingBottom: 24, borderBottom: "1px solid var(--c-border)" }}>
+              <span style={{ fontFamily: FO, fontSize: 40, fontWeight: 800, color: "var(--c-text)" }}>₹{p.price}</span>
               <span style={{ fontFamily: FO, fontSize: 20, fontWeight: 400, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>
               <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "#dc2626", background: "rgba(220,38,38,0.06)", padding: "4px 12px", borderRadius: 4 }}>{discount}% OFF</span>
             </div>
@@ -126,12 +126,12 @@ export default function ProductPage() {
             {/* Size Selector */}
             <div style={{ marginBottom: 20 }}>
               <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#777", marginBottom: 10 }}>
-                Size: <span style={{ color: "#111", fontWeight: 700 }}>{p.sizes[selectedSize]}</span>
+                Size: <span style={{ color: "var(--c-text)", fontWeight: 700 }}>{p.sizes[selectedSize]}</span>
               </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {p.sizes.map((s, i) => (
                   <button key={s} onClick={() => setSelectedSize(i)}
-                    style={{ padding: "10px 22px", border: `1.5px solid ${selectedSize === i ? "#111" : "#e0e0e0"}`, background: selectedSize === i ? "#111" : "#fff", color: selectedSize === i ? "#fff" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }}>
+                    style={{ padding: "10px 22px", border: `1.5px solid ${selectedSize === i ? "var(--c-text)" : "#e0e0e0"}`, background: selectedSize === i ? "var(--c-btn-bg)" : "var(--c-bg)", color: selectedSize === i ? "var(--c-btn-text)" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }}>
                     {s}
                   </button>
                 ))}
@@ -141,12 +141,12 @@ export default function ProductPage() {
             {/* Finish Selector */}
             <div style={{ marginBottom: 24 }}>
               <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#777", marginBottom: 10 }}>
-                Finish: <span style={{ color: "#111", fontWeight: 700 }}>{p.finishes[selectedFinish]}</span>
+                Finish: <span style={{ color: "var(--c-text)", fontWeight: 700 }}>{p.finishes[selectedFinish]}</span>
               </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {p.finishes.map((f, i) => (
                   <button key={f} onClick={() => setSelectedFinish(i)}
-                    style={{ padding: "10px 22px", border: `1.5px solid ${selectedFinish === i ? "#111" : "#e0e0e0"}`, background: selectedFinish === i ? "#111" : "#fff", color: selectedFinish === i ? "#fff" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }}>
+                    style={{ padding: "10px 22px", border: `1.5px solid ${selectedFinish === i ? "var(--c-text)" : "#e0e0e0"}`, background: selectedFinish === i ? "var(--c-btn-bg)" : "var(--c-bg)", color: selectedFinish === i ? "var(--c-btn-text)" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }}>
                     {f}
                   </button>
                 ))}
@@ -174,9 +174,9 @@ export default function ProductPage() {
             {/* Trust badges */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 24 }}>
               {[["Free delivery", "On prepaid orders"], ["Ships in 24hrs", "Mon–Sat"], ["7-day returns", "No questions asked"], ["Secure payment", "Razorpay secured"]].map(([title, sub]) => (
-                <div key={title} style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "12px 14px", border: "1px solid #f0f0f0", background: "#fafafa" }}>
+                <div key={title} style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "12px 14px", border: "1px solid var(--c-border)", background: "var(--c-bg-card)" }}>
                   <div>
-                    <div style={{ fontFamily: F, fontSize: 11, fontWeight: 700, color: "#111" }}>{title}</div>
+                    <div style={{ fontFamily: F, fontSize: 11, fontWeight: 700, color: "var(--c-text)" }}>{title}</div>
                     <div style={{ fontFamily: F, fontSize: 10, color: "#aaa" }}>{sub}</div>
                   </div>
                 </div>
@@ -184,7 +184,7 @@ export default function ProductPage() {
             </div>
 
             {/* Description */}
-            <div style={{ paddingTop: 20, borderTop: "1px solid #f0f0f0" }}>
+            <div style={{ paddingTop: 20, borderTop: "1px solid var(--c-border)" }}>
               <div style={{ fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#aaa", marginBottom: 10 }}>Product Details</div>
               <p style={{ fontFamily: F, fontSize: 13, color: "#555", lineHeight: 1.8 }}>{p.description}</p>
               <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 6 }}>
@@ -200,7 +200,7 @@ export default function ProductPage() {
 
         {/* Related Products */}
         {related.length > 0 && (
-          <div style={{ borderTop: "1px solid #f0f0f0", padding: "64px 32px" }}>
+          <div style={{ borderTop: "1px solid var(--c-border)", padding: "64px 32px" }}>
             <div style={{ maxWidth: 1400, margin: "0 auto" }}>
               <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#aaa", marginBottom: 8 }}>You Might Also Like</div>
               <h2 style={{ fontFamily: FE, fontSize: "clamp(22px,3vw,36px)", fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.03em", marginBottom: 32 }}>Related <span style={{ color: "#e8a000" }}>Products</span></h2>

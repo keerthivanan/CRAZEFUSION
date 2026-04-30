@@ -85,7 +85,7 @@ export default function Navbar() {
                   {item.label}
                   {item.children && (
                     <svg width="7" height="5" viewBox="0 0 7 5" fill="none" style={{ opacity: 0.4, marginTop: 1 }}>
-                      <path d="M1 1l2.5 2.5L6 1" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M1 1l2.5 2.5L6 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   )}
                 </Link>
@@ -202,9 +202,9 @@ export default function Navbar() {
               style={{ display: "none", background: "none", border: "none", cursor: "pointer", padding: "4px 2px", flexDirection: "column", gap: 5 }}
               aria-label="Menu"
             >
-              <span style={{ display: "block", width: 22, height: 2, background: "#111", transition: "all 0.2s", transform: mobileOpen ? "rotate(45deg) translate(5px,5px)" : "none" }} />
-              <span style={{ display: "block", width: 22, height: 2, background: "#111", transition: "all 0.2s", opacity: mobileOpen ? 0 : 1 }} />
-              <span style={{ display: "block", width: 22, height: 2, background: "#111", transition: "all 0.2s", transform: mobileOpen ? "rotate(-45deg) translate(5px,-5px)" : "none" }} />
+              <span style={{ display: "block", width: 22, height: 2, background: "var(--c-text)", transition: "all 0.2s", transform: mobileOpen ? "rotate(45deg) translate(5px,5px)" : "none" }} />
+              <span style={{ display: "block", width: 22, height: 2, background: "var(--c-text)", transition: "all 0.2s", opacity: mobileOpen ? 0 : 1 }} />
+              <span style={{ display: "block", width: 22, height: 2, background: "var(--c-text)", transition: "all 0.2s", transform: mobileOpen ? "rotate(-45deg) translate(5px,-5px)" : "none" }} />
             </button>
           </div>
         </div>
@@ -226,8 +226,8 @@ export default function Navbar() {
                 display: "block",
                 fontFamily: FO, fontSize: 13, fontWeight: 700,
                 letterSpacing: "0.07em", textTransform: "uppercase",
-                color: "#111", textDecoration: "none",
-                padding: "13px 0", borderBottom: "1px solid #f0f0f0",
+                color: "var(--c-text)", textDecoration: "none",
+                padding: "13px 0", borderBottom: "1px solid var(--c-border)",
               }}>
                 {item.label}
               </Link>
@@ -249,7 +249,7 @@ export default function Navbar() {
           <div style={{ marginTop: 28, display: "flex", gap: 10 }}>
             <Link href="/cart" onClick={() => setMobileOpen(false)} style={{
               flex: 1, padding: "14px 0",
-              border: "1.5px solid #111", color: "#111",
+              border: "1.5px solid var(--c-text)", color: "var(--c-text)",
               fontFamily: FO, fontSize: 11, fontWeight: 700,
               textAlign: "center", textDecoration: "none",
               letterSpacing: "0.08em", textTransform: "uppercase",

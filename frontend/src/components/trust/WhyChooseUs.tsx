@@ -63,7 +63,7 @@ export default function WhyChooseUs() {
                 spotlightColor="rgba(232,160,0,0.12)"
                 style={{
                   background: "var(--c-bg-card)",
-                  border: "1px solid #efefef",
+                  border: "1px solid var(--c-card-border)",
                   borderRadius: 10,
                   padding: "20px 22px",
                   height: "100%",

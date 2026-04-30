@@ -22,7 +22,7 @@ export default function CheckoutPage() {
   const total    = subtotal + shipping;
 
   const handleField = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }));
-  const inputStyle = (val: string) => ({ width: "100%", padding: "14px 18px", border: `1.5px solid ${val ? "#111" : "#ebebeb"}`, background: "var(--c-bg)", fontFamily: FO, fontSize: 13, color: "#111", outline: "none", transition: "all 0.2s", boxSizing: "border-box" as const });
+  const inputStyle = (val: string) => ({ width: "100%", padding: "14px 18px", border: `1.5px solid ${val ? "var(--c-text)" : "#ebebeb"}`, background: "var(--c-bg)", fontFamily: FO, fontSize: 13, color: "var(--c-text)", outline: "none", transition: "all 0.2s", boxSizing: "border-box" as const });
   const labelStyle = { fontFamily: FO, fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: "#999", marginBottom: 8, display: "block" };
 
   const handlePlaceOrder = () => {
