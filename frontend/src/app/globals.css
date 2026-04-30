@@ -1,25 +1,13 @@
 @import "tailwindcss";
 
-/* ── Design Tokens — White Theme ── */
+/* ── Design Tokens ── */
 @theme {
-  --color-primary:     #ffffff;
-  --color-secondary:   #111111;
-  --color-accent:      #111111;
   --color-gold:        #e8a000;
-  --color-bg:          #ffffff;
-  --color-bg-soft:     #f7f7f7;
-  --color-bg-muted:    #f0f0f0;
-  --color-surface:     #ffffff;
-  --color-border:      #e5e5e5;
-  --color-border-dark: #d0d0d0;
-  --color-text:        #111111;
-  --color-text-muted:  #666666;
-  --color-text-dim:    #999999;
   --color-red:         #dc2626;
   --color-green:       #16a34a;
 
   --font-epilogue: var(--font-epilogue-var), "Epilogue", sans-serif;
-  --font-inter:    var(--font-inter-var), "Inter", sans-serif;
+  --font-poppins:  var(--font-poppins-var), "Poppins", sans-serif;
   --font-space:    var(--font-space-var), "Space Grotesk", sans-serif;
 }
 
@@ -32,21 +20,53 @@
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; }
-  50%       { opacity: 1; }
+
+/* ── CSS Variables — Light (default) ── */
+:root {
+  --c-bg:          #ffffff;
+  --c-bg-soft:     #f7f7f7;
+  --c-bg-card:     #fafafa;
+  --c-text:        #111111;
+  --c-text-muted:  #777777;
+  --c-text-dim:    #aaaaaa;
+  --c-border:      #f0f0f0;
+  --c-card-border: #efefef;
+  --c-nav-link:    #444444;
+  --c-btn-bg:      #111111;
+  --c-btn-text:    #ffffff;
+  --c-outline-col: #111111;
+  --c-logo-filter: none;
 }
 
-/* ── Base ── */
+/* ── CSS Variables — Dark ── */
+[data-theme="dark"] {
+  --c-bg:          #0a0a0a;
+  --c-bg-soft:     #111111;
+  --c-bg-card:     #141414;
+  --c-text:        #f0f0f0;
+  --c-text-muted:  #aaaaaa;
+  --c-text-dim:    #555555;
+  --c-border:      #1a1a1a;
+  --c-card-border: #222222;
+  --c-nav-link:    #bbbbbb;
+  --c-btn-bg:      #f0f0f0;
+  --c-btn-text:    #0a0a0a;
+  --c-outline-col: #f0f0f0;
+  --c-logo-filter: brightness(0) invert(1);
+}
+
+/* ── Base — LIGHT (default) ── */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  background: #ffffff;
-  color: #111111;
-  font-family: var(--font-inter-var, "Inter", sans-serif);
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-poppins-var, "Poppins", sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  margin: 0;
+  transition: background 0.3s, color 0.3s;
 }
 
 /* ── Scrollbar ── */
@@ -62,6 +82,131 @@ body {
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
-.marquee { animation: marquee 35s linear infinite; }
+.marquee       { animation: marquee 35s linear infinite; }
 .marquee:hover { animation-play-state: paused; }
 .marquee-track { animation: marquee 35s linear infinite; }
+
+/* ════════════════════════════════════
+   DARK MODE — data-theme="dark"
+   Now works via CSS vars in inline styles
+   ════════════════════════════════════ */
+
+/* Logo auto-inverts in dark mode */
+.pk-logo { filter: var(--c-logo-filter); transition: filter 0.3s; }
+
+/* Ticker: BLACK strip → WHITE strip in dark mode */
+[data-theme="dark"] .ticker-strip {
+  background: #fff !important;
+}
+[data-theme="dark"] .ticker-strip span {
+  color: #111 !important;
+}
+
+/* Headings that still use hardcoded #111 */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3 {
+  color: #f0f0f0 !important;
+}
+
+/* ══════════════════════════════════════════
+   MOBILE RESPONSIVE — max-width: 768px
+   ══════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Stats bar: 2×2 grid ── */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .stats-grid > div:nth-child(2) {
+    border-right: none !important;
+  }
+  .stats-grid > div:nth-child(1),
+  .stats-grid > div:nth-child(2) {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  /* ── Category icons: horizontal scroll ── */
+  .cat-icons-row {
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    padding-bottom: 8px !important;
+    gap: 20px !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cat-icons-row a {
+    flex-shrink: 0 !important;
+  }
+
+  /* ── WhyChooseUs: 1 column ── */
+  .why-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── DesignYourOwn: 2-col on mobile ── */
+  .design-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* ── Newsletter form: stack ── */
+  .newsletter-form {
+    flex-direction: column !important;
+  }
+  .newsletter-form input {
+    border-right: 1.5px solid #e0e0e0 !important;
+    border-bottom: none !important;
+    width: 100% !important;
+  }
+  .newsletter-form button {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* ── Section padding reductions ── */
+  .section-pad { padding: 36px 16px !important; }
+
+  /* ── Product carousel card sizing ── */
+  .product-carousel > div { width: 170px !important; }
+  .multi-carousel   > div { width: 160px !important; }
+  .trending-carousel > div { width: 150px !important; }
+
+  /* ── Footer bottom bar: stack ── */
+  .footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .footer-bottom-links {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+
+  /* ── Reduce heading sizes on mobile ── */
+  .section-heading {
+    font-size: clamp(20px, 6vw, 28px) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* ── Design Your Own: 1 col on very small screens ── */
+  .design-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* ── WhyChooseUs grid still 1 col ── */
+  .why-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Paragraphs */
+[data-theme="dark"] p { color: #999 !important; }
+
+/* Inputs */
+[data-theme="dark"] input { background: #111 !important; border-color: #333 !important; color: #f0f0f0 !important; }
+[data-theme="dark"] input::placeholder { color: #555 !important; }
+
+/* Scrollbar */
+[data-theme="dark"] ::-webkit-scrollbar-track { background: #111; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #333; }
+[data-theme="dark"] ::selection { background: #fff; color: #000; }

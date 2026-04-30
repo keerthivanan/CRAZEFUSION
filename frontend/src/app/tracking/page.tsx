@@ -12,7 +12,7 @@ const mockOrder = {
   status: "In Transit",
   progress: 3,
   product: "DEFENDER | Built For No Roads | 8 Panel Split Wall Set",
-  img: "https://www.posterized.in/cdn/shop/files/NEWDWALL8SPILT_jpg.jpg?v=1769703364&width=533",
+  img: "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=120&h=120&fit=crop&q=80",
   price: 499,
   placed: "28 Apr 2026",
   expected: "3 May 2026",
@@ -40,7 +40,7 @@ export default function TrackingPage() {
   };
 
   return (
-    <div style={{ background: "#fff", minHeight: "100vh" }}>
+    <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
       <main style={{ paddingTop: 64 }}>
         {/* Header */}
@@ -53,7 +53,7 @@ export default function TrackingPage() {
           <div style={{ display: "flex", maxWidth: 480, margin: "0 auto", gap: 0 }}>
             <input type="text" placeholder="Enter Order ID (e.g. PK-A8X2C1)" value={orderId} onChange={e => setOrderId(e.target.value)}
               onKeyDown={e => e.key === "Enter" && handleTrack()}
-              style={{ flex: 1, padding: "14px 20px", border: "1.5px solid #e0e0e0", borderRight: "none", fontFamily: F, fontSize: 13, color: "#111", outline: "none", background: "#fff" }} />
+              style={{ flex: 1, padding: "14px 20px", border: "1.5px solid #e0e0e0", borderRight: "none", fontFamily: F, fontSize: 13, color: "#111", outline: "none", background: "var(--c-bg)" }} />
             <button onClick={handleTrack}
               style={{ padding: "14px 28px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "background 0.2s" }}
               onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.background = "#333"}
@@ -85,7 +85,7 @@ export default function TrackingPage() {
                 </div>
               </div>
               <div style={{ padding: "24px", display: "flex", gap: 20, alignItems: "flex-start", flexWrap: "wrap" }}>
-                <div style={{ width: 80, height: 80, flexShrink: 0, overflow: "hidden", background: "#f7f7f7" }}>
+                <div style={{ width: 80, height: 80, flexShrink: 0, overflow: "hidden", background: "var(--c-bg-soft)" }}>
                   <img src={mockOrder.img} alt={mockOrder.product} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </div>
                 <div style={{ flex: 1 }}>
@@ -135,9 +135,9 @@ export default function TrackingPage() {
             <div style={{ background: "#f9f9f9", border: "1px solid #f0f0f0", padding: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
               <div>
                 <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 800, color: "#111", marginBottom: 4 }}>Need Help?</div>
-                <div style={{ fontFamily: F, fontSize: 13, color: "#666" }}>Contact us at <strong>support@posterking.in</strong> with your Order ID.</div>
+                <div style={{ fontFamily: F, fontSize: 13, color: "#666" }}>Contact us at <strong>support@crazefusion.in</strong> with your Order ID.</div>
               </div>
-              <a href="mailto:support@posterking.in"
+              <a href="mailto:support@crazefusion.in"
                 style={{ padding: "12px 24px", background: "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", transition: "background 0.2s" }}
                 onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = "#333"}
                 onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = "#111"}>

@@ -4,7 +4,7 @@ const text = "Free Delivery for Prepaid Orders &nbsp;·&nbsp; BUY 4 GET 3 FREE &
 
 export default function Ticker() {
   return (
-    <div style={{ background: "#111", padding: "9px 0", overflow: "hidden" }}>
+    <div className="ticker-strip" style={{ background: "#111", padding: "9px 0", overflow: "hidden" }}>
       <div className="marquee-track" style={{ display: "flex", width: "max-content", gap: 0 }}>
         {[...Array(6)].map((_, i) => (
           <span key={i} dangerouslySetInnerHTML={{ __html: text }}

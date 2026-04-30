@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import TiltedCard from "@/components/reactbits/TiltedCard";
 import ClickSpark from "@/components/reactbits/ClickSpark";
+import CountUp from "@/components/reactbits/CountUp";
 import { products } from "@/data";
 
 const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
@@ -56,7 +57,7 @@ export default function ProductCard({ p }: { p: typeof products[0] }) {
             <div style={{ fontFamily: F, fontSize: 11, color: "#999" }}>{p.sub}</div>
           </div>
           <div style={{ textAlign: "right", flexShrink: 0, marginLeft: 10 }}>
-            <div style={{ fontFamily: F, fontSize: 14, fontWeight: 800, color: "#111" }}>₹{p.price}</div>
+            <div style={{ fontFamily: F, fontSize: 14, fontWeight: 800, color: "#111" }}>₹<CountUp to={p.price} from={0} duration={1} /></div>
             {p.price < p.original && <div style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</div>}
           </div>
         </div>

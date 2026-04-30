@@ -6,7 +6,11 @@ import Footer from "@/components/footer/Footer";
 import Newsletter from "@/components/footer/Newsletter";
 import { products, categories } from "@/data";
 import { useCart } from "@/context/CartContext";
+import AnimatedContent from "@/components/reactbits/AnimatedContent";
+import SpotlightCard from "@/components/reactbits/SpotlightCard";
+import ClickSpark from "@/components/reactbits/ClickSpark";
 
+const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
 
@@ -26,32 +30,34 @@ function ProductCard({ p }: { p: typeof products[0] }) {
 
   return (
     <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ cursor: "pointer" }}>
-      <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", marginBottom: 10, background: "#f7f7f7", border: `1px solid ${hovered ? "#ccc" : "#f0f0f0"}`, transition: "border-color 0.2s" }}>
+      <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", border: `1px solid ${hovered ? "#ccc" : "#f0f0f0"}`, transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}>
         <img src={hovered ? p.img2 : p.img} alt={p.title}
-          style={{ width: "100%", height: "100%", objectFit: "cover", transition: "opacity 0.35s ease" }} />
+          style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.5s ease", transform: hovered ? "scale(1.1)" : "scale(1)" }} />
         {p.badge && (
-          <span style={{ position: "absolute", top: 8, left: 8, background: badgeColor, color: badgeText, fontFamily: F, fontSize: 9, fontWeight: 800, padding: "3px 8px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+          <span style={{ position: "absolute", top: 10, left: 10, background: badgeColor, color: badgeText, fontFamily: FO, fontSize: 9, fontWeight: 900, padding: "4px 10px", textTransform: "uppercase", letterSpacing: "0.05em", boxShadow: "0 4px 10px rgba(0,0,0,0.15)" }}>
             {p.badge}
           </span>
         )}
         {discount > 0 && (
-          <span style={{ position: "absolute", top: 8, right: 8, background: "#fff", color: "#dc2626", fontFamily: F, fontSize: 9, fontWeight: 800, padding: "3px 6px", border: "1px solid #dc2626" }}>
+          <span style={{ position: "absolute", top: 10, right: 10, background: "var(--c-bg)", color: "#dc2626", fontFamily: FO, fontSize: 10, fontWeight: 900, padding: "4px 8px", border: "1.5px solid #dc2626", boxShadow: "0 4px 10px rgba(220,38,38,0.1)" }}>
             -{discount}%
           </span>
         )}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(6px)", transition: "all 0.25s ease" }}>
-          <button onClick={handleQuickAdd}
-            style={{ width: "100%", padding: "10px 0", background: added ? "#16a34a" : "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "background 0.2s" }}>
-            {added ? "✓ Added!" : "Quick Add"}
-          </button>
+        <div style={{ position: "absolute", bottom: 10, left: 10, right: 10, opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(10px)", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}>
+          <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={20}>
+            <button onClick={handleQuickAdd}
+              style={{ width: "100%", padding: "12px 0", background: added ? "#16a34a" : "rgba(17, 17, 17, 0.9)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s" }}>
+              {added ? "✓ Added!" : "Quick Add"}
+            </button>
+          </ClickSpark>
         </div>
       </div>
       <Link href={`/product/${p.id}`} style={{ textDecoration: "none" }}>
-        <div style={{ fontFamily: FE, fontSize: 12, fontWeight: 700, color: "#111", textTransform: "uppercase", marginBottom: 3, lineHeight: 1.3, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{p.title}</div>
-        <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.05em" }}>{p.sub}</div>
-        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "#111" }}>From ₹{p.price}</span>
-          {p.original > p.price && <span style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>}
+        <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, color: "#111", textTransform: "uppercase", marginBottom: 6, lineHeight: 1.3, letterSpacing: "0.02em", overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{p.title}</div>
+        <div style={{ fontFamily: FO, fontSize: 11, color: "#aaa", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>{p.sub}</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 800, color: "#111" }}>₹{p.price}</span>
+          {p.original > p.price && <span style={{ fontFamily: FO, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>}
         </div>
       </Link>
     </div>
@@ -91,12 +97,12 @@ export default function CollectionPage() {
   };
 
   return (
-    <div style={{ background: "#fff", minHeight: "100vh" }}>
+    <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <div style={{ paddingTop: 64 }}>
+      <div style={{ paddingTop: 56 }}>
 
         {/* Breadcrumb + Header */}
-        <div style={{ borderBottom: "1px solid #f0f0f0", background: "#fff", padding: "20px 32px" }}>
+        <div style={{ borderBottom: "1px solid #f0f0f0", background: "var(--c-bg)", padding: "20px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 8 }}>
               <Link href="/" style={{ color: "#aaa", textDecoration: "none" }}>Home</Link>
@@ -116,7 +122,7 @@ export default function CollectionPage() {
                   Filters {filtersOpen ? "↑" : "↓"}
                 </button>
                 <select value={sortBy} onChange={e => setSortBy(e.target.value)}
-                  style={{ padding: "8px 16px", border: "1px solid #e0e0e0", background: "#fff", color: "#111", fontFamily: F, fontSize: 11, fontWeight: 600, cursor: "pointer", outline: "none" }}>
+                  style={{ padding: "8px 16px", border: "1px solid #e0e0e0", background: "var(--c-bg)", color: "#111", fontFamily: F, fontSize: 11, fontWeight: 600, cursor: "pointer", outline: "none" }}>
                   <option value="featured">Featured</option>
                   <option value="newest">Newest First</option>
                   <option value="price-asc">Price: Low → High</option>
@@ -128,7 +134,7 @@ export default function CollectionPage() {
         </div>
 
         {/* Category Pills */}
-        <div style={{ borderBottom: "1px solid #f0f0f0", padding: "16px 32px", overflowX: "auto", background: "#fafafa" }}>
+        <div style={{ borderBottom: "1px solid #f0f0f0", padding: "16px 32px", overflowX: "auto", background: "var(--c-bg-card)" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 8 }}>
             {categories.map(cat => (
               <button key={cat} onClick={() => setActiveCategory(cat)}
@@ -197,8 +203,12 @@ export default function CollectionPage() {
           </div>
 
           {sorted.length > 0 ? (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 24 }}>
-              {sorted.map(p => <ProductCard key={p.id} p={p} />)}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 20 }}>
+              {sorted.map((p, i) => (
+                <AnimatedContent key={p.id} distance={20} delay={i * 0.04} duration={0.5} threshold={0.05}>
+                  <ProductCard p={p} />
+                </AnimatedContent>
+              ))}
             </div>
           ) : (
             <div style={{ textAlign: "center", padding: "80px 20px" }}>
@@ -210,6 +220,12 @@ export default function CollectionPage() {
       </div>
       <Newsletter />
       <Footer />
+      <style>{`
+        @media (max-width: 768px) {
+          /* Collection grid: 2-col on mobile */
+          .collection-page { padding: 24px 12px !important; }
+        }
+      `}</style>
     </div>
   );
 }
