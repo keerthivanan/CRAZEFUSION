@@ -5,24 +5,40 @@ import { useCart } from "@/context/CartContext";
 import { useTheme } from "@/context/ThemeContext";
 
 const nav = [
-  { label: "Shop Posters", href: "/collection", children: [
-    { label: "All Posters",          href: "/collection" },
-    { label: "Cars & Bikes",         href: "/collection?cat=Cars+%26+Bikes" },
-    { label: "Anime",                href: "/collection?cat=Anime" },
-    { label: "Sports",               href: "/collection?cat=Sports" },
-    { label: "Pop Culture",          href: "/collection?cat=Movies" },
-    { label: "Make Your Own Poster", href: "/custom-builder" },
+  { label: "Cricket", href: "/cricket", children: [
+    { label: "All Cricket",        href: "/cricket" },
+    { label: "Chennai Super Kings",href: "/cricket?team=CSK" },
+    { label: "Mumbai Indians",     href: "/cricket?team=MI" },
+    { label: "Royal Challengers",  href: "/cricket?team=RCB" },
+    { label: "Kolkata Knight Riders", href: "/cricket?team=KKR" },
+    { label: "Delhi Capitals",     href: "/cricket?team=DC" },
+    { label: "Sunrisers Hyderabad",href: "/cricket?team=SRH" },
+    { label: "Rajasthan Royals",   href: "/cricket?team=RR" },
+    { label: "Punjab Kings",       href: "/cricket?team=PBKS" },
+    { label: "Gujarat Titans",     href: "/cricket?team=GT" },
+    { label: "Lucknow Super Giants",href: "/cricket?team=LSG" },
   ]},
-  { label: "Multi Posters", href: "/collection", children: [
-    { label: "9-Piece Epic Splits",  href: "/collection?cat=Split+Posters" },
-    { label: "8-Panel Wall Sets",    href: "/collection?cat=Split+Posters" },
-    { label: "50-Piece Collage Kit", href: "/collection?cat=Collage+Kits" },
-    { label: "3-Piece Sets",         href: "/collection?cat=Split+Posters" },
-    { label: "Best Selling",         href: "/collection" },
+  { label: "Basketball", href: "/collection?cat=Basketball", children: [
+    { label: "All Basketball",      href: "/collection?cat=Basketball" },
+    { label: "LA Lakers",           href: "/collection?cat=Basketball&team=Lakers" },
+    { label: "Golden State Warriors",href: "/collection?cat=Basketball&team=Warriors" },
+    { label: "Chicago Bulls",       href: "/collection?cat=Basketball&team=Bulls" },
+    { label: "Miami Heat",          href: "/collection?cat=Basketball&team=Heat" },
+    { label: "Boston Celtics",      href: "/collection?cat=Basketball&team=Celtics" },
+    { label: "Brooklyn Nets",       href: "/collection?cat=Basketball&team=Nets" },
+    { label: "Toronto Raptors",     href: "/collection?cat=Basketball&team=Raptors" },
   ]},
-  { label: "Retro Prints",   href: "/custom-builder" },
+  { label: "Football", href: "/collection?cat=Football", children: [
+    { label: "All Football",        href: "/collection?cat=Football" },
+    { label: "Real Madrid",         href: "/collection?cat=Football&team=RealMadrid" },
+    { label: "FC Barcelona",        href: "/collection?cat=Football&team=Barcelona" },
+    { label: "Manchester City",     href: "/collection?cat=Football&team=ManCity" },
+    { label: "Liverpool FC",        href: "/collection?cat=Football&team=Liverpool" },
+    { label: "PSG",                 href: "/collection?cat=Football&team=PSG" },
+    { label: "Arsenal",             href: "/collection?cat=Football&team=Arsenal" },
+    { label: "Manchester United",   href: "/collection?cat=Football&team=ManUnited" },
+  ]},
   { label: "Custom Posters", href: "/custom-builder" },
-  { label: "Stickers",       href: "/collection?cat=Stickers" },
   { label: "Reviews",        href: "/reviews" },
 ];
 

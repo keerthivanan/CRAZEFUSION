@@ -9,7 +9,7 @@ import { useCart } from "@/context/CartContext";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 
-const multiIds = [7, 8, 9, 10, 11, 12, 15];
+const multiIds = [1, 2, 3, 4, 5, 6];
 const multiProducts = multiIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
 
 function MultiCard({ p }: { p: typeof products[0] }) {

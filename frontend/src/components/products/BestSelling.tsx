@@ -11,7 +11,7 @@ import { useCart } from "@/context/CartContext";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 
-const bestSellerIds = [16, 1, 13, 5, 2, 6, 14, 3, 4];
+const bestSellerIds = [1, 2, 3, 4, 5, 6];
 const bestSellers = bestSellerIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
 
 function ProductCard({ p }: { p: typeof products[0] }) {
