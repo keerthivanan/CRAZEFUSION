@@ -1,17 +1,13 @@
 "use client";
 import Link from "next/link";
+import { CricketAvatar, BasketballAvatar, FootballAvatar } from "./SportAvatars";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
-const KEY = process.env.NEXT_PUBLIC_LOGODEV_KEY ?? "pk_X0d9dkoXSXC1bEBCAvNs-g";
-
-const logo = (domain: string) =>
-  `https://img.logo.dev/${domain}?token=${KEY}&size=160&format=png`;
-
 const cats = [
-  { label: "Cricket",    href: "/cricket",    domain: "iplt20.com"        },
-  { label: "Basketball", href: "/basketball",  domain: "nba.com"           },
-  { label: "Football",   href: "/football",   domain: "fifa.com"          },
+  { label: "Cricket",    href: "/cricket",    Avatar: CricketAvatar    },
+  { label: "Basketball", href: "/basketball", Avatar: BasketballAvatar },
+  { label: "Football",   href: "/football",   Avatar: FootballAvatar   },
 ];
 
 export default function CategoryIcons() {
@@ -21,7 +17,7 @@ export default function CategoryIcons() {
         maxWidth: 1400, margin: "0 auto", padding: "0 32px",
         display: "flex", alignItems: "flex-start", justifyContent: "center", gap: 64,
       }}>
-        {cats.map(({ label, href, domain }) => (
+        {cats.map(({ label, href, Avatar }) => (
           <Link key={label} href={href} style={{
             textDecoration: "none", display: "flex", flexDirection: "column",
             alignItems: "center", gap: 10,
@@ -42,11 +38,7 @@ export default function CategoryIcons() {
                 (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
                 (e.currentTarget as HTMLDivElement).style.borderColor = "var(--c-border)";
               }}>
-              <img
-                src={logo(domain)}
-                alt={label}
-                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: 6 }}
-              />
+              <Avatar />
             </div>
             <span className="cat-icon-label" style={{
               fontFamily: FO, fontSize: 11, fontWeight: 600,
