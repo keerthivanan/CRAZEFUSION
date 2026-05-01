@@ -9,7 +9,7 @@ const logo = (domain: string) =>
   `https://img.logo.dev/${domain}?token=${KEY}&size=160&format=png`;
 
 const cats = [
-  { label: "Cricket",    href: "/cricket",    domain: "icc-cricket.com"   },
+  { label: "Cricket",    href: "/cricket",    domain: "iplt20.com"        },
   { label: "Basketball", href: "/basketball",  domain: "nba.com"           },
   { label: "Football",   href: "/football",   domain: "fifa.com"          },
 ];
