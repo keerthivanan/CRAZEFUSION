@@ -40,7 +40,7 @@ export default function ReviewsPage() {
         {/* Hero */}
         <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "64px 32px", textAlign: "center" }}>
           <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#e8a000", marginBottom: 12 }}>Customer Love</div>
-          <h1 style={{ fontFamily: FE, fontSize: "clamp(32px,5vw,72px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>
+          <h1 style={{ fontFamily: FE, fontSize: "clamp(32px,5vw,72px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>
             10,000+ Happy <span style={{ color: "#e8a000" }}>Walls</span>
           </h1>
           <p style={{ fontFamily: F, fontSize: 15, color: "#888", maxWidth: 440, margin: "0 auto 36px" }}>
@@ -48,7 +48,7 @@ export default function ReviewsPage() {
           </p>
           {/* Rating Summary */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
-            <div style={{ fontFamily: FE, fontSize: 56, fontWeight: 900, color: "var(--c-text)", lineHeight: 1 }}>4.9</div>
+            <div style={{ fontFamily: FE, fontSize: 56, fontWeight: 400, color: "var(--c-text)", lineHeight: 1 }}>4.9</div>
             <div>
               <div style={{ color: "#e8a000", fontSize: 24, letterSpacing: 4, marginBottom: 4 }}>★★★★★</div>
               <div style={{ fontFamily: F, fontSize: 12, color: "#aaa", letterSpacing: "0.1em", textTransform: "uppercase" }}>2,400+ Reviews</div>
@@ -62,7 +62,7 @@ export default function ReviewsPage() {
             {[["10000","+","Happy Customers"],[" 2400","+","Verified Reviews"],["4.9","/5","Average Rating"],["1981","+","Poster Designs"]].map(([val,suf,label],i) => (
               <AnimatedContent key={label} distance={16} delay={i*0.1} duration={0.5}>
                 <div style={{ textAlign: "center", padding: "16px", borderRight: i < 3 ? "1px solid #1f1f1f" : "none" }}>
-                  <div style={{ fontFamily: FE, fontSize: "clamp(28px,3.5vw,44px)", fontWeight: 900, color: "#e8a000", lineHeight: 1 }}>
+                  <div style={{ fontFamily: FE, fontSize: "clamp(28px,3.5vw,44px)", fontWeight: 400, color: "#e8a000", lineHeight: 1 }}>
                     <CountUp to={Number(val)} from={0} duration={2} delay={i*0.1} />{suf}
                   </div>
                   <div style={{ fontFamily: F, fontSize: 10, color: "#555", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: 6 }}>{label}</div>
@@ -77,7 +77,7 @@ export default function ReviewsPage() {
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 40, flexWrap: "wrap", gap: 16 }}>
             <div>
               <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#aaa", marginBottom: 8 }}>What They Say</div>
-              <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,40px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>Verified Reviews</h2>
+              <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,40px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>Verified Reviews</h2>
             </div>
             <div style={{ display: "flex", gap: 8 }}>
               {["All", "5★", "4★", "Cars", "Anime", "Custom"].map(f => (
@@ -117,10 +117,10 @@ export default function ReviewsPage() {
         {/* CTA */}
         <div style={{ background: "#111", padding: "64px 32px", textAlign: "center" }}>
           <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#e8a000", marginBottom: 12 }}>Join Them</div>
-          <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,4vw,48px)", fontWeight: 900, color: "#fff", textTransform: "uppercase", letterSpacing: "-0.03em", marginBottom: 20 }}>Your Wall is Waiting</h2>
+          <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,4vw,48px)", fontWeight: 400, color: "#fff", textTransform: "uppercase", letterSpacing: "-0.03em", marginBottom: 20 }}>Your Wall is Waiting</h2>
           <p style={{ fontFamily: F, fontSize: 14, color: "#666", marginBottom: 32 }}>Premium posters starting ₹79. Free shipping on prepaid orders.</p>
           <a href="/collection"
-            style={{ display: "inline-block", padding: "16px 48px", background: "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", transition: "all 0.2s" }}
+            style={{ display: "inline-block", padding: "16px 48px", background: "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", transition: "all 0.2s" }}
             onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = "#d09800"}
             onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = "#e8a000"}>
             Shop Now →

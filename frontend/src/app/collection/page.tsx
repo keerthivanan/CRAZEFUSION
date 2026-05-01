@@ -34,19 +34,19 @@ function ProductCard({ p }: { p: typeof products[0] }) {
         <img src={hovered ? p.img2 : p.img} alt={p.title}
           style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.5s ease", transform: hovered ? "scale(1.1)" : "scale(1)" }} />
         {p.badge && (
-          <span style={{ position: "absolute", top: 10, left: 10, background: badgeColor, color: badgeText, fontFamily: FO, fontSize: 9, fontWeight: 900, padding: "4px 10px", textTransform: "uppercase", letterSpacing: "0.05em", boxShadow: "0 4px 10px rgba(0,0,0,0.15)" }}>
+          <span style={{ position: "absolute", top: 10, left: 10, background: badgeColor, color: badgeText, fontFamily: FO, fontSize: 9, fontWeight: 400, padding: "4px 10px", textTransform: "uppercase", letterSpacing: "0.05em", boxShadow: "0 4px 10px rgba(0,0,0,0.15)" }}>
             {p.badge}
           </span>
         )}
         {discount > 0 && (
-          <span style={{ position: "absolute", top: 10, right: 10, background: "var(--c-bg)", color: "#dc2626", fontFamily: FO, fontSize: 10, fontWeight: 900, padding: "4px 8px", border: "1.5px solid #dc2626", boxShadow: "0 4px 10px rgba(220,38,38,0.1)" }}>
+          <span style={{ position: "absolute", top: 10, right: 10, background: "var(--c-bg)", color: "#dc2626", fontFamily: FO, fontSize: 10, fontWeight: 400, padding: "4px 8px", border: "1.5px solid #dc2626", boxShadow: "0 4px 10px rgba(220,38,38,0.1)" }}>
             -{discount}%
           </span>
         )}
         <div style={{ position: "absolute", bottom: 10, left: 10, right: 10, opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(10px)", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}>
           <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={20}>
             <button onClick={handleQuickAdd}
-              style={{ width: "100%", padding: "12px 0", background: added ? "#16a34a" : "rgba(17, 17, 17, 0.9)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s" }}>
+              style={{ width: "100%", padding: "12px 0", background: added ? "#16a34a" : "rgba(17, 17, 17, 0.9)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s" }}>
               {added ? "✓ Added!" : "Quick Add"}
             </button>
           </ClickSpark>
@@ -56,7 +56,7 @@ function ProductCard({ p }: { p: typeof products[0] }) {
         <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 6, lineHeight: 1.3, letterSpacing: "0.02em", overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{p.title}</div>
         <div style={{ fontFamily: FO, fontSize: 11, color: "#aaa", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>{p.sub}</div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 800, color: "var(--c-text)" }}>₹{p.price}</span>
+          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>₹{p.price}</span>
           {p.original > p.price && <span style={{ fontFamily: FO, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>}
         </div>
       </Link>
@@ -111,7 +111,7 @@ export default function CollectionPage() {
             </div>
             <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
               <div>
-                <h1 style={{ fontFamily: FE, fontSize: "clamp(28px,4vw,48px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>
+                <h1 style={{ fontFamily: FE, fontSize: "clamp(28px,4vw,48px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>
                   {activeCategory === "All" ? "All Posters" : activeCategory}
                 </h1>
                 <p style={{ fontFamily: F, fontSize: 13, color: "#aaa", marginTop: 4 }}>{sorted.length} products</p>
@@ -195,7 +195,7 @@ export default function CollectionPage() {
           <div style={{ background: "#111", color: "#fff", padding: "14px 24px", marginBottom: 32, display: "flex", alignItems: "center", justifyContent: "center", gap: 32, flexWrap: "wrap" }}>
             {[["BUY 4", "GET 3 FREE"], ["BUY 5", "GET 5 FREE"], ["BUY 6", "GET 12 FREE"]].map(([b, g]) => (
               <div key={b} style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                <span style={{ fontFamily: FE, fontSize: 14, fontWeight: 900, color: "#e8a000" }}>{b}</span>
+                <span style={{ fontFamily: FE, fontSize: 14, fontWeight: 400, color: "#e8a000" }}>{b}</span>
                 <span style={{ fontFamily: F, fontSize: 11, color: "#aaa", letterSpacing: "0.1em" }}>{g}</span>
               </div>
             ))}
@@ -212,7 +212,7 @@ export default function CollectionPage() {
             </div>
           ) : (
             <div style={{ textAlign: "center", padding: "80px 20px" }}>
-              <h2 style={{ fontFamily: FE, fontSize: 24, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase" }}>No products found</h2>
+              <h2 style={{ fontFamily: FE, fontSize: 24, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase" }}>No products found</h2>
               <p style={{ fontFamily: F, fontSize: 14, color: "#aaa", marginTop: 8 }}>Try a different category or remove filters.</p>
             </div>
           )}

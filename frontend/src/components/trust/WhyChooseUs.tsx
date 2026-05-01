@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import AnimatedContent from "@/components/reactbits/AnimatedContent";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import Link from "next/link";
@@ -50,7 +50,7 @@ export default function WhyChooseUs() {
             <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#aaa", marginBottom: 8 }}>
               Why thousands love us
             </div>
-            <h2 style={{ fontFamily: FE, fontSize: "clamp(22px,3vw,40px)", fontWeight: 900, letterSpacing: "-0.03em", color: "var(--c-text)", textTransform: "uppercase", margin: 0 }}>
+            <h2 style={{ fontFamily: FE, fontSize: "clamp(22px,3vw,40px)", fontWeight: 400, letterSpacing: "-0.03em", color: "var(--c-text)", textTransform: "uppercase", margin: 0 }}>
               The PosterKing <span style={{ color: "#e8a000" }}>Difference</span>
             </h2>
           </div>
@@ -104,7 +104,7 @@ export default function WhyChooseUs() {
             <Link href="/collection" style={{
               display: "inline-block", padding: "14px 52px",
               background: "#111", color: "#fff",
-              fontFamily: F, fontSize: 12, fontWeight: 800,
+              fontFamily: F, fontSize: 12, fontWeight: 500,
               letterSpacing: "0.12em", textTransform: "uppercase",
               textDecoration: "none", transition: "background 0.2s",
             }}

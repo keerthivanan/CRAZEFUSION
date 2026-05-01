@@ -32,14 +32,14 @@ function MultiCard({ p }: { p: typeof products[0] }) {
         <img src={p.img} alt={p.title}
           style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }} />
         {p.badge && (
-          <span style={{ position: "absolute", top: 10, left: 10, background: badgeColor, color: badgeTextColor, fontFamily: FO, fontSize: 10, fontWeight: 900, padding: "4px 10px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+          <span style={{ position: "absolute", top: 10, left: 10, background: badgeColor, color: badgeTextColor, fontFamily: FO, fontSize: 10, fontWeight: 400, padding: "4px 10px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
             {p.badge}
           </span>
         )}
         <div style={{ position: "absolute", bottom: 10, left: 10, right: 10 }}>
           <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={20}>
             <button onClick={handleQuickAdd}
-              style={{ width: "100%", padding: "12px 0", background: "rgba(10,10,10,0.88)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer" }}>
+              style={{ width: "100%", padding: "12px 0", background: "rgba(10,10,10,0.88)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer" }}>
               Quick Add
             </button>
           </ClickSpark>
@@ -49,7 +49,7 @@ function MultiCard({ p }: { p: typeof products[0] }) {
         <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 5, lineHeight: 1.3, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{p.title}</div>
         <div style={{ fontFamily: FO, fontSize: 10, color: "#aaa", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>{p.sub}</div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 800, color: "var(--c-text)" }}>₹{p.price}</span>
+          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>₹{p.price}</span>
           {p.original > p.price && <span style={{ fontFamily: FO, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>}
         </div>
       </Link>
@@ -64,7 +64,7 @@ export default function MultiPosters() {
     <section style={{ padding: "56px 0", background: "var(--c-bg-soft)" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 24px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
-          <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,40px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", margin: 0, letterSpacing: "-0.03em", display: "flex", gap: "0.2em", flexWrap: "wrap", alignItems: "center" }}>
+          <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,40px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", margin: 0, letterSpacing: "-0.03em", display: "flex", gap: "0.2em", flexWrap: "wrap", alignItems: "center" }}>
             <BlurText text="Multi Poster" delay={60} animateBy="words" direction="bottom" />
             <span style={{ color: "#e8a000" }}><BlurText text="Collections" delay={200} animateBy="words" direction="bottom" /></span>
           </h2>

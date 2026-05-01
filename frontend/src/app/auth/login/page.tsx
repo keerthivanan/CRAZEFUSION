@@ -39,7 +39,7 @@ export default function LoginPage() {
         <div style={{ width: "100%", maxWidth: 400 }}>
 
           <div style={{ textAlign: "center", marginBottom: 36 }}>
-            <h1 style={{ fontFamily: FO, fontSize: 22, fontWeight: 800, color: "var(--c-text)", margin: "0 0 8px", textTransform: "uppercase", letterSpacing: "-0.01em" }}>Welcome Back</h1>
+            <h1 style={{ fontFamily: FO, fontSize: 22, fontWeight: 500, color: "var(--c-text)", margin: "0 0 8px", textTransform: "uppercase", letterSpacing: "-0.01em" }}>Welcome Back</h1>
             <p style={{ fontFamily: F, fontSize: 13, color: "#aaa", margin: 0 }}>Sign in to continue shopping</p>
           </div>
 

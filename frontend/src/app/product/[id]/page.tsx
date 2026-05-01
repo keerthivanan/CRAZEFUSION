@@ -27,7 +27,7 @@ export default function ProductPage() {
   if (!p) return (
     <div style={{ background: "#fff", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
       <Navbar />
-      <div style={{ fontFamily: FE, fontSize: 32, fontWeight: 900, color: "#111", paddingTop: 64 }}>Product not found</div>
+      <div style={{ fontFamily: FE, fontSize: 32, fontWeight: 400, color: "#111", paddingTop: 64 }}>Product not found</div>
       <Link href="/collection" style={{ fontFamily: F, fontSize: 13, color: "#e8a000", textDecoration: "underline" }}>← Back to collection</Link>
     </div>
   );
@@ -83,12 +83,12 @@ export default function ProductPage() {
               <img src={imgs[activeImg]} alt={p.title}
                 style={{ width: "100%", height: "100%", objectFit: "cover", transition: "opacity 0.3s" }} />
               {p.badge && (
-                <span style={{ position: "absolute", top: 16, left: 16, background: p.badge === "Best Seller" ? "#e8a000" : p.badge === "Hot" ? "#dc2626" : p.badge === "Sale" ? "#dc2626" : "#111", color: p.badge === "Best Seller" ? "#000" : "#fff", fontFamily: F, fontSize: 10, fontWeight: 800, padding: "4px 10px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                <span style={{ position: "absolute", top: 16, left: 16, background: p.badge === "Best Seller" ? "#e8a000" : p.badge === "Hot" ? "#dc2626" : p.badge === "Sale" ? "#dc2626" : "#111", color: p.badge === "Best Seller" ? "#000" : "#fff", fontFamily: F, fontSize: 10, fontWeight: 500, padding: "4px 10px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
                   {p.badge}
                 </span>
               )}
               {discount > 0 && (
-                <span style={{ position: "absolute", top: 16, right: 16, background: "#111", color: "#fff", fontFamily: F, fontSize: 10, fontWeight: 800, padding: "4px 10px" }}>
+                <span style={{ position: "absolute", top: 16, right: 16, background: "#111", color: "#fff", fontFamily: F, fontSize: 10, fontWeight: 500, padding: "4px 10px" }}>
                   {discount}% OFF
                 </span>
               )}
@@ -118,7 +118,7 @@ export default function ProductPage() {
 
             {/* Price */}
             <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 24, paddingBottom: 24, borderBottom: "1px solid var(--c-border)" }}>
-              <span style={{ fontFamily: FO, fontSize: 40, fontWeight: 800, color: "var(--c-text)" }}>₹{p.price}</span>
+              <span style={{ fontFamily: FO, fontSize: 40, fontWeight: 500, color: "var(--c-text)" }}>₹{p.price}</span>
               <span style={{ fontFamily: FO, fontSize: 20, fontWeight: 400, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>
               <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "#dc2626", background: "rgba(220,38,38,0.06)", padding: "4px 12px", borderRadius: 4 }}>{discount}% OFF</span>
             </div>
@@ -203,7 +203,7 @@ export default function ProductPage() {
           <div style={{ borderTop: "1px solid var(--c-border)", padding: "64px 32px" }}>
             <div style={{ maxWidth: 1400, margin: "0 auto" }}>
               <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#aaa", marginBottom: 8 }}>You Might Also Like</div>
-              <h2 style={{ fontFamily: FE, fontSize: "clamp(22px,3vw,36px)", fontWeight: 900, color: "#111", textTransform: "uppercase", letterSpacing: "-0.03em", marginBottom: 32 }}>Related <span style={{ color: "#e8a000" }}>Products</span></h2>
+              <h2 style={{ fontFamily: FE, fontSize: "clamp(22px,3vw,36px)", fontWeight: 400, color: "#111", textTransform: "uppercase", letterSpacing: "-0.03em", marginBottom: 32 }}>Related <span style={{ color: "#e8a000" }}>Products</span></h2>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 24 }}>
                 {related.map(r => (
                   <Link key={r.id} href={`/product/${r.id}`} style={{ textDecoration: "none" }}>
@@ -212,9 +212,9 @@ export default function ProductPage() {
                         onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.04)")}
                         onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")} />
                     </div>
-                    <div style={{ fontFamily: FE, fontSize: 12, fontWeight: 800, color: "#111", textTransform: "uppercase", marginBottom: 2 }}>{r.title}</div>
+                    <div style={{ fontFamily: FE, fontSize: 12, fontWeight: 500, color: "#111", textTransform: "uppercase", marginBottom: 2 }}>{r.title}</div>
                     <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginBottom: 4 }}>{r.sub}</div>
-                    <div style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "#111" }}>From ₹{r.price}</div>
+                    <div style={{ fontFamily: F, fontSize: 13, fontWeight: 500, color: "#111" }}>From ₹{r.price}</div>
                   </Link>
                 ))}
               </div>
