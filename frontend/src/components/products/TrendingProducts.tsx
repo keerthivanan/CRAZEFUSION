@@ -63,7 +63,6 @@ function TCard({ p }: { p: typeof products[0] }) {
 
 export default function TrendingProducts() {
   const ref = useRef<HTMLDivElement>(null);
-  const scroll = (dir: "l" | "r") => ref.current?.scrollBy({ left: dir === "l" ? -200 : 200, behavior: "smooth" });
 
   return (
     <section style={{ padding: "56px 0", background: "var(--c-bg)" }}>
@@ -73,19 +72,12 @@ export default function TrendingProducts() {
             <BlurText text="Trending" delay={60} animateBy="words" direction="bottom" />
             <span style={{ color: "#e8a000" }}><BlurText text="Now" delay={160} animateBy="words" direction="bottom" /></span>
           </h2>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <Link href="/collection" style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-text)", textDecoration: "none", borderBottom: "1.5px solid var(--c-text)" }}>View All</Link>
-            <div style={{ display: "flex", gap: 6 }}>
-              {["←", "→"].map((d, i) => (
-                <button key={d} onClick={() => scroll(i === 0 ? "l" : "r")}
-                  style={{ width: 34, height: 34, border: "1px solid var(--c-border)", background: "var(--c-bg)", cursor: "pointer", fontSize: 14, color: "var(--c-text)", transition: "all 0.2s" }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = "#111"; (e.currentTarget as HTMLButtonElement).style.color = "#fff"; (e.currentTarget as HTMLButtonElement).style.borderColor = "#111"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "var(--c-bg)"; (e.currentTarget as HTMLButtonElement).style.color = "var(--c-text)"; (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--c-border)"; }}>
-                  {d}
-                </button>
-              ))}
-            </div>
-          </div>
+          <Link href="/collection"
+            style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-text)", textDecoration: "none", border: "1px solid var(--c-border)", padding: "8px 18px", transition: "all 0.2s" }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "var(--c-btn-bg)"; (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-btn-text)"; (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--c-btn-bg)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-text)"; (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--c-border)"; }}>
+            View All
+          </Link>
         </div>
         <div ref={ref} className="no-scrollbar trending-carousel" style={{ display: "flex", gap: 14, overflowX: "auto" }}>
           {trending.map(p => (
