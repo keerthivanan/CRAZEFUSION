@@ -109,25 +109,13 @@ export function CricketAvatar() {
 // ── NBA LEGENDS ──────────────────────────────────────────────────────
 export function BasketballAvatar() {
   return (
-    <Badge
-      bg="radial-gradient(circle at 50% 40%, #3d1a6e, #0a0218)"
-      accent="#e8a000"
-      title="NBA LEGENDS"
-      players={[
-        {
-          src: "https://a.espncdn.com/i/headshots/nba/players/full/1035.png",
-          name: "JORDAN", number: "23",
-        },
-        {
-          src: "https://a.espncdn.com/i/headshots/nba/players/full/110.png",
-          name: "KOBE", number: "24",
-        },
-        {
-          src: "https://a.espncdn.com/i/headshots/nba/players/full/1966.png",
-          name: "LEBRON", number: "6",
-        },
-      ]}
-    />
+    <div style={{ width: "100%", height: "100%", borderRadius: "50%", overflow: "hidden" }}>
+      <img
+        src="/categories/basketball_legends.png"
+        alt="NBA Legends"
+        style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
+      />
+    </div>
   );
 }
 
