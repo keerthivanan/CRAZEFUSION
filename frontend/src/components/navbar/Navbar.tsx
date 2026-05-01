@@ -45,12 +45,6 @@ const nav = [
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
 
-const IconSearch = () => (
-  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-  </svg>
-);
-
 const IconBag = () => (
   <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
@@ -228,12 +222,23 @@ export default function Navbar() {
             >Login</Link>
           </div>
 
-          {/* Mobile Actions — Search + Hamburger only */}
-          <div className="pk-mobile-actions" style={{ display: "none", alignItems: "center", gap: 4 }}>
+          {/* Mobile Actions — Theme + Cart + Hamburger */}
+          <div className="pk-mobile-actions" style={{ display: "none", alignItems: "center", gap: 2 }}>
 
-            {/* Search icon */}
-            <Link href="/collection" style={{ ...iconBtn, textDecoration: "none" }}>
-              <IconSearch />
+            {/* Theme toggle — visible directly on mobile bar */}
+            <button onClick={toggle} aria-label="Toggle theme"
+              style={{ ...iconBtn, border: "1px solid var(--c-border)", borderRadius: "50%", width: 34, height: 34, padding: 0, flexShrink: 0 }}>
+              {theme === "light" ? <IconMoon /> : <IconSun />}
+            </button>
+
+            {/* Cart with badge */}
+            <Link href="/cart" style={{ ...iconBtn, textDecoration: "none", position: "relative" }}>
+              <IconBag />
+              {count > 0 && (
+                <span style={{ position: "absolute", top: 2, right: 2, background: "#e8a000", color: "#000", borderRadius: "50%", width: 14, height: 14, fontSize: 7, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: F, lineHeight: 1 }}>
+                  {count}
+                </span>
+              )}
             </Link>
 
             {/* Hamburger */}
