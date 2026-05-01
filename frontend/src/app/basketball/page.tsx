@@ -48,7 +48,7 @@ function TeamLogo({ team }: { team: Team }) {
     <img
       src={team.logo}
       alt={team.name}
-      style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: 8 }}
+      style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: 6 }}
       onError={() => setFailed(true)}
     />
   );
@@ -58,32 +58,30 @@ function ProductCard({ p }: { p: typeof products[0] }) {
   const { addItem } = useCart();
   const [hovered, setHovered] = useState(false);
   const [added, setAdded]     = useState(false);
-  const discount = p.original > p.price ? Math.round((1 - p.price / p.original) * 100) : 0;
-
   return (
     <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ cursor: "pointer" }}>
-      <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", border: `1px solid ${hovered ? "var(--c-text-muted)" : "var(--c-border)"}`, transition: "all 0.3s ease" }}>
+      <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", border: `1px solid ${hovered ? "#888888" : "var(--c-border)"}`, transition: "all 0.3s ease", boxShadow: hovered ? "0 0 14px rgba(160,160,160,0.22)" : "none" }}>
         <img src={hovered ? p.img2 : p.img} alt={p.title}
           style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.5s ease", transform: hovered ? "scale(1.1)" : "scale(1)" }} />
-        {discount > 0 && (
-          <span style={{ position: "absolute", top: 10, left: 10, background: "#dc2626", color: "#fff", fontFamily: F, fontSize: 9, fontWeight: 500, padding: "3px 8px" }}>
-            -{discount}%
+        {p.badge && (
+          <span style={{ position: "absolute", top: 10, left: 10, background: "#000", color: "#fff", fontFamily: FO, fontSize: 9, fontWeight: 700, padding: "5px 12px", borderRadius: 20, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+            {p.badge}
           </span>
         )}
         <div style={{ position: "absolute", bottom: 10, left: 10, right: 10, opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(10px)", transition: "all 0.3s ease" }}>
           <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={20}>
             <button onClick={() => { addItem({ id: p.id, title: p.title, sub: p.sub, img: p.img, price: p.price, original: p.original, size: p.sizes[0], finish: p.finishes[0] }); setAdded(true); setTimeout(() => setAdded(false), 1500); }}
-              style={{ width: "100%", padding: "12px 0", background: added ? "#16a34a" : "rgba(17,17,17,0.9)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s" }}>
+              style={{ width: "100%", padding: "12px 0", background: added ? "#16a34a" : "rgba(17,17,17,0.9)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s", borderRadius: 8 }}>
               {added ? "✓ Added!" : "Quick Add"}
             </button>
           </ClickSpark>
         </div>
       </div>
       <Link href={`/product/${p.id}`} style={{ textDecoration: "none" }}>
-        <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 5, lineHeight: 1.3, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{p.title}</div>
-        <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>{p.sub}</div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>₹{p.price}</span>
+        <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 5, lineHeight: 1.3, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const, textAlign: "center" }}>{p.title}</div>
+        <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em", textAlign: "center" }}>{p.sub}</div>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>From ₹{p.price}</span>
           {p.original > p.price && <span style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>}
         </div>
       </Link>
@@ -138,7 +136,7 @@ export default function BasketballPage() {
                   <div style={{
                     width: 72, height: 72, borderRadius: "50%", overflow: "hidden",
                     border: activeTeam === team.short ? `2.5px solid ${team.color}` : "2px solid var(--c-border)",
-                    background: "var(--c-bg)",
+                    background: "#fff",
                     transition: "all 0.25s ease",
                     boxShadow: activeTeam === team.short ? `0 0 16px ${team.color}55` : "none",
                   }}
@@ -176,7 +174,7 @@ export default function BasketballPage() {
           return (
             <div style={{ background: t.color + "18", borderBottom: `2px solid ${t.color}33`, padding: "14px 32px" }}>
               <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "center", gap: 12 }}>
-                <img src={t.logo} alt={t.name} style={{ width: 32, height: 32, objectFit: "contain" }} />
+                <img src={t.logo} alt={t.name} style={{ width: 32, height: 32, objectFit: "contain", borderRadius: "50%", background: "var(--c-bg-soft)" }} />
                 <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 600, color: t.color }}>
                   {t.name} — {t.short}
                 </span>

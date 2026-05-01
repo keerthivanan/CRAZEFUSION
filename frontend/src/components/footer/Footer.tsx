@@ -30,8 +30,6 @@ const links = {
   ],
 };
 
-const payments = ["UPI", "Razorpay", "Visa", "Mastercard", "Net Banking", "COD"];
-
 export default function Footer() {
   return (
     <footer style={{ background: "#000000", color: "#ffffff", borderTop: "1px solid #1a1a1a" }}>
@@ -74,7 +72,7 @@ export default function Footer() {
             <div className="footer-socials" style={{ display: "flex", gap: 12 }}>
               {[["IN", "https://instagram.com/posterking"], ["YT", "https://youtube.com/posterking"], ["TW", "https://twitter.com/posterking"]].map(([label, href]) => (
                 <a key={label} href={href} target="_blank" rel="noreferrer"
-                  style={{ width: 38, height: 38, border: "1px solid #1a1a1a", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FO, fontSize: 10, fontWeight: 500, color: "#666", textDecoration: "none", transition: "all 0.3s ease", letterSpacing: "0.05em" }}
+                  style={{ width: 38, height: 38, border: "1px solid #1a1a1a", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FO, fontSize: 10, fontWeight: 500, color: "#666", textDecoration: "none", transition: "all 0.3s ease", letterSpacing: "0.05em" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#fff"; (e.currentTarget as HTMLAnchorElement).style.color = "#fff"; (e.currentTarget as HTMLAnchorElement).style.background = "#111"; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#1a1a1a"; (e.currentTarget as HTMLAnchorElement).style.color = "#666"; (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; }}>
                   {label}
@@ -99,16 +97,6 @@ export default function Footer() {
                   </Link>
                 ))}
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Payment badges */}
-        <div className="footer-payment" style={{ borderTop: "1px solid #111", borderBottom: "1px solid #111", padding: "24px 0", marginBottom: 32, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
-          <span style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#444", marginRight: 8 }}>Secure Checkout</span>
-          {payments.map(p => (
-            <div key={p} style={{ padding: "6px 16px", border: "1px solid #1a1a1a", fontFamily: F, fontSize: 10, fontWeight: 700, color: "#555", letterSpacing: "0.08em", borderRadius: "2px" }}>
-              {p}
             </div>
           ))}
         </div>

@@ -96,7 +96,7 @@ export default function ProductPage() {
             <div style={{ display: "flex", gap: 8 }}>
               {imgs.map((src, i) => (
                 <button key={i} onClick={() => setActiveImg(i)}
-                  style={{ width: 72, height: 72, overflow: "hidden", border: `2px solid ${activeImg === i ? "var(--c-text)" : "var(--c-border)"}`, background: "none", padding: 0, cursor: "pointer", transition: "border-color 0.2s" }}>
+                  style={{ width: 72, height: 72, overflow: "hidden", border: `2px solid ${activeImg === i ? "var(--c-text)" : "var(--c-border)"}`, background: "none", padding: 0, cursor: "pointer", transition: "border-color 0.2s", borderRadius: 6 }}>
                   <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </button>
               ))}
@@ -131,7 +131,7 @@ export default function ProductPage() {
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {p.sizes.map((s, i) => (
                   <button key={s} onClick={() => setSelectedSize(i)}
-                    style={{ padding: "10px 22px", border: `1.5px solid ${selectedSize === i ? "var(--c-text)" : "#e0e0e0"}`, background: selectedSize === i ? "var(--c-btn-bg)" : "var(--c-bg)", color: selectedSize === i ? "var(--c-btn-text)" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }}>
+                    style={{ padding: "10px 22px", border: `1.5px solid ${selectedSize === i ? "var(--c-text)" : "#e0e0e0"}`, background: selectedSize === i ? "var(--c-btn-bg)" : "var(--c-bg)", color: selectedSize === i ? "var(--c-btn-text)" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s", borderRadius: 8 }}>
                     {s}
                   </button>
                 ))}
@@ -146,7 +146,7 @@ export default function ProductPage() {
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {p.finishes.map((f, i) => (
                   <button key={f} onClick={() => setSelectedFinish(i)}
-                    style={{ padding: "10px 22px", border: `1.5px solid ${selectedFinish === i ? "var(--c-text)" : "#e0e0e0"}`, background: selectedFinish === i ? "var(--c-btn-bg)" : "var(--c-bg)", color: selectedFinish === i ? "var(--c-btn-text)" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }}>
+                    style={{ padding: "10px 22px", border: `1.5px solid ${selectedFinish === i ? "var(--c-text)" : "#e0e0e0"}`, background: selectedFinish === i ? "var(--c-btn-bg)" : "var(--c-bg)", color: selectedFinish === i ? "var(--c-btn-text)" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s", borderRadius: 8 }}>
                     {f}
                   </button>
                 ))}
@@ -157,13 +157,13 @@ export default function ProductPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 24 }}>
               <ClickSpark sparkColor="#fff" sparkCount={10} sparkRadius={28}>
                 <button onClick={handleAddToCart}
-                  style={{ width: "100%", padding: "16px 0", background: added ? "#16a34a" : "#111", color: "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.3s", boxShadow: "0 4px 16px rgba(0,0,0,0.12)" }}>
+                  style={{ width: "100%", padding: "16px 0", background: added ? "#16a34a" : "#111", color: "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.3s", borderRadius: 8, boxShadow: "0 4px 16px rgba(0,0,0,0.12)" }}>
                   {added ? "Added to Cart!" : "Add to Cart"}
                 </button>
               </ClickSpark>
               <ClickSpark sparkColor="#111" sparkCount={10} sparkRadius={28}>
                 <button onClick={handleBuyNow}
-                  style={{ width: "100%", padding: "16px 0", background: "#e8a000", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.3s", boxShadow: "0 4px 16px rgba(232,160,0,0.2)" }}
+                  style={{ width: "100%", padding: "16px 0", background: "#e8a000", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.3s", borderRadius: 8, boxShadow: "0 4px 16px rgba(232,160,0,0.2)" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#d09800")}
                   onMouseLeave={e => (e.currentTarget.style.background = "#e8a000")}>
                   Buy Now — ₹{p.price}

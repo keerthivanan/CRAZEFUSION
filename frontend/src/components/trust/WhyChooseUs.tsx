@@ -106,7 +106,7 @@ export default function WhyChooseUs() {
               background: "#111", color: "#fff",
               fontFamily: F, fontSize: 12, fontWeight: 500,
               letterSpacing: "0.12em", textTransform: "uppercase",
-              textDecoration: "none", transition: "background 0.2s",
+              textDecoration: "none", transition: "background 0.2s", borderRadius: 8,
             }}
               onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = "#333"}
               onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = "#111"}>

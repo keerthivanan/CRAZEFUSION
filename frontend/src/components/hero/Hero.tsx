@@ -79,7 +79,7 @@ export default function Hero() {
 
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 40, animation: "fadeUp 0.7s ease 0.6s both" }}>
             <ClickSpark sparkColor="#e8a000" sparkCount={12} sparkRadius={28}>
-              <StarBorder color="#e8a000" speed="3.5s" as="div" style={{ borderRadius: 0 }}>
+              <StarBorder color="#e8a000" speed="3.5s" as="div" style={{ borderRadius: 8 }}>
                 <Link href="/collection" style={{
                   display: "block", padding: "16px 44px",
                   background: "var(--c-btn-bg)", color: "var(--c-btn-text)",
@@ -99,7 +99,7 @@ export default function Hero() {
                 border: "1.5px solid var(--c-outline-col)",
                 fontFamily: FO, fontSize: 12, fontWeight: 700,
                 letterSpacing: "0.12em", textTransform: "uppercase",
-                textDecoration: "none", transition: "all 0.25s",
+                textDecoration: "none", transition: "all 0.25s", borderRadius: 8,
               }}
                 onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "var(--c-btn-bg)"; (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-btn-text)"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-outline-col)"; }}>
