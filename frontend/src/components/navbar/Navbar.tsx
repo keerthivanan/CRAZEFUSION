@@ -212,38 +212,13 @@ export default function Navbar() {
             >Login</Link>
           </div>
 
-          {/* Mobile Actions — icons only */}
+          {/* Mobile Actions — Search + Hamburger only */}
           <div className="pk-mobile-actions" style={{ display: "none", alignItems: "center", gap: 4 }}>
 
             {/* Search icon */}
             <Link href="/collection" style={{ ...iconBtn, textDecoration: "none" }}>
               <IconSearch />
             </Link>
-
-            {/* Cart icon + badge */}
-            <Link href="/cart" style={{ ...iconBtn, textDecoration: "none", position: "relative" }}>
-              <IconBag />
-              {count > 0 && (
-                <span style={{
-                  position: "absolute", top: 2, right: 2,
-                  background: "#e8a000", color: "#000",
-                  borderRadius: "50%", width: 14, height: 14,
-                  fontSize: 7, fontWeight: 900,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontFamily: F, lineHeight: 1,
-                }}>{count}</span>
-              )}
-            </Link>
-
-            {/* Account icon */}
-            <Link href="/auth/login" style={{ ...iconBtn, textDecoration: "none" }}>
-              <IconUser />
-            </Link>
-
-            {/* Theme toggle */}
-            <button onClick={toggle} aria-label="Toggle theme" style={{ ...iconBtn }}>
-              {theme === "light" ? <IconMoon /> : <IconSun />}
-            </button>
 
             {/* Hamburger */}
             <button onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu"
@@ -282,11 +257,17 @@ export default function Navbar() {
           <Link href="/" onClick={() => setMobileOpen(false)}>
             <img src="/logo.png" alt="PosterKing" className="pk-logo" style={{ height: 36, objectFit: "contain" }} />
           </Link>
-          <button onClick={() => setMobileOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--c-text)", display: "flex", padding: 4 }}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            {/* Theme toggle inside drawer */}
+            <button onClick={toggle} aria-label="Toggle theme" style={{ background: "none", border: "1px solid var(--c-border)", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--c-text)", flexShrink: 0 }}>
+              {theme === "light" ? <IconMoon /> : <IconSun />}
+            </button>
+            <button onClick={() => setMobileOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--c-text)", display: "flex", padding: 4 }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Nav items */}
