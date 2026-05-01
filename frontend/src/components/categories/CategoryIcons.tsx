@@ -27,15 +27,14 @@ export default function CategoryIcons() {
             alignItems: "center", gap: 12,
           }}>
             <div style={{
-              width: 80, height: 80, borderRadius: "50%", overflow: "hidden",
-              background: "var(--c-bg-soft)",
-              border: "1.5px solid var(--c-border)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              transition: "transform 0.25s ease, box-shadow 0.25s ease",
+              width: 84, height: 84, borderRadius: "50%",
+              overflow: "hidden", flexShrink: 0,
+              border: "2px solid var(--c-border)",
+              transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s",
             }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLDivElement).style.transform = "translateY(-5px)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 10px 24px rgba(232,160,0,0.25)";
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 10px 24px rgba(232,160,0,0.3)";
                 (e.currentTarget as HTMLDivElement).style.borderColor = "#e8a000";
               }}
               onMouseLeave={e => {
@@ -46,7 +45,7 @@ export default function CategoryIcons() {
               <img
                 src={logo(domain)}
                 alt={label}
-                style={{ width: 52, height: 52, objectFit: "contain" }}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
             </div>
             <span style={{
