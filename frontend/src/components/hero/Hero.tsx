@@ -108,19 +108,6 @@ export default function Hero() {
             </ClickSpark>
           </div>
 
-          {/* Mini stats */}
-          <div style={{
-            display: "flex", marginTop: 52,
-            maxWidth: 420,
-            animation: "fadeUp 0.7s ease 0.7s both",
-          }}>
-            {[["10K+","Customers"],["1,981+","Designs"],["4.9★","Rating"],["₹79","Starting"]].map(([v, l], i) => (
-              <div key={l} style={{ flex: 1, textAlign: "center", padding: "20px 8px 0", borderRight: i < 3 ? "1px solid #f0f0f0" : "none" }}>
-                <div style={{ fontFamily: FE, fontSize: 22, fontWeight: 900, color: "var(--c-text)", lineHeight: 1 }}>{v}</div>
-                <div style={{ fontFamily: F, fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", color: "#aaa", marginTop: 5 }}>{l}</div>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* RIGHT — images */}
