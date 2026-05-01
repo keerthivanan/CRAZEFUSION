@@ -60,7 +60,7 @@ export default function WhyChooseUs() {
           {features.map((f, i) => (
             <AnimatedContent key={f.title} distance={20} delay={i * 0.08} duration={0.5} threshold={0.05}>
               <SpotlightCard
-                spotlightColor="rgba(232,160,0,0.12)"
+                spotlightColor="rgba(160,160,160,0.12)"
                 style={{
                   background: "var(--c-bg-card)",
                   border: "1px solid var(--c-card-border)",
@@ -71,8 +71,8 @@ export default function WhyChooseUs() {
                   transition: "border-color 0.25s, box-shadow 0.25s, transform 0.25s",
                 }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = "#e8a000";
-                  e.currentTarget.style.boxShadow = "0 8px 24px rgba(232,160,0,0.08)";
+                  e.currentTarget.style.borderColor = "#888888";
+                  e.currentTarget.style.boxShadow = "0 8px 24px rgba(160,160,160,0.18)";
                   e.currentTarget.style.transform = "translateY(-3px)";
                 }}
                 onMouseLeave={e => {
