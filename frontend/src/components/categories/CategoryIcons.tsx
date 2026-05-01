@@ -50,13 +50,13 @@ export default function CategoryIcons() {
                 const el = e.currentTarget as HTMLDivElement;
                 el.style.transform = "translateY(-4px)";
                 el.style.boxShadow = "0 8px 20px rgba(0,0,0,0.10)";
-                el.style.borderColor = "#111";
+                el.style.borderColor = "var(--c-text)";
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLDivElement;
                 el.style.transform = "translateY(0)";
                 el.style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)";
-                el.style.borderColor = "#eee";
+                el.style.borderColor = "var(--c-border)";
               }}>
               <img src={cat.img} alt={cat.label} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
@@ -64,7 +64,7 @@ export default function CategoryIcons() {
               fontFamily: "var(--font-poppins-var,'Poppins',sans-serif)",
               fontSize: 10,
               fontWeight: 600,
-              color: "#222",
+              color: "var(--c-text)",
               textAlign: "center",
               lineHeight: 1.25,
               maxWidth: 72,

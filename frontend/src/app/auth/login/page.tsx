@@ -31,7 +31,7 @@ export default function LoginPage() {
       {/* Top logo — centered */}
       <div style={{ padding: "28px 32px", borderBottom: "1px solid var(--c-border)", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Link href="/">
-          <img src="/logo.png" alt="PosterKing" className="pk-logo" style={{ height: 52, objectFit: "contain", display: "block" }} />
+          <img src="/logo.png" alt="PosterKing" className="pk-logo" style={{ height: 68, objectFit: "contain", display: "block" }} />
         </Link>
       </div>
 
@@ -60,7 +60,7 @@ export default function LoginPage() {
 
             {!otpSent ? (
               <button onClick={handleSendOtp}
-                style={{ width: "100%", padding: "15px 0", background: phone.length >= 10 ? "#111" : "#e0e0e0", color: phone.length >= 10 ? "#fff" : "#aaa", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: phone.length >= 10 ? "pointer" : "not-allowed", transition: "background 0.2s" }}>
+                style={{ width: "100%", padding: "15px 0", background: phone.length >= 10 ? "var(--c-btn-bg)" : "var(--c-bg-soft)", color: phone.length >= 10 ? "var(--c-btn-text)" : "var(--c-text-muted)", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: phone.length >= 10 ? "pointer" : "not-allowed", transition: "background 0.2s" }}>
                 {loading ? "Sending OTP..." : "Send OTP"}
               </button>
             ) : (
@@ -85,9 +85,9 @@ export default function LoginPage() {
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "24px 0" }}>
-            <div style={{ flex: 1, height: 1, background: "#f0f0f0" }} />
+            <div style={{ flex: 1, height: 1, background: "var(--c-border)" }} />
             <span style={{ fontFamily: F, fontSize: 11, color: "#ccc" }}>OR</span>
-            <div style={{ flex: 1, height: 1, background: "#f0f0f0" }} />
+            <div style={{ flex: 1, height: 1, background: "var(--c-border)" }} />
           </div>
 
           <Link href="/collection" style={{ display: "block", padding: "13px 0", background: "var(--c-bg)", color: "var(--c-text-muted)", border: "1px solid var(--c-border)", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none", textAlign: "center", transition: "all 0.2s" }}
