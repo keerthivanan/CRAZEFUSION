@@ -32,7 +32,7 @@ function ProductCard({ p }: { p: typeof products[0] }) {
       )}
       <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={20}>
         <button onClick={handleQuickAdd}
-          style={{ width: "100%", padding: "12px 0", background: "rgba(10,10,10,0.88)", backdropFilter: "blur(6px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 8 }}>
+          style={{ width: "100%", padding: "12px 0", background: "rgba(10,10,10,0.88)", backdropFilter: "blur(6px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50 }}>
           Quick Add
         </button>
       </ClickSpark>
@@ -40,7 +40,7 @@ function ProductCard({ p }: { p: typeof products[0] }) {
   );
 
   return (
-    <SpotlightCard spotlightColor="rgba(160,160,160,0.1)" style={{ padding: 10, background: "var(--c-bg)", border: "1px solid var(--c-border)", borderRadius: 8 }}>
+    <SpotlightCard spotlightColor="rgba(160,160,160,0.1)" style={{ padding: 10, background: "var(--c-bg)", border: "1px solid var(--c-border)", borderRadius: 50 }}>
       <Link href={`/product/${p.id}`} style={{ textDecoration: "none", display: "block" }}>
         <TiltedCard
           imageSrc={p.img} altText={p.title}
@@ -72,7 +72,7 @@ export default function BestSelling() {
             <span style={{ color: "#e8a000" }}><BlurText text="Selling" delay={160} animateBy="words" direction="bottom" /></span>
           </h2>
           <Link href="/collection"
-            style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-btn-text)", background: "var(--c-btn-bg)", textDecoration: "none", padding: "9px 22px", borderRadius: 24, transition: "opacity 0.2s", whiteSpace: "nowrap" }}
+            style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-btn-text)", background: "var(--c-btn-bg)", textDecoration: "none", padding: "9px 22px", borderRadius: 50, transition: "opacity 0.2s", whiteSpace: "nowrap" }}
             onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}>
             View All
