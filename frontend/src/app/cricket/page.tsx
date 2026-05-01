@@ -19,15 +19,15 @@ const logo = (domain: string) =>
 
 const teams = [
   { name: "Chennai Super Kings",         short: "CSK",  domain: "chennaisuperkings.com",  color: "#f9cd1c" },
-  { name: "Delhi Capitals",              short: "DC",   domain: "delhicapitalsipl.com",   color: "#0066b2" },
+  { name: "Delhi Capitals",              short: "DC",   domain: "delhicapitals.in",      color: "#0066b2" },
   { name: "Gujarat Titans",              short: "GT",   domain: "gujarattitansipl.com",   color: "#1c2951" },
   { name: "Kolkata Knight Riders",       short: "KKR",  domain: "kkr.in",                 color: "#3a225d" },
-  { name: "Lucknow Super Giants",        short: "LSG",  domain: "lucknowsupergiants.com", color: "#a72056" },
+  { name: "Lucknow Super Giants",        short: "LSG",  domain: "lucknowsupergiants.in",  color: "#a72056" },
   { name: "Mumbai Indians",              short: "MI",   domain: "mumbaiindians.com",      color: "#004ba0" },
-  { name: "Punjab Kings",               short: "PBKS", domain: "punjabkingsipl.com",     color: "#d71920" },
+  { name: "Punjab Kings",               short: "PBKS", domain: "punjabkingsipl.in",      color: "#d71920" },
   { name: "Rajasthan Royals",            short: "RR",   domain: "rajasthanroyals.com",    color: "#2d4e8a" },
   { name: "Royal Challengers Bengaluru", short: "RCB",  domain: "royalchallengers.com",   color: "#c8102e" },
-  { name: "Sunrisers Hyderabad",         short: "SRH",  domain: "sunrisers.com",          color: "#f26522" },
+  { name: "Sunrisers Hyderabad",         short: "SRH",  domain: "sunrisershyderabad.in",  color: "#f26522" },
 ];
 
 type Team = typeof teams[0];
