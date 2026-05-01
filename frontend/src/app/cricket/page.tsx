@@ -18,17 +18,44 @@ const logo = (domain: string) =>
   `https://img.logo.dev/${domain}?token=${KEY}&size=160&format=png`;
 
 const teams = [
-  { name: "Chennai Super Kings",     short: "CSK", domain: "chennaisuperkings.com", color: "#f9cd1c" },
-  { name: "Delhi Capitals",          short: "DC",  domain: "delhicapitals.com",     color: "#0066b2" },
-  { name: "Gujarat Titans",          short: "GT",  domain: "gujarattitans.com",      color: "#1c2951" },
-  { name: "Kolkata Knight Riders",   short: "KKR", domain: "kkr.in",                color: "#3a225d" },
-  { name: "Lucknow Super Giants",    short: "LSG", domain: "lucknowsupergiants.in",  color: "#a72056" },
-  { name: "Mumbai Indians",          short: "MI",  domain: "mumbaiindians.com",      color: "#004ba0" },
-  { name: "Punjab Kings",            short: "PBKS",domain: "punjabkings.com",        color: "#d71920" },
-  { name: "Rajasthan Royals",        short: "RR",  domain: "rajasthanroyals.com",    color: "#2d4e8a" },
-  { name: "Royal Challengers Bengaluru", short: "RCB", domain: "royalchallengers.com", color: "#c8102e" },
-  { name: "Sunrisers Hyderabad",     short: "SRH", domain: "sunrisershyderabad.com", color: "#f26522" },
+  { name: "Chennai Super Kings",         short: "CSK",  domain: "chennaisuperkings.com",  color: "#f9cd1c" },
+  { name: "Delhi Capitals",              short: "DC",   domain: "delhicapitalsipl.com",   color: "#0066b2" },
+  { name: "Gujarat Titans",              short: "GT",   domain: "gujarattitansipl.com",   color: "#1c2951" },
+  { name: "Kolkata Knight Riders",       short: "KKR",  domain: "kkr.in",                 color: "#3a225d" },
+  { name: "Lucknow Super Giants",        short: "LSG",  domain: "lucknowsupergiants.com", color: "#a72056" },
+  { name: "Mumbai Indians",              short: "MI",   domain: "mumbaiindians.com",      color: "#004ba0" },
+  { name: "Punjab Kings",               short: "PBKS", domain: "punjabkingsipl.com",     color: "#d71920" },
+  { name: "Rajasthan Royals",            short: "RR",   domain: "rajasthanroyals.com",    color: "#2d4e8a" },
+  { name: "Royal Challengers Bengaluru", short: "RCB",  domain: "royalchallengers.com",   color: "#c8102e" },
+  { name: "Sunrisers Hyderabad",         short: "SRH",  domain: "sunrisers.com",          color: "#f26522" },
 ];
+
+type Team = typeof teams[0];
+
+function TeamLogo({ team }: { team: Team }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <div style={{
+        width: "100%", height: "100%",
+        background: team.color + "22",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}>
+        <span style={{ fontFamily: FO, fontSize: 18, fontWeight: 700, color: team.color }}>
+          {team.short}
+        </span>
+      </div>
+    );
+  }
+  return (
+    <img
+      src={logo(team.domain)}
+      alt={team.name}
+      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      onError={() => setFailed(true)}
+    />
+  );
+}
 
 function ProductCard({ p }: { p: typeof products[0] }) {
   const { addItem } = useCart();
@@ -130,8 +157,7 @@ export default function CricketPage() {
                         (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
                       }
                     }}>
-                    <img src={logo(team.domain)} alt={team.name}
-                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                    <TeamLogo team={team} />
                   </div>
                   <span style={{
                     fontFamily: FO, fontSize: 10, fontWeight: 600,
