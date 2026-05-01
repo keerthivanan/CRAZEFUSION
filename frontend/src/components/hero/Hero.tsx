@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Link from "next/link";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 import StarBorder from "@/components/reactbits/StarBorder";
@@ -31,7 +31,7 @@ export default function Hero() {
             <h1 style={{
               fontFamily: FE,
               fontSize: "clamp(48px,6.5vw,100px)",
-              fontWeight: 900, lineHeight: 0.88,
+              fontWeight: 400, lineHeight: 0.88,
               letterSpacing: "-0.04em",
               color: "var(--c-text)", textTransform: "uppercase",
               margin: 0,
@@ -45,7 +45,7 @@ export default function Hero() {
             <h1 style={{
               fontFamily: FE,
               fontSize: "clamp(48px,6.5vw,100px)",
-              fontWeight: 900, lineHeight: 0.88,
+              fontWeight: 400, lineHeight: 0.88,
               letterSpacing: "-0.04em",
               color: "#e8a000", textTransform: "uppercase",
               margin: "6px 0",
@@ -59,7 +59,7 @@ export default function Hero() {
             <h1 style={{
               fontFamily: FE,
               fontSize: "clamp(48px,6.5vw,100px)",
-              fontWeight: 900, lineHeight: 0.88,
+              fontWeight: 400, lineHeight: 0.88,
               letterSpacing: "-0.04em",
               color: "var(--c-text)", textTransform: "uppercase",
               margin: 0,
@@ -131,7 +131,7 @@ export default function Hero() {
                 onMouseEnter={e => (e.currentTarget as HTMLImageElement).style.transform = "scale(1.07)"}
                 onMouseLeave={e => (e.currentTarget as HTMLImageElement).style.transform = "scale(1)"}
               />
-              <div style={{ position: "absolute", top: 10, left: 10, background: "#e8a000", color: "#000", fontFamily: F, fontSize: 9, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", padding: "3px 9px" }}>
+              <div style={{ position: "absolute", top: 10, left: 10, background: "#e8a000", color: "#000", fontFamily: F, fontSize: 9, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", padding: "3px 9px" }}>
                 {img.label}
               </div>
             </Link>

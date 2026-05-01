@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Link from "next/link";
 import CountUp from "@/components/reactbits/CountUp";
 
@@ -47,7 +47,7 @@ export default function Footer() {
                 onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
                 onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")} />
             </Link>
-            <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8a000", marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8a000", marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ width: 16, height: 2, background: "#e8a000" }} />
               Premium Quality Prints
             </div>
@@ -74,7 +74,7 @@ export default function Footer() {
             <div className="footer-socials" style={{ display: "flex", gap: 12 }}>
               {[["IN", "https://instagram.com/posterking"], ["YT", "https://youtube.com/posterking"], ["TW", "https://twitter.com/posterking"]].map(([label, href]) => (
                 <a key={label} href={href} target="_blank" rel="noreferrer"
-                  style={{ width: 38, height: 38, border: "1px solid #1a1a1a", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FO, fontSize: 10, fontWeight: 800, color: "#666", textDecoration: "none", transition: "all 0.3s ease", letterSpacing: "0.05em" }}
+                  style={{ width: 38, height: 38, border: "1px solid #1a1a1a", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FO, fontSize: 10, fontWeight: 500, color: "#666", textDecoration: "none", transition: "all 0.3s ease", letterSpacing: "0.05em" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#fff"; (e.currentTarget as HTMLAnchorElement).style.color = "#fff"; (e.currentTarget as HTMLAnchorElement).style.background = "#111"; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#1a1a1a"; (e.currentTarget as HTMLAnchorElement).style.color = "#666"; (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; }}>
                   {label}

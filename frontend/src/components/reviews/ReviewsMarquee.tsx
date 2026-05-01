@@ -29,7 +29,7 @@ export default function ReviewsMarquee() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16 }}>
             <div>
               <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#999", marginBottom: 8 }}>Customer Reviews</div>
-              <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,42px)", fontWeight: 900, letterSpacing: "-0.03em", color: "var(--c-text)", textTransform: "uppercase", margin: 0, display: "flex", flexWrap: "wrap", gap: "0.25em" }}>
+              <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,42px)", fontWeight: 400, letterSpacing: "-0.03em", color: "var(--c-text)", textTransform: "uppercase", margin: 0, display: "flex", flexWrap: "wrap", gap: "0.25em" }}>
                 <BlurText text="10,000+ Happy" delay={60} animateBy="words" direction="bottom" />
                 <span style={{ color: "#e8a000" }}>
                   <BlurText text="Walls" delay={200} animateBy="words" direction="bottom" />
@@ -37,7 +37,7 @@ export default function ReviewsMarquee() {
               </h2>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-              <div style={{ fontFamily: FE, fontSize: 48, fontWeight: 900, color: "var(--c-text)", lineHeight: 1 }}>4.8</div>
+              <div style={{ fontFamily: FE, fontSize: 48, fontWeight: 400, color: "var(--c-text)", lineHeight: 1 }}>4.8</div>
               <div>
                 <div style={{ color: "#e8a000", fontSize: 18, letterSpacing: 3 }}>★★★★★</div>
                 <div style={{ fontFamily: F, fontSize: 10, color: "#bbb", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 4 }}>2,400+ Reviews</div>
@@ -87,7 +87,7 @@ export default function ReviewsMarquee() {
               {/* Name + Product */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div>
-                  <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 800, color: "var(--c-text)", letterSpacing: "0.02em" }}>{r.name}</div>
+                  <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 500, color: "var(--c-text)", letterSpacing: "0.02em" }}>{r.name}</div>
                   <div style={{ fontFamily: F, fontSize: 10, color: "#bbb", marginTop: 2 }}>{r.city}</div>
                 </div>
                 <div style={{ fontFamily: F, fontSize: 9, color: "#e8a000", background: "rgba(232,160,0,0.08)", border: "1px solid rgba(232,160,0,0.2)", padding: "3px 9px", borderRadius: 20, letterSpacing: "0.05em", textTransform: "uppercase", fontWeight: 700 }}>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
@@ -20,7 +20,7 @@ export default function StatsBar() {
               textAlign: "center", padding: "16px 20px",
               borderRight: i < 3 ? "1px solid #f0f0f0" : "none",
             }}>
-              <div style={{ fontFamily: FE, fontSize: "clamp(26px,3vw,44px)", fontWeight: 900, color: "var(--c-text)", lineHeight: 1, marginBottom: 6 }}>
+              <div style={{ fontFamily: FE, fontSize: "clamp(26px,3vw,44px)", fontWeight: 400, color: "var(--c-text)", lineHeight: 1, marginBottom: 6 }}>
                 {s.display}
               </div>
               <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8a000" }}>

@@ -186,7 +186,7 @@ export default function Navbar() {
                 onMouseLeave={e => ((e.target as HTMLElement).style.color = "var(--c-nav-link)")}
               >Cart</span>
               {count > 0 && (
-                <span style={{ background: "#e8a000", color: "#000", borderRadius: "50%", width: 16, height: 16, fontSize: 8, fontWeight: 900, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: F, lineHeight: 1 }}>
+                <span style={{ background: "#e8a000", color: "#000", borderRadius: "50%", width: 16, height: 16, fontSize: 8, fontWeight: 400, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: F, lineHeight: 1 }}>
                   {count}
                 </span>
               )}

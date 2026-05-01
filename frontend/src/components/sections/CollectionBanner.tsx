@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Link from "next/link";
 import Aurora from "@/components/reactbits/Aurora";
 import AnimatedContent from "@/components/reactbits/AnimatedContent";
@@ -29,7 +29,7 @@ export default function CollectionBanner() {
             Premium Collection
           </div>
 
-          <h2 style={{ fontFamily: FE, fontSize: "clamp(40px,7vw,88px)", fontWeight: 900, color: "#fff", textTransform: "uppercase", letterSpacing: "-0.04em", lineHeight: 0.9, margin: "0 0 16px" }}>
+          <h2 style={{ fontFamily: FE, fontSize: "clamp(40px,7vw,88px)", fontWeight: 400, color: "#fff", textTransform: "uppercase", letterSpacing: "-0.04em", lineHeight: 0.9, margin: "0 0 16px" }}>
             Transform<br />
             <span style={{ color: "#e8a000" }}>Your Wall</span>
           </h2>
@@ -46,7 +46,7 @@ export default function CollectionBanner() {
                   <Link href="/collection" style={{
                     display: "block", padding: "16px 52px",
                     background: "#e8a000", color: "#000",
-                    fontFamily: FO, fontSize: 12, fontWeight: 900,
+                    fontFamily: FO, fontSize: 12, fontWeight: 400,
                     letterSpacing: "0.12em", textTransform: "uppercase",
                     textDecoration: "none",
                   }}>
@@ -62,7 +62,7 @@ export default function CollectionBanner() {
                   display: "block", padding: "17px 52px",
                   background: "transparent", color: "#fff",
                   border: "1px solid rgba(255,255,255,0.2)",
-                  fontFamily: FO, fontSize: 12, fontWeight: 800,
+                  fontFamily: FO, fontSize: 12, fontWeight: 500,
                   letterSpacing: "0.12em", textTransform: "uppercase",
                   textDecoration: "none", transition: "border-color 0.2s",
                 }}

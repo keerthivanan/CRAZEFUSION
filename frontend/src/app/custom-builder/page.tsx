@@ -41,7 +41,7 @@ export default function CustomBuilderPage() {
         {/* Header */}
         <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "48px 32px", textAlign: "center" }}>
           <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#e8a000", marginBottom: 12 }}>Design Your Own</div>
-          <h1 style={{ fontFamily: FE, fontSize: "clamp(32px,5vw,64px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>Custom Poster Builder</h1>
+          <h1 style={{ fontFamily: FE, fontSize: "clamp(32px,5vw,64px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>Custom Poster Builder</h1>
           <p style={{ fontFamily: F, fontSize: 15, color: "#888", maxWidth: 480, margin: "0 auto" }}>Upload your photo, choose your layout and size. We print and ship within 24 hours.</p>
         </div>
 
@@ -50,8 +50,8 @@ export default function CustomBuilderPage() {
           {/* Step 1: Choose Layout */}
           <div style={{ marginBottom: 48 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
-              <div style={{ width: 32, height: 32, background: "#111", color: "#fff", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FE, fontSize: 14, fontWeight: 900, flexShrink: 0 }}>1</div>
-              <h2 style={{ fontFamily: FE, fontSize: 22, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>Choose Your Layout</h2>
+              <div style={{ width: 32, height: 32, background: "#111", color: "#fff", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FE, fontSize: 14, fontWeight: 400, flexShrink: 0 }}>1</div>
+              <h2 style={{ fontFamily: FE, fontSize: 22, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>Choose Your Layout</h2>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 12 }}>
               {layouts.map(l => (
@@ -66,7 +66,7 @@ export default function CustomBuilderPage() {
                     {l.id === "strip"   && <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>{[1,2,3,4].map(i => <div key={i} style={{ width: 28, height: 12, background: selectedLayout === l.id ? "#111" : "#ccc", borderRadius: 1 }} />)}</div>}
                   </div>
                   <div style={{ padding: "10px 12px", textAlign: "left" }}>
-                    <div style={{ fontFamily: FE, fontSize: 12, fontWeight: 800, color: selectedLayout === l.id ? "#111" : "#555", textTransform: "uppercase", marginBottom: 2 }}>{l.label}</div>
+                    <div style={{ fontFamily: FE, fontSize: 12, fontWeight: 500, color: selectedLayout === l.id ? "#111" : "#555", textTransform: "uppercase", marginBottom: 2 }}>{l.label}</div>
                     <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.05em" }}>{l.pieces}</div>
                   </div>
                 </button>
@@ -77,8 +77,8 @@ export default function CustomBuilderPage() {
           {/* Step 2: Upload Photo */}
           <div style={{ marginBottom: 48 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
-              <div style={{ width: 32, height: 32, background: "#111", color: "#fff", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FE, fontSize: 14, fontWeight: 900, flexShrink: 0 }}>2</div>
-              <h2 style={{ fontFamily: FE, fontSize: 22, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>Upload Your Photo</h2>
+              <div style={{ width: 32, height: 32, background: "#111", color: "#fff", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FE, fontSize: 14, fontWeight: 400, flexShrink: 0 }}>2</div>
+              <h2 style={{ fontFamily: FE, fontSize: 22, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>Upload Your Photo</h2>
             </div>
             <label
               onDragOver={e => { e.preventDefault(); setDragging(true); }}
@@ -91,14 +91,14 @@ export default function CustomBuilderPage() {
                   <div style={{ width: 120, height: 120, margin: "0 auto 16px", overflow: "hidden", border: "3px solid #16a34a" }}>
                     <img src={uploadedFile} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   </div>
-                  <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 800, color: "#16a34a", marginBottom: 8 }}>✓ Photo Uploaded!</div>
+                  <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 500, color: "#16a34a", marginBottom: 8 }}>✓ Photo Uploaded!</div>
                   <div style={{ fontFamily: F, fontSize: 12, color: "#aaa" }}>Click to change photo</div>
                 </div>
               ) : (
                 <div>
-                  <div style={{ fontFamily: FE, fontSize: 18, fontWeight: 800, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 8 }}>Drag & Drop your photo here</div>
+                  <div style={{ fontFamily: FE, fontSize: 18, fontWeight: 500, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 8 }}>Drag & Drop your photo here</div>
                   <div style={{ fontFamily: F, fontSize: 13, color: "#aaa", marginBottom: 16 }}>or click to browse files</div>
-                  <div style={{ display: "inline-block", padding: "10px 24px", background: "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase" }}>Choose File</div>
+                  <div style={{ display: "inline-block", padding: "10px 24px", background: "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase" }}>Choose File</div>
                   <div style={{ fontFamily: F, fontSize: 11, color: "#ccc", marginTop: 16 }}>Supports JPG, PNG, HEIC · Max 50MB · Min 2000px recommended</div>
                 </div>
               )}
@@ -108,8 +108,8 @@ export default function CustomBuilderPage() {
           {/* Step 3: Size & Finish */}
           <div style={{ marginBottom: 48 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
-              <div style={{ width: 32, height: 32, background: "#111", color: "#fff", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FE, fontSize: 14, fontWeight: 900, flexShrink: 0 }}>3</div>
-              <h2 style={{ fontFamily: FE, fontSize: 22, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>Size & Finish</h2>
+              <div style={{ width: 32, height: 32, background: "#111", color: "#fff", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FE, fontSize: 14, fontWeight: 400, flexShrink: 0 }}>3</div>
+              <h2 style={{ fontFamily: FE, fontSize: 22, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0 }}>Size & Finish</h2>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }}>
               <div>
@@ -139,22 +139,22 @@ export default function CustomBuilderPage() {
 
           {/* Order Summary + CTA */}
           <div style={{ background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", padding: 32 }}>
-            <h3 style={{ fontFamily: FE, fontSize: 20, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 20 }}>Your Custom Poster</h3>
+            <h3 style={{ fontFamily: FE, fontSize: 20, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 20 }}>Your Custom Poster</h3>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginBottom: 24 }}>
               {[["Layout", layout.label], ["Size", sizes[selectedSize]], ["Finish", finishes[selectedFinish]], ["Delivery", "5–7 Business Days"]].map(([label, val]) => (
                 <div key={label as string}>
                   <div style={{ fontFamily: F, fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "#aaa", marginBottom: 4 }}>{label as string}</div>
-                  <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 800, color: "var(--c-text)" }}>{val as string}</div>
+                  <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 500, color: "var(--c-text)" }}>{val as string}</div>
                 </div>
               ))}
             </div>
             <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
               <div>
                 <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginBottom: 2 }}>Starting from</div>
-                <div style={{ fontFamily: FE, fontSize: 28, fontWeight: 900, color: "var(--c-text)" }}>₹149</div>
+                <div style={{ fontFamily: FE, fontSize: 28, fontWeight: 400, color: "var(--c-text)" }}>₹149</div>
               </div>
               <Link href="/cart"
-                style={{ flex: 1, minWidth: 200, padding: "16px 32px", background: "#111", color: "#fff", fontFamily: F, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", textAlign: "center", display: "block", transition: "background 0.2s" }}
+                style={{ flex: 1, minWidth: 200, padding: "16px 32px", background: "#111", color: "#fff", fontFamily: F, fontSize: 13, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", textAlign: "center", display: "block", transition: "background 0.2s" }}
                 onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = "#333"}
                 onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = "#111"}>
                 Add to Cart — ₹149+

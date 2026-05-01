@@ -27,7 +27,7 @@ export default function DesignYourOwn() {
             <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.35em", textTransform: "uppercase", color: "#aaa", marginBottom: 10 }}>
               Make It Yours
             </div>
-            <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,48px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0, display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "0.25em" }}>
+            <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,48px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0, display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "0.25em" }}>
               <BlurText text="Design Your" delay={60} animateBy="words" direction="bottom" />
               <span style={{ color: "#e8a000" }}>
                 <BlurText text="Own" delay={200} animateBy="words" direction="bottom" />

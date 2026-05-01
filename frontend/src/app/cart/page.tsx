@@ -31,7 +31,7 @@ export default function CartPage() {
               <span style={{ margin: "0 8px" }}>›</span>
               <span style={{ color: "var(--c-text)" }}>Cart</span>
             </div>
-            <h1 style={{ fontFamily: FO, fontSize: "clamp(24px,4vw,42px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>
+            <h1 style={{ fontFamily: FO, fontSize: "clamp(24px,4vw,42px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>
               Your Cart <span style={{ color: "#aaa", fontWeight: 400, fontSize: "0.5em" }}>({items.reduce((s, i) => s + i.qty, 0)} items)</span>
             </h1>
           </div>
@@ -51,10 +51,10 @@ export default function CartPage() {
 
             {items.length === 0 ? (
               <div style={{ textAlign: "center", padding: "80px 20px" }}>
-                <h2 style={{ fontFamily: FE, fontSize: 28, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 8 }}>Your cart is empty</h2>
+                <h2 style={{ fontFamily: FE, fontSize: 28, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 8 }}>Your cart is empty</h2>
                 <p style={{ fontFamily: F, fontSize: 14, color: "#aaa", marginBottom: 24 }}>Browse our collection and find something you love.</p>
                 <Link href="/collection"
-                  style={{ display: "inline-block", padding: "14px 36px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}>
+                  style={{ display: "inline-block", padding: "14px 36px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}>
                   Shop Now
                 </Link>
               </div>
@@ -70,7 +70,7 @@ export default function CartPage() {
                       </div>
                     </Link>
                     <div>
-                      <div style={{ fontFamily: FE, fontSize: 14, fontWeight: 800, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 4, lineHeight: 1.2 }}>{item.title}</div>
+                      <div style={{ fontFamily: FE, fontSize: 14, fontWeight: 500, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 4, lineHeight: 1.2 }}>{item.title}</div>
                       <div style={{ fontFamily: F, fontSize: 12, color: "#aaa", marginBottom: 12 }}>
                         {item.sub} · Size: {item.size} · {item.finish}
                       </div>
@@ -88,7 +88,7 @@ export default function CartPage() {
                         </button>
                       </div>
                     </div>
-                    <div style={{ fontFamily: FE, fontSize: 18, fontWeight: 900, color: "var(--c-text)", textAlign: "right" }}>
+                    <div style={{ fontFamily: FE, fontSize: 18, fontWeight: 400, color: "var(--c-text)", textAlign: "right" }}>
                       ₹{item.price * item.qty}
                       {item.price < item.original && (
                         <div style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through", fontWeight: 400 }}>₹{item.original * item.qty}</div>
@@ -111,7 +111,7 @@ export default function CartPage() {
           {/* Order Summary */}
           <div>
             <div style={{ border: "1px solid var(--c-border)", padding: 28, position: "sticky", top: 80 }}>
-              <h2 style={{ fontFamily: FE, fontSize: 20, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.01em", marginBottom: 24, paddingBottom: 20, borderBottom: "1px solid var(--c-border)" }}>Order Summary</h2>
+              <h2 style={{ fontFamily: FE, fontSize: 20, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.01em", marginBottom: 24, paddingBottom: 20, borderBottom: "1px solid var(--c-border)" }}>Order Summary</h2>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 24 }}>
                 {[["Subtotal", `₹${subtotal}`], ["Discount", discount > 0 ? `-₹${discount}` : "—"], ["Shipping", shipping === 0 ? "FREE" : `₹${shipping}`]].map(([label, val]) => (
@@ -136,12 +136,12 @@ export default function CartPage() {
               </div>
 
               <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 20, borderTop: "1px solid var(--c-border)", marginBottom: 20 }}>
-                <span style={{ fontFamily: FE, fontSize: 18, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase" }}>Total</span>
-                <span style={{ fontFamily: FE, fontSize: 22, fontWeight: 900, color: "var(--c-text)" }}>₹{total}</span>
+                <span style={{ fontFamily: FE, fontSize: 18, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase" }}>Total</span>
+                <span style={{ fontFamily: FE, fontSize: 22, fontWeight: 400, color: "var(--c-text)" }}>₹{total}</span>
               </div>
 
               <Link href="/checkout"
-                style={{ display: "block", width: "100%", padding: "16px 0", background: "#111", color: "#fff", textAlign: "center", fontFamily: FO, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", transition: "background 0.2s", marginBottom: 12 }}
+                style={{ display: "block", width: "100%", padding: "16px 0", background: "#111", color: "#fff", textAlign: "center", fontFamily: FO, fontSize: 13, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", transition: "background 0.2s", marginBottom: 12 }}
                 onMouseEnter={e => (e.currentTarget.style.background = "#333")}
                 onMouseLeave={e => (e.currentTarget.style.background = "#111")}>
                 Proceed to Checkout →

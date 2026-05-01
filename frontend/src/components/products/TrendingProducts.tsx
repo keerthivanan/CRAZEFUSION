@@ -37,13 +37,13 @@ function TCard({ p }: { p: typeof products[0] }) {
           (e.currentTarget.querySelector(".tcard-btn") as HTMLDivElement).style.transform = "translateY(6px)";
         }}>
         <img src={p.img} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }} />
-        <span style={{ position: "absolute", top: 8, left: 8, background: "#dc2626", color: "#fff", fontFamily: F, fontSize: 9, fontWeight: 800, padding: "3px 7px", textTransform: "uppercase" }}>
+        <span style={{ position: "absolute", top: 8, left: 8, background: "#dc2626", color: "#fff", fontFamily: F, fontSize: 9, fontWeight: 500, padding: "3px 7px", textTransform: "uppercase" }}>
           -{disc}%
         </span>
         <div className="tcard-btn" style={{ position: "absolute", bottom: 0, left: 0, right: 0, opacity: 0, transform: "translateY(6px)", transition: "all 0.25s ease" }}>
           <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={18}>
             <button onClick={handleQuickAdd}
-              style={{ width: "100%", padding: "10px 0", background: "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer" }}>
+              style={{ width: "100%", padding: "10px 0", background: "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer" }}>
               Quick Add
             </button>
           </ClickSpark>
@@ -53,7 +53,7 @@ function TCard({ p }: { p: typeof products[0] }) {
         <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 3, overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}>{p.title}</div>
         <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.04em" }}>{p.sub}</div>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "var(--c-text)" }}>From ₹{p.price}</span>
+          <span style={{ fontFamily: F, fontSize: 13, fontWeight: 500, color: "var(--c-text)" }}>From ₹{p.price}</span>
           <span style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>
         </div>
       </Link>
@@ -68,7 +68,7 @@ export default function TrendingProducts() {
     <section style={{ padding: "56px 0", background: "var(--c-bg)" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 24px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
-          <h2 style={{ fontFamily: FE, fontSize: "clamp(22px,3vw,40px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0, display: "flex", gap: "0.2em", flexWrap: "wrap", alignItems: "center" }}>
+          <h2 style={{ fontFamily: FE, fontSize: "clamp(22px,3vw,40px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", margin: 0, display: "flex", gap: "0.2em", flexWrap: "wrap", alignItems: "center" }}>
             <BlurText text="Trending" delay={60} animateBy="words" direction="bottom" />
             <span style={{ color: "#e8a000" }}><BlurText text="Now" delay={160} animateBy="words" direction="bottom" /></span>
           </h2>

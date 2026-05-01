@@ -18,7 +18,7 @@ export default function Newsletter() {
           Stay in the loop
         </div>
 
-        <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,40px)", fontWeight: 900, letterSpacing: "-0.03em", color: "var(--c-text)", textTransform: "uppercase", marginBottom: 10 }}>
+        <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,40px)", fontWeight: 400, letterSpacing: "-0.03em", color: "var(--c-text)", textTransform: "uppercase", marginBottom: 10 }}>
           Get <span style={{ color: "#e8a000" }}>10% Off</span> Your First Order
         </h2>
 

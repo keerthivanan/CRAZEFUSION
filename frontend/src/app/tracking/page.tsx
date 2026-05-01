@@ -46,7 +46,7 @@ export default function TrackingPage() {
         {/* Header */}
         <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "56px 32px", textAlign: "center" }}>
           <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#e8a000", marginBottom: 12 }}>Real-Time Updates</div>
-          <h1 style={{ fontFamily: FE, fontSize: "clamp(28px,5vw,56px)", fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>Track Your Order</h1>
+          <h1 style={{ fontFamily: FE, fontSize: "clamp(28px,5vw,56px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>Track Your Order</h1>
           <p style={{ fontFamily: F, fontSize: 14, color: "#888", maxWidth: 380, margin: "0 auto 32px" }}>Enter your Order ID to see real-time shipping updates.</p>
 
           {/* Search Bar */}
@@ -55,7 +55,7 @@ export default function TrackingPage() {
               onKeyDown={e => e.key === "Enter" && handleTrack()}
               style={{ flex: 1, padding: "14px 20px", border: "1.5px solid var(--c-border)", borderRight: "none", fontFamily: F, fontSize: 13, color: "var(--c-text)", outline: "none", background: "var(--c-bg)" }} />
             <button onClick={handleTrack}
-              style={{ padding: "14px 28px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "background 0.2s" }}
+              style={{ padding: "14px 28px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "background 0.2s" }}
               onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.background = "#333"}
               onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.background = "#111"}>
               {loading ? "..." : "Track"}
@@ -77,11 +77,11 @@ export default function TrackingPage() {
               <div style={{ background: "#111", padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
                 <div>
                   <div style={{ fontFamily: F, fontSize: 10, color: "#666", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 4 }}>Order ID</div>
-                  <div style={{ fontFamily: FE, fontSize: 20, fontWeight: 900, color: "#fff" }}>{mockOrder.id}</div>
+                  <div style={{ fontFamily: FE, fontSize: 20, fontWeight: 400, color: "#fff" }}>{mockOrder.id}</div>
                 </div>
                 <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#e8a000", padding: "8px 16px" }}>
                   <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#000", display: "inline-block", animation: "scrollPulse 1.5s ease infinite" }} />
-                  <span style={{ fontFamily: F, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", color: "#000", textTransform: "uppercase" }}>{mockOrder.status}</span>
+                  <span style={{ fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", color: "#000", textTransform: "uppercase" }}>{mockOrder.status}</span>
                 </div>
               </div>
               <div style={{ padding: "24px", display: "flex", gap: 20, alignItems: "flex-start", flexWrap: "wrap" }}>
@@ -89,7 +89,7 @@ export default function TrackingPage() {
                   <img src={mockOrder.img} alt={mockOrder.product} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontFamily: FE, fontSize: 14, fontWeight: 800, color: "var(--c-text)", textTransform: "uppercase", lineHeight: 1.3, marginBottom: 8 }}>{mockOrder.product}</div>
+                  <div style={{ fontFamily: FE, fontSize: 14, fontWeight: 500, color: "var(--c-text)", textTransform: "uppercase", lineHeight: 1.3, marginBottom: 8 }}>{mockOrder.product}</div>
                   <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
                     {[["Placed", mockOrder.placed], ["Expected", mockOrder.expected], ["Carrier", mockOrder.carrier], ["AWB", mockOrder.awb]].map(([label, val]) => (
                       <div key={label as string}>
@@ -101,14 +101,14 @@ export default function TrackingPage() {
                 </div>
                 <div style={{ textAlign: "right" }}>
                   <div style={{ fontFamily: F, fontSize: 11, color: "#aaa" }}>Order Total</div>
-                  <div style={{ fontFamily: FE, fontSize: 24, fontWeight: 900, color: "var(--c-text)" }}>₹{mockOrder.price}</div>
+                  <div style={{ fontFamily: FE, fontSize: 24, fontWeight: 400, color: "var(--c-text)" }}>₹{mockOrder.price}</div>
                 </div>
               </div>
             </div>
 
             {/* Timeline */}
             <div style={{ border: "1px solid var(--c-border)", padding: "32px", marginBottom: 32 }}>
-              <h2 style={{ fontFamily: FE, fontSize: 20, fontWeight: 900, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.01em", marginBottom: 32 }}>Shipment Timeline</h2>
+              <h2 style={{ fontFamily: FE, fontSize: 20, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.01em", marginBottom: 32 }}>Shipment Timeline</h2>
               <div style={{ position: "relative", paddingLeft: 40 }}>
                 {/* Vertical line */}
                 <div style={{ position: "absolute", left: 12, top: 0, bottom: 0, width: 2, background: "#f0f0f0" }} />
@@ -117,11 +117,11 @@ export default function TrackingPage() {
                   <div key={i} style={{ position: "relative", paddingBottom: i < mockOrder.steps.length - 1 ? 28 : 0 }}>
                     {/* Dot */}
                     <div style={{ position: "absolute", left: -32, top: 2, width: 20, height: 20, borderRadius: "50%", background: step.done ? "#111" : "#fff", border: `2px solid ${step.done ? "#111" : "#e0e0e0"}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      {step.done && <div style={{ color: "#fff", fontSize: 10, fontWeight: 900 }}>✓</div>}
+                      {step.done && <div style={{ color: "#fff", fontSize: 10, fontWeight: 400 }}>✓</div>}
                     </div>
                     <div style={{ opacity: step.done ? 1 : 0.4 }}>
                       <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
-                        <div style={{ fontFamily: FE, fontSize: 15, fontWeight: 800, color: "var(--c-text)", textTransform: "uppercase" }}>{step.label}</div>
+                        <div style={{ fontFamily: FE, fontSize: 15, fontWeight: 500, color: "var(--c-text)", textTransform: "uppercase" }}>{step.label}</div>
                         <div style={{ fontFamily: F, fontSize: 11, color: step.done ? "#e8a000" : "#aaa" }}>{step.date}</div>
                       </div>
                       <div style={{ fontFamily: F, fontSize: 13, color: "#666", marginTop: 2 }}>{step.desc}</div>
@@ -134,11 +134,11 @@ export default function TrackingPage() {
             {/* Help */}
             <div style={{ background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", padding: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
               <div>
-                <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 800, color: "var(--c-text)", marginBottom: 4 }}>Need Help?</div>
+                <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 500, color: "var(--c-text)", marginBottom: 4 }}>Need Help?</div>
                 <div style={{ fontFamily: F, fontSize: 13, color: "#666" }}>Contact us at <strong>support@crazefusion.in</strong> with your Order ID.</div>
               </div>
               <a href="mailto:support@crazefusion.in"
-                style={{ padding: "12px 24px", background: "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", transition: "background 0.2s" }}
+                style={{ padding: "12px 24px", background: "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", transition: "background 0.2s" }}
                 onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = "#333"}
                 onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = "#111"}>
                 Contact Support
@@ -156,8 +156,8 @@ export default function TrackingPage() {
               ["04", "5–7 Day Delivery", "Delivered to your doorstep across India."]
             ].map(([num, title, desc]) => (
               <div key={title as string} style={{ padding: 24, border: "1px solid var(--c-border)", textAlign: "center" }}>
-                <div style={{ fontFamily: FE, fontSize: 28, fontWeight: 900, color: "#e8a000", marginBottom: 12 }}>{num}</div>
-                <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 800, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 8 }}>{title as string}</div>
+                <div style={{ fontFamily: FE, fontSize: 28, fontWeight: 400, color: "#e8a000", marginBottom: 12 }}>{num}</div>
+                <div style={{ fontFamily: FE, fontSize: 16, fontWeight: 500, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 8 }}>{title as string}</div>
                 <div style={{ fontFamily: F, fontSize: 13, color: "#888", lineHeight: 1.6 }}>{desc as string}</div>
               </div>
             ))}

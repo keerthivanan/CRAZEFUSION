@@ -26,7 +26,7 @@ export default function SectionHeader({ label, title, highlight, subtitle, viewA
             {label}
           </div>
         )}
-        <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,42px)", fontWeight: 900, letterSpacing: "-0.03em", lineHeight: 1.1, color: "var(--c-text)", textTransform: "uppercase", margin: 0, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.25em" }}>
+        <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,42px)", fontWeight: 400, letterSpacing: "-0.03em", lineHeight: 1.1, color: "var(--c-text)", textTransform: "uppercase", margin: 0, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.25em" }}>
           <BlurText text={title} delay={80} animateBy="words" direction="bottom" />
           {highlight && (
             <span style={{ color: "#e8a000" }}>
