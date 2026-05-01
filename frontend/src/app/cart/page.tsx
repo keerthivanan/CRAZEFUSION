@@ -54,7 +54,7 @@ export default function CartPage() {
                 <h2 style={{ fontFamily: FE, fontSize: 28, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 8 }}>Your cart is empty</h2>
                 <p style={{ fontFamily: F, fontSize: 14, color: "#aaa", marginBottom: 24 }}>Browse our collection and find something you love.</p>
                 <Link href="/collection"
-                  style={{ display: "inline-block", padding: "14px 36px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}>
+                  style={{ display: "inline-block", padding: "14px 36px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", borderRadius: 8 }}>
                   Shop Now
                 </Link>
               </div>
@@ -128,7 +128,7 @@ export default function CartPage() {
                   <input type="text" placeholder="Promo code" value={promoCode} onChange={e => setPromoCode(e.target.value)}
                     style={{ flex: 1, padding: "10px 14px", border: "1px solid var(--c-border)", borderRight: "none", fontFamily: F, fontSize: 12, color: "var(--c-text)", outline: "none" }} />
                   <button onClick={() => { if (promoCode.trim()) setPromoApplied(true); }}
-                    style={{ padding: "10px 16px", background: "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", border: "none", cursor: "pointer" }}>
+                    style={{ padding: "10px 16px", background: "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", border: "none", cursor: "pointer", borderRadius: "0 8px 8px 0" }}>
                     Apply
                   </button>
                 </div>
@@ -141,9 +141,9 @@ export default function CartPage() {
               </div>
 
               <Link href="/checkout"
-                style={{ display: "block", width: "100%", padding: "16px 0", background: "#111", color: "#fff", textAlign: "center", fontFamily: FO, fontSize: 13, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", transition: "background 0.2s", marginBottom: 12 }}
-                onMouseEnter={e => (e.currentTarget.style.background = "#333")}
-                onMouseLeave={e => (e.currentTarget.style.background = "#111")}>
+                style={{ display: "block", width: "100%", padding: "16px 0", background: "#111", color: "#fff", textAlign: "center", fontFamily: FO, fontSize: 13, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", transition: "background 0.2s, box-shadow 0.2s", marginBottom: 12, borderRadius: 8 }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "#333"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 0 18px rgba(160,160,160,0.25)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "#111"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "none"; }}>
                 Proceed to Checkout →
               </Link>
 

@@ -60,7 +60,7 @@ export default function LoginPage() {
 
             {!otpSent ? (
               <button onClick={handleSendOtp}
-                style={{ width: "100%", padding: "15px 0", background: phone.length >= 10 ? "var(--c-btn-bg)" : "var(--c-bg-soft)", color: phone.length >= 10 ? "var(--c-btn-text)" : "var(--c-text-muted)", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: phone.length >= 10 ? "pointer" : "not-allowed", transition: "background 0.2s" }}>
+                style={{ width: "100%", padding: "15px 0", background: phone.length >= 10 ? "var(--c-btn-bg)" : "var(--c-bg-soft)", color: phone.length >= 10 ? "var(--c-btn-text)" : "var(--c-text-muted)", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: phone.length >= 10 ? "pointer" : "not-allowed", transition: "background 0.2s", borderRadius: 8 }}>
                 {loading ? "Sending OTP..." : "Send OTP"}
               </button>
             ) : (
@@ -90,7 +90,7 @@ export default function LoginPage() {
             <div style={{ flex: 1, height: 1, background: "var(--c-border)" }} />
           </div>
 
-          <Link href="/collection" style={{ display: "block", padding: "13px 0", background: "var(--c-bg)", color: "var(--c-text-muted)", border: "1px solid var(--c-border)", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none", textAlign: "center", transition: "all 0.2s" }}
+          <Link href="/collection" style={{ display: "block", padding: "13px 0", background: "var(--c-bg)", color: "var(--c-text-muted)", border: "1px solid var(--c-border)", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none", textAlign: "center", transition: "all 0.2s", borderRadius: 8 }}
             onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#111"; (e.currentTarget as HTMLAnchorElement).style.color = "#111"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--c-border)"; (e.currentTarget as HTMLAnchorElement).style.color = "#555"; }}>
             Continue as Guest

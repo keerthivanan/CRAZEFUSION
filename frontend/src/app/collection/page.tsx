@@ -18,9 +18,6 @@ function ProductCard({ p }: { p: typeof products[0] }) {
   const { addItem } = useCart();
   const [hovered, setHovered] = useState(false);
   const [added, setAdded]     = useState(false);
-  const discount = p.original > p.price ? Math.round((1 - p.price / p.original) * 100) : 0;
-  const badgeColor = p.badge === "Sale" ? "#dc2626" : p.badge === "Best Seller" ? "#e8a000" : p.badge === "Hot" ? "#dc2626" : "#111";
-  const badgeText  = p.badge === "Best Seller" ? "#000" : "#fff";
 
   const handleQuickAdd = () => {
     addItem({ id: p.id, title: p.title, sub: p.sub, img: p.img, price: p.price, original: p.original, size: p.sizes[0], finish: p.finishes[0] });
@@ -30,33 +27,28 @@ function ProductCard({ p }: { p: typeof products[0] }) {
 
   return (
     <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ cursor: "pointer" }}>
-      <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", border: `1px solid ${hovered ? "var(--c-text-muted)" : "var(--c-border)"}`, transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}>
+      <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", border: `1px solid ${hovered ? "#888888" : "var(--c-border)"}`, transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)", boxShadow: hovered ? "0 0 14px rgba(160,160,160,0.22)" : "none" }}>
         <img src={hovered ? p.img2 : p.img} alt={p.title}
           style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.5s ease", transform: hovered ? "scale(1.1)" : "scale(1)" }} />
         {p.badge && (
-          <span style={{ position: "absolute", top: 10, left: 10, background: badgeColor, color: badgeText, fontFamily: FO, fontSize: 9, fontWeight: 400, padding: "4px 10px", textTransform: "uppercase", letterSpacing: "0.05em", boxShadow: "0 4px 10px rgba(0,0,0,0.15)" }}>
+          <span style={{ position: "absolute", top: 10, left: 10, background: "#000", color: "#fff", fontFamily: FO, fontSize: 9, fontWeight: 700, padding: "5px 12px", borderRadius: 20, textTransform: "uppercase", letterSpacing: "0.06em" }}>
             {p.badge}
-          </span>
-        )}
-        {discount > 0 && (
-          <span style={{ position: "absolute", top: 10, right: 10, background: "var(--c-bg)", color: "#dc2626", fontFamily: FO, fontSize: 10, fontWeight: 400, padding: "4px 8px", border: "1.5px solid #dc2626", boxShadow: "0 4px 10px rgba(220,38,38,0.1)" }}>
-            -{discount}%
           </span>
         )}
         <div style={{ position: "absolute", bottom: 10, left: 10, right: 10, opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(10px)", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}>
           <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={20}>
             <button onClick={handleQuickAdd}
-              style={{ width: "100%", padding: "12px 0", background: added ? "#16a34a" : "rgba(17, 17, 17, 0.9)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s" }}>
+              style={{ width: "100%", padding: "12px 0", background: added ? "#16a34a" : "rgba(17, 17, 17, 0.9)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s", borderRadius: 8 }}>
               {added ? "✓ Added!" : "Quick Add"}
             </button>
           </ClickSpark>
         </div>
       </div>
       <Link href={`/product/${p.id}`} style={{ textDecoration: "none" }}>
-        <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 6, lineHeight: 1.3, letterSpacing: "0.02em", overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{p.title}</div>
-        <div style={{ fontFamily: FO, fontSize: 11, color: "#aaa", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>{p.sub}</div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>₹{p.price}</span>
+        <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 4, lineHeight: 1.3, letterSpacing: "0.02em", overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const, textAlign: "center" }}>{p.title}</div>
+        <div style={{ fontFamily: FO, fontSize: 11, color: "#aaa", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em", textAlign: "center" }}>{p.sub}</div>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>From ₹{p.price}</span>
           {p.original > p.price && <span style={{ fontFamily: FO, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>}
         </div>
       </Link>
@@ -118,11 +110,11 @@ export default function CollectionPage() {
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <button onClick={() => setFiltersOpen(!filtersOpen)}
-                  style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: filtersOpen ? "var(--c-btn-bg)" : "transparent", color: filtersOpen ? "var(--c-btn-text)" : "var(--c-text)", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", transition: "all 0.2s" }}>
+                  style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: filtersOpen ? "var(--c-btn-bg)" : "transparent", color: filtersOpen ? "var(--c-btn-text)" : "var(--c-text)", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", transition: "all 0.2s", borderRadius: 8 }}>
                   Filters {filtersOpen ? "↑" : "↓"}
                 </button>
                 <select value={sortBy} onChange={e => setSortBy(e.target.value)}
-                  style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 11, fontWeight: 600, cursor: "pointer", outline: "none" }}>
+                  style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 11, fontWeight: 600, cursor: "pointer", outline: "none", borderRadius: 8 }}>
                   <option value="featured">Featured</option>
                   <option value="newest">Newest First</option>
                   <option value="price-asc">Price: Low → High</option>

@@ -43,7 +43,7 @@ export default function Newsletter() {
               onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")}
             />
             <ClickSpark sparkColor="#e8a000" sparkCount={8} sparkRadius={20}>
-              <button type="submit" style={{ padding: "14px 24px", background: "#111", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", whiteSpace: "nowrap", transition: "background 0.2s" }}
+              <button type="submit" style={{ padding: "14px 24px", background: "#111", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", whiteSpace: "nowrap", transition: "background 0.2s", borderRadius: 8 }}
                 onMouseEnter={e => (e.currentTarget.style.background = "#333")}
                 onMouseLeave={e => (e.currentTarget.style.background = "#111")}>
                 Subscribe
