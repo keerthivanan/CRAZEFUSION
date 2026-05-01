@@ -71,8 +71,7 @@ export default function TrendingProducts() {
           <FireHeading
             text="#Trending Now!"
             subtitle="New Arrival"
-            flameAt={[1, 10]}
-            size="clamp(28px,4vw,54px)"
+            size="clamp(32px,4.5vw,64px)"
             align="center"
             as="h2"
           />
