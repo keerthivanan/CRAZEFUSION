@@ -134,7 +134,7 @@ export default function CricketPage() {
             <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#aaa", marginBottom: 20 }}>
               IPL Franchises
             </div>
-            <div className="no-scrollbar" style={{ display: "flex", gap: 20, overflowX: "auto", paddingBottom: 4 }}>
+            <div className="no-scrollbar" style={{ display: "flex", gap: 20, overflowX: "auto", paddingBottom: 4, justifyContent: "center", flexWrap: "wrap" }}>
               {teams.map(team => (
                 <button key={team.short} onClick={() => setActiveTeam(activeTeam === team.short ? null : team.short)}
                   style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 10, background: "none", border: "none", cursor: "pointer", padding: 0 }}>
