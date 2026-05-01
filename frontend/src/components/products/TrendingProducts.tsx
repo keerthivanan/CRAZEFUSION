@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
 import ClickSpark from "@/components/reactbits/ClickSpark";
-import BlurText from "@/components/reactbits/BlurText";
 import { products } from "@/data";
 import { useCart } from "@/context/CartContext";
+import FireHeading from "@/components/ui/FireHeading";
 
 const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 
 const trendingIds = [3, 4, 5, 6, 1, 2];
 const trending = trendingIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
@@ -68,11 +67,15 @@ export default function TrendingProducts() {
   return (
     <section style={{ padding: "64px 0", background: "var(--c-bg)" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 32px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 36 }}>
-          <h2 style={{ fontFamily: FE, fontSize: "clamp(22px,3.5vw,44px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0, display: "flex", gap: "0.2em", flexWrap: "wrap", alignItems: "center" }}>
-            <BlurText text="Trending" delay={60} animateBy="words" direction="bottom" />
-            <span style={{ color: "#e8a000" }}><BlurText text="Now" delay={160} animateBy="words" direction="bottom" /></span>
-          </h2>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 36 }}>
+          <FireHeading
+            text="#Trending Now!"
+            subtitle="New Arrival"
+            flameAt={[1, 10]}
+            size="clamp(24px,3.5vw,48px)"
+            align="left"
+            as="h2"
+          />
           <Link href="/collection"
             style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-btn-text)", background: "var(--c-btn-bg)", textDecoration: "none", padding: "9px 22px", borderRadius: 24, transition: "opacity 0.2s", whiteSpace: "nowrap" }}
             onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75"; }}

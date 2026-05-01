@@ -9,6 +9,7 @@ import { useCart } from "@/context/CartContext";
 import AnimatedContent from "@/components/reactbits/AnimatedContent";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import ClickSpark from "@/components/reactbits/ClickSpark";
+import SlashHeading from "@/components/ui/SlashHeading";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
@@ -103,10 +104,14 @@ export default function CollectionPage() {
             </div>
             <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
               <div>
-                <h1 style={{ fontFamily: FE, fontSize: "clamp(28px,4vw,48px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0 }}>
-                  {activeCategory === "All" ? "All Posters" : activeCategory}
-                </h1>
-                <p style={{ fontFamily: F, fontSize: 13, color: "#aaa", marginTop: 4 }}>{sorted.length} products</p>
+                <SlashHeading
+                  text={activeCategory === "All" ? "Collections" : activeCategory}
+                  subtitle={activeCategory === "All" ? "Your Style, Your Collection • Find The Perfect Poster Sets!" : undefined}
+                  size="clamp(32px,4.5vw,56px)"
+                  align="left"
+                  as="h1"
+                />
+                <p style={{ fontFamily: F, fontSize: 13, color: "#aaa", marginTop: 10 }}>{sorted.length} products</p>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <button onClick={() => setFiltersOpen(!filtersOpen)}

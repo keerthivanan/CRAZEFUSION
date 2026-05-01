@@ -8,6 +8,7 @@ import { products } from "@/data";
 import { useCart } from "@/context/CartContext";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 import AnimatedContent from "@/components/reactbits/AnimatedContent";
+import SlashHeading from "@/components/ui/SlashHeading";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
@@ -200,12 +201,15 @@ export default function CricketPage() {
         {/* Page Header */}
         <div style={{ background: "var(--c-bg)", padding: "40px 32px 28px", borderBottom: "1px solid var(--c-border)" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-            <h1 style={{ fontFamily: FE, fontSize: "clamp(28px,4vw,52px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: "0 0 6px" }}>
-              Cricket <span style={{ color: "#e8a000" }}>Posters</span>
-            </h1>
-            <p style={{ fontFamily: F, fontSize: 13, color: "#aaa", margin: "0 0 24px" }}>
-              Shop by IPL franchise or international team
-            </p>
+            <div style={{ marginBottom: 24 }}>
+              <SlashHeading
+                text="Cricket Posters"
+                subtitle="Shop by IPL Franchise or International Team"
+                size="clamp(32px,4.5vw,58px)"
+                align="left"
+                as="h1"
+              />
+            </div>
 
             {/* Tab Switcher */}
             <div style={{ display: "flex", gap: 8 }}>
