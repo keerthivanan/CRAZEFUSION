@@ -10,8 +10,8 @@ const logo = (domain: string) =>
 
 const cats = [
   { label: "Cricket",    href: "/cricket",    domain: "icc-cricket.com"   },
-  { label: "Basketball", href: "/collection", domain: "nba.com"           },
-  { label: "Football",   href: "/collection", domain: "fifa.com"          },
+  { label: "Basketball", href: "/basketball",  domain: "nba.com"           },
+  { label: "Football",   href: "/football",   domain: "fifa.com"          },
 ];
 
 export default function CategoryIcons() {
