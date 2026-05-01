@@ -10,7 +10,7 @@ const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 
-const trendingIds = [1, 2, 5, 6, 4, 3, 11, 12, 7, 13];
+const trendingIds = [3, 4, 5, 6, 1, 2];
 const trending = trendingIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
 
 function TCard({ p }: { p: typeof products[0] }) {

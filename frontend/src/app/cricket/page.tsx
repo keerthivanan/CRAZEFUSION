@@ -70,10 +70,10 @@ function ProductCard({ p }: { p: typeof products[0] }) {
 export default function CricketPage() {
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
 
-  const cricketProducts = products.filter(p =>
-    p.cat === "Sports" || p.cat === "Cricket" || p.title.toLowerCase().includes("cricket") || p.title.toLowerCase().includes("sport")
-  );
-  const displayProducts = cricketProducts.length > 0 ? cricketProducts : products.slice(0, 8);
+  const cricketProducts = products.filter(p => p.cat === "Cricket");
+  const displayProducts = activeTeam
+    ? cricketProducts.filter(p => (p as any).team === activeTeam)
+    : cricketProducts;
 
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
