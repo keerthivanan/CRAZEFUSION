@@ -41,7 +41,7 @@ export default function DesignYourOwn() {
             <AnimatedContent key={opt.label} distance={20} delay={i * 0.07} duration={0.5} threshold={0.05}>
               <Link href={opt.href} style={{ textDecoration: "none", display: "block" }}>
                 <div style={{ borderRadius: 8, overflow: "hidden", background: "var(--c-bg)", border: "1px solid var(--c-card-border)", transition: "all 0.25s ease", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "#e8a000"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 24px rgba(232,160,0,0.1)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)"; }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "#888888"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 24px rgba(160,160,160,0.18)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)"; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "var(--c-card-border)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}>
 
                   <TiltedCard
@@ -70,7 +70,7 @@ export default function DesignYourOwn() {
                       </div>
                     </div>
                     <div style={{ width: 36, height: 36, background: "#111", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "background 0.2s" }}
-                      onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = "#e8a000"}
+                      onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = "#555555"}
                       onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.background = "#111"}>
                       <span style={{ color: "#fff", fontSize: 16, lineHeight: 1 }}>→</span>
                     </div>

@@ -30,8 +30,8 @@ export default function CategoryIcons() {
             }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLDivElement).style.transform = "translateY(-5px)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 10px 24px rgba(232,160,0,0.3)";
-                (e.currentTarget as HTMLDivElement).style.borderColor = "#e8a000";
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 10px 24px rgba(160,160,160,0.35)";
+                (e.currentTarget as HTMLDivElement).style.borderColor = "#888888";
               }}
               onMouseLeave={e => {
                 (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";

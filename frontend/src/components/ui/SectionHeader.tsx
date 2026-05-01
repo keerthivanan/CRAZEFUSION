@@ -42,8 +42,8 @@ export default function SectionHeader({ label, title, highlight, subtitle, viewA
         <Magnet padding={16} magnetStrength={2}>
           <Link href={viewAllHref}
             style={{ fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text)", textDecoration: "none", borderBottom: "1.5px solid #111", paddingBottom: 2, whiteSpace: "nowrap", transition: "opacity 0.2s, color 0.2s" }}
-            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#e8a000"; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = "#e8a000"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#111"; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = "#111"; }}>
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#888888"; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = "#888888"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-text)"; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = "var(--c-text)"; }}>
             View All →
           </Link>
         </Magnet>

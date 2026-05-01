@@ -94,9 +94,9 @@ export default function ReviewsPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 20 }}>
             {reviews.map((r, i) => (
               <AnimatedContent key={i} distance={20} delay={i * 0.06} duration={0.5} threshold={0.05}>
-                <SpotlightCard spotlightColor="rgba(232,160,0,0.1)"
+                <SpotlightCard spotlightColor="rgba(160,160,160,0.1)"
                   style={{ padding: 24, background: "var(--c-bg-card)", border: "1px solid var(--c-card-border)", borderRadius: 12, cursor: "default", transition: "border-color 0.25s, box-shadow 0.25s, transform 0.25s" }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = "#e8a000"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(232,160,0,0.1)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = "#888888"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(160,160,160,0.18)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = "#efefef"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.transform = "translateY(0)"; }}>
                   <div style={{ color: "#e8a000", fontSize: 13, marginBottom: 12, letterSpacing: 2 }}>{"★".repeat(r.stars)}</div>
                   <p style={{ fontFamily: F, fontSize: 14, color: "#444", lineHeight: 1.7, marginBottom: 16 }}>"{r.text}"</p>

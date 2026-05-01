@@ -53,7 +53,7 @@ export default function ReviewsMarquee() {
           {doubled.map((r, i) => (
             <SpotlightCard
               key={i}
-              spotlightColor="rgba(232,160,0,0.1)"
+              spotlightColor="rgba(160,160,160,0.1)"
               style={{
                 flexShrink: 0,
                 width: 300,
@@ -65,8 +65,8 @@ export default function ReviewsMarquee() {
                 transition: "border-color 0.25s, box-shadow 0.25s",
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = "#e8a000";
-                e.currentTarget.style.boxShadow = "0 8px 32px rgba(232,160,0,0.1)";
+                e.currentTarget.style.borderColor = "#888888";
+                e.currentTarget.style.boxShadow = "0 8px 32px rgba(160,160,160,0.18)";
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.borderColor = "var(--c-card-border)";

@@ -37,7 +37,7 @@ export default function SignupPage() {
     <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
 
       {/* Top logo — centered */}
-      <div style={{ padding: "28px 32px", borderBottom: "1px solid var(--c-border)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ padding: "28px 32px", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Link href="/">
           <img src="/logo.png" alt="PosterKing" className="pk-logo" style={{ height: 52, objectFit: "contain", display: "block" }} />
         </Link>
