@@ -82,7 +82,7 @@ export default function SignupPage() {
 
             {!otpSent ? (
               <button onClick={handleSendOtp}
-                style={{ width: "100%", padding: "15px 0", background: phone.length >= 10 ? "#111" : "#e0e0e0", color: phone.length >= 10 ? "#fff" : "#aaa", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: phone.length >= 10 ? "pointer" : "not-allowed", transition: "background 0.2s", borderRadius: 8 }}>
+                style={{ width: "100%", padding: "15px 0", background: phone.length >= 10 ? "#111" : "#e0e0e0", color: phone.length >= 10 ? "#fff" : "#aaa", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: phone.length >= 10 ? "pointer" : "not-allowed", transition: "background 0.2s", borderRadius: 50 }}>
                 {loading ? "Sending OTP..." : "Send OTP"}
               </button>
             ) : (

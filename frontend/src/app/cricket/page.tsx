@@ -219,7 +219,7 @@ export default function CricketPage() {
                   onClick={() => handleTabSwitch(tab)}
                   style={{
                     padding: "10px 28px",
-                    borderRadius: 24,
+                    borderRadius: 50,
                     border: `1.5px solid ${activeTab === tab ? "var(--c-btn-bg)" : "var(--c-border)"}`,
                     background: activeTab === tab ? "var(--c-btn-bg)" : "transparent",
                     color: activeTab === tab ? "var(--c-btn-text)" : "var(--c-text-muted)",
@@ -323,7 +323,7 @@ export default function CricketPage() {
               </p>
               <button
                 onClick={() => setActiveTeam(null)}
-                style={{ marginTop: 20, padding: "10px 28px", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 24 }}
+                style={{ marginTop: 20, padding: "10px 28px", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50 }}
               >
                 View All Cricket Posters
               </button>

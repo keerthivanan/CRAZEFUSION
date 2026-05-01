@@ -215,7 +215,7 @@ export default function Navbar() {
               letterSpacing: "0.08em", textTransform: "uppercase",
               color: "var(--c-btn-text)", background: "var(--c-btn-bg)",
               textDecoration: "none", padding: "9px 20px",
-              transition: "opacity 0.2s", lineHeight: 1, borderRadius: 8,
+              transition: "opacity 0.2s", lineHeight: 1, borderRadius: 50,
             }}
               onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.8"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 0 14px rgba(160,160,160,0.3)"; }}
               onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "none"; }}

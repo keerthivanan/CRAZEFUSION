@@ -70,14 +70,36 @@ export default function Footer() {
 
             {/* Social */}
             <div className="footer-socials" style={{ display: "flex", gap: 12 }}>
-              {[["IN", "https://instagram.com/posterking"], ["YT", "https://youtube.com/posterking"], ["TW", "https://twitter.com/posterking"]].map(([label, href]) => (
-                <a key={label} href={href} target="_blank" rel="noreferrer"
-                  style={{ width: 38, height: 38, border: "1px solid #1a1a1a", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FO, fontSize: 10, fontWeight: 500, color: "#666", textDecoration: "none", transition: "all 0.3s ease", letterSpacing: "0.05em" }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#fff"; (e.currentTarget as HTMLAnchorElement).style.color = "#fff"; (e.currentTarget as HTMLAnchorElement).style.background = "#111"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#1a1a1a"; (e.currentTarget as HTMLAnchorElement).style.color = "#666"; (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; }}>
-                  {label}
-                </a>
-              ))}
+              {/* Instagram */}
+              <a href="https://www.instagram.com/crazefusion/" target="_blank" rel="noreferrer" aria-label="Instagram"
+                style={{ width: 42, height: 42, border: "1px solid #1a1a1a", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "#666", textDecoration: "none", transition: "all 0.3s ease" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.borderColor = "#e1306c"; el.style.color = "#e1306c"; el.style.background = "#1a0008"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.borderColor = "#1a1a1a"; el.style.color = "#666"; el.style.background = "transparent"; }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </a>
+              {/* YouTube */}
+              <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube"
+                style={{ width: 42, height: 42, border: "1px solid #1a1a1a", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "#666", textDecoration: "none", transition: "all 0.3s ease" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.borderColor = "#ff0000"; el.style.color = "#ff0000"; el.style.background = "#1a0000"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.borderColor = "#1a1a1a"; el.style.color = "#666"; el.style.background = "transparent"; }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                  <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+                </svg>
+              </a>
+              {/* Twitter / X */}
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter"
+                style={{ width: 42, height: 42, border: "1px solid #1a1a1a", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "#666", textDecoration: "none", transition: "all 0.3s ease" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.borderColor = "#fff"; el.style.color = "#fff"; el.style.background = "#111"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.borderColor = "#1a1a1a"; el.style.color = "#666"; el.style.background = "transparent"; }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
             </div>
           </div>
 

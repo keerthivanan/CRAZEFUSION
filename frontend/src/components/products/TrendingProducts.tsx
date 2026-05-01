@@ -23,7 +23,7 @@ function TCard({ p }: { p: typeof products[0] }) {
   return (
     <div>
       <div
-        style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", borderRadius: 8 }}
+        style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", borderRadius: 50 }}
         onMouseEnter={e => {
           (e.currentTarget.querySelector("img") as HTMLImageElement).style.transform = "scale(1.06)";
           (e.currentTarget.querySelector(".tcard-btn") as HTMLDivElement).style.opacity = "1";
@@ -45,7 +45,7 @@ function TCard({ p }: { p: typeof products[0] }) {
         <div className="tcard-btn" style={{ position: "absolute", bottom: 0, left: 0, right: 0, opacity: 0, transform: "translateY(8px)", transition: "all 0.25s ease" }}>
           <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={18}>
             <button onClick={handleQuickAdd}
-              style={{ width: "100%", padding: "12px 0", background: "rgba(17,17,17,0.92)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 8 }}>
+              style={{ width: "100%", padding: "12px 0", background: "rgba(17,17,17,0.92)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50 }}>
               Quick Add
             </button>
           </ClickSpark>
@@ -77,7 +77,7 @@ export default function TrendingProducts() {
             as="h2"
           />
           <Link href="/collection"
-            style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-btn-text)", background: "var(--c-btn-bg)", textDecoration: "none", padding: "9px 22px", borderRadius: 24, transition: "opacity 0.2s", whiteSpace: "nowrap" }}
+            style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-btn-text)", background: "var(--c-btn-bg)", textDecoration: "none", padding: "9px 22px", borderRadius: 50, transition: "opacity 0.2s", whiteSpace: "nowrap" }}
             onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75"; }}
             onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}>
             View All

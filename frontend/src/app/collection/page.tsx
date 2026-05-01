@@ -39,7 +39,7 @@ function ProductCard({ p }: { p: typeof products[0] }) {
         <div style={{ position: "absolute", bottom: 10, left: 10, right: 10, opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(10px)", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}>
           <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={20}>
             <button onClick={handleQuickAdd}
-              style={{ width: "100%", padding: "12px 0", background: added ? "#16a34a" : "rgba(17, 17, 17, 0.9)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s", borderRadius: 8 }}>
+              style={{ width: "100%", padding: "12px 0", background: added ? "#16a34a" : "rgba(17, 17, 17, 0.9)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s", borderRadius: 50 }}>
               {added ? "✓ Added!" : "Quick Add"}
             </button>
           </ClickSpark>
@@ -115,11 +115,11 @@ export default function CollectionPage() {
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <button onClick={() => setFiltersOpen(!filtersOpen)}
-                  style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: filtersOpen ? "var(--c-btn-bg)" : "transparent", color: filtersOpen ? "var(--c-btn-text)" : "var(--c-text)", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", transition: "all 0.2s", borderRadius: 8 }}>
+                  style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: filtersOpen ? "var(--c-btn-bg)" : "transparent", color: filtersOpen ? "var(--c-btn-text)" : "var(--c-text)", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", transition: "all 0.2s", borderRadius: 50 }}>
                   Filters {filtersOpen ? "↑" : "↓"}
                 </button>
                 <select value={sortBy} onChange={e => setSortBy(e.target.value)}
-                  style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 11, fontWeight: 600, cursor: "pointer", outline: "none", borderRadius: 8 }}>
+                  style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 11, fontWeight: 600, cursor: "pointer", outline: "none", borderRadius: 50 }}>
                   <option value="featured">Featured</option>
                   <option value="newest">Newest First</option>
                   <option value="price-asc">Price: Low → High</option>
