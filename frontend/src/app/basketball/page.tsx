@@ -13,19 +13,18 @@ const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
 
-const KEY = process.env.NEXT_PUBLIC_LOGODEV_KEY ?? "pk_X0d9dkoXSXC1bEBCAvNs-g";
-const logo = (domain: string) =>
-  `https://img.logo.dev/${domain}?token=${KEY}&size=160&format=png`;
+const espn = (abbr: string) =>
+  `https://a.espncdn.com/i/teamlogos/nba/500/${abbr}.png`;
 
 const teams = [
-  { name: "LA Lakers",              short: "LAL",  domain: "lakers.com",      color: "#552583" },
-  { name: "Golden State Warriors",  short: "GSW",  domain: "warriors.com",     color: "#1d428a" },
-  { name: "Chicago Bulls",          short: "CHI",  domain: "bulls.com",        color: "#ce1141" },
-  { name: "Miami Heat",             short: "MIA",  domain: "heat.com",         color: "#98002e" },
-  { name: "Boston Celtics",         short: "BOS",  domain: "celtics.com",      color: "#007a33" },
-  { name: "Brooklyn Nets",          short: "BKN",  domain: "brooklynnets.com", color: "#000000" },
-  { name: "Toronto Raptors",        short: "TOR",  domain: "raptors.com",      color: "#ce1141" },
-  { name: "Dallas Mavericks",       short: "DAL",  domain: "mavs.com",         color: "#00538c" },
+  { name: "LA Lakers",             short: "LAL", logo: espn("lal"), color: "#552583" },
+  { name: "Golden State Warriors", short: "GSW", logo: espn("gs"),  color: "#1d428a" },
+  { name: "Chicago Bulls",         short: "CHI", logo: espn("chi"), color: "#ce1141" },
+  { name: "Miami Heat",            short: "MIA", logo: espn("mia"), color: "#98002e" },
+  { name: "Boston Celtics",        short: "BOS", logo: espn("bos"), color: "#007a33" },
+  { name: "Brooklyn Nets",         short: "BKN", logo: espn("bkn"), color: "#000000" },
+  { name: "Toronto Raptors",       short: "TOR", logo: espn("tor"), color: "#ce1141" },
+  { name: "Dallas Mavericks",      short: "DAL", logo: espn("dal"), color: "#00538c" },
 ];
 
 type Team = typeof teams[0];
@@ -47,9 +46,9 @@ function TeamLogo({ team }: { team: Team }) {
   }
   return (
     <img
-      src={logo(team.domain)}
+      src={team.logo}
       alt={team.name}
-      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: 8 }}
       onError={() => setFailed(true)}
     />
   );
@@ -177,7 +176,7 @@ export default function BasketballPage() {
           return (
             <div style={{ background: t.color + "18", borderBottom: `2px solid ${t.color}33`, padding: "14px 32px" }}>
               <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "center", gap: 12 }}>
-                <img src={logo(t.domain)} alt={t.name} style={{ width: 32, height: 32, objectFit: "cover", borderRadius: "50%" }} />
+                <img src={t.logo} alt={t.name} style={{ width: 32, height: 32, objectFit: "contain" }} />
                 <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 600, color: t.color }}>
                   {t.name} — {t.short}
                 </span>
