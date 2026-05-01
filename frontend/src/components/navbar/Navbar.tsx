@@ -92,7 +92,7 @@ export default function Navbar() {
   const iconBtn: React.CSSProperties = {
     background: "none", border: "none", cursor: "pointer",
     display: "flex", alignItems: "center", justifyContent: "center",
-    color: "var(--c-nav-link)", padding: 6, borderRadius: 8,
+    color: "var(--c-nav-link)", padding: 6, borderRadius: 50,
     transition: "color 0.15s, background 0.15s",
   };
 
@@ -348,7 +348,7 @@ export default function Navbar() {
             border: "1.5px solid var(--c-text)", color: "var(--c-text)",
             fontFamily: FO, fontSize: 11, fontWeight: 700,
             textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 6, borderRadius: 8,
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 6, borderRadius: 50,
           }}>
             <IconBag />
             Cart{count > 0 ? ` (${count})` : ""}
@@ -358,7 +358,7 @@ export default function Navbar() {
             background: "var(--c-btn-bg)", color: "var(--c-btn-text)",
             fontFamily: FO, fontSize: 11, fontWeight: 700,
             textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 6, borderRadius: 8,
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 6, borderRadius: 50,
           }}>
             <IconUser />
             Login

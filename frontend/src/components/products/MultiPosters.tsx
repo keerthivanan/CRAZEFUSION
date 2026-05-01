@@ -68,8 +68,8 @@ export default function MultiPosters() {
   return (
     <section style={{ padding: "64px 0", background: "var(--c-bg-soft)" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 32px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 36 }}>
-          <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,44px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", margin: 0, letterSpacing: "-0.03em", display: "flex", gap: "0.2em", flexWrap: "wrap", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 36, gap: 20 }}>
+          <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,44px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", margin: 0, letterSpacing: "-0.03em", display: "flex", gap: "0.2em", flexWrap: "wrap", alignItems: "center", justifyContent: "center" }}>
             <BlurText text="Multi Poster" delay={60} animateBy="words" direction="bottom" />
             <span style={{ color: "#e8a000" }}><BlurText text="Collections" delay={200} animateBy="words" direction="bottom" /></span>
           </h2>

@@ -66,8 +66,8 @@ export default function BestSelling() {
   return (
     <section style={{ padding: "64px 0", background: "var(--c-bg)" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 32px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 36 }}>
-          <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,44px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0, display: "flex", gap: "0.2em", alignItems: "center", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 36, gap: 20 }}>
+          <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,44px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0, display: "flex", gap: "0.2em", alignItems: "center", flexWrap: "wrap", justifyContent: "center" }}>
             <BlurText text="Best" delay={60} animateBy="words" direction="bottom" />
             <span style={{ color: "#e8a000" }}><BlurText text="Selling" delay={160} animateBy="words" direction="bottom" /></span>
           </h2>
