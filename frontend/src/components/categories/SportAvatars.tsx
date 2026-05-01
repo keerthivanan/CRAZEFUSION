@@ -122,24 +122,12 @@ export function BasketballAvatar() {
 // ── FOOTBALL LEGENDS ─────────────────────────────────────────────────
 export function FootballAvatar() {
   return (
-    <Badge
-      bg="radial-gradient(circle at 50% 40%, #0f3d22, #020c06)"
-      accent="#e8a000"
-      title="FOOTBALL LEGENDS"
-      players={[
-        {
-          src: "https://a.espncdn.com/i/headshots/soccer/players/full/45843.png",
-          name: "MESSI", number: "10",
-        },
-        {
-          src: "https://a.espncdn.com/i/headshots/soccer/players/full/22774.png",
-          name: "RONALDO", number: "7",
-        },
-        {
-          src: "https://a.espncdn.com/i/headshots/soccer/players/full/231388.png",
-          name: "MBAPPÉ", number: "10",
-        },
-      ]}
-    />
+    <div style={{ width: "100%", height: "100%", borderRadius: "50%", overflow: "hidden" }}>
+      <img
+        src="/categories/football_legends.png"
+        alt="Football Legends"
+        style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
+      />
+    </div>
   );
 }
