@@ -3,44 +3,59 @@ import Link from "next/link";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
+const KEY = process.env.NEXT_PUBLIC_LOGODEV_KEY ?? "pk_X0d9dkoXSXC1bEBCAvNs-g";
+
+const logo = (domain: string) =>
+  `https://img.logo.dev/${domain}?token=${KEY}&size=160&format=png`;
+
 const cats = [
-  { label: "Cricket",    href: "/collection" },
-  { label: "Basketball", href: "/collection" },
-  { label: "Football",   href: "/collection" },
+  { label: "Cricket",    href: "/collection", domain: "icc-cricket.com"   },
+  { label: "Basketball", href: "/collection", domain: "nba.com"           },
+  { label: "Football",   href: "/collection", domain: "fifa.com"          },
 ];
 
 export default function CategoryIcons() {
   return (
-    <section style={{ padding: "0", background: "var(--c-bg)", borderBottom: "1px solid var(--c-border)" }}>
-      <div className="no-scrollbar" style={{
-        display: "flex",
-        overflowX: "auto",
-        gap: 0,
+    <section style={{ padding: "32px 0 28px", background: "var(--c-bg)" }}>
+      <div style={{
+        maxWidth: 1400, margin: "0 auto", padding: "0 32px",
+        display: "flex", alignItems: "flex-start", justifyContent: "center", gap: 64,
       }}>
-        {cats.map((cat, i) => (
-          <Link key={cat.label} href={cat.href} style={{
-            textDecoration: "none",
-            flexShrink: 0,
-            padding: "14px 22px",
-            fontFamily: FO,
-            fontSize: 11,
-            fontWeight: 500,
-            color: "var(--c-text-muted)",
-            letterSpacing: "0.05em",
-            textTransform: "uppercase",
-            whiteSpace: "nowrap",
-            borderRight: i < cats.length - 1 ? "1px solid var(--c-border)" : "none",
-            transition: "color 0.15s, background 0.15s",
-          }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-text)";
-              (e.currentTarget as HTMLAnchorElement).style.background = "var(--c-bg-soft)";
+        {cats.map(({ label, href, domain }) => (
+          <Link key={label} href={href} style={{
+            textDecoration: "none", display: "flex", flexDirection: "column",
+            alignItems: "center", gap: 12,
+          }}>
+            <div style={{
+              width: 80, height: 80, borderRadius: "50%", overflow: "hidden",
+              background: "var(--c-bg-soft)",
+              border: "1.5px solid var(--c-border)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              transition: "transform 0.25s ease, box-shadow 0.25s ease",
             }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-text-muted)";
-              (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLDivElement).style.transform = "translateY(-5px)";
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 10px 24px rgba(232,160,0,0.25)";
+                (e.currentTarget as HTMLDivElement).style.borderColor = "#e8a000";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+                (e.currentTarget as HTMLDivElement).style.borderColor = "var(--c-border)";
+              }}>
+              <img
+                src={logo(domain)}
+                alt={label}
+                style={{ width: 52, height: 52, objectFit: "contain" }}
+              />
+            </div>
+            <span style={{
+              fontFamily: FO, fontSize: 11, fontWeight: 600,
+              color: "var(--c-text)", textTransform: "uppercase",
+              letterSpacing: "0.08em",
             }}>
-            {cat.label}
+              {label}
+            </span>
           </Link>
         ))}
       </div>
