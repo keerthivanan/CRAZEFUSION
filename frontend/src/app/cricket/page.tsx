@@ -51,7 +51,7 @@ function TeamLogo({ team }: { team: Team }) {
     <img
       src={logo(team.domain)}
       alt={team.name}
-      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: 6 }}
       onError={() => setFailed(true)}
     />
   );

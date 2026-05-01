@@ -45,7 +45,7 @@ export default function CategoryIcons() {
               <img
                 src={logo(domain)}
                 alt={label}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", padding: 6 }}
               />
             </div>
             <span className="cat-icon-label" style={{
