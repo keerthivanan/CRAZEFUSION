@@ -67,13 +67,13 @@ export default function TrendingProducts() {
   return (
     <section style={{ padding: "64px 0", background: "var(--c-bg)" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 32px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 36 }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 36, gap: 20 }}>
           <FireHeading
             text="#Trending Now!"
             subtitle="New Arrival"
             flameAt={[1, 10]}
-            size="clamp(24px,3.5vw,48px)"
-            align="left"
+            size="clamp(28px,4vw,54px)"
+            align="center"
             as="h2"
           />
           <Link href="/collection"
