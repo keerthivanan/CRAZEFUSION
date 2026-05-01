@@ -1,76 +1,55 @@
-﻿"use client";
+"use client";
 import Link from "next/link";
 
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const cats = [
-  { label: "Custom Poster",    href: "/custom-builder", img: "https://www.posterized.in/cdn/shop/files/ROUND_ICON_1.webp?v=1752915982" },
-  { label: "Superhero Collections", href: "/collection", img: "https://www.posterized.in/cdn/shop/files/ROUND_ICON_11.webp?v=1752915992" },
-  { label: "Car Collections",       href: "/collection", img: "https://www.posterized.in/cdn/shop/files/ROUND_ICON_10.webp?v=1752915998" },
-  { label: "Movie Collections",     href: "/collection", img: "https://www.posterized.in/cdn/shop/files/ROUND_ICON_3.webp?v=1752916291" },
-  { label: "TV-Series Collections", href: "/collection", img: "https://www.posterized.in/cdn/shop/files/ROUND_ICON_2.webp?v=1752916304" },
-  { label: "Music Collections",     href: "/collection", img: "https://www.posterized.in/cdn/shop/files/ROUND_ICON_12.webp?v=1752916383" },
-  { label: "Video Game Collections", href: "/collection", img: "https://www.posterized.in/cdn/shop/files/ROUND_ICON_4.webp?v=1752916390" },
-  { label: "Motivate Collections",   href: "/collection", img: "https://www.posterized.in/cdn/shop/files/ROUND_ICON_5.webp?v=1752916394" },
-  { label: "Cricket Collections",    href: "/collection", img: "https://www.posterized.in/cdn/shop/files/ROUND_ICON_9.webp?v=1752916404" },
-  { label: "Football Collections",   href: "/collection", img: "https://www.posterized.in/cdn/shop/files/ROUND_ICON_7.webp?v=1752916412" },
-  { label: "F1 Collections",         href: "/collection", img: "https://www.posterized.in/cdn/shop/files/ROUND_ICON_8.webp?v=1752916418" },
-  { label: "Explore More !",         href: "/collection", img: "https://www.posterized.in/cdn/shop/files/Explore.png?v=1726206041" },
+  { label: "Custom Poster",       href: "/custom-builder" },
+  { label: "Superhero",           href: "/collection" },
+  { label: "Cars & Bikes",        href: "/collection" },
+  { label: "Movies",              href: "/collection" },
+  { label: "TV Series",           href: "/collection" },
+  { label: "Music",               href: "/collection" },
+  { label: "Video Games",         href: "/collection" },
+  { label: "Motivation",          href: "/collection" },
+  { label: "Cricket",             href: "/collection" },
+  { label: "Football",            href: "/collection" },
+  { label: "F1 Racing",           href: "/collection" },
+  { label: "Explore More →",      href: "/collection" },
 ];
 
 export default function CategoryIcons() {
   return (
-    <section style={{ padding: "28px 0 24px", background: "var(--c-bg)" }}>
-      <div className="cat-icons-row" style={{
-        maxWidth: 1400,
-        margin: "0 auto",
-        padding: "0 32px",
+    <section style={{ padding: "0", background: "var(--c-bg)", borderBottom: "1px solid var(--c-border)" }}>
+      <div className="no-scrollbar" style={{
         display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "space-between",
+        overflowX: "auto",
+        gap: 0,
       }}>
-        {cats.map(cat => (
+        {cats.map((cat, i) => (
           <Link key={cat.label} href={cat.href} style={{
             textDecoration: "none",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 8,
-          }}>
-            <div style={{
-              width: 72,
-              height: 72,
-              borderRadius: "50%",
-              overflow: "hidden",
-              border: "1px solid var(--c-border)",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-              transition: "all 0.25s ease",
+            flexShrink: 0,
+            padding: "14px 22px",
+            fontFamily: FO,
+            fontSize: 11,
+            fontWeight: 500,
+            color: "var(--c-text-muted)",
+            letterSpacing: "0.05em",
+            textTransform: "uppercase",
+            whiteSpace: "nowrap",
+            borderRight: i < cats.length - 1 ? "1px solid var(--c-border)" : "none",
+            transition: "color 0.15s, background 0.15s",
+          }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-text)";
+              (e.currentTarget as HTMLAnchorElement).style.background = "var(--c-bg-soft)";
             }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLDivElement;
-                el.style.transform = "translateY(-4px)";
-                el.style.boxShadow = "0 8px 20px rgba(0,0,0,0.10)";
-                el.style.borderColor = "var(--c-text)";
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLDivElement;
-                el.style.transform = "translateY(0)";
-                el.style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)";
-                el.style.borderColor = "var(--c-border)";
-              }}>
-              <img src={cat.img} alt={cat.label} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            </div>
-            <span style={{
-              fontFamily: "var(--font-poppins-var,'Poppins',sans-serif)",
-              fontSize: 10,
-              fontWeight: 600,
-              color: "var(--c-text)",
-              textAlign: "center",
-              lineHeight: 1.25,
-              maxWidth: 72,
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-text-muted)";
+              (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
             }}>
-              {cat.label}
-            </span>
+            {cat.label}
           </Link>
         ))}
       </div>
