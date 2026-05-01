@@ -166,16 +166,11 @@ body {
     border-bottom: 1px solid #f0f0f0;
   }
 
-  /* ── Category icons: horizontal scroll ── */
+  /* ── Category icons: centered ── */
   .cat-icons-row {
-    overflow-x: auto !important;
-    justify-content: flex-start !important;
-    padding-bottom: 8px !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
     gap: 20px !important;
-    -webkit-overflow-scrolling: touch;
-  }
-  .cat-icons-row a {
-    flex-shrink: 0 !important;
   }
 
   /* ── WhyChooseUs: 1 column ── */
