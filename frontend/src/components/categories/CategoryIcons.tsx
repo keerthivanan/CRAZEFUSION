@@ -4,18 +4,9 @@ import Link from "next/link";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const cats = [
-  { label: "Custom Poster",       href: "/custom-builder" },
-  { label: "Superhero",           href: "/collection" },
-  { label: "Cars & Bikes",        href: "/collection" },
-  { label: "Movies",              href: "/collection" },
-  { label: "TV Series",           href: "/collection" },
-  { label: "Music",               href: "/collection" },
-  { label: "Video Games",         href: "/collection" },
-  { label: "Motivation",          href: "/collection" },
-  { label: "Cricket",             href: "/collection" },
-  { label: "Football",            href: "/collection" },
-  { label: "F1 Racing",           href: "/collection" },
-  { label: "Explore More →",      href: "/collection" },
+  { label: "Cricket",    href: "/collection" },
+  { label: "Basketball", href: "/collection" },
+  { label: "Football",   href: "/collection" },
 ];
 
 export default function CategoryIcons() {
