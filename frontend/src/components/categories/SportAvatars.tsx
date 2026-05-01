@@ -3,28 +3,23 @@ import { useState } from "react";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
-// ── Player face with fallback to jersey number ──────────────────────
-function Face({ src, name, number, accent, hero }: {
-  src: string; name: string; number: string; accent: string; hero?: boolean;
+function Face({ src, name, number, accent, size = 22 }: {
+  src: string; name: string; number: string; accent: string; size?: number;
 }) {
   const [failed, setFailed] = useState(false);
-  const size = hero ? 28 : 21;
+  const isHero = size >= 32;
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2, flexShrink: 0 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
       <div style={{
         width: size, height: size, borderRadius: "50%", overflow: "hidden",
-        border: `${hero ? 2 : 1.4}px solid ${hero ? accent : accent + "99"}`,
-        background: accent + "25", flexShrink: 0,
-        boxShadow: hero ? `0 0 8px ${accent}66` : "none",
+        border: `${isHero ? 2 : 1.4}px solid ${isHero ? accent : accent + "88"}`,
+        background: accent + "20",
+        boxShadow: isHero ? `0 0 12px ${accent}88, 0 0 4px ${accent}55` : "none",
+        flexShrink: 0,
       }}>
         {failed ? (
-          <div style={{
-            width: "100%", height: "100%", display: "flex",
-            alignItems: "center", justifyContent: "center",
-          }}>
-            <span style={{ color: accent, fontSize: hero ? 11 : 8, fontWeight: 900, fontFamily: FO }}>
-              {number}
-            </span>
+          <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ color: accent, fontSize: isHero ? 13 : 8, fontWeight: 900, fontFamily: FO }}>{number}</span>
           </div>
         ) : (
           <img
@@ -35,49 +30,53 @@ function Face({ src, name, number, accent, hero }: {
         )}
       </div>
       <span style={{
-        color: "rgba(255,255,255,0.82)", fontSize: hero ? 5.2 : 4.6,
-        fontFamily: FO, textTransform: "uppercase", letterSpacing: 0.4,
-        lineHeight: 1, whiteSpace: "nowrap",
+        color: isHero ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.7)",
+        fontSize: isHero ? 5.5 : 4.2,
+        fontFamily: FO, textTransform: "uppercase", letterSpacing: 0.5,
+        lineHeight: 1, whiteSpace: "nowrap", fontWeight: isHero ? 700 : 400,
       }}>{name}</span>
     </div>
   );
 }
 
-// ── Shared badge wrapper ─────────────────────────────────────────────
 function Badge({ bg, accent, title, players }: {
   bg: string; accent: string; title: string;
-  players: { src: string; name: string; number: string; hero?: boolean }[];
+  players: { src: string; name: string; number: string }[];
 }) {
+  const [left, center, right] = players;
   return (
     <div style={{
       width: "100%", height: "100%",
       background: bg,
       display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "space-between",
-      padding: "8px 3px 6px",
+      padding: "8px 0 5px",
     }}>
       {/* Title */}
       <span style={{
         fontFamily: FO, fontSize: 5.5, color: accent,
-        textTransform: "uppercase", letterSpacing: 1.8,
-        fontWeight: 700, opacity: 0.95, whiteSpace: "nowrap",
+        textTransform: "uppercase", letterSpacing: 1.6,
+        fontWeight: 700, whiteSpace: "nowrap", opacity: 0.95,
       }}>{title}</span>
 
-      {/* Separator */}
-      <div style={{ width: "78%", height: 0.6, background: accent, opacity: 0.35 }} />
-
-      {/* Faces */}
-      <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", gap: 5 }}>
-        {players.map(p => (
-          <Face key={p.name} {...p} accent={accent} />
-        ))}
+      {/* Cinematic trio — center hero big and front, sides small and behind */}
+      <div style={{ position: "relative", width: "76%", height: 56, flexShrink: 0 }}>
+        {/* Left — smaller, behind */}
+        <div style={{ position: "absolute", left: 0, bottom: 0, zIndex: 1, opacity: 0.78 }}>
+          <Face src={left.src} name={left.name} number={left.number} accent={accent} size={21} />
+        </div>
+        {/* Center hero — large, front */}
+        <div style={{ position: "absolute", left: "50%", bottom: 0, transform: "translateX(-50%)", zIndex: 3 }}>
+          <Face src={center.src} name={center.name} number={center.number} accent={accent} size={35} />
+        </div>
+        {/* Right — smaller, behind */}
+        <div style={{ position: "absolute", right: 0, bottom: 0, zIndex: 1, opacity: 0.78 }}>
+          <Face src={right.src} name={right.name} number={right.number} accent={accent} size={21} />
+        </div>
       </div>
 
-      {/* Separator */}
-      <div style={{ width: "78%", height: 0.6, background: accent, opacity: 0.35 }} />
-
       {/* Stars */}
-      <span style={{ color: accent, fontSize: 7.5, opacity: 0.92, letterSpacing: 4 }}>★★★</span>
+      <span style={{ color: accent, fontSize: 7.5, opacity: 0.9, letterSpacing: 4 }}>★★★</span>
     </div>
   );
 }
@@ -86,7 +85,7 @@ function Badge({ bg, accent, title, players }: {
 export function CricketAvatar() {
   return (
     <Badge
-      bg="radial-gradient(circle at 45% 35%, #1a3a6b, #050d1c)"
+      bg="radial-gradient(circle at 50% 40%, #1e3f70, #04091a)"
       accent="#e8a000"
       title="CRICKET LEGENDS"
       players={[
@@ -96,7 +95,7 @@ export function CricketAvatar() {
         },
         {
           src: "https://img1.hscicdn.com/image/upload/f_auto,t_h_100/lsci/db/PICTURES/CMS/303600/303697.png",
-          name: "VIRAT", number: "18", hero: true,
+          name: "VIRAT", number: "18",
         },
         {
           src: "https://img1.hscicdn.com/image/upload/f_auto,t_h_100/lsci/db/PICTURES/CMS/285600/285630.png",
@@ -111,7 +110,7 @@ export function CricketAvatar() {
 export function BasketballAvatar() {
   return (
     <Badge
-      bg="radial-gradient(circle at 45% 35%, #3d1a6e, #0e0520)"
+      bg="radial-gradient(circle at 50% 40%, #3d1a6e, #0a0218)"
       accent="#e8a000"
       title="NBA LEGENDS"
       players={[
@@ -121,7 +120,7 @@ export function BasketballAvatar() {
         },
         {
           src: "https://a.espncdn.com/i/headshots/nba/players/full/110.png",
-          name: "KOBE", number: "24", hero: true,
+          name: "KOBE", number: "24",
         },
         {
           src: "https://a.espncdn.com/i/headshots/nba/players/full/1966.png",
@@ -136,7 +135,7 @@ export function BasketballAvatar() {
 export function FootballAvatar() {
   return (
     <Badge
-      bg="radial-gradient(circle at 45% 35%, #0d3b20, #030c07)"
+      bg="radial-gradient(circle at 50% 40%, #0f3d22, #020c06)"
       accent="#e8a000"
       title="FOOTBALL LEGENDS"
       players={[
@@ -146,7 +145,7 @@ export function FootballAvatar() {
         },
         {
           src: "https://a.espncdn.com/i/headshots/soccer/players/full/22774.png",
-          name: "RONALDO", number: "7", hero: true,
+          name: "RONALDO", number: "7",
         },
         {
           src: "https://a.espncdn.com/i/headshots/soccer/players/full/231388.png",
