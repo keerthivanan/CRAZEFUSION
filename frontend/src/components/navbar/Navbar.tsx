@@ -1,394 +1,290 @@
-﻿"use client";
-import { useState, useEffect } from "react";
+"use client";
+import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { GoArrowUpRight } from "react-icons/go";
+import { gsap } from "gsap";
 import { useCart } from "@/context/CartContext";
 import { useTheme } from "@/context/ThemeContext";
 
-const nav = [
-  { label: "Cricket", href: "/cricket", children: [
-    { label: "All Cricket",        href: "/cricket" },
-    { label: "Chennai Super Kings",href: "/cricket?team=CSK" },
-    { label: "Mumbai Indians",     href: "/cricket?team=MI" },
-    { label: "Royal Challengers",  href: "/cricket?team=RCB" },
-    { label: "Kolkata Knight Riders", href: "/cricket?team=KKR" },
-    { label: "Delhi Capitals",     href: "/cricket?team=DC" },
-    { label: "Sunrisers Hyderabad",href: "/cricket?team=SRH" },
-    { label: "Rajasthan Royals",   href: "/cricket?team=RR" },
-    { label: "Punjab Kings",       href: "/cricket?team=PBKS" },
-    { label: "Gujarat Titans",     href: "/cricket?team=GT" },
-    { label: "Lucknow Super Giants",href: "/cricket?team=LSG" },
-  ]},
-  { label: "Basketball", href: "/basketball", children: [
-    { label: "All Basketball",       href: "/basketball" },
-    { label: "LA Lakers",            href: "/basketball?team=LAL" },
-    { label: "Golden State Warriors",href: "/basketball?team=GSW" },
-    { label: "Chicago Bulls",        href: "/basketball?team=CHI" },
-    { label: "Miami Heat",           href: "/basketball?team=MIA" },
-    { label: "Boston Celtics",       href: "/basketball?team=BOS" },
-    { label: "Brooklyn Nets",        href: "/basketball?team=BKN" },
-    { label: "Dallas Mavericks",     href: "/basketball?team=DAL" },
-  ]},
-  { label: "Football", href: "/football", children: [
-    { label: "All Football",         href: "/football" },
-    { label: "Real Madrid",          href: "/football?team=RMA" },
-    { label: "FC Barcelona",         href: "/football?team=FCB" },
-    { label: "Manchester City",      href: "/football?team=MCI" },
-    { label: "Liverpool FC",         href: "/football?team=LIV" },
-    { label: "PSG",                  href: "/football?team=PSG" },
-    { label: "Arsenal",              href: "/football?team=ARS" },
-    { label: "Manchester United",    href: "/football?team=MUN" },
-  ]},
-  { label: "Reviews",        href: "/reviews" },
+const navCards = [
+  {
+    label: "Cricket",
+    href: "/cricket",
+    bgColor: "#0d1f0d",
+    textColor: "#fff",
+    links: [
+      { label: "All Cricket",           href: "/cricket" },
+      { label: "Chennai Super Kings",   href: "/cricket?team=CSK" },
+      { label: "Mumbai Indians",        href: "/cricket?team=MI" },
+      { label: "Royal Challengers",     href: "/cricket?team=RCB" },
+      { label: "Kolkata Knight Riders", href: "/cricket?team=KKR" },
+      { label: "Sunrisers Hyderabad",   href: "/cricket?team=SRH" },
+    ],
+  },
+  {
+    label: "Basketball",
+    href: "/basketball",
+    bgColor: "#1B1722",
+    textColor: "#fff",
+    links: [
+      { label: "All Basketball",        href: "/basketball" },
+      { label: "LA Lakers",             href: "/basketball?team=LAL" },
+      { label: "Golden State Warriors", href: "/basketball?team=GSW" },
+      { label: "Chicago Bulls",         href: "/basketball?team=CHI" },
+      { label: "Miami Heat",            href: "/basketball?team=MIA" },
+      { label: "Boston Celtics",        href: "/basketball?team=BOS" },
+    ],
+  },
+  {
+    label: "Football",
+    href: "/football",
+    bgColor: "#2F293A",
+    textColor: "#fff",
+    links: [
+      { label: "All Football",    href: "/football" },
+      { label: "Real Madrid",     href: "/football?team=RMA" },
+      { label: "FC Barcelona",    href: "/football?team=FCB" },
+      { label: "Manchester City", href: "/football?team=MCI" },
+      { label: "Liverpool FC",    href: "/football?team=LIV" },
+      { label: "Arsenal",         href: "/football?team=ARS" },
+    ],
+  },
 ];
 
-const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
-
 const IconBag = () => (
-  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
-  </svg>
-);
-
-const IconUser = () => (
-  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+    <line x1="3" y1="6" x2="21" y2="6"/>
+    <path d="M16 10a4 4 0 01-8 0"/>
   </svg>
 );
 
 const IconMoon = () => (
-  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
   </svg>
 );
 
 const IconSun = () => (
-  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="5"/>
+    <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+    <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
   </svg>
 );
 
 export default function Navbar() {
-  const [scrolled, setScrolled]       = useState(false);
-  const [openMenu, setOpenMenu]       = useState<string | null>(null);
-  const [mobileOpen, setMobileOpen]   = useState(false);
-  const [openSub, setOpenSub]         = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const navRef   = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const tlRef    = useRef<gsap.core.Timeline | null>(null);
   const { count } = useCart();
   const { theme, toggle } = useTheme();
 
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
+  const isMobile = () =>
+    typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
+
+  const calcHeight = () => {
+    const navEl = navRef.current;
+    if (!navEl) return 280;
+    if (isMobile()) {
+      const contentEl = navEl.querySelector(".cn-content") as HTMLElement;
+      if (contentEl) {
+        const saved = {
+          v: contentEl.style.visibility,
+          p: contentEl.style.pointerEvents,
+          pos: contentEl.style.position,
+          h: contentEl.style.height,
+        };
+        contentEl.style.visibility = "visible";
+        contentEl.style.pointerEvents = "auto";
+        contentEl.style.position = "static";
+        contentEl.style.height = "auto";
+        contentEl.offsetHeight;
+        const total = 60 + contentEl.scrollHeight + 16;
+        Object.assign(contentEl.style, { visibility: saved.v, pointerEvents: saved.p, position: saved.pos, height: saved.h });
+        return total;
+      }
+    }
+    return 280;
+  };
+
+  const buildTl = () => {
+    const navEl = navRef.current;
+    if (!navEl) return null;
+    const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
+    gsap.set(navEl,  { height: 60, overflow: "hidden" });
+    gsap.set(cards,  { y: 50, opacity: 0 });
+    const tl = gsap.timeline({ paused: true });
+    tl.to(navEl, { height: calcHeight, duration: 0.42, ease: "circ.out" });
+    tl.to(cards, { y: 0, opacity: 1, duration: 0.38, ease: "circ.out", stagger: 0.08 }, "-=0.12");
+    return tl;
+  };
+
+  useLayoutEffect(() => {
+    tlRef.current = buildTl();
+    return () => { tlRef.current?.kill(); tlRef.current = null; };
   }, []);
 
-  // lock body scroll when drawer is open
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen]);
+  useLayoutEffect(() => {
+    const onResize = () => {
+      if (!tlRef.current) return;
+      tlRef.current.kill();
+      const newTl = buildTl();
+      if (!newTl) return;
+      if (isOpen) { newTl.progress(1); }
+      tlRef.current = newTl;
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [isOpen]);
 
-  const iconBtn: React.CSSProperties = {
-    background: "none", border: "none", cursor: "pointer",
-    display: "flex", alignItems: "center", justifyContent: "center",
-    color: "var(--c-nav-link)", padding: 6, borderRadius: 50,
-    transition: "color 0.15s, background 0.15s",
+  const toggleMenu = () => {
+    const tl = tlRef.current;
+    if (!tl) return;
+    if (!isOpen) {
+      setIsOpen(true);
+      tl.play(0);
+    } else {
+      tl.eventCallback("onReverseComplete", () => setIsOpen(false));
+      tl.reverse();
+    }
   };
+
+  const navBg   = theme === "dark" ? "#111111" : "#ffffff";
+  const iconClr = theme === "dark" ? "#ffffff" : "#111111";
+  const borderClr = theme === "dark" ? "#2a2a2a" : "#e5e5e5";
+  const FO = "'Poppins', sans-serif";
+  const FE = "'Epilogue', sans-serif";
 
   return (
     <>
-      <header style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: "var(--c-bg)",
-        borderBottom: `1px solid ${scrolled ? "var(--c-border)" : "var(--c-border)"}`,
-        boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.07)" : "none",
-        transition: "box-shadow 0.3s",
+      {/* Floating wrapper */}
+      <div style={{
+        position: "fixed", top: 16, left: "50%",
+        transform: "translateX(-50%)",
+        width: "calc(100% - 32px)", maxWidth: 920,
+        zIndex: 1000,
       }}>
-        <div style={{
-          maxWidth: 1440, margin: "0 auto",
-          padding: "0 32px",
-          display: "flex", alignItems: "center",
-          justifyContent: "space-between",
-          height: 56,
-        }}>
-
-          {/* Logo */}
-          <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", flexShrink: 0 }}>
-            <img src="/logo.png" alt="PosterKing" className="pk-logo" style={{ height: 44, width: "auto", objectFit: "contain" }} />
-          </Link>
-
-          {/* Desktop Nav */}
-          <nav style={{ display: "flex", alignItems: "center", flex: 1, justifyContent: "center" }} className="pk-desktop-nav">
-            {nav.map(item => (
-              <div key={item.label} style={{ position: "relative" }}
-                onMouseEnter={() => item.children && setOpenMenu(item.label)}
-                onMouseLeave={() => setOpenMenu(null)}
-              >
-                <Link href={item.href} style={{
-                  fontFamily: FO, fontSize: 11, fontWeight: 700,
-                  letterSpacing: "0.05em", textTransform: "uppercase",
-                  color: "var(--c-nav-link)", textDecoration: "none",
-                  padding: "8px 12px",
-                  display: "flex", alignItems: "center", gap: 3,
-                  whiteSpace: "nowrap", transition: "color 0.15s",
-                }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "var(--c-text)")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "var(--c-nav-link)")}
-                >
-                  {item.label}
-                  {item.children && (
-                    <svg width="7" height="5" viewBox="0 0 7 5" fill="none" style={{ opacity: 0.4, marginTop: 1 }}>
-                      <path d="M1 1l2.5 2.5L6 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  )}
-                </Link>
-
-                {/* Dropdown */}
-                {item.children && openMenu === item.label && (
-                  <div style={{
-                    position: "absolute", top: "100%", left: "50%",
-                    transform: "translateX(-50%)",
-                    background: "var(--c-bg)",
-                    border: "1px solid var(--c-border)",
-                    minWidth: 220,
-                    boxShadow: "0 12px 40px rgba(0,0,0,0.10)",
-                    zIndex: 200,
-                    paddingTop: 4, paddingBottom: 4,
-                  }}>
-                    <div style={{ position: "absolute", top: -5, left: "50%", transform: "translateX(-50%)", width: 10, height: 5, overflow: "hidden" }}>
-                      <div style={{ width: 10, height: 10, background: "var(--c-bg)", border: "1px solid var(--c-border)", transform: "rotate(45deg) translate(2px,2px)" }} />
-                    </div>
-                    {item.children.map(child => (
-                      <Link key={child.label} href={child.href} style={{
-                        display: "block", padding: "9px 18px",
-                        fontFamily: F, fontSize: 12, fontWeight: 500,
-                        color: "var(--c-text-muted)", textDecoration: "none",
-                        transition: "all 0.12s",
-                        borderBottom: "1px solid var(--c-border)",
-                      }}
-                        onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = "var(--c-bg-soft)"; el.style.color = "var(--c-text)"; el.style.paddingLeft = "22px"; }}
-                        onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = ""; el.style.color = "var(--c-text-muted)"; el.style.paddingLeft = "18px"; }}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-
-          {/* Desktop Actions */}
-          <div className="pk-desktop-actions" style={{ display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
-            <Link href="/collection" style={{
-              fontFamily: F, fontSize: 11, fontWeight: 700,
-              letterSpacing: "0.07em", textTransform: "uppercase",
-              color: "var(--c-nav-link)", textDecoration: "none", transition: "color 0.15s",
-            }}
-              onMouseEnter={e => (e.currentTarget.style.color = "var(--c-text)")}
-              onMouseLeave={e => (e.currentTarget.style.color = "var(--c-nav-link)")}
-            >Search</Link>
-
-            <Link href="/cart" style={{ position: "relative", textDecoration: "none", display: "flex", alignItems: "center", gap: 4 }}>
-              <span style={{ fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--c-nav-link)", transition: "color 0.15s" }}
-                onMouseEnter={e => ((e.target as HTMLElement).style.color = "var(--c-text)")}
-                onMouseLeave={e => ((e.target as HTMLElement).style.color = "var(--c-nav-link)")}
-              >Cart</span>
-              {count > 0 && (
-                <span style={{ background: "#e8a000", color: "#000", borderRadius: "50%", width: 16, height: 16, fontSize: 8, fontWeight: 400, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: F, lineHeight: 1 }}>
-                  {count}
-                </span>
-              )}
-            </Link>
-
-            <button onClick={toggle} aria-label="Toggle theme"
-              style={{ background: "none", border: "1px solid var(--c-border)", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.2s", color: "var(--c-text)" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--c-text)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--c-border)"; }}
-            >
-              {theme === "light" ? <IconMoon /> : <IconSun />}
-            </button>
-
-            <Link href="/auth/login" style={{
-              fontFamily: FO, fontSize: 11, fontWeight: 700,
-              letterSpacing: "0.08em", textTransform: "uppercase",
-              color: "var(--c-btn-text)", background: "var(--c-btn-bg)",
-              textDecoration: "none", padding: "9px 20px",
-              transition: "opacity 0.2s", lineHeight: 1, borderRadius: 50,
-            }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.8"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 0 14px rgba(160,160,160,0.3)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "none"; }}
-            >Login</Link>
-          </div>
-
-          {/* Mobile Actions — Theme + Cart + Hamburger */}
-          <div className="pk-mobile-actions" style={{ display: "none", alignItems: "center", gap: 2 }}>
-
-            {/* Theme toggle — visible directly on mobile bar */}
-            <button onClick={toggle} aria-label="Toggle theme"
-              style={{ ...iconBtn, border: "1px solid var(--c-border)", borderRadius: "50%", width: 34, height: 34, padding: 0, flexShrink: 0 }}>
-              {theme === "light" ? <IconMoon /> : <IconSun />}
-            </button>
-
-            {/* Cart with badge */}
-            <Link href="/cart" style={{ ...iconBtn, textDecoration: "none", position: "relative" }}>
-              <IconBag />
-              {count > 0 && (
-                <span style={{ position: "absolute", top: 2, right: 2, background: "#e8a000", color: "#000", borderRadius: "50%", width: 14, height: 14, fontSize: 7, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: F, lineHeight: 1 }}>
-                  {count}
-                </span>
-              )}
-            </Link>
+        <nav
+          ref={navRef}
+          style={{
+            height: 60, borderRadius: 14, overflow: "hidden",
+            background: navBg,
+            boxShadow: "0 8px 40px rgba(0,0,0,0.18)",
+            position: "relative", willChange: "height",
+            border: `1px solid ${borderClr}`,
+          }}
+        >
+          {/* ── Top bar ── */}
+          <div style={{
+            position: "absolute", top: 0, left: 0, right: 0, height: 60,
+            display: "flex", alignItems: "center",
+            justifyContent: "space-between", padding: "0 10px", zIndex: 2,
+          }}>
 
             {/* Hamburger */}
-            <button onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu"
-              style={{ ...iconBtn, flexDirection: "column", gap: 4, padding: "6px 4px" }}>
-              <span style={{ display: "block", width: 20, height: 2, background: "var(--c-text)", borderRadius: 2, transition: "all 0.25s", transform: mobileOpen ? "rotate(45deg) translate(4px,4px)" : "none" }} />
-              <span style={{ display: "block", width: 20, height: 2, background: "var(--c-text)", borderRadius: 2, transition: "all 0.25s", opacity: mobileOpen ? 0 : 1 }} />
-              <span style={{ display: "block", width: 20, height: 2, background: "var(--c-text)", borderRadius: 2, transition: "all 0.25s", transform: mobileOpen ? "rotate(-45deg) translate(4px,-4px)" : "none" }} />
+            <button
+              onClick={toggleMenu}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              style={{ background: "none", border: "none", cursor: "pointer", padding: 8, display: "flex", flexDirection: "column", gap: 5, color: iconClr, flexShrink: 0 }}
+            >
+              <span style={{ display: "block", width: 26, height: 2, background: "currentColor", borderRadius: 2, transition: "transform 0.28s ease", transformOrigin: "50% 50%", transform: isOpen ? "translateY(3.5px) rotate(45deg)" : "none" }} />
+              <span style={{ display: "block", width: 26, height: 2, background: "currentColor", borderRadius: 2, transition: "opacity 0.2s", opacity: isOpen ? 0 : 1 }} />
+              <span style={{ display: "block", width: 26, height: 2, background: "currentColor", borderRadius: 2, transition: "transform 0.28s ease", transformOrigin: "50% 50%", transform: isOpen ? "translateY(-3.5px) rotate(-45deg)" : "none" }} />
             </button>
-          </div>
-        </div>
-      </header>
 
-      {/* Mobile Drawer Overlay */}
-      <div onClick={() => setMobileOpen(false)} style={{
-        position: "fixed", inset: 0, zIndex: 98,
-        background: "rgba(0,0,0,0.5)",
-        opacity: mobileOpen ? 1 : 0,
-        pointerEvents: mobileOpen ? "auto" : "none",
-        transition: "opacity 0.3s",
-      }} />
-
-      {/* Mobile Drawer */}
-      <div style={{
-        position: "fixed", top: 0, left: 0, bottom: 0,
-        width: "82vw", maxWidth: 340,
-        background: "var(--c-bg)", zIndex: 99,
-        overflowY: "auto",
-        transform: mobileOpen ? "translateX(0)" : "translateX(-100%)",
-        transition: "transform 0.32s cubic-bezier(0.4,0,0.2,1)",
-        display: "flex", flexDirection: "column",
-        boxShadow: "8px 0 48px rgba(0,0,0,0.18)",
-      }}>
-
-        {/* Drawer header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 24px", borderBottom: "1px solid var(--c-border)", flexShrink: 0 }}>
-          <Link href="/" onClick={() => setMobileOpen(false)}>
-            <img src="/logo.png" alt="CrazeFusion" className="pk-logo" style={{ height: 38, objectFit: "contain" }} />
-          </Link>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <button onClick={toggle} aria-label="Toggle theme" style={{ background: "none", border: "1px solid var(--c-border)", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--c-text)", flexShrink: 0 }}>
-              {theme === "light" ? <IconMoon /> : <IconSun />}
-            </button>
-            <button onClick={() => setMobileOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--c-text-muted)", display: "flex", padding: 4 }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Nav items */}
-        <div style={{ flex: 1, overflowY: "auto", padding: "10px 0 20px" }}>
-          {nav.map(item => {
-            const hasChildren = !!item.children;
-            const isOpen = openSub === item.label;
-            return (
-              <div key={item.label}>
-                {/* Main item row */}
-                <div
-                  onClick={() => {
-                    if (hasChildren) setOpenSub(isOpen ? null : item.label);
-                    else setMobileOpen(false);
-                  }}
-                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px", cursor: "pointer" }}
-                >
-                  {hasChildren ? (
-                    <span style={{ fontFamily: FO, fontSize: 15, fontWeight: 600, color: "#e8a000", letterSpacing: "0.01em" }}>
-                      {item.label}
-                    </span>
-                  ) : (
-                    <Link href={item.href} onClick={() => setMobileOpen(false)}
-                      style={{ fontFamily: FO, fontSize: 15, fontWeight: 600, color: "var(--c-text)", letterSpacing: "0.01em", textDecoration: "none", flex: 1 }}>
-                      {item.label}
-                    </Link>
-                  )}
-                  {hasChildren && (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e8a000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-                      style={{ transition: "transform 0.22s", transform: isOpen ? "rotate(180deg)" : "none", flexShrink: 0, marginLeft: 8 }}>
-                      <polyline points="6 9 12 15 18 9"/>
-                    </svg>
-                  )}
-                </div>
-
-                {/* Submenu — slides open */}
-                {hasChildren && isOpen && (
-                  <div style={{ paddingBottom: 8 }}>
-                    {item.children!.map(child => (
-                      <Link key={child.label} href={child.href} onClick={() => setMobileOpen(false)} style={{
-                        display: "flex", alignItems: "center", gap: 10,
-                        padding: "11px 24px 11px 40px",
-                        fontFamily: F, fontSize: 13, fontWeight: 500,
-                        color: "var(--c-text-muted)", textDecoration: "none",
-                        transition: "color 0.15s",
-                      }}
-                        onMouseEnter={e => (e.currentTarget.style.color = "var(--c-text)")}
-                        onMouseLeave={e => (e.currentTarget.style.color = "var(--c-text-muted)")}
-                      >
-                        <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#e8a000", flexShrink: 0 }} />
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-
-                {/* Subtle separator */}
-                <div style={{ height: 1, background: "var(--c-border)", margin: "0 24px" }} />
-              </div>
-            );
-          })}
-
-          {/* Extra links */}
-          <div style={{ padding: "8px 0" }}>
-            <Link href="/collection" onClick={() => setMobileOpen(false)}
-              style={{ display: "flex", alignItems: "center", padding: "16px 24px", fontFamily: FO, fontSize: 15, fontWeight: 600, color: "var(--c-text)", textDecoration: "none" }}>
-              Shop All Posters
+            {/* Logo — centered */}
+            <Link href="/" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", textDecoration: "none", flexShrink: 0 }}>
+              <img src="/logo.png" alt="CrazeFusion" style={{ height: 38, width: "auto", objectFit: "contain", display: "block" }} />
             </Link>
-            <div style={{ height: 1, background: "var(--c-border)", margin: "0 24px" }} />
-          </div>
-        </div>
 
-        {/* Drawer bottom CTAs */}
-        <div style={{ padding: "16px 24px 28px", borderTop: "1px solid var(--c-border)", display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
-          <Link href="/cart" onClick={() => setMobileOpen(false)} style={{
-            width: "100%", padding: "14px 0", textAlign: "center",
-            border: "1.5px solid var(--c-border)", color: "var(--c-text)",
-            fontFamily: FO, fontSize: 12, fontWeight: 700,
-            textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 8, borderRadius: 50,
-          }}>
-            <IconBag />
-            Cart{count > 0 ? ` (${count})` : ""}
-          </Link>
-          <Link href="/auth/login" onClick={() => setMobileOpen(false)} style={{
-            width: "100%", padding: "14px 0", textAlign: "center",
-            background: "var(--c-btn-bg)", color: "var(--c-btn-text)",
-            fontFamily: FO, fontSize: 12, fontWeight: 700,
-            textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 8, borderRadius: 50,
-          }}>
-            <IconUser />
-            Login
-          </Link>
-        </div>
+            {/* Right: theme + cart + login */}
+            <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
+              <button onClick={toggle} aria-label="Toggle theme"
+                style={{ background: "none", border: `1px solid ${borderClr}`, borderRadius: "50%", width: 34, height: 34, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: iconClr, flexShrink: 0, transition: "border-color 0.2s" }}>
+                {theme === "light" ? <IconMoon /> : <IconSun />}
+              </button>
+
+              <Link href="/cart" style={{ position: "relative", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, color: iconClr, flexShrink: 0 }}>
+                <IconBag />
+                {count > 0 && (
+                  <span style={{ position: "absolute", top: 3, right: 3, background: "#e8a000", color: "#000", borderRadius: "50%", width: 14, height: 14, fontSize: 7, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
+                    {count}
+                  </span>
+                )}
+              </Link>
+
+              <Link href="/auth/login"
+                style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", textDecoration: "none", padding: "8px 14px", borderRadius: 50, background: "#111", color: "#fff", whiteSpace: "nowrap", flexShrink: 0 }}
+              >
+                Login
+              </Link>
+            </div>
+          </div>
+
+          {/* ── Cards ── */}
+          <div
+            className="cn-content"
+            style={{
+              position: "absolute", left: 0, right: 0, top: 60, bottom: 0,
+              padding: 8,
+              display: "flex", gap: 8,
+              flexDirection: "column",
+              visibility: isOpen ? "visible" : "hidden",
+              pointerEvents: isOpen ? "auto" : "none",
+            }}
+            aria-hidden={!isOpen}
+          >
+            {navCards.map((card, idx) => (
+              <div
+                key={card.label}
+                ref={el => { cardsRef.current[idx] = el; }}
+                style={{
+                  background: card.bgColor, color: card.textColor,
+                  borderRadius: 10, padding: "12px 16px",
+                  display: "flex", flexDirection: "column", gap: 6,
+                  flex: "1 1 auto", minHeight: 60,
+                }}
+              >
+                <Link href={card.href} style={{ fontFamily: FE, fontSize: 18, fontWeight: 400, color: "#fff", textDecoration: "none", letterSpacing: "-0.3px" }}>
+                  {card.label}
+                </Link>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "2px 16px", marginTop: "auto" }}>
+                  {card.links.map(link => (
+                    <Link key={link.label} href={link.href}
+                      style={{ display: "inline-flex", alignItems: "center", gap: 4, textDecoration: "none", color: "rgba(255,255,255,0.75)", fontFamily: FO, fontSize: 12, fontWeight: 400, padding: "3px 0", transition: "color 0.18s" }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = "#fff"; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)"; }}
+                    >
+                      <GoArrowUpRight size={12} />
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </nav>
+
+        {/* Click-outside overlay */}
+        {isOpen && (
+          <div
+            onClick={toggleMenu}
+            style={{ position: "fixed", inset: 0, zIndex: -1 }}
+            aria-hidden="true"
+          />
+        )}
       </div>
 
+      {/* Desktop layout: cards side-by-side */}
       <style>{`
-        @media (max-width: 960px) {
-          .pk-desktop-nav     { display: none !important; }
-          .pk-desktop-actions { display: none !important; }
-          .pk-mobile-actions  { display: flex !important; }
+        @media (min-width: 769px) {
+          .cn-content {
+            flex-direction: row !important;
+          }
         }
       `}</style>
     </>
