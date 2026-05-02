@@ -28,18 +28,18 @@ function ProductCard({ p }: { p: typeof products[0] }) {
 
   return (
     <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ cursor: "pointer" }}>
-      <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", border: `1px solid ${hovered ? "#888888" : "var(--c-border)"}`, transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)", boxShadow: hovered ? "0 0 14px rgba(160,160,160,0.22)" : "none" }}>
+      <div style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", borderRadius: 10, transition: "all 0.3s ease" }}>
         <img src={hovered ? p.img2 : p.img} alt={p.title}
-          style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.5s ease", transform: hovered ? "scale(1.1)" : "scale(1)" }} />
+          style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.5s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
         {p.badge && (
-          <span style={{ position: "absolute", top: 10, left: 10, background: "#000", color: "#fff", fontFamily: FO, fontSize: 9, fontWeight: 700, padding: "5px 12px", borderRadius: 20, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+          <span style={{ position: "absolute", bottom: 10, left: 10, background: "#111", color: "#fff", fontFamily: FO, fontSize: 9, fontWeight: 700, padding: "5px 13px", borderRadius: 50, textTransform: "uppercase", letterSpacing: "0.07em" }}>
             {p.badge}
           </span>
         )}
-        <div style={{ position: "absolute", bottom: 10, left: 10, right: 10, opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(10px)", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}>
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(10px)", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}>
           <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={20}>
             <button onClick={handleQuickAdd}
-              style={{ width: "100%", padding: "12px 0", background: added ? "#16a34a" : "rgba(17, 17, 17, 0.9)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s", borderRadius: 50 }}>
+              style={{ width: "100%", padding: "13px 0", background: added ? "#16a34a" : "rgba(17,17,17,0.92)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s", borderRadius: 50 }}>
               {added ? "✓ Added!" : "Quick Add"}
             </button>
           </ClickSpark>
