@@ -52,7 +52,7 @@ function ProductCard({ p }: { p: typeof products[0] }) {
           </div>
         </div>
         <div style={{ textAlign: "center", padding: "0 4px" }}>
-          <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 600, color: "#1a6fa8", marginBottom: 4, lineHeight: 1.45, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{p.title}</div>
+          <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 400, color: "#1a6fa8", marginBottom: 4, lineHeight: 1.45, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{p.title}</div>
           <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", marginBottom: 7, textTransform: "uppercase", letterSpacing: "0.06em" }}>{p.sub}</div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
             {p.original > p.price && <span style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>}
