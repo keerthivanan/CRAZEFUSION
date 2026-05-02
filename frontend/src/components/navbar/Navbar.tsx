@@ -191,9 +191,9 @@ export default function Navbar() {
               aria-label={isOpen ? "Close menu" : "Open menu"}
               style={{ background: "none", border: "none", cursor: "pointer", padding: 8, display: "flex", flexDirection: "column", gap: 5, color: iconClr, flexShrink: 0 }}
             >
-              <span style={{ display: "block", width: 26, height: 2, background: "currentColor", borderRadius: 2, transition: "transform 0.28s ease", transformOrigin: "50% 50%", transform: isOpen ? "translateY(3.5px) rotate(45deg)" : "none" }} />
+              <span style={{ display: "block", width: 26, height: 2, background: "currentColor", borderRadius: 2, transition: "transform 0.28s ease", transformOrigin: "50% 50%", transform: isOpen ? "translateY(7px) rotate(45deg)" : "none" }} />
               <span style={{ display: "block", width: 26, height: 2, background: "currentColor", borderRadius: 2, transition: "opacity 0.2s", opacity: isOpen ? 0 : 1 }} />
-              <span style={{ display: "block", width: 26, height: 2, background: "currentColor", borderRadius: 2, transition: "transform 0.28s ease", transformOrigin: "50% 50%", transform: isOpen ? "translateY(-3.5px) rotate(-45deg)" : "none" }} />
+              <span style={{ display: "block", width: 26, height: 2, background: "currentColor", borderRadius: 2, transition: "transform 0.28s ease", transformOrigin: "50% 50%", transform: isOpen ? "translateY(-7px) rotate(-45deg)" : "none" }} />
             </button>
 
             {/* Logo — centered */}
