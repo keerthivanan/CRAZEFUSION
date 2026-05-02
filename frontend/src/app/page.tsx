@@ -1,7 +1,6 @@
 import Navbar from "@/components/navbar/Navbar";
 import Hero from "@/components/hero/Hero";
 import Ticker from "@/components/ticker/Ticker";
-import StatsBar from "@/components/sections/StatsBar";
 import CategoryIcons from "@/components/categories/CategoryIcons";
 import BestSelling from "@/components/products/BestSelling";
 import MultiPosters from "@/components/products/MultiPosters";
@@ -17,7 +16,6 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Ticker />
-      <StatsBar />
       <CategoryIcons />
       <BestSelling />
       <MultiPosters />
