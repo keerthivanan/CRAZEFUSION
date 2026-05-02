@@ -150,7 +150,6 @@ function ProductCard({ p }: { p: typeof products[0] }) {
         <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em", textAlign: "center" }}>{p.sub}</div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
           <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>From ₹{p.price}</span>
-          {p.original > p.price && <span style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>}
         </div>
       </Link>
     </div>
@@ -210,22 +209,42 @@ export default function CricketPage() {
         {/* Team Circles */}
         <div style={{ background: "var(--c-bg-soft)", padding: "28px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-            <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#aaa", marginBottom: 20 }}>
-              All Teams
+
+            {/* IPL Section */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+              <img src={logo("iplt20.com")} alt="IPL"
+                style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }} />
+              <span style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--c-text-muted)" }}>
+                IPL Franchises
+              </span>
             </div>
-            <div
-              className="no-scrollbar cricket-teams"
-              style={{ display: "flex", gap: 18, overflowX: "auto", paddingBottom: 4, justifyContent: "center", flexWrap: "wrap" }}
-            >
-              {allTeams.map((team: AnyTeam) => (
-                <TeamCircle
-                  key={team.short}
-                  team={team}
+            <div className="no-scrollbar" style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", marginBottom: 28 }}>
+              {iplTeams.map(team => (
+                <TeamCircle key={team.short} team={team}
                   isActive={activeTeam === team.short}
-                  onClick={() => handleTeamClick(team.short)}
-                />
+                  onClick={() => handleTeamClick(team.short)} />
               ))}
             </div>
+
+            {/* Divider */}
+            <div style={{ height: 1, background: "var(--c-border)", margin: "4px 0 24px" }} />
+
+            {/* International Section */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+              <img src={logo("t20worldcup.com")} alt="World Cup"
+                style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }} />
+              <span style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--c-text-muted)" }}>
+                International
+              </span>
+            </div>
+            <div className="no-scrollbar" style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
+              {internationalTeams.map(team => (
+                <TeamCircle key={team.short} team={team}
+                  isActive={activeTeam === team.short}
+                  onClick={() => handleTeamClick(team.short)} />
+              ))}
+            </div>
+
           </div>
         </div>
 
