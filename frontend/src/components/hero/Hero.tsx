@@ -92,20 +92,6 @@ export default function Hero() {
               </StarBorder>
             </ClickSpark>
 
-            <ClickSpark sparkColor="var(--c-outline-col)" sparkCount={8} sparkRadius={22}>
-              <Link href="/custom-builder" style={{
-                display: "block", padding: "16px 44px",
-                background: "transparent", color: "var(--c-outline-col)",
-                border: "1.5px solid var(--c-outline-col)",
-                fontFamily: FO, fontSize: 12, fontWeight: 700,
-                letterSpacing: "0.12em", textTransform: "uppercase",
-                textDecoration: "none", transition: "all 0.25s", borderRadius: 50,
-              }}
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "var(--c-btn-bg)"; (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-btn-text)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-outline-col)"; }}>
-                Custom Order
-              </Link>
-            </ClickSpark>
           </div>
 
         </div>

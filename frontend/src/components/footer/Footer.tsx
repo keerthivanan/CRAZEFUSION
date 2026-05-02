@@ -12,17 +12,15 @@ const links = {
     ["Anime",           "/collection"],
     ["Movies",          "/collection"],
     ["Gaming",          "/collection"],
-    ["Custom Poster",   "/custom-builder"],
   ],
   Collections: [
     ["Split Posters",   "/collection"],
     ["Collage Kits",    "/collection"],
-    ["Retro Prints",    "/custom-builder"],
+    ["Retro Prints",    "/collection"],
     ["8-Panel Sets",    "/collection"],
     ["Bulk Orders",     "/collection"],
   ],
   Help: [
-    ["Track Order",       "/tracking"],
     ["Returns & Refunds", "/collection"],
     ["Shipping Policy",   "/collection"],
     ["FAQs",              "/collection"],

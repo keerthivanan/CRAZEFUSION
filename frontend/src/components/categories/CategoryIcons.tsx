@@ -24,14 +24,6 @@ const cats = [
     bg: "#2e1a4a",
   },
   {
-    label: ["Custom", "Poster"],
-    href: "/custom-builder",
-    img: null,
-    bg: "linear-gradient(135deg, #1a1a1a 0%, #3a3a3a 100%)",
-    icon: "✦",
-    iconSub: "Design",
-  },
-  {
     label: ["All", "Collections"],
     href: "/collection",
     img: null,

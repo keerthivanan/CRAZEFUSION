@@ -3,7 +3,6 @@ import Hero from "@/components/hero/Hero";
 import Ticker from "@/components/ticker/Ticker";
 import StatsBar from "@/components/sections/StatsBar";
 import CategoryIcons from "@/components/categories/CategoryIcons";
-import DesignYourOwn from "@/components/categories/DesignYourOwn";
 import BestSelling from "@/components/products/BestSelling";
 import MultiPosters from "@/components/products/MultiPosters";
 import TrendingProducts from "@/components/products/TrendingProducts";
@@ -22,7 +21,6 @@ export default function Home() {
       <CategoryIcons />
       <BestSelling />
       <MultiPosters />
-      <DesignYourOwn />
       <TrendingProducts />
       <WhyChooseUs />
       <ReviewsMarquee />
