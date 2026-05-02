@@ -184,7 +184,7 @@ export default function CricketPage() {
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <div style={{ paddingTop: 90 }}>
+      <div style={{ paddingTop: 124 }}>
 
         {/* Breadcrumb */}
         <div style={{ borderBottom: "1px solid var(--c-border)", background: "var(--c-bg)", padding: "16px 32px" }}>

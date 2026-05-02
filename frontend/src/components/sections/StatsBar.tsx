@@ -1,35 +1,78 @@
-﻿"use client";
+"use client";
 
-const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
-const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
+const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const stats = [
-  { display: "10,000+", label: "Happy Customers" },
-  { display: "1,981+",  label: "Poster Designs" },
-  { display: "4.9/5",   label: "Average Rating" },
-  { display: "₹79",     label: "Starting Price" },
+  { display: "10K+",   label: "Happy Customers", sub: "Across India" },
+  { display: "1,981+", label: "Poster Designs",   sub: "& counting" },
+  { display: "4.9★",   label: "Average Rating",   sub: "Verified reviews" },
+  { display: "₹79",    label: "Starting Price",    sub: "Free prepaid ship" },
 ];
 
 export default function StatsBar() {
   return (
-    <section style={{ padding: "40px 0", background: "var(--c-bg)" }}>
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 32px" }}>
-        <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 0 }}>
-          {stats.map((s, i) => (
-            <div key={s.label} style={{
-              textAlign: "center", padding: "16px 20px",
-              borderRight: i < 3 ? "1px solid #f0f0f0" : "none",
+    <section style={{ background: "#080808", padding: "0" }}>
+      <div className="stats-grid-wrap" style={{
+        maxWidth: 1100, margin: "0 auto",
+        display: "grid", gridTemplateColumns: "repeat(4,1fr)",
+      }}>
+        {stats.map((s, i) => (
+          <div
+            key={s.label}
+            className="stats-cell"
+            style={{
+              padding: "40px 28px",
+              borderRight: i < 3 ? "1px solid rgba(255,255,255,0.07)" : "none",
+              display: "flex", flexDirection: "column",
+              alignItems: "center", textAlign: "center",
+              gap: 4,
+            }}
+          >
+            <div style={{
+              fontFamily: FO,
+              fontSize: "clamp(32px, 3.5vw, 52px)",
+              fontWeight: 700,
+              lineHeight: 1,
+              color: "#fff",
+              letterSpacing: "-0.02em",
             }}>
-              <div style={{ fontFamily: FE, fontSize: "clamp(26px,3vw,44px)", fontWeight: 400, color: "var(--c-text)", lineHeight: 1, marginBottom: 6 }}>
-                {s.display}
-              </div>
-              <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8a000" }}>
-                {s.label}
-              </div>
+              {s.display}
             </div>
-          ))}
-        </div>
+            <div style={{
+              fontFamily: FO, fontSize: 10, fontWeight: 700,
+              letterSpacing: "0.18em", textTransform: "uppercase",
+              color: "#e8a000", marginTop: 8,
+            }}>
+              {s.label}
+            </div>
+            <div style={{
+              fontFamily: FO, fontSize: 11, fontWeight: 400,
+              color: "rgba(255,255,255,0.28)", letterSpacing: "0.02em",
+            }}>
+              {s.sub}
+            </div>
+          </div>
+        ))}
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .stats-grid-wrap {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .stats-cell:nth-child(2) { border-right: none !important; }
+          .stats-cell:nth-child(1),
+          .stats-cell:nth-child(2) {
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+          }
+          .stats-cell { padding: 28px 16px !important; }
+        }
+        @media (max-width: 480px) {
+          .stats-grid-wrap {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

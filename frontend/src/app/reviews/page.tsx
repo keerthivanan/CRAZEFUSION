@@ -35,7 +35,7 @@ export default function ReviewsPage() {
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <main style={{ paddingTop: 64 }}>
+      <main style={{ paddingTop: 98 }}>
 
         {/* Hero */}
         <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "64px 32px", textAlign: "center" }}>
