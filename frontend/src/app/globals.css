@@ -224,14 +224,76 @@ body {
 }
 
 @media (max-width: 480px) {
-  /* ── Design Your Own: 1 col on very small screens ── */
-  .design-grid {
-    grid-template-columns: 1fr !important;
+  .design-grid  { grid-template-columns: 1fr !important; }
+  .why-grid     { grid-template-columns: 1fr !important; }
+  .hero-images  { height: 250px !important; }
+  .hero-grid    { padding: 20px 16px 28px !important; gap: 20px !important; }
+  .offer-banner { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+  .cart-item-row { grid-template-columns: 70px 1fr !important; gap: 10px !important; }
+}
+
+/* ══════════════════════════════════════════════
+   GOLD-LEVEL MOBILE — comprehensive fixes
+   ══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* ── Universal section padding ── */
+  .bestselling-section, .trending-section, .multiposters-section {
+    padding-top: 40px !important; padding-bottom: 40px !important;
   }
-  /* ── WhyChooseUs grid still 1 col ── */
-  .why-grid {
-    grid-template-columns: 1fr !important;
+  .bestselling-inner, .trending-inner, .multiposters-inner,
+  .why-inner, .collection-inner {
+    padding-left: 16px !important; padding-right: 16px !important;
   }
+  .why-section  { padding-top: 48px !important; padding-bottom: 40px !important; }
+  .why-grid     { gap: 24px !important; }
+
+  /* ── Cart: stack sidebar below items ── */
+  .cart-layout {
+    grid-template-columns: 1fr !important;
+    padding: 20px 16px !important;
+    gap: 24px !important;
+  }
+  .cart-header  { padding: 14px 16px !important; }
+  .cart-item-row {
+    grid-template-columns: 80px 1fr !important;
+    gap: 12px !important;
+    padding: 16px 0 !important;
+  }
+  .cart-item-price { grid-column: 2 !important; text-align: left !important; font-size: 15px !important; }
+  .order-sticky    { position: static !important; }
+
+  /* ── Product detail: single column ── */
+  .product-detail-layout {
+    grid-template-columns: 1fr !important;
+    padding: 20px 16px !important;
+    gap: 28px !important;
+  }
+  .breadcrumb-bar { padding: 10px 16px !important; }
+
+  /* ── Collection page ── */
+  .collection-header  { padding: 14px 16px !important; }
+  .collection-pills   { padding: 10px 16px !important; }
+  .collection-main    { padding: 20px 16px !important; }
+  .offer-banner       { padding: 10px 16px !important; gap: 14px !important; }
+
+  /* ── Sport pages ── */
+  .sport-header        { padding: 24px 16px 18px !important; }
+  .sport-teams-section { padding: 18px 16px !important; }
+  .sport-banner        { padding: 10px 16px !important; }
+  .sport-products      { padding: 20px 16px !important; }
+  .sport-teams-row     { gap: 10px !important; justify-content: center !important; flex-wrap: wrap !important; }
+
+  /* ── Newsletter ── */
+  .newsletter-section { padding: 48px 16px !important; }
+
+  /* ── Footer ── */
+  .footer-inner { padding: 48px 16px 32px !important; }
+
+  /* ── FireHeading subtitle ── */
+  .fire-subtitle { font-size: 9px !important; letter-spacing: 0.18em !important; }
+
+  /* ── Hero 768px ── */
+  .hero-grid { gap: 28px !important; }
 }
 
 /* ── Global font weight normalization ── */

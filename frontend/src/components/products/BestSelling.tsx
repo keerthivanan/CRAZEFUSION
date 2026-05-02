@@ -40,7 +40,7 @@ function ProductCard({ p }: { p: typeof products[0] }) {
   );
 
   return (
-    <SpotlightCard spotlightColor="rgba(160,160,160,0.1)" style={{ padding: 10, background: "var(--c-bg)", border: "1px solid var(--c-border)", borderRadius: 50 }}>
+    <SpotlightCard spotlightColor="rgba(160,160,160,0.1)" style={{ padding: 10, background: "var(--c-bg)", border: "1px solid var(--c-border)", borderRadius: 10 }}>
       <Link href={`/product/${p.id}`} style={{ textDecoration: "none", display: "block" }}>
         <TiltedCard
           imageSrc={p.img} altText={p.title}
