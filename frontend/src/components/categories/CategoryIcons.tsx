@@ -23,14 +23,6 @@ const cats = [
     img: "/categories/football_legends.png",
     bg: "#2e1a4a",
   },
-  {
-    label: ["All", "Collections"],
-    href: "/collection",
-    img: null,
-    bg: "linear-gradient(135deg, #111 0%, #444 100%)",
-    icon: "⊞",
-    iconSub: "Browse",
-  },
 ];
 
 type Cat = typeof cats[0];

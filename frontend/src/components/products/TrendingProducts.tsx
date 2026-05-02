@@ -12,7 +12,7 @@ const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const CARD_W = 240;
 const GAP    = 20;
 
-const trending = [...products].sort(() => 0.5 - Math.random()).slice(0, products.length);
+const trending = products.slice().reverse();
 
 function TCard({ p }: { p: typeof products[0] }) {
   const { addItem } = useCart();
@@ -23,7 +23,7 @@ function TCard({ p }: { p: typeof products[0] }) {
   return (
     <div style={{ flexShrink: 0, width: CARD_W, scrollSnapAlign: "start" }}>
       <div
-        style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", borderRadius: 10, background: "var(--c-bg-soft)", marginBottom: 12 }}
+        style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", borderRadius: 0, background: "var(--c-bg-soft)", marginBottom: 12 }}
         onMouseEnter={e => {
           (e.currentTarget.querySelector("img") as HTMLImageElement).style.transform = "scale(1.06)";
           const btn = e.currentTarget.querySelector(".tr-qa") as HTMLElement;
@@ -75,32 +75,34 @@ export default function TrendingProducts() {
   return (
     <section style={{ padding: "64px 0", background: "var(--c-bg)" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 32px", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
+        {/* Header */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 32px", marginBottom: 32, flexWrap: "wrap", gap: 12 }}>
           <FireHeading text="#Trending Now!" subtitle="New Arrival" size="clamp(28px,3.5vw,52px)" align="left" as="h2" />
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <button onClick={() => scroll(-1)} disabled={page === 0}
-                style={{ width: 36, height: 36, border: "1px solid var(--c-border)", borderRadius: "50%", background: "var(--c-bg)", color: "var(--c-text)", cursor: page === 0 ? "not-allowed" : "pointer", opacity: page === 0 ? 0.3 : 1, fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s", fontFamily: FO }}>
-                ‹
-              </button>
-              <span style={{ fontFamily: FO, fontSize: 12, color: "var(--c-text-muted)", minWidth: 48, textAlign: "center" }}>{page + 1}/{total}</span>
-              <button onClick={() => scroll(1)} disabled={page === total - 1}
-                style={{ width: 36, height: 36, border: "1px solid var(--c-border)", borderRadius: "50%", background: "var(--c-bg)", color: "var(--c-text)", cursor: page === total - 1 ? "not-allowed" : "pointer", opacity: page === total - 1 ? 0.3 : 1, fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s", fontFamily: FO }}>
-                ›
-              </button>
-            </div>
-            <Link href="/collection"
-              style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-btn-text)", background: "var(--c-btn-bg)", textDecoration: "none", padding: "9px 22px", borderRadius: 50, whiteSpace: "nowrap" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}>
-              View All
-            </Link>
-          </div>
+          <Link href="/collection"
+            style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-btn-text)", background: "var(--c-btn-bg)", textDecoration: "none", padding: "9px 22px", borderRadius: 50, whiteSpace: "nowrap" }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}>
+            View All
+          </Link>
         </div>
 
+        {/* Carousel */}
         <div ref={trackRef} className="no-scrollbar"
-          style={{ display: "flex", gap: GAP, overflowX: "auto", scrollSnapType: "x mandatory", padding: "8px 32px 16px", WebkitOverflowScrolling: "touch" as any }}>
+          style={{ display: "flex", gap: GAP, overflowX: "auto", scrollSnapType: "x mandatory", padding: "4px 32px 8px", WebkitOverflowScrolling: "touch" as any }}>
           {trending.map(p => <TCard key={p.id} p={p} />)}
+        </div>
+
+        {/* Pagination — bottom center */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 20, marginTop: 28 }}>
+          <button onClick={() => scroll(-1)} disabled={page === 0}
+            style={{ width: 36, height: 36, border: "1px solid var(--c-border)", borderRadius: "50%", background: "var(--c-bg)", color: "var(--c-text)", cursor: page === 0 ? "not-allowed" : "pointer", opacity: page === 0 ? 0.3 : 1, fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}>
+            ‹
+          </button>
+          <span style={{ fontFamily: FO, fontSize: 12, color: "var(--c-text-muted)", minWidth: 44, textAlign: "center" }}>{page + 1}/{total}</span>
+          <button onClick={() => scroll(1)} disabled={page === total - 1}
+            style={{ width: 36, height: 36, border: "1px solid var(--c-border)", borderRadius: "50%", background: "var(--c-bg)", color: "var(--c-text)", cursor: page === total - 1 ? "not-allowed" : "pointer", opacity: page === total - 1 ? 0.3 : 1, fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}>
+            ›
+          </button>
         </div>
       </div>
     </section>
