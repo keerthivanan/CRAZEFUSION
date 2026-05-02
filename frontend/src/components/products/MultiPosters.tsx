@@ -74,7 +74,7 @@ export default function MultiPosters() {
   }, [page, total]);
 
   return (
-    <section style={{ padding: "64px 0", background: "var(--c-bg-soft)" }}>
+    <section style={{ padding: "64px 0", background: "var(--c-bg)" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto" }}>
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 32px", marginBottom: 32, flexWrap: "wrap", gap: 12 }}>
