@@ -44,9 +44,9 @@ export default function CheckoutPage() {
         </div>
         <p style={{ fontFamily: F, fontSize: 12, color: "#aaa", marginBottom: 28 }}>Expected delivery: 5–7 business days</p>
         <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
-          <Link href="/tracking"
+          <Link href="/collection"
             style={{ display: "inline-block", padding: "14px 28px", border: "1px solid #111", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}>
-            Track Order
+            Shop More
           </Link>
           <Link href="/"
             style={{ display: "inline-block", padding: "14px 28px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}>
