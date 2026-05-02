@@ -15,36 +15,38 @@ const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const KEY = process.env.NEXT_PUBLIC_LOGODEV_KEY ?? "pk_X0d9dkoXSXC1bEBCAvNs-g";
-const logoUrl = (domain: string) =>
-  `https://img.logo.dev/${domain}?token=${KEY}&size=160&format=png`;
+const logo = (domain: string) => `https://img.logo.dev/${domain}?token=${KEY}&size=160&format=png`;
+const flag = (iso: string)    => `https://flagcdn.com/w160/${iso}.png`;
 
 const iplTeams = [
-  { name: "Chennai Super Kings",         short: "CSK",  domain: "chennaisuperkings.com", color: "#f9cd1c" },
-  { name: "Delhi Capitals",              short: "DC",   domain: "delhicapitals.in",      color: "#0066b2" },
-  { name: "Gujarat Titans",              short: "GT",   domain: "gujarattitansipl.com",  color: "#1c2951" },
-  { name: "Kolkata Knight Riders",       short: "KKR",  domain: "kkr.in",                color: "#3a225d" },
-  { name: "Lucknow Super Giants",        short: "LSG",  domain: "lucknowsupergiants.in", color: "#a72056" },
-  { name: "Mumbai Indians",              short: "MI",   domain: "mumbaiindians.com",     color: "#004ba0" },
-  { name: "Punjab Kings",                short: "PBKS", domain: "punjabkingsipl.in",     color: "#d71920" },
-  { name: "Rajasthan Royals",            short: "RR",   domain: "rajasthanroyals.com",   color: "#2d4e8a" },
-  { name: "Royal Challengers Bengaluru", short: "RCB",  domain: "royalchallengers.com",  color: "#c8102e" },
-  { name: "Sunrisers Hyderabad",         short: "SRH",  domain: "sunrisershyderabad.in", color: "#f26522" },
+  { name: "Chennai Super Kings",         short: "CSK",  src: logo("chennaisuperkings.com"), color: "#f9cd1c" },
+  { name: "Delhi Capitals",              short: "DC",   src: logo("delhicapitals.in"),      color: "#0066b2" },
+  { name: "Gujarat Titans",              short: "GT",   src: logo("gujarattitansipl.com"),  color: "#1c2951" },
+  { name: "Kolkata Knight Riders",       short: "KKR",  src: logo("kkr.in"),                color: "#3a225d" },
+  { name: "Lucknow Super Giants",        short: "LSG",  src: logo("lucknowsupergiants.in"), color: "#a72056" },
+  { name: "Mumbai Indians",              short: "MI",   src: logo("mumbaiindians.com"),     color: "#004ba0" },
+  { name: "Punjab Kings",                short: "PBKS", src: logo("punjabkingsipl.in"),     color: "#d71920" },
+  { name: "Rajasthan Royals",            short: "RR",   src: logo("rajasthanroyals.com"),   color: "#2d4e8a" },
+  { name: "Royal Challengers Bengaluru", short: "RCB",  src: logo("royalchallengers.com"),  color: "#c8102e" },
+  { name: "Sunrisers Hyderabad",         short: "SRH",  src: logo("sunrisershyderabad.in"), color: "#f26522" },
 ];
 
 const internationalTeams = [
-  { name: "India",         short: "IND", domain: "bcci.tv",              color: "#003087" },
-  { name: "Australia",     short: "AUS", domain: "cricket.com.au",       color: "#f5a623" },
-  { name: "England",       short: "ENG", domain: "ecb.co.uk",            color: "#1c3a6b" },
-  { name: "Pakistan",      short: "PAK", domain: "pcb.com.pk",           color: "#01411c" },
-  { name: "South Africa",  short: "SA",  domain: "cricket.co.za",        color: "#007a4d" },
-  { name: "New Zealand",   short: "NZ",  domain: "nzc.nz",               color: "#000000" },
-  { name: "West Indies",   short: "WI",  domain: "windiescricket.com",   color: "#7b0000" },
-  { name: "Sri Lanka",     short: "SL",  domain: "srilankacricket.lk",   color: "#003f87" },
-  { name: "Bangladesh",    short: "BAN", domain: "tigercricket.com.bd",  color: "#006a4e" },
-  { name: "Afghanistan",   short: "AFG", domain: "afghancricket.af",     color: "#0032a0" },
+  { name: "India",         short: "IND", src: flag("in"),     color: "#003087" },
+  { name: "Australia",     short: "AUS", src: flag("au"),     color: "#00008b" },
+  { name: "England",       short: "ENG", src: flag("gb-eng"), color: "#1c3a6b" },
+  { name: "Pakistan",      short: "PAK", src: flag("pk"),     color: "#01411c" },
+  { name: "South Africa",  short: "SA",  src: flag("za"),     color: "#007a4d" },
+  { name: "New Zealand",   short: "NZ",  src: flag("nz"),     color: "#00247d" },
+  { name: "West Indies",   short: "WI",  src: flag("tt"),     color: "#7b0000" },
+  { name: "Sri Lanka",     short: "SL",  src: flag("lk"),     color: "#003f87" },
+  { name: "Bangladesh",    short: "BAN", src: flag("bd"),     color: "#006a4e" },
+  { name: "Afghanistan",   short: "AFG", src: flag("af"),     color: "#0032a0" },
+  { name: "Zimbabwe",      short: "ZIM", src: flag("zw"),     color: "#006400" },
+  { name: "Ireland",       short: "IRE", src: flag("ie"),     color: "#169b62" },
 ];
 
-type AnyTeam = { name: string; short: string; domain: string; color: string };
+type AnyTeam = { name: string; short: string; src: string; color: string };
 
 function TeamCircle({
   team, isActive, onClick,
@@ -56,61 +58,60 @@ function TeamCircle({
       onClick={onClick}
       style={{
         flexShrink: 0, display: "flex", flexDirection: "column",
-        alignItems: "center", gap: 10,
-        background: "none", border: "none", cursor: "pointer", padding: 0,
+        alignItems: "center", gap: 8,
+        background: "none", border: "none", cursor: "pointer", padding: "4px 2px",
       }}
     >
-      <div
-        style={{
-          width: 76, height: 76, borderRadius: "50%", overflow: "hidden",
-          border: isActive ? `3px solid ${team.color}` : "2px solid var(--c-border)",
-          background: "#ffffff",
-          transition: "all 0.25s ease",
-          boxShadow: isActive ? `0 0 20px ${team.color}55` : "none",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          flexShrink: 0,
-        }}
+      {/* Circle — border-free, uses box-shadow ring to avoid rectangle glitch */}
+      <div style={{
+        width: 76, height: 76, borderRadius: "50%", overflow: "hidden",
+        background: "#fff",
+        transition: "transform 0.22s ease, box-shadow 0.22s ease",
+        boxShadow: isActive
+          ? `0 0 0 3px ${team.color}, 0 6px 24px ${team.color}55`
+          : "0 0 0 1.5px rgba(0,0,0,0.1)",
+        transform: isActive ? "translateY(-4px) scale(1.07)" : "translateY(0) scale(1)",
+        display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+      }}
         onMouseEnter={e => {
           if (!isActive) {
-            (e.currentTarget as HTMLDivElement).style.borderColor = team.color;
-            (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
-            (e.currentTarget as HTMLDivElement).style.boxShadow = `0 8px 20px ${team.color}44`;
+            (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 2.5px ${team.color}99, 0 8px 20px ${team.color}33`;
+            (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px) scale(1.04)";
           }
         }}
         onMouseLeave={e => {
           if (!isActive) {
-            (e.currentTarget as HTMLDivElement).style.borderColor = "var(--c-border)";
-            (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-            (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+            (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 0 1.5px rgba(0,0,0,0.1)";
+            (e.currentTarget as HTMLDivElement).style.transform = "translateY(0) scale(1)";
           }
         }}
       >
         {failed ? (
-          <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: team.color, letterSpacing: "-0.02em" }}>
-            {team.short}
-          </span>
+          <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: team.color }}>{team.short}</span>
         ) : (
-          <img
-            src={logoUrl(team.domain)}
-            alt={team.name}
-            style={{
-              width: "88%", height: "88%",
-              objectFit: "contain",
-              display: "block",
-              borderRadius: "50%",
-            }}
+          <img src={team.src} alt={team.name}
+            style={{ width: "82%", height: "82%", objectFit: "contain", display: "block" }}
             onError={() => setFailed(true)}
           />
         )}
       </div>
+
+      {/* Label */}
       <span style={{
-        fontFamily: FO, fontSize: 9, fontWeight: 700,
+        fontFamily: FO, fontSize: 9, fontWeight: isActive ? 700 : 600,
         color: isActive ? team.color : "var(--c-text-muted)",
-        letterSpacing: "0.06em", textTransform: "uppercase",
+        letterSpacing: "0.07em", textTransform: "uppercase",
         transition: "color 0.2s", textAlign: "center", maxWidth: 72, lineHeight: 1.2,
       }}>
         {team.short}
       </span>
+
+      {/* Active dot indicator */}
+      <div style={{
+        width: 4, height: 4, borderRadius: "50%",
+        background: isActive ? team.color : "transparent",
+        transition: "background 0.2s",
+      }} />
     </button>
   );
 }
@@ -273,7 +274,7 @@ export default function CricketPage() {
             <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "center", gap: 12 }}>
               <div style={{ width: 36, height: 36, borderRadius: "50%", overflow: "hidden", background: "#fff", border: `2px solid ${activeTeamObj.color}44`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 <img
-                  src={logoUrl(activeTeamObj.domain)}
+                  src={activeTeamObj.src}
                   alt={activeTeamObj.name}
                   style={{ width: "85%", height: "85%", objectFit: "contain", borderRadius: "50%" }}
                   onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}

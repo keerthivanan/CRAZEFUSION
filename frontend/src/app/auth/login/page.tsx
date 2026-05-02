@@ -31,7 +31,7 @@ export default function LoginPage() {
       {/* Top logo — centered */}
       <div style={{ padding: "28px 32px", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Link href="/">
-          <img src="/logo.png" alt="PosterKing" className="pk-logo" style={{ height: 68, objectFit: "contain", display: "block" }} />
+          <img src="/logo.png" alt="CrazeFusion" className="pk-logo theme-logo" style={{ height: 68, objectFit: "contain", display: "block" }} />
         </Link>
       </div>
 
@@ -103,11 +103,6 @@ export default function LoginPage() {
         </div>
       </div>
 
-      <div style={{ borderTop: "1px solid var(--c-border)", padding: "14px 32px", display: "flex", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
-        {["Secured by Razorpay", "4.9 Rating", "Free Delivery on Prepaid", "7-Day Returns"].map(t => (
-          <span key={t} style={{ fontFamily: F, fontSize: 11, color: "#bbb" }}>{t}</span>
-        ))}
-      </div>
     </div>
   );
 }
