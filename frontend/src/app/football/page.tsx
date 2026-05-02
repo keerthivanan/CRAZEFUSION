@@ -77,14 +77,14 @@ function TeamCircle({
         background: "#fff",
         transition: "transform 0.22s ease, box-shadow 0.22s ease",
         boxShadow: isActive
-          ? `0 0 0 3px ${team.color}, 0 6px 24px ${team.color}55`
+          ? `0 0 0 2px var(--c-bg), 0 0 0 5px ${team.color}, 0 6px 24px ${team.color}33`
           : "0 0 0 1.5px rgba(0,0,0,0.1)",
         transform: isActive ? "translateY(-4px) scale(1.07)" : "translateY(0) scale(1)",
         display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}
         onMouseEnter={e => {
           if (!isActive) {
-            (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 2.5px ${team.color}99, 0 8px 20px ${team.color}33`;
+            (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 2px var(--c-bg), 0 0 0 4px ${team.color}99`;
             (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px) scale(1.04)";
           }
         }}
@@ -205,7 +205,7 @@ export default function FootballPage() {
               <SlashHeading
                 text="Football Posters"
                 subtitle="Shop by Club or International Team"
-                size="clamp(32px,4.5vw,58px)"
+                size="clamp(20px,2.2vw,32px)"
                 align="left"
                 as="h1"
               />
