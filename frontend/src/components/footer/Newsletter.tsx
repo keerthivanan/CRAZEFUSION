@@ -9,13 +9,13 @@ export default function Newsletter() {
   const [done, setDone]   = useState(false);
 
   return (
-    <section style={{ background: "#080808", padding: "88px 32px" }} className="newsletter-section">
+    <section style={{ background: "var(--c-bg-soft)", padding: "88px 32px" }} className="newsletter-section">
       <div style={{ maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
 
         {/* Badge */}
         <div style={{
           display: "inline-flex", alignItems: "center", gap: 8,
-          border: "1px solid rgba(232,160,0,0.3)",
+          border: "1px solid var(--c-border)",
           borderRadius: 50, padding: "6px 16px 6px 10px",
           marginBottom: 28,
         }}>
@@ -29,23 +29,23 @@ export default function Newsletter() {
           fontFamily: FO,
           fontSize: "clamp(28px,4.5vw,52px)",
           fontWeight: 700, letterSpacing: "-0.03em",
-          color: "#fff", textTransform: "uppercase",
+          color: "var(--c-text)", textTransform: "uppercase",
           margin: "0 0 16px", lineHeight: 0.95,
         }}>
           Get <span style={{ color: "#e8a000" }}>10% Off</span><br />Your First Order
         </h2>
 
-        <p style={{ fontFamily: FO, fontSize: 13, color: "rgba(255,255,255,0.35)", margin: "0 0 40px", lineHeight: 1.8 }}>
+        <p style={{ fontFamily: FO, fontSize: 13, color: "var(--c-text-muted)", margin: "0 0 40px", lineHeight: 1.8 }}>
           New arrivals, exclusive deals, and wall inspiration — straight to your inbox. No spam, unsubscribe anytime.
         </p>
 
         {done ? (
           <div style={{
-            fontFamily: FO, fontSize: 13, color: "#e8a000",
+            fontFamily: FO, fontSize: 13, color: "#16a34a",
             padding: "18px 28px",
-            border: "1px solid rgba(232,160,0,0.25)",
+            border: "1px solid rgba(22,163,74,0.3)",
             borderRadius: 12,
-            background: "rgba(232,160,0,0.06)",
+            background: "rgba(22,163,74,0.05)",
           }}>
             You&apos;re in! Your 10% discount code is on its way.
           </div>
@@ -61,16 +61,16 @@ export default function Newsletter() {
               placeholder="your@email.com"
               style={{
                 flex: 1, padding: "16px 20px",
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.12)",
+                background: "var(--c-bg)",
+                border: "1px solid var(--c-border)",
                 borderRight: "none",
-                color: "#fff", fontFamily: FO, fontSize: 13,
+                color: "var(--c-text)", fontFamily: FO, fontSize: 13,
                 outline: "none",
                 transition: "border-color 0.2s",
                 borderRadius: "50px 0 0 50px",
               }}
-              onFocus={e => (e.currentTarget.style.borderColor = "rgba(232,160,0,0.5)")}
-              onBlur={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)")}
+              onFocus={e => (e.currentTarget.style.borderColor = "#e8a000")}
+              onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")}
             />
             <ClickSpark sparkColor="#e8a000" sparkCount={8} sparkRadius={20}>
               <button type="submit" style={{
@@ -96,11 +96,9 @@ export default function Newsletter() {
 
       <style>{`
         @media (max-width: 768px) {
-          .newsletter-form {
-            flex-direction: column !important;
-          }
+          .newsletter-form { flex-direction: column !important; }
           .newsletter-form input {
-            border-right: 1px solid rgba(255,255,255,0.12) !important;
+            border-right: 1px solid var(--c-border) !important;
             border-bottom: none !important;
             border-radius: 50px 50px 0 0 !important;
             width: 100% !important;

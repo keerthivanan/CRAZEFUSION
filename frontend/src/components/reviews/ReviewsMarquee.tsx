@@ -17,8 +17,8 @@ function ReviewCard({ r }: { r: typeof reviews[0] }) {
   return (
     <div style={{
       flexShrink: 0, width: 320,
-      background: "#111",
-      border: "1px solid #222",
+      background: "var(--c-bg-soft)",
+      border: "1px solid var(--c-card-border)",
       borderRadius: 12,
       padding: "24px 24px 20px",
       position: "relative",
@@ -31,18 +31,18 @@ function ReviewCard({ r }: { r: typeof reviews[0] }) {
       <div style={{ color: "#e8a000", fontSize: 14, letterSpacing: 2, marginBottom: 14 }}>★★★★★</div>
 
       {/* Quote */}
-      <p style={{ fontFamily: FO, fontSize: 13, fontWeight: 400, color: "rgba(255,255,255,0.82)", lineHeight: 1.75, margin: "0 0 20px", minHeight: 72 }}>
+      <p style={{ fontFamily: FO, fontSize: 13, fontWeight: 400, color: "var(--c-text)", lineHeight: 1.75, margin: "0 0 20px", minHeight: 72, opacity: 0.85 }}>
         &ldquo;{r.text}&rdquo;
       </p>
 
       {/* Divider */}
-      <div style={{ height: 1, background: "#1f1f1f", marginBottom: 16 }} />
+      <div style={{ height: 1, background: "var(--c-border)", marginBottom: 16 }} />
 
       {/* Footer */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div>
-          <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 600, color: "#fff" }}>{r.name}</div>
-          <div style={{ fontFamily: FO, fontSize: 11, color: "#555", marginTop: 2 }}>{r.city}</div>
+          <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 600, color: "var(--c-text)" }}>{r.name}</div>
+          <div style={{ fontFamily: FO, fontSize: 11, color: "var(--c-text-muted)", marginTop: 2 }}>{r.city}</div>
         </div>
         <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#e8a000", background: "rgba(232,160,0,0.1)", border: "1px solid rgba(232,160,0,0.25)", padding: "4px 10px", borderRadius: 20 }}>
           {r.product}
@@ -57,15 +57,15 @@ export default function ReviewsMarquee() {
   const row2 = [...reviews].reverse().concat([...reviews].reverse());
 
   return (
-    <section style={{ padding: "88px 0 80px", background: "#080808", overflow: "hidden" }}>
+    <section style={{ padding: "88px 0 80px", background: "var(--c-bg)", overflow: "hidden" }}>
 
       {/* Header */}
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 32px 56px", display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 24 }}>
         <div>
-          <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", marginBottom: 10 }}>
+          <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 10 }}>
             Customer Reviews
           </div>
-          <h2 style={{ fontFamily: FO, fontSize: "clamp(32px,4.5vw,60px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#fff", textTransform: "uppercase", margin: 0, lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: FO, fontSize: "clamp(32px,4.5vw,60px)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--c-text)", textTransform: "uppercase", margin: 0, lineHeight: 1.1 }}>
             10,000+ Happy<br />
             <span style={{ color: "#e8a000" }}>Walls</span>
           </h2>
@@ -74,13 +74,12 @@ export default function ReviewsMarquee() {
         {/* Rating block */}
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div style={{ textAlign: "right" }}>
-            <div style={{ fontFamily: FO, fontSize: 64, fontWeight: 800, color: "#fff", lineHeight: 1 }}>4.8</div>
+            <div style={{ fontFamily: FO, fontSize: 64, fontWeight: 800, color: "var(--c-text)", lineHeight: 1 }}>4.8</div>
             <div style={{ color: "#e8a000", fontSize: 20, letterSpacing: 4, marginTop: 4 }}>★★★★★</div>
-            <div style={{ fontFamily: FO, fontSize: 10, color: "#444", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: 6 }}>2,400+ Reviews</div>
+            <div style={{ fontFamily: FO, fontSize: 10, color: "var(--c-text-muted)", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: 6 }}>2,400+ Reviews</div>
           </div>
-          {/* Vertical divider */}
-          <div style={{ width: 1, height: 80, background: "#1f1f1f" }} />
-          <div style={{ fontFamily: FO, fontSize: 11, color: "#555", maxWidth: 160, lineHeight: 1.6 }}>
+          <div style={{ width: 1, height: 80, background: "var(--c-border)" }} />
+          <div style={{ fontFamily: FO, fontSize: 11, color: "var(--c-text-muted)", maxWidth: 160, lineHeight: 1.6 }}>
             Verified purchases across India
           </div>
         </div>
