@@ -56,22 +56,6 @@ export default function CollectionBanner() {
               </ClickSpark>
             </Magnet>
 
-            <Magnet padding={16} magnetStrength={2}>
-              <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={20}>
-                <Link href="/custom-builder" style={{
-                  display: "block", padding: "17px 52px",
-                  background: "transparent", color: "#fff",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  fontFamily: FO, fontSize: 12, fontWeight: 500,
-                  letterSpacing: "0.12em", textTransform: "uppercase",
-                  textDecoration: "none", transition: "border-color 0.2s",
-                }}
-                  onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.borderColor = "#e8a000"}
-                  onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.2)"}>
-                  Custom Poster
-                </Link>
-              </ClickSpark>
-            </Magnet>
           </div>
         </AnimatedContent>
       </div>

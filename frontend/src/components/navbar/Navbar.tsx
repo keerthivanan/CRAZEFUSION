@@ -38,7 +38,6 @@ const nav = [
     { label: "Arsenal",              href: "/football?team=ARS" },
     { label: "Manchester United",    href: "/football?team=MUN" },
   ]},
-  { label: "Custom Posters", href: "/custom-builder" },
   { label: "Reviews",        href: "/reviews" },
 ];
 
