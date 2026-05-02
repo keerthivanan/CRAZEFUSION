@@ -7,7 +7,6 @@ import Newsletter from "@/components/footer/Newsletter";
 import { products, categories } from "@/data";
 import { useCart } from "@/context/CartContext";
 import AnimatedContent from "@/components/reactbits/AnimatedContent";
-import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 import SlashHeading from "@/components/ui/SlashHeading";
 
@@ -28,7 +27,7 @@ function ProductCard({ p }: { p: typeof products[0] }) {
 
   return (
     <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ cursor: "pointer" }}>
-      <div style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", borderRadius: 10, transition: "all 0.3s ease" }}>
+      <div style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", borderRadius: 0, transition: "all 0.3s ease" }}>
         <img src={hovered ? p.img2 : p.img} alt={p.title}
           style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.5s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
         {p.badge && (

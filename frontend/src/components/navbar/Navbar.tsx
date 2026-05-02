@@ -254,7 +254,7 @@ export default function Navbar() {
       {/* Mobile Drawer Overlay */}
       <div onClick={() => setMobileOpen(false)} style={{
         position: "fixed", inset: 0, zIndex: 98,
-        background: "rgba(0,0,0,0.45)",
+        background: "rgba(0,0,0,0.5)",
         opacity: mobileOpen ? 1 : 0,
         pointerEvents: mobileOpen ? "auto" : "none",
         transition: "opacity 0.3s",
@@ -262,28 +262,27 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div style={{
-        position: "fixed", top: 0, right: 0, bottom: 0,
-        width: "80vw", maxWidth: 320,
+        position: "fixed", top: 0, left: 0, bottom: 0,
+        width: "82vw", maxWidth: 340,
         background: "var(--c-bg)", zIndex: 99,
         overflowY: "auto",
-        transform: mobileOpen ? "translateX(0)" : "translateX(100%)",
-        transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
+        transform: mobileOpen ? "translateX(0)" : "translateX(-100%)",
+        transition: "transform 0.32s cubic-bezier(0.4,0,0.2,1)",
         display: "flex", flexDirection: "column",
-        boxShadow: "-8px 0 40px rgba(0,0,0,0.15)",
+        boxShadow: "8px 0 48px rgba(0,0,0,0.18)",
       }}>
 
         {/* Drawer header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", borderBottom: "1px solid var(--c-border)", flexShrink: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 24px", borderBottom: "1px solid var(--c-border)", flexShrink: 0 }}>
           <Link href="/" onClick={() => setMobileOpen(false)}>
-            <img src="/logo.png" alt="PosterKing" className="pk-logo" style={{ height: 36, objectFit: "contain" }} />
+            <img src="/logo.png" alt="CrazeFusion" className="pk-logo" style={{ height: 38, objectFit: "contain" }} />
           </Link>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            {/* Theme toggle inside drawer */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <button onClick={toggle} aria-label="Toggle theme" style={{ background: "none", border: "1px solid var(--c-border)", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--c-text)", flexShrink: 0 }}>
               {theme === "light" ? <IconMoon /> : <IconSun />}
             </button>
-            <button onClick={() => setMobileOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--c-text)", display: "flex", padding: 4 }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <button onClick={() => setMobileOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--c-text-muted)", display: "flex", padding: 4 }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
               </svg>
             </button>
@@ -291,73 +290,93 @@ export default function Navbar() {
         </div>
 
         {/* Nav items */}
-        <div style={{ flex: 1, padding: "8px 0", overflowY: "auto" }}>
-          {nav.map(item => (
-            <div key={item.label}>
-              <div
-                onClick={() => {
-                  if (item.children) {
-                    setOpenSub(openSub === item.label ? null : item.label);
-                  } else {
-                    setMobileOpen(false);
-                  }
-                }}
-                style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", cursor: "pointer", borderBottom: "1px solid var(--c-border)" }}
-              >
-                {item.children ? (
-                  <span style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--c-text)" }}>
-                    {item.label}
-                  </span>
-                ) : (
-                  <Link href={item.href} onClick={() => setMobileOpen(false)} style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--c-text)", textDecoration: "none", flex: 1 }}>
-                    {item.label}
-                  </Link>
-                )}
-                {item.children && (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                    style={{ color: "var(--c-text-muted)", transition: "transform 0.2s", transform: openSub === item.label ? "rotate(180deg)" : "none", flexShrink: 0 }}>
-                    <polyline points="6 9 12 15 18 9"/>
-                  </svg>
-                )}
-              </div>
-
-              {/* Submenu */}
-              {item.children && openSub === item.label && (
-                <div style={{ background: "var(--c-bg-soft)" }}>
-                  {item.children.map(child => (
-                    <Link key={child.label} href={child.href} onClick={() => setMobileOpen(false)} style={{
-                      display: "block", padding: "11px 20px 11px 32px",
-                      fontFamily: F, fontSize: 12, fontWeight: 500,
-                      color: "var(--c-text-muted)", textDecoration: "none",
-                      borderBottom: "1px solid var(--c-border)",
-                    }}>
-                      {child.label}
+        <div style={{ flex: 1, overflowY: "auto", padding: "10px 0 20px" }}>
+          {nav.map(item => {
+            const hasChildren = !!item.children;
+            const isOpen = openSub === item.label;
+            return (
+              <div key={item.label}>
+                {/* Main item row */}
+                <div
+                  onClick={() => {
+                    if (hasChildren) setOpenSub(isOpen ? null : item.label);
+                    else setMobileOpen(false);
+                  }}
+                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px", cursor: "pointer" }}
+                >
+                  {hasChildren ? (
+                    <span style={{ fontFamily: FO, fontSize: 15, fontWeight: 600, color: "#e8a000", letterSpacing: "0.01em" }}>
+                      {item.label}
+                    </span>
+                  ) : (
+                    <Link href={item.href} onClick={() => setMobileOpen(false)}
+                      style={{ fontFamily: FO, fontSize: 15, fontWeight: 600, color: "var(--c-text)", letterSpacing: "0.01em", textDecoration: "none", flex: 1 }}>
+                      {item.label}
                     </Link>
-                  ))}
+                  )}
+                  {hasChildren && (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e8a000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                      style={{ transition: "transform 0.22s", transform: isOpen ? "rotate(180deg)" : "none", flexShrink: 0, marginLeft: 8 }}>
+                      <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
+
+                {/* Submenu — slides open */}
+                {hasChildren && isOpen && (
+                  <div style={{ paddingBottom: 8 }}>
+                    {item.children!.map(child => (
+                      <Link key={child.label} href={child.href} onClick={() => setMobileOpen(false)} style={{
+                        display: "flex", alignItems: "center", gap: 10,
+                        padding: "11px 24px 11px 40px",
+                        fontFamily: F, fontSize: 13, fontWeight: 500,
+                        color: "var(--c-text-muted)", textDecoration: "none",
+                        transition: "color 0.15s",
+                      }}
+                        onMouseEnter={e => (e.currentTarget.style.color = "var(--c-text)")}
+                        onMouseLeave={e => (e.currentTarget.style.color = "var(--c-text-muted)")}
+                      >
+                        <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#e8a000", flexShrink: 0 }} />
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
+                {/* Subtle separator */}
+                <div style={{ height: 1, background: "var(--c-border)", margin: "0 24px" }} />
+              </div>
+            );
+          })}
+
+          {/* Extra links */}
+          <div style={{ padding: "8px 0" }}>
+            <Link href="/collection" onClick={() => setMobileOpen(false)}
+              style={{ display: "flex", alignItems: "center", padding: "16px 24px", fontFamily: FO, fontSize: 15, fontWeight: 600, color: "var(--c-text)", textDecoration: "none" }}>
+              Shop All Posters
+            </Link>
+            <div style={{ height: 1, background: "var(--c-border)", margin: "0 24px" }} />
+          </div>
         </div>
 
         {/* Drawer bottom CTAs */}
-        <div style={{ padding: "16px 20px", borderTop: "1px solid var(--c-border)", display: "flex", gap: 10, flexShrink: 0 }}>
+        <div style={{ padding: "16px 24px 28px", borderTop: "1px solid var(--c-border)", display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
           <Link href="/cart" onClick={() => setMobileOpen(false)} style={{
-            flex: 1, padding: "13px 0", textAlign: "center",
-            border: "1.5px solid var(--c-text)", color: "var(--c-text)",
-            fontFamily: FO, fontSize: 11, fontWeight: 700,
+            width: "100%", padding: "14px 0", textAlign: "center",
+            border: "1.5px solid var(--c-border)", color: "var(--c-text)",
+            fontFamily: FO, fontSize: 12, fontWeight: 700,
             textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 6, borderRadius: 50,
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 8, borderRadius: 50,
           }}>
             <IconBag />
             Cart{count > 0 ? ` (${count})` : ""}
           </Link>
           <Link href="/auth/login" onClick={() => setMobileOpen(false)} style={{
-            flex: 1, padding: "13px 0", textAlign: "center",
+            width: "100%", padding: "14px 0", textAlign: "center",
             background: "var(--c-btn-bg)", color: "var(--c-btn-text)",
-            fontFamily: FO, fontSize: 11, fontWeight: 700,
+            fontFamily: FO, fontSize: 12, fontWeight: 700,
             textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase",
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 6, borderRadius: 50,
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 8, borderRadius: 50,
           }}>
             <IconUser />
             Login
