@@ -11,7 +11,7 @@ import Footer from "@/components/footer/Footer";
 
 export default function Home() {
   return (
-    <main style={{ background: "var(--c-bg)", minHeight: "100vh", paddingTop: 134 }}>
+    <main style={{ background: "var(--c-bg)", minHeight: "100vh", paddingTop: 108 }}>
       <Navbar />
       <Hero />
       <CategoryIcons />

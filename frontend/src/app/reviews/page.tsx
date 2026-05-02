@@ -38,7 +38,7 @@ export default function ReviewsPage() {
       <main style={{ paddingTop: 98 }}>
 
         {/* Hero */}
-        <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "64px 32px", textAlign: "center" }}>
+        <div style={{ background: "var(--c-bg-soft)", padding: "64px 32px", textAlign: "center" }}>
           <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#e8a000", marginBottom: 12 }}>Customer Love</div>
           <h1 style={{ fontFamily: FE, fontSize: "clamp(32px,5vw,72px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>
             10,000+ Happy <span style={{ color: "#e8a000" }}>Walls</span>

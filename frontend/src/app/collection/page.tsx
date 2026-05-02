@@ -91,10 +91,10 @@ export default function CollectionPage() {
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <div style={{ paddingTop: 134 }}>
+      <div style={{ paddingTop: 108 }}>
 
         {/* Breadcrumb + Header */}
-        <div style={{ borderBottom: "1px solid var(--c-border)", background: "var(--c-bg)", padding: "20px 32px" }}>
+        <div style={{ background: "var(--c-bg)", padding: "20px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 8 }}>
               <Link href="/" style={{ color: "#aaa", textDecoration: "none" }}>Home</Link>
@@ -130,7 +130,7 @@ export default function CollectionPage() {
         </div>
 
         {/* Category Pills */}
-        <div style={{ borderBottom: "1px solid var(--c-border)", padding: "16px 32px", overflowX: "auto", background: "var(--c-bg-card)" }}>
+        <div style={{ padding: "16px 32px", overflowX: "auto", background: "var(--c-bg-card)" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 8 }}>
             {categories.map(cat => (
               <button key={cat} onClick={() => setActiveCategory(cat)}
@@ -143,7 +143,7 @@ export default function CollectionPage() {
 
         {/* Filter Panel */}
         {filtersOpen && (
-          <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "24px 32px" }}>
+          <div style={{ background: "var(--c-bg-soft)", padding: "24px 32px" }}>
             <div style={{ maxWidth: 1400, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 32 }}>
               <div>
                 <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--c-text)", marginBottom: 12 }}>Size</div>

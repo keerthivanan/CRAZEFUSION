@@ -61,10 +61,10 @@ export default function ProductPage() {
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <main style={{ paddingTop: 134 }}>
+      <main style={{ paddingTop: 108 }}>
 
         {/* Breadcrumb */}
-        <div style={{ borderBottom: "1px solid var(--c-border)", padding: "16px 32px" }}>
+        <div style={{ padding: "16px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto", fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase" }}>
             <Link href="/" style={{ color: "#aaa", textDecoration: "none" }}>Home</Link>
             <span style={{ margin: "0 8px" }}>›</span>

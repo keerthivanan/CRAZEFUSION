@@ -22,9 +22,9 @@ export default function CartPage() {
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <main style={{ paddingTop: 134 }}>
+      <main style={{ paddingTop: 108 }}>
         {/* Header */}
-        <div style={{ borderBottom: "1px solid var(--c-border)", padding: "28px 32px" }}>
+        <div style={{ padding: "28px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>
               <Link href="/" style={{ color: "#aaa", textDecoration: "none" }}>Home</Link>
