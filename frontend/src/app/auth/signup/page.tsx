@@ -37,18 +37,10 @@ export default function SignupPage() {
     <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", flexDirection: "column", paddingTop: 34 }}>
 
       {/* Top logo */}
-      <div style={{
-        padding: "24px 32px",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        borderBottom: "1px solid var(--c-border)",
-      }}>
+      <div style={{ padding: "36px 32px", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Link href="/" style={{ display: "block", lineHeight: 0 }}>
-          <img
-            src="/logo.png"
-            alt="CrazeFusion"
-            className="pk-logo"
-            style={{ height: 44, width: "auto", objectFit: "contain", display: "block" }}
-          />
+          <img src="/logo.png" alt="CrazeFusion" className="pk-logo"
+            style={{ height: 64, width: "auto", objectFit: "contain", display: "block" }} />
         </Link>
       </div>
 

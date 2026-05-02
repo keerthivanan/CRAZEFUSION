@@ -53,7 +53,7 @@ export default function Newsletter() {
           <form
             onSubmit={e => { e.preventDefault(); if (email) setDone(true); }}
             className="newsletter-form"
-            style={{ display: "flex", gap: 0, maxWidth: 480, margin: "0 auto" }}
+            style={{ display: "flex", gap: 0, width: "100%", maxWidth: 480, margin: "0 auto" }}
           >
             <input
               type="email" required value={email}

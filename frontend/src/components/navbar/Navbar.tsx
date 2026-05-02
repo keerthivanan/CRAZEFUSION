@@ -162,7 +162,7 @@ export default function Navbar() {
     <>
       {/* Floating wrapper */}
       <div className="nav-wrapper" style={{
-        position: "fixed", top: 58, left: "50%",
+        position: "fixed", top: 44, left: "50%",
         transform: "translateX(-50%)",
         width: "calc(100% - 24px)", maxWidth: 920,
         zIndex: 1000,
@@ -197,7 +197,10 @@ export default function Navbar() {
 
             {/* Logo — centered */}
             <Link href="/" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", textDecoration: "none", flexShrink: 0 }}>
-              <img src="/logo.png" alt="CrazeFusion" className="nav-logo" style={{ height: 52, width: "auto", objectFit: "contain", display: "block", filter: theme === "dark" ? "invert(1)" : "none", transition: "filter 0.2s" }} />
+              {/* Desktop logo */}
+              <img src="/logo.png" alt="CrazeFusion" className="nav-logo nav-logo-desktop" style={{ height: 52, width: "auto", objectFit: "contain", display: "block", filter: theme === "dark" ? "invert(1)" : "none", transition: "filter 0.2s" }} />
+              {/* Mobile logo */}
+              <img src="/cf_mobile.png" alt="CrazeFusion" className="nav-logo nav-logo-mobile" style={{ height: 36, width: "auto", objectFit: "contain", display: "none", filter: theme === "dark" ? "invert(1)" : "none", transition: "filter 0.2s" }} />
             </Link>
 
             {/* Right: theme + cart + login */}
@@ -283,8 +286,9 @@ export default function Navbar() {
           .cn-content { flex-direction: row !important; }
         }
         @media (max-width: 768px) {
-          .nav-wrapper { top: 42px !important; width: calc(100% - 16px) !important; }
-          .nav-logo    { height: 38px !important; }
+          .nav-wrapper        { top: 42px !important; width: calc(100% - 16px) !important; }
+          .nav-logo-desktop   { display: none !important; }
+          .nav-logo-mobile    { display: block !important; }
         }
       `}</style>
     </>
