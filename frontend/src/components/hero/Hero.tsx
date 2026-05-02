@@ -16,9 +16,8 @@ export default function Hero() {
       <div style={{
         maxWidth: 1400, margin: "0 auto",
         display: "grid", gridTemplateColumns: "1fr 1fr",
-        minHeight: "calc(100vh - 124px)",
         alignItems: "center",
-        padding: "60px 40px",
+        padding: "52px 40px 60px",
         gap: 56,
       }} className="hero-grid">
 
@@ -189,59 +188,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── Infographic Stats Strip ── */}
-      <div className="stats-strip" style={{
-        borderTop: "1px solid var(--c-border)",
-        maxWidth: 1400, margin: "0 auto",
-        padding: "0 40px",
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
-      }}>
-        {[
-          { value: "10K+",   bar: 100, label: "Happy Customers",  sub: "Across India" },
-          { value: "1,981+", bar: 72,  label: "Poster Designs",   sub: "& counting" },
-          { value: "4.9 ★",  bar: 98,  label: "Average Rating",   sub: "5,000+ reviews" },
-          { value: "₹79",    bar: 28,  label: "Starting Price",   sub: "Free prepaid ship" },
-        ].map((s, i) => (
-          <div key={i} className="stat-cell" style={{
-            padding: "28px 24px 32px",
-            borderRight: i < 3 ? "1px solid var(--c-border)" : "none",
-          }}>
-            {/* Progress bar */}
-            <div style={{ height: 2, background: "var(--c-border)", borderRadius: 2, marginBottom: 18, overflow: "hidden" }}>
-              <div style={{
-                height: "100%", width: `${s.bar}%`,
-                background: "linear-gradient(90deg, #e8a000, #ffcc44)",
-                borderRadius: 2,
-                animation: `barFill 1.2s cubic-bezier(0.16,1,0.3,1) ${i * 0.15}s both`,
-              }} />
-            </div>
-            {/* Number */}
-            <div style={{
-              fontFamily: FO,
-              fontSize: "clamp(22px, 2.8vw, 38px)",
-              fontWeight: 700, letterSpacing: "-0.03em",
-              color: "var(--c-text)", lineHeight: 1, marginBottom: 8,
-            }}>
-              {s.value}
-            </div>
-            {/* Label */}
-            <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#e8a000", marginBottom: 3 }}>
-              {s.label}
-            </div>
-            {/* Sub */}
-            <div style={{ fontFamily: FO, fontSize: 11, color: "var(--c-text-muted)" }}>
-              {s.sub}
-            </div>
-          </div>
-        ))}
-      </div>
-
       <style>{`
-        @keyframes barFill {
-          from { width: 0%; }
-          to   { width: var(--bar-w); }
-        }
         @keyframes slideUp {
           from { opacity: 0; transform: translateY(100%); }
           to   { opacity: 1; transform: translateY(0); }

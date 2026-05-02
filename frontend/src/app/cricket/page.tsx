@@ -90,7 +90,7 @@ function TeamCircle({
           <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: team.color }}>{team.short}</span>
         ) : (
           <img src={team.src} alt={team.name}
-            style={{ width: "82%", height: "82%", objectFit: "contain", display: "block" }}
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             onError={() => setFailed(true)}
           />
         )}
@@ -276,7 +276,7 @@ export default function CricketPage() {
                 <img
                   src={activeTeamObj.src}
                   alt={activeTeamObj.name}
-                  style={{ width: "85%", height: "85%", objectFit: "contain", borderRadius: "50%" }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%" }}
                   onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
                 />
               </div>
