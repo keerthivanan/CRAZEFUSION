@@ -172,10 +172,10 @@ export default function BasketballPage() {
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <div style={{ paddingTop: 134 }}>
+      <div style={{ paddingTop: 108 }}>
 
         {/* Breadcrumb */}
-        <div style={{ borderBottom: "1px solid var(--c-border)", background: "var(--c-bg)", padding: "16px 32px" }}>
+        <div style={{ background: "var(--c-bg)", padding: "16px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase" }}>
               <Link href="/" style={{ color: "#aaa", textDecoration: "none" }}>Home</Link>
@@ -186,7 +186,7 @@ export default function BasketballPage() {
         </div>
 
         {/* Page Header */}
-        <div style={{ background: "var(--c-bg)", padding: "40px 32px 28px", borderBottom: "1px solid var(--c-border)" }}>
+        <div style={{ background: "var(--c-bg)", padding: "40px 32px 28px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <div style={{ marginBottom: 24 }}>
               <SlashHeading
@@ -234,7 +234,7 @@ export default function BasketballPage() {
         </div>
 
         {/* Team Circles */}
-        <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "28px 32px" }}>
+        <div style={{ background: "var(--c-bg-soft)", padding: "28px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#aaa", marginBottom: 20 }}>
               {activeTab === "nba" ? "NBA Franchises" : "International Teams"}
@@ -254,7 +254,7 @@ export default function BasketballPage() {
 
         {/* Active team banner */}
         {activeTeamObj && (
-          <div style={{ background: activeTeamObj.color + "18", borderBottom: `2px solid ${activeTeamObj.color}33`, padding: "14px 32px" }}>
+          <div style={{ background: activeTeamObj.color + "18", padding: "14px 32px" }}>
             <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "center", gap: 12 }}>
               <div style={{ width: 36, height: 36, borderRadius: "50%", overflow: "hidden", background: "#fff", border: `2px solid ${activeTeamObj.color}44`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 <img src={activeTeamObj.src} alt={activeTeamObj.name}

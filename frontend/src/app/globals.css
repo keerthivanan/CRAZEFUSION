@@ -160,8 +160,8 @@ body {
    ══════════════════════════════════════════ */
 @media (max-width: 768px) {
 
-  /* ── Page top padding: mobile navbar is at top:42, height:60 → clear at 116px ── */
-  main { padding-top: 116px !important; }
+  /* ── Page top padding: mobile navbar is at top:42, height:60 → clear at 106px ── */
+  main { padding-top: 106px !important; }
 
   /* ── Stats bar: 2×2 grid ── */
   .stats-grid {

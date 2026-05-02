@@ -17,7 +17,7 @@ export default function Hero() {
         maxWidth: 1400, margin: "0 auto",
         display: "grid", gridTemplateColumns: "1fr 1fr",
         alignItems: "center",
-        padding: "52px 40px 60px",
+        padding: "20px 40px 56px",
         gap: 56,
       }} className="hero-grid">
 

@@ -72,9 +72,9 @@ export default function CheckoutPage() {
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <main style={{ paddingTop: 134 }}>
+      <main style={{ paddingTop: 108 }}>
         {/* Steps Header */}
-        <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "20px 32px" }}>
+        <div style={{ background: "var(--c-bg-soft)", padding: "20px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: 0 }}>
             {steps.map((s, i) => (
               <div key={s} style={{ display: "flex", alignItems: "center" }}>
