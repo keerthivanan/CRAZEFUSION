@@ -26,7 +26,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", flexDirection: "column", paddingTop: 34 }}>
 
       {/* Top logo */}
       <div style={{
