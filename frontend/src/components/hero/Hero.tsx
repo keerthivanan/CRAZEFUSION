@@ -16,27 +16,14 @@ export default function Hero() {
       <div style={{
         maxWidth: 1400, margin: "0 auto",
         display: "grid", gridTemplateColumns: "1fr 1fr",
+        minHeight: "calc(100vh - 108px)",
         alignItems: "center",
-        padding: "20px 40px 56px",
+        padding: "40px 40px 40px",
         gap: 56,
       }} className="hero-grid">
 
         {/* LEFT */}
         <div>
-          {/* Badge */}
-          <div style={{
-            display: "inline-flex", alignItems: "center", gap: 8,
-            border: "1px solid var(--c-border)",
-            borderRadius: 50, padding: "6px 14px 6px 8px",
-            marginBottom: 32,
-            animation: "fadeUp 0.6s ease 0s both",
-          }}>
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#e8a000", flexShrink: 0 }} />
-            <span style={{ fontFamily: FO, fontSize: 10, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--c-text-muted)" }}>
-              Premium Wall Prints · India
-            </span>
-          </div>
-
           {/* Headline */}
           <div style={{ overflow: "hidden" }}>
             <h1 style={{
