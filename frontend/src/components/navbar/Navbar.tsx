@@ -197,7 +197,7 @@ export default function Navbar() {
 
             {/* Logo — centered */}
             <Link href="/" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", textDecoration: "none", flexShrink: 0 }}>
-              <img src="/logo.png" alt="CrazeFusion" style={{ height: 52, width: "auto", objectFit: "contain", display: "block" }} />
+              <img src="/logo.png" alt="CrazeFusion" style={{ height: 52, width: "auto", objectFit: "contain", display: "block", filter: theme === "dark" ? "invert(1)" : "none", transition: "filter 0.2s" }} />
             </Link>
 
             {/* Right: theme + cart + login */}

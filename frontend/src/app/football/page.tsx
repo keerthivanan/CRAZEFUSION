@@ -15,31 +15,45 @@ const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const KEY = process.env.NEXT_PUBLIC_LOGODEV_KEY ?? "pk_X0d9dkoXSXC1bEBCAvNs-g";
-const logoUrl = (domain: string) =>
-  `https://img.logo.dev/${domain}?token=${KEY}&size=160&format=png`;
+const logo = (domain: string) => `https://img.logo.dev/${domain}?token=${KEY}&size=160&format=png`;
+const flag = (iso: string)    => `https://flagcdn.com/w160/${iso}.png`;
 
 const clubTeams = [
-  { name: "Real Madrid",       short: "RMA", src: logoUrl("realmadrid.com"),  color: "#00529f" },
-  { name: "FC Barcelona",      short: "FCB", src: logoUrl("fcbarcelona.com"), color: "#a50044" },
-  { name: "Manchester City",   short: "MCI", src: logoUrl("mancity.com"),     color: "#6cabdd" },
-  { name: "Liverpool FC",      short: "LIV", src: logoUrl("liverpoolfc.com"), color: "#c8102e" },
-  { name: "PSG",               short: "PSG", src: logoUrl("psg.fr"),          color: "#004170" },
-  { name: "Arsenal",           short: "ARS", src: logoUrl("arsenal.com"),     color: "#ef0107" },
-  { name: "Manchester United", short: "MUN", src: logoUrl("manutd.com"),      color: "#da291c" },
-  { name: "Chelsea FC",        short: "CHE", src: logoUrl("chelseafc.com"),   color: "#034694" },
+  { name: "Real Madrid",       short: "RMA", src: logo("realmadrid.com"),    color: "#00529f" },
+  { name: "FC Barcelona",      short: "FCB", src: logo("fcbarcelona.com"),   color: "#a50044" },
+  { name: "Manchester City",   short: "MCI", src: logo("mancity.com"),       color: "#6cabdd" },
+  { name: "Liverpool FC",      short: "LIV", src: logo("liverpoolfc.com"),   color: "#c8102e" },
+  { name: "PSG",               short: "PSG", src: logo("psg.fr"),            color: "#004170" },
+  { name: "Arsenal",           short: "ARS", src: logo("arsenal.com"),       color: "#ef0107" },
+  { name: "Manchester United", short: "MUN", src: logo("manutd.com"),        color: "#da291c" },
+  { name: "Chelsea FC",        short: "CHE", src: logo("chelseafc.com"),     color: "#034694" },
+  { name: "Bayern Munich",     short: "BAY", src: logo("fcbayern.com"),      color: "#dc052d" },
+  { name: "Juventus",          short: "JUV", src: logo("juventus.com"),      color: "#1a1a1a" },
+  { name: "AC Milan",          short: "MIL", src: logo("acmilan.com"),       color: "#fb090b" },
+  { name: "Atletico Madrid",   short: "ATM", src: logo("atleticodemadrid.com"), color: "#cb3524" },
 ];
 
 const internationalTeams = [
-  { name: "Brazil",      short: "BRA", src: logoUrl("cbf.com.br"),   color: "#009c3b" },
-  { name: "Argentina",   short: "ARG", src: logoUrl("afa.com.ar"),   color: "#74acdf" },
-  { name: "France",      short: "FRA", src: logoUrl("fff.fr"),       color: "#003189" },
-  { name: "Germany",     short: "GER", src: logoUrl("dfb.de"),       color: "#1a1a1a" },
-  { name: "Spain",       short: "ESP", src: logoUrl("rfef.es"),      color: "#aa151b" },
-  { name: "England",     short: "ENG", src: logoUrl("thefa.com"),    color: "#13297b" },
-  { name: "Portugal",    short: "POR", src: logoUrl("fpf.pt"),       color: "#006600" },
-  { name: "Italy",       short: "ITA", src: logoUrl("figc.it"),      color: "#003399" },
-  { name: "Netherlands", short: "NED", src: logoUrl("knvb.nl"),      color: "#ff6900" },
-  { name: "Belgium",     short: "BEL", src: logoUrl("rbfa.be"),      color: "#ed2939" },
+  { name: "Brazil",      short: "BRA", src: flag("br"), color: "#009c3b" },
+  { name: "Argentina",   short: "ARG", src: flag("ar"), color: "#74acdf" },
+  { name: "France",      short: "FRA", src: flag("fr"), color: "#003189" },
+  { name: "Germany",     short: "GER", src: flag("de"), color: "#1a1a1a" },
+  { name: "Spain",       short: "ESP", src: flag("es"), color: "#aa151b" },
+  { name: "England",     short: "ENG", src: flag("gb-eng"), color: "#13297b" },
+  { name: "Portugal",    short: "POR", src: flag("pt"), color: "#006600" },
+  { name: "Italy",       short: "ITA", src: flag("it"), color: "#003399" },
+  { name: "Netherlands", short: "NED", src: flag("nl"), color: "#ff6900" },
+  { name: "Belgium",     short: "BEL", src: flag("be"), color: "#ed2939" },
+  { name: "Croatia",     short: "CRO", src: flag("hr"), color: "#cc0000" },
+  { name: "Japan",       short: "JPN", src: flag("jp"), color: "#bc002d" },
+  { name: "South Korea", short: "KOR", src: flag("kr"), color: "#003478" },
+  { name: "Morocco",     short: "MAR", src: flag("ma"), color: "#006233" },
+  { name: "Senegal",     short: "SEN", src: flag("sn"), color: "#00853f" },
+  { name: "USA",         short: "USA", src: flag("us"), color: "#002868" },
+  { name: "Mexico",      short: "MEX", src: flag("mx"), color: "#006847" },
+  { name: "Colombia",    short: "COL", src: flag("co"), color: "#fcd116" },
+  { name: "Uruguay",     short: "URU", src: flag("uy"), color: "#5aaae7" },
+  { name: "Ghana",       short: "GHA", src: flag("gh"), color: "#006b3f" },
 ];
 
 type AnyTeam = { name: string; short: string; src: string; color: string };
@@ -54,56 +68,55 @@ function TeamCircle({
       onClick={onClick}
       style={{
         flexShrink: 0, display: "flex", flexDirection: "column",
-        alignItems: "center", gap: 10,
-        background: "none", border: "none", cursor: "pointer", padding: 0,
+        alignItems: "center", gap: 8,
+        background: "none", border: "none", cursor: "pointer", padding: "4px 2px",
       }}
     >
-      <div
-        style={{
-          width: 76, height: 76, borderRadius: "50%", overflow: "hidden",
-          border: isActive ? `3px solid ${team.color}` : "2px solid var(--c-border)",
-          background: "#ffffff",
-          transition: "all 0.25s ease",
-          boxShadow: isActive ? `0 0 20px ${team.color}55` : "none",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          flexShrink: 0,
-        }}
+      <div style={{
+        width: 76, height: 76, borderRadius: "50%", overflow: "hidden",
+        background: "#fff",
+        transition: "transform 0.22s ease, box-shadow 0.22s ease",
+        boxShadow: isActive
+          ? `0 0 0 3px ${team.color}, 0 6px 24px ${team.color}55`
+          : "0 0 0 1.5px rgba(0,0,0,0.1)",
+        transform: isActive ? "translateY(-4px) scale(1.07)" : "translateY(0) scale(1)",
+        display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+      }}
         onMouseEnter={e => {
           if (!isActive) {
-            (e.currentTarget as HTMLDivElement).style.borderColor = team.color;
-            (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
-            (e.currentTarget as HTMLDivElement).style.boxShadow = `0 8px 20px ${team.color}44`;
+            (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 2.5px ${team.color}99, 0 8px 20px ${team.color}33`;
+            (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px) scale(1.04)";
           }
         }}
         onMouseLeave={e => {
           if (!isActive) {
-            (e.currentTarget as HTMLDivElement).style.borderColor = "var(--c-border)";
-            (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-            (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+            (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 0 1.5px rgba(0,0,0,0.1)";
+            (e.currentTarget as HTMLDivElement).style.transform = "translateY(0) scale(1)";
           }
         }}
       >
         {failed ? (
-          <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: team.color, letterSpacing: "-0.02em" }}>
-            {team.short}
-          </span>
+          <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: team.color }}>{team.short}</span>
         ) : (
-          <img
-            src={team.src}
-            alt={team.name}
-            style={{ width: "88%", height: "88%", objectFit: "contain", display: "block", borderRadius: "50%" }}
+          <img src={team.src} alt={team.name}
+            style={{ width: "82%", height: "82%", objectFit: "contain", display: "block" }}
             onError={() => setFailed(true)}
           />
         )}
       </div>
       <span style={{
-        fontFamily: FO, fontSize: 9, fontWeight: 700,
+        fontFamily: FO, fontSize: 9, fontWeight: isActive ? 700 : 600,
         color: isActive ? team.color : "var(--c-text-muted)",
-        letterSpacing: "0.06em", textTransform: "uppercase",
+        letterSpacing: "0.07em", textTransform: "uppercase",
         transition: "color 0.2s", textAlign: "center", maxWidth: 72, lineHeight: 1.2,
       }}>
         {team.short}
       </span>
+      <div style={{
+        width: 4, height: 4, borderRadius: "50%",
+        background: isActive ? team.color : "transparent",
+        transition: "background 0.2s",
+      }} />
     </button>
   );
 }

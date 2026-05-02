@@ -55,56 +55,55 @@ function TeamCircle({
       onClick={onClick}
       style={{
         flexShrink: 0, display: "flex", flexDirection: "column",
-        alignItems: "center", gap: 10,
-        background: "none", border: "none", cursor: "pointer", padding: 0,
+        alignItems: "center", gap: 8,
+        background: "none", border: "none", cursor: "pointer", padding: "4px 2px",
       }}
     >
-      <div
-        style={{
-          width: 76, height: 76, borderRadius: "50%", overflow: "hidden",
-          border: isActive ? `3px solid ${team.color}` : "2px solid var(--c-border)",
-          background: "#ffffff",
-          transition: "all 0.25s ease",
-          boxShadow: isActive ? `0 0 20px ${team.color}55` : "none",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          flexShrink: 0,
-        }}
+      <div style={{
+        width: 76, height: 76, borderRadius: "50%", overflow: "hidden",
+        background: "#fff",
+        transition: "transform 0.22s ease, box-shadow 0.22s ease",
+        boxShadow: isActive
+          ? `0 0 0 3px ${team.color}, 0 6px 24px ${team.color}55`
+          : "0 0 0 1.5px rgba(0,0,0,0.1)",
+        transform: isActive ? "translateY(-4px) scale(1.07)" : "translateY(0) scale(1)",
+        display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+      }}
         onMouseEnter={e => {
           if (!isActive) {
-            (e.currentTarget as HTMLDivElement).style.borderColor = team.color;
-            (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
-            (e.currentTarget as HTMLDivElement).style.boxShadow = `0 8px 20px ${team.color}44`;
+            (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 2.5px ${team.color}99, 0 8px 20px ${team.color}33`;
+            (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px) scale(1.04)";
           }
         }}
         onMouseLeave={e => {
           if (!isActive) {
-            (e.currentTarget as HTMLDivElement).style.borderColor = "var(--c-border)";
-            (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-            (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+            (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 0 1.5px rgba(0,0,0,0.1)";
+            (e.currentTarget as HTMLDivElement).style.transform = "translateY(0) scale(1)";
           }
         }}
       >
         {failed ? (
-          <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: team.color, letterSpacing: "-0.02em" }}>
-            {team.short}
-          </span>
+          <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: team.color }}>{team.short}</span>
         ) : (
-          <img
-            src={team.src}
-            alt={team.name}
-            style={{ width: "88%", height: "88%", objectFit: "contain", display: "block", borderRadius: "50%" }}
+          <img src={team.src} alt={team.name}
+            style={{ width: "82%", height: "82%", objectFit: "contain", display: "block" }}
             onError={() => setFailed(true)}
           />
         )}
       </div>
       <span style={{
-        fontFamily: FO, fontSize: 9, fontWeight: 700,
+        fontFamily: FO, fontSize: 9, fontWeight: isActive ? 700 : 600,
         color: isActive ? team.color : "var(--c-text-muted)",
-        letterSpacing: "0.06em", textTransform: "uppercase",
+        letterSpacing: "0.07em", textTransform: "uppercase",
         transition: "color 0.2s", textAlign: "center", maxWidth: 72, lineHeight: 1.2,
       }}>
         {team.short}
       </span>
+      <div style={{
+        width: 4, height: 4, borderRadius: "50%",
+        background: isActive ? team.color : "transparent",
+        transition: "background 0.2s",
+      }} />
     </button>
   );
 }
