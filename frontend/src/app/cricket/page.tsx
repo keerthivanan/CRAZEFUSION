@@ -157,16 +157,10 @@ function ProductCard({ p }: { p: typeof products[0] }) {
   );
 }
 
+const allTeams = [...iplTeams, ...internationalTeams];
+
 export default function CricketPage() {
-  const [activeTab, setActiveTab]   = useState<"ipl" | "international">("ipl");
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
-
-  const currentTeams = activeTab === "ipl" ? iplTeams : internationalTeams;
-
-  const handleTabSwitch = (tab: "ipl" | "international") => {
-    setActiveTab(tab);
-    setActiveTeam(null);
-  };
 
   const handleTeamClick = (short: string) => {
     setActiveTeam(activeTeam === short ? null : short);
@@ -178,7 +172,7 @@ export default function CricketPage() {
     : cricketProducts;
 
   const activeTeamObj = activeTeam
-    ? currentTeams.find(t => t.short === activeTeam) ?? null
+    ? allTeams.find(t => t.short === activeTeam) ?? null
     : null;
 
   return (
@@ -203,55 +197,13 @@ export default function CricketPage() {
             <div style={{ marginBottom: 24 }}>
               <SlashHeading
                 text="Cricket Posters"
-                subtitle="Shop by IPL Franchise or International Team"
+                subtitle="IPL Franchises & International Teams"
                 size="clamp(20px,2.2vw,32px)"
                 align="left"
                 as="h1"
               />
             </div>
 
-            {/* Tab Switcher */}
-            <div style={{ display: "flex", gap: 8 }}>
-              {(["ipl", "international"] as const).map(tab => (
-                <button
-                  key={tab}
-                  onClick={() => handleTabSwitch(tab)}
-                  style={{
-                    padding: "10px 28px",
-                    borderRadius: 50,
-                    border: `1.5px solid ${activeTab === tab ? "var(--c-btn-bg)" : "var(--c-border)"}`,
-                    background: activeTab === tab ? "var(--c-btn-bg)" : "transparent",
-                    color: activeTab === tab ? "var(--c-btn-text)" : "var(--c-text-muted)",
-                    fontFamily: FO, fontSize: 11, fontWeight: 700,
-                    letterSpacing: "0.1em", textTransform: "uppercase",
-                    cursor: "pointer", transition: "all 0.2s",
-                  }}
-                  onMouseEnter={e => {
-                    if (activeTab !== tab) {
-                      (e.currentTarget as HTMLButtonElement).style.borderColor = "#888888";
-                      (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 12px rgba(160,160,160,0.2)";
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (activeTab !== tab) {
-                      (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--c-border)";
-                      (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
-                    }
-                  }}
-                >
-                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <img
-                      src={tab === "ipl"
-                        ? logo("iplt20.com")
-                        : logo("icc-cricket.com")}
-                      alt={tab}
-                      style={{ width: 22, height: 22, objectFit: "contain", borderRadius: "50%", flexShrink: 0 }}
-                    />
-                    {tab === "ipl" ? "IPL" : "International"}
-                  </span>
-                </button>
-              ))}
-            </div>
           </div>
         </div>
 
@@ -259,13 +211,13 @@ export default function CricketPage() {
         <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "28px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#aaa", marginBottom: 20 }}>
-              {activeTab === "ipl" ? "IPL Franchises" : "International Teams"}
+              All Teams
             </div>
             <div
               className="no-scrollbar cricket-teams"
               style={{ display: "flex", gap: 18, overflowX: "auto", paddingBottom: 4, justifyContent: "center", flexWrap: "wrap" }}
             >
-              {currentTeams.map(team => (
+              {allTeams.map((team: AnyTeam) => (
                 <TeamCircle
                   key={team.short}
                   team={team}
@@ -294,7 +246,7 @@ export default function CricketPage() {
                   {activeTeamObj.name}
                 </span>
                 <span style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginLeft: 8 }}>
-                  {activeTab === "ipl" ? "IPL" : "International"} · {activeTeamObj.short}
+                  Cricket · {activeTeamObj.short}
                 </span>
               </div>
               <button
