@@ -3,117 +3,175 @@ import Link from "next/link";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
-/* ─── Category data ─────────────────────────────────────────────── */
-const cats = [
+const sports = [
   {
-    label: ["Cricket"],
+    label: "Cricket",
     href: "/cricket",
-    img: "/categories/cricket_legends.png",
-    bg: "#1a4a2e",
+    img: "/cricket_1.png",
+    fallbackBg: "#0d1f0d",
+    tag: "IPL & International",
+    count: "50+ Teams",
   },
   {
-    label: ["Basketball"],
+    label: "Basketball",
     href: "/basketball",
-    img: "/categories/basketball_legends.png",
-    bg: "#1a2e4a",
+    img: "/basketball_1.png",
+    fallbackBg: "#1B1722",
+    tag: "NBA & Global",
+    count: "30+ Teams",
   },
   {
-    label: ["Football"],
+    label: "Football",
     href: "/football",
-    img: "/categories/football_legends.png",
-    bg: "#2e1a4a",
+    img: "/football_1.png",
+    fallbackBg: "#2F293A",
+    tag: "Club & International",
+    count: "40+ Teams",
   },
 ];
 
-type Cat = typeof cats[0];
-
-function CatCircle({ cat }: { cat: Cat }) {
-  return (
-    <Link
-      href={cat.href}
-      style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}
-    >
-      <div
-        className="cat-circle"
-        style={{
-          width: 96, height: 96, borderRadius: "50%", overflow: "hidden",
-          border: "2px solid var(--c-border)",
-          background: cat.img ? "var(--c-bg-soft)" : cat.bg,
-          transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          flexShrink: 0, position: "relative",
-        }}
-        onMouseEnter={e => {
-          const el = e.currentTarget as HTMLDivElement;
-          el.style.transform = "translateY(-6px)";
-          el.style.boxShadow = "0 12px 28px rgba(160,160,160,0.30)";
-          el.style.borderColor = "#888888";
-        }}
-        onMouseLeave={e => {
-          const el = e.currentTarget as HTMLDivElement;
-          el.style.transform = "translateY(0)";
-          el.style.boxShadow = "none";
-          el.style.borderColor = "var(--c-border)";
-        }}
-      >
-        {cat.img ? (
-          <img
-            src={cat.img}
-            alt={cat.label.join(" ")}
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
-          />
-        ) : (
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-            <span style={{ fontSize: 26, color: "#fff", lineHeight: 1 }}>{(cat as any).icon}</span>
-            <span style={{ fontFamily: FO, fontSize: 9, fontWeight: 600, color: "rgba(255,255,255,0.6)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-              {(cat as any).iconSub}
-            </span>
-          </div>
-        )}
-      </div>
-
-      {/* Label — Title Case, regular weight, 2 lines */}
-      <div style={{ textAlign: "center", lineHeight: 1.5 }}>
-        {cat.label.map((line, i) => (
-          <div key={i} style={{
-            fontFamily: FO,
-            fontSize: 12,
-            fontWeight: i === 0 ? 500 : 400,
-            color: "var(--c-text)",
-            letterSpacing: 0,
-          }}>
-            {line}
-          </div>
-        ))}
-      </div>
-    </Link>
-  );
-}
-
 export default function CategoryIcons() {
   return (
-    <section style={{ padding: "36px 0 32px", background: "var(--c-bg)" }}>
-      <div
-        className="cat-icons-row"
-        style={{
-          maxWidth: 1400, margin: "0 auto", padding: "0 32px",
-          display: "flex", alignItems: "flex-start",
-          justifyContent: "center", gap: 52, flexWrap: "wrap",
-        }}
-      >
-        {cats.map(cat => (
-          <CatCircle key={cat.href} cat={cat} />
+    <section style={{ background: "var(--c-bg)", padding: "0 0 0 0" }}>
+
+      {/* Section Label */}
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "48px 40px 24px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
+          <div>
+            <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8a000", marginBottom: 6 }}>
+              Shop by Sport
+            </div>
+            <h2 style={{ fontFamily: FO, fontSize: "clamp(22px,3vw,36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--c-text)", margin: 0, textTransform: "uppercase" }}>
+              Your Favourite Sport
+            </h2>
+          </div>
+          <Link href="/collection" style={{
+            fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em",
+            textTransform: "uppercase", color: "var(--c-text-muted)",
+            textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6,
+            transition: "color 0.2s",
+          }}
+            onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-text)"}
+            onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = "var(--c-text-muted)"}
+          >
+            View All ↗
+          </Link>
+        </div>
+      </div>
+
+      {/* Cards */}
+      <div className="sport-cards-grid" style={{
+        maxWidth: 1400, margin: "0 auto",
+        padding: "0 40px 56px",
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: 12,
+      }}>
+        {sports.map((sport) => (
+          <Link
+            key={sport.href}
+            href={sport.href}
+            className="sport-card"
+            style={{
+              position: "relative", overflow: "hidden",
+              borderRadius: 14, display: "block",
+              height: 280, textDecoration: "none",
+              background: sport.fallbackBg,
+              transition: "transform 0.3s ease",
+            }}
+            onMouseEnter={e => {
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.transform = "translateY(-4px)";
+              const img = el.querySelector(".sport-card-img") as HTMLImageElement | null;
+              if (img) img.style.transform = "scale(1.08)";
+            }}
+            onMouseLeave={e => {
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.transform = "translateY(0)";
+              const img = el.querySelector(".sport-card-img") as HTMLImageElement | null;
+              if (img) img.style.transform = "scale(1)";
+            }}
+          >
+            {/* Background image */}
+            <img
+              src={sport.img}
+              alt={sport.label}
+              className="sport-card-img"
+              style={{
+                position: "absolute", inset: 0,
+                width: "100%", height: "100%",
+                objectFit: "cover", objectPosition: "center",
+                transition: "transform 0.5s ease",
+              }}
+            />
+
+            {/* Gradient overlay */}
+            <div style={{
+              position: "absolute", inset: 0,
+              background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.08) 100%)",
+            }} />
+
+            {/* Top tag */}
+            <div style={{
+              position: "absolute", top: 14, left: 14,
+              background: "rgba(255,255,255,0.12)",
+              backdropFilter: "blur(8px)",
+              border: "1px solid rgba(255,255,255,0.15)",
+              borderRadius: 50,
+              padding: "4px 12px",
+              fontFamily: FO, fontSize: 9, fontWeight: 600,
+              letterSpacing: "0.1em", textTransform: "uppercase",
+              color: "rgba(255,255,255,0.85)",
+            }}>
+              {sport.tag}
+            </div>
+
+            {/* Bottom content */}
+            <div style={{
+              position: "absolute", bottom: 0, left: 0, right: 0,
+              padding: "20px 20px 22px",
+              display: "flex", justifyContent: "space-between", alignItems: "flex-end",
+            }}>
+              <div>
+                <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#e8a000", marginBottom: 4 }}>
+                  {sport.count}
+                </div>
+                <div style={{ fontFamily: FO, fontSize: 26, fontWeight: 700, letterSpacing: "-0.02em", color: "#fff", lineHeight: 1 }}>
+                  {sport.label}
+                </div>
+              </div>
+              <div style={{
+                width: 40, height: 40, borderRadius: "50%",
+                background: "#e8a000",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                flexShrink: 0,
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                </svg>
+              </div>
+            </div>
+          </Link>
         ))}
       </div>
 
       <style>{`
         @media (max-width: 768px) {
-          .cat-icons-row { gap: 24px !important; padding: 0 16px !important; }
-          .cat-circle    { width: 72px !important; height: 72px !important; }
+          .sport-cards-grid {
+            grid-template-columns: 1fr !important;
+            padding: 0 16px 40px !important;
+            gap: 10px !important;
+          }
+          .sport-card { height: 200px !important; }
+          .sport-cards-grid + div,
+          .sport-cards-grid ~ * { padding-left: 16px !important; padding-right: 16px !important; }
         }
-        @media (max-width: 480px) {
-          .cat-icons-row { gap: 14px !important; }
-          .cat-circle    { width: 60px !important; height: 60px !important; }
+        @media (max-width: 960px) and (min-width: 769px) {
+          .sport-cards-grid {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+          }
+          .sport-card { height: 220px !important; }
         }
       `}</style>
     </section>

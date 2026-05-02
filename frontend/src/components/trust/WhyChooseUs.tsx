@@ -1,107 +1,83 @@
 "use client";
 import AnimatedContent from "@/components/reactbits/AnimatedContent";
-import SlashHeading from "@/components/ui/SlashHeading";
 import Link from "next/link";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
-
-const MedalIcon = () => (
-  <svg width="58" height="62" viewBox="0 0 24 26" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="9" r="7"/>
-    <circle cx="12" cy="9" r="4.5"/>
-    <path d="M9.5 9l2 2 3.5-3.5"/>
-    <path d="M7.5 15.5L5 23l3.5-1.5L10 24"/>
-    <path d="M16.5 15.5L19 23l-3.5-1.5L14 24"/>
-  </svg>
-);
-
-const CustomIcon = () => (
-  <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="3" width="15" height="12" rx="2"/>
-    <circle cx="6.5" cy="7" r="1.5"/>
-    <path d="M2 12l4-4 3.5 3.5 2.5-2.5L17 12"/>
-    <circle cx="20" cy="19" r="3.5"/>
-    <line x1="20" y1="17" x2="20" y2="21"/>
-    <line x1="18" y1="19" x2="22" y2="19"/>
-  </svg>
-);
-
-const ExclusiveIcon = () => (
-  <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" strokeDasharray="3.5 2.2"/>
-    <circle cx="12" cy="12" r="6.5"/>
-    <path d="M9.5 14.5l5-5"/>
-    <circle cx="9.5" cy="9.5" r="0.75" fill="currentColor" stroke="none"/>
-    <circle cx="14.5" cy="14.5" r="0.75" fill="currentColor" stroke="none"/>
-  </svg>
-);
-
-const StarIcon = () => (
-  <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-  </svg>
-);
 
 const features = [
   {
-    Icon: MedalIcon,
+    num: "01",
     title: "Quality Guaranteed",
-    desc: "Quality is our top priority. Each poster is meticulously crafted using premium materials.",
+    desc: "Every poster is printed on premium materials with HD precision. We stand behind every order.",
   },
   {
-    Icon: CustomIcon,
+    num: "02",
     title: "Custom Creations",
-    desc: "Upload your own images or designs and create personalised posters that reflect your personality.",
+    desc: "Upload your own image or design and we'll turn it into a stunning wall piece.",
   },
   {
-    Icon: ExclusiveIcon,
+    num: "03",
     title: "Exclusive Offers",
-    desc: "We're constantly rolling out exciting offers to help you save big on your favourite designs.",
+    desc: "Buy 4 Get 3 Free. Buy 5 Get 5 Free. Always-on deals that make great prints affordable.",
   },
   {
-    Icon: StarIcon,
+    num: "04",
     title: "Free Shipping",
-    desc: "Enjoy free delivery on prepaid orders — no shipping fees mean more savings for you.",
+    desc: "Zero delivery fees on all prepaid orders. Delivered across India in 5–7 days.",
   },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section style={{ padding: "72px 0 64px", background: "var(--c-bg)" }}>
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 32px" }}>
+    <section style={{ background: "#080808", padding: "80px 0" }} className="why-section">
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 40px" }} className="why-inner">
 
-        <AnimatedContent distance={24} duration={0.55}>
-          <div style={{ textAlign: "center", marginBottom: 56 }}>
-            <SlashHeading
-              text="Why Choose Us?"
-              size="clamp(30px,4vw,56px)"
-              align="center"
-              as="h2"
-            />
+        {/* Header */}
+        <AnimatedContent distance={20} duration={0.5}>
+          <div style={{
+            display: "flex", alignItems: "flex-end",
+            justifyContent: "space-between", flexWrap: "wrap",
+            gap: 24, marginBottom: 56,
+          }}>
+            <div>
+              <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#e8a000", marginBottom: 12 }}>
+                Why Choose Us
+              </div>
+              <h2 style={{ fontFamily: FO, fontSize: "clamp(28px,4vw,52px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#fff", margin: 0, textTransform: "uppercase", lineHeight: 0.95 }}>
+                We&apos;re Built<br />Different
+              </h2>
+            </div>
+            <p style={{ fontFamily: FO, fontSize: 13, color: "rgba(255,255,255,0.4)", maxWidth: 320, lineHeight: 1.7, margin: 0 }}>
+              India's most obsessed poster brand — driven by quality, priced for everyone.
+            </p>
           </div>
         </AnimatedContent>
 
-        <div className="why-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 40 }}>
-          {features.map(({ Icon, title, desc }, i) => (
-            <AnimatedContent key={title} distance={20} delay={i * 0.1} duration={0.5} threshold={0.05}>
-              <div style={{
-                display: "flex", flexDirection: "column",
-                alignItems: "center", textAlign: "center", gap: 18,
-              }}>
-                <div style={{ color: "var(--c-text)", lineHeight: 0 }}>
-                  <Icon />
+        {/* Cards grid */}
+        <div className="why-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 1 }}>
+          {features.map(({ num, title, desc }, i) => (
+            <AnimatedContent key={title} distance={16} delay={i * 0.1} duration={0.5} threshold={0.05}>
+              <div
+                className="why-card"
+                style={{
+                  background: "#0e0e0e",
+                  padding: "36px 28px",
+                  borderRadius: 2,
+                  display: "flex", flexDirection: "column",
+                  gap: 0, height: "100%",
+                  transition: "background 0.2s",
+                }}
+                onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = "#141414"}
+                onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.background = "#0e0e0e"}
+              >
+                <div style={{ fontFamily: FO, fontSize: 48, fontWeight: 700, letterSpacing: "-0.04em", color: "rgba(255,255,255,0.06)", lineHeight: 1, marginBottom: 28 }}>
+                  {num}
                 </div>
-                <div style={{
-                  fontFamily: FO, fontSize: 14, fontWeight: 700,
-                  color: "var(--c-text)", letterSpacing: "0.01em",
-                }}>
+                <div style={{ width: 28, height: 2, background: "#e8a000", marginBottom: 20 }} />
+                <div style={{ fontFamily: FO, fontSize: 15, fontWeight: 700, color: "#fff", letterSpacing: "-0.01em", marginBottom: 14 }}>
                   {title}
                 </div>
-                <p style={{
-                  fontFamily: F, fontSize: 13,
-                  color: "#777", lineHeight: 1.7, margin: 0,
-                }}>
+                <p style={{ fontFamily: FO, fontSize: 12, color: "rgba(255,255,255,0.38)", lineHeight: 1.75, margin: 0 }}>
                   {desc}
                 </p>
               </div>
@@ -109,18 +85,20 @@ export default function WhyChooseUs() {
           ))}
         </div>
 
-        <AnimatedContent distance={16} duration={0.5} delay={0.5}>
+        {/* CTA */}
+        <AnimatedContent distance={16} duration={0.5} delay={0.45}>
           <div style={{ textAlign: "center", marginTop: 52 }}>
             <Link href="/collection" style={{
-              display: "inline-block", padding: "14px 52px",
-              background: "var(--c-btn-bg)", color: "var(--c-btn-text)",
-              fontFamily: FO, fontSize: 12, fontWeight: 700,
-              letterSpacing: "0.12em", textTransform: "uppercase",
-              textDecoration: "none", transition: "opacity 0.2s, box-shadow 0.2s",
-              borderRadius: 50,
+              display: "inline-block", padding: "15px 52px",
+              background: "#e8a000", color: "#000",
+              fontFamily: FO, fontSize: 11, fontWeight: 700,
+              letterSpacing: "0.14em", textTransform: "uppercase",
+              textDecoration: "none", borderRadius: 50,
+              transition: "opacity 0.2s",
             }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.8"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 0 18px rgba(160,160,160,0.25)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "none"; }}>
+              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.opacity = "0.88"}
+              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.opacity = "1"}
+            >
               Shop All Posters
             </Link>
           </div>
@@ -130,10 +108,11 @@ export default function WhyChooseUs() {
 
       <style>{`
         @media (max-width: 900px) {
-          .why-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 32px !important; }
+          .why-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 480px) {
           .why-grid { grid-template-columns: 1fr !important; }
+          .why-card { padding: 28px 20px !important; }
         }
       `}</style>
     </section>
