@@ -5,8 +5,8 @@ import Navbar from "@/components/navbar/Navbar";
 import { useCart } from "@/context/CartContext";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const steps = ["Delivery", "Payment", "Confirm"];
 

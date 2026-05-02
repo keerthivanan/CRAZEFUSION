@@ -8,7 +8,7 @@ export default function Ticker() {
       <div className="marquee-track" style={{ display: "flex", width: "max-content", gap: 0 }}>
         {[...Array(6)].map((_, i) => (
           <span key={i} dangerouslySetInnerHTML={{ __html: text }}
-            style={{ fontFamily: "var(--font-space-var,'Space Grotesk',sans-serif)", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#fff", whiteSpace: "nowrap", paddingRight: 32 }} />
+            style={{ fontFamily: "var(--font-poppins-var,'Poppins',sans-serif)", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#fff", whiteSpace: "nowrap", paddingRight: 32 }} />
         ))}
       </div>
     </div>

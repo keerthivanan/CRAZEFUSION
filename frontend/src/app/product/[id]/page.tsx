@@ -10,8 +10,8 @@ import { useCart } from "@/context/CartContext";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 export default function ProductPage() {
   const { id } = useParams();

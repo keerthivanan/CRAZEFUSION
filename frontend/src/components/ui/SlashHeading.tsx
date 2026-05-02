@@ -2,7 +2,7 @@
 
 const TEAL = "#0dcfcf";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 interface SlashHeadingProps {
   text: string;

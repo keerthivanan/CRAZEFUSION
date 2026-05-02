@@ -6,8 +6,8 @@ import AnimatedContent from "@/components/reactbits/AnimatedContent";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import CountUp from "@/components/reactbits/CountUp";
 
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const reviews = [
   { name: "Arjun K.", city: "Mumbai", text: "Absolutely stunning quality! My room looks like a magazine shoot. The panels align perfectly and the print quality is unreal.", stars: 5, product: "BMW M4 Poster", date: "Mar 2025" },

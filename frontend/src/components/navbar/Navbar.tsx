@@ -156,8 +156,7 @@ export default function Navbar() {
   const navBg   = theme === "dark" ? "#111111" : "#ffffff";
   const iconClr = theme === "dark" ? "#ffffff" : "#111111";
   const borderClr = theme === "dark" ? "#2a2a2a" : "#e5e5e5";
-  const FO = "'Poppins', sans-serif";
-  const FE = "'Epilogue', sans-serif";
+  const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
   return (
     <>
@@ -249,7 +248,7 @@ export default function Navbar() {
                   flex: "1 1 auto", minHeight: 60,
                 }}
               >
-                <Link href={card.href} style={{ fontFamily: FE, fontSize: 18, fontWeight: 400, color: "#fff", textDecoration: "none", letterSpacing: "-0.3px" }}>
+                <Link href={card.href} style={{ fontFamily: FO, fontSize: 18, fontWeight: 400, color: "#fff", textDecoration: "none", letterSpacing: "-0.3px" }}>
                   {card.label}
                 </Link>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "2px 16px", marginTop: "auto" }}>

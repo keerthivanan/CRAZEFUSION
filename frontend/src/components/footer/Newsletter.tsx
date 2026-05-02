@@ -2,9 +2,9 @@
 import { useState } from "react";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");

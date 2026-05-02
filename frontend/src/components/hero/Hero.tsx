@@ -9,9 +9,9 @@ const heroImages = [
   { src: "https://www.posterized.in/cdn/shop/files/blackpanther1_22c3b291-1166-4186-8189-936711466fec.jpg?v=1777101350&width=533", label: "Trending" },
 ];
 
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 export default function Hero() {
   return (

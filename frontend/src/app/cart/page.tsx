@@ -7,8 +7,8 @@ import Newsletter from "@/components/footer/Newsletter";
 import { useCart } from "@/context/CartContext";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 export default function CartPage() {
   const { items, updateQty, removeItem, subtotal } = useCart();
