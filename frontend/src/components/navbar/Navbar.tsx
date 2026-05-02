@@ -205,7 +205,8 @@ export default function Navbar() {
 
             {/* Right: theme + cart + login */}
             <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
-              <button onClick={toggle} aria-label="Toggle theme"
+              {/* Theme toggle — hidden on mobile */}
+              <button onClick={toggle} aria-label="Toggle theme" className="nav-theme-btn"
                 style={{ background: "none", border: `1px solid ${borderClr}`, borderRadius: "50%", width: 34, height: 34, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: iconClr, flexShrink: 0, transition: "border-color 0.2s" }}>
                 {theme === "light" ? <IconMoon /> : <IconSun />}
               </button>
@@ -219,10 +220,21 @@ export default function Navbar() {
                 )}
               </Link>
 
-              <Link href="/auth/login"
+              {/* Desktop: LOGIN button */}
+              <Link href="/auth/login" className="nav-login-desktop"
                 style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", textDecoration: "none", padding: "8px 14px", borderRadius: 50, background: "#111", color: "#fff", whiteSpace: "nowrap", flexShrink: 0 }}
               >
                 Login
+              </Link>
+
+              {/* Mobile: user icon → profile */}
+              <Link href="/auth/profile" className="nav-user-mobile"
+                style={{ display: "none", alignItems: "center", justifyContent: "center", width: 34, height: 34, color: iconClr, textDecoration: "none", flexShrink: 0 }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
               </Link>
             </div>
           </div>
@@ -289,6 +301,9 @@ export default function Navbar() {
           .nav-wrapper        { top: 42px !important; width: calc(100% - 16px) !important; }
           .nav-logo-desktop   { display: none !important; }
           .nav-logo-mobile    { display: block !important; }
+          .nav-theme-btn      { display: none !important; }
+          .nav-login-desktop  { display: none !important; }
+          .nav-user-mobile    { display: flex !important; }
         }
       `}</style>
     </>
