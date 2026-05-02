@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 /* ── canvas fire particle system ───────────────────────────── */
 function FireCanvas() {

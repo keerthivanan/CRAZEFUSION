@@ -6,7 +6,7 @@ import ClickSpark from "@/components/reactbits/ClickSpark";
 import CountUp from "@/components/reactbits/CountUp";
 import { products } from "@/data";
 
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 export default function ProductCard({ p }: { p: typeof products[0] }) {

@@ -11,8 +11,8 @@ import ClickSpark from "@/components/reactbits/ClickSpark";
 import SlashHeading from "@/components/ui/SlashHeading";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 function ProductCard({ p }: { p: typeof products[0] }) {
   const { addItem } = useCart();

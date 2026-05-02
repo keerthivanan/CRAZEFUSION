@@ -4,7 +4,7 @@ import SlashHeading from "@/components/ui/SlashHeading";
 import Link from "next/link";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const MedalIcon = () => (
   <svg width="58" height="62" viewBox="0 0 24 26" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

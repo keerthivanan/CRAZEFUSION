@@ -4,9 +4,9 @@ import TiltedCard from "@/components/reactbits/TiltedCard";
 import AnimatedContent from "@/components/reactbits/AnimatedContent";
 import BlurText from "@/components/reactbits/BlurText";
 
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const options = [
   { label: "Single Poster",    sub: "1 Piece · Any Size",     href: "/custom-builder", img: "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=600&h=400&fit=crop&q=80" },

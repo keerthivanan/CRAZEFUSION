@@ -6,8 +6,8 @@ import StarBorder from "@/components/reactbits/StarBorder";
 import Magnet from "@/components/reactbits/Magnet";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 export default function CollectionBanner() {

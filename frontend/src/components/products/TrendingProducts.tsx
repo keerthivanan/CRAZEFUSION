@@ -5,9 +5,9 @@ import ClickSpark from "@/components/reactbits/ClickSpark";
 import { products } from "@/data";
 import { useCart } from "@/context/CartContext";
 
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const FE = "var(--font-epilogue-var,'Epilogue',sans-serif)";
+const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const CARD_W = 240;
 const GAP    = 20;

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import CountUp from "@/components/reactbits/CountUp";
 
-const F  = "var(--font-space-var,'Space Grotesk',sans-serif)";
+const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const links = {
