@@ -161,10 +161,10 @@ export default function Navbar() {
   return (
     <>
       {/* Floating wrapper */}
-      <div style={{
+      <div className="nav-wrapper" style={{
         position: "fixed", top: 58, left: "50%",
         transform: "translateX(-50%)",
-        width: "calc(100% - 32px)", maxWidth: 920,
+        width: "calc(100% - 24px)", maxWidth: 920,
         zIndex: 1000,
       }}>
         <nav
@@ -197,7 +197,7 @@ export default function Navbar() {
 
             {/* Logo — centered */}
             <Link href="/" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", textDecoration: "none", flexShrink: 0 }}>
-              <img src="/logo.png" alt="CrazeFusion" style={{ height: 52, width: "auto", objectFit: "contain", display: "block", filter: theme === "dark" ? "invert(1)" : "none", transition: "filter 0.2s" }} />
+              <img src="/logo.png" alt="CrazeFusion" className="nav-logo" style={{ height: 52, width: "auto", objectFit: "contain", display: "block", filter: theme === "dark" ? "invert(1)" : "none", transition: "filter 0.2s" }} />
             </Link>
 
             {/* Right: theme + cart + login */}
@@ -278,12 +278,13 @@ export default function Navbar() {
         )}
       </div>
 
-      {/* Desktop layout: cards side-by-side */}
       <style>{`
         @media (min-width: 769px) {
-          .cn-content {
-            flex-direction: row !important;
-          }
+          .cn-content { flex-direction: row !important; }
+        }
+        @media (max-width: 768px) {
+          .nav-wrapper { top: 42px !important; width: calc(100% - 16px) !important; }
+          .nav-logo    { height: 38px !important; }
         }
       `}</style>
     </>
