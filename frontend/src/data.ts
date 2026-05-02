@@ -3,7 +3,7 @@ export const categories = ["All", "Cricket", "Basketball", "Football", "Cars", "
 export const products = [
   {
     id: 1,
-    title: "CSK | YELLOW ARMY WALL SET",
+    title: "CSK | Yellow Army Wall Set",
     sub: "8 Panel Split · Cricket",
     price: 499, original: 999, badge: "Best Seller", cat: "Cricket", team: "CSK",
     img:  "https://www.posterized.in/cdn/shop/files/NEWDWALL8SPILT_jpg.jpg?v=1769703364&width=533",
@@ -13,7 +13,7 @@ export const products = [
   },
   {
     id: 2,
-    title: "RCB | RED DEVILS COLLECTION",
+    title: "RCB | Red Devils Collection",
     sub: "8 Panel Split · Cricket",
     price: 499, original: 999, badge: "Hot", cat: "Cricket", team: "RCB",
     img:  "https://www.posterized.in/cdn/shop/files/NEWAWALLSPILT_jpg.jpg?v=1769701946&width=533",
@@ -23,7 +23,7 @@ export const products = [
   },
   {
     id: 3,
-    title: "LA LAKERS | PURPLE DYNASTY",
+    title: "LA Lakers | Purple Dynasty",
     sub: "8 Panel Split · Basketball",
     price: 499, original: 999, badge: "Best Seller", cat: "Basketball", team: "Lakers",
     img:  "https://www.posterized.in/cdn/shop/files/NEWNWALL8SPILT_jpg.jpg?v=1769703069&width=533",
@@ -33,7 +33,7 @@ export const products = [
   },
   {
     id: 4,
-    title: "GOLDEN STATE | WARRIORS LEGACY",
+    title: "Golden State | Warriors Legacy",
     sub: "8 Panel Split · Basketball",
     price: 499, original: 999, badge: "New", cat: "Basketball", team: "Warriors",
     img:  "https://www.posterized.in/cdn/shop/files/NEWbWALL8SPILT_jpg.jpg?v=1769701721&width=533",
@@ -43,7 +43,7 @@ export const products = [
   },
   {
     id: 5,
-    title: "REAL MADRID | GALACTICOS WALL SET",
+    title: "Real Madrid | Galacticos Wall Set",
     sub: "8 Panel Split · Football",
     price: 499, original: 999, badge: "Hot", cat: "Football", team: "RealMadrid",
     img:  "https://www.posterized.in/cdn/shop/files/NEWMWALL8SPILT_jpg.jpg?v=1769702161&width=533",
@@ -53,7 +53,7 @@ export const products = [
   },
   {
     id: 6,
-    title: "GTR | VECTOR STYLE CARS #01",
+    title: "GTR | Vector Style Cars #01",
     sub: "8 Panel Split · Car Posters",
     price: 499, original: 999, badge: "Sale", cat: "Cars", team: null,
     img:  "https://www.posterized.in/cdn/shop/files/GTRVECTORSTYLECARS_018PanelSplitWallSet_2bd0f0ec-7b22-4c1e-8e9c-27b7b6410269.jpg?v=1772684558&width=533",
@@ -63,7 +63,7 @@ export const products = [
   },
   {
     id: 7,
-    title: "BLACK PANTHER | LEGACY EDITION",
+    title: "Black Panther | Legacy Edition",
     sub: "Single Poster · Anime & Movie",
     price: 79, original: 149, badge: "Sale", cat: "Anime", team: null,
     img:  "https://www.posterized.in/cdn/shop/files/blackpanther1_22c3b291-1166-4186-8189-936711466fec.jpg?v=1777101350&width=533",
@@ -73,7 +73,7 @@ export const products = [
   },
   {
     id: 8,
-    title: "FC BARCELONA | BLAUGRANA SET",
+    title: "FC Barcelona | Blaugrana Set",
     sub: "8 Panel Split · Football",
     price: 499, original: 999, badge: null, cat: "Football", team: "Barcelona",
     img:  "https://www.posterized.in/cdn/shop/files/GTRVECTORSTYLECARS_018PanelSplitWallSet_292626bc-2488-4cf5-9eb6-9611698c3b36.jpg?v=1772684558&width=533",
@@ -83,7 +83,7 @@ export const products = [
   },
   {
     id: 9,
-    title: "MIAMI HEAT | FIRE SQUAD",
+    title: "Miami Heat | Fire Squad",
     sub: "8 Panel Split · Basketball",
     price: 499, original: 999, badge: "New", cat: "Basketball", team: "MIA",
     img:  "https://www.posterized.in/cdn/shop/files/NEWMWALL8SPILT_jpg.jpg?v=1769702161&width=533",
@@ -93,7 +93,7 @@ export const products = [
   },
   {
     id: 10,
-    title: "MUMBAI INDIANS | PALTAN EDITION",
+    title: "Mumbai Indians | Paltan Edition",
     sub: "8 Panel Split · Cricket",
     price: 499, original: 999, badge: "Hot", cat: "Cricket", team: "MI",
     img:  "https://www.posterized.in/cdn/shop/files/NEWNWALL8SPILT_jpg.jpg?v=1769703069&width=533",
@@ -103,7 +103,7 @@ export const products = [
   },
   {
     id: 11,
-    title: "MANCHESTER CITY | CHAMPIONS",
+    title: "Manchester City | Champions",
     sub: "8 Panel Split · Football",
     price: 499, original: 999, badge: "New", cat: "Football", team: "MCI",
     img:  "https://www.posterized.in/cdn/shop/files/NEWAWALLSPILT_jpg.jpg?v=1769701946&width=533",
@@ -113,7 +113,7 @@ export const products = [
   },
   {
     id: 12,
-    title: "BMW M2 | VECTOR STYLE CARS #01",
+    title: "BMW M2 | Vector Style Cars #01",
     sub: "Single Poster · Car Posters",
     price: 79, original: 149, badge: "Sale", cat: "Cars", team: null,
     img:  "https://www.posterized.in/cdn/shop/files/NEWDWALL8SPILT_jpg.jpg?v=1769703364&width=533",

@@ -6,19 +6,19 @@ const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 /* ─── Category data ─────────────────────────────────────────────── */
 const cats = [
   {
-    label: ["Cricket", "Collections"],
+    label: ["Cricket"],
     href: "/cricket",
     img: "/categories/cricket_legends.png",
     bg: "#1a4a2e",
   },
   {
-    label: ["Basketball", "Collections"],
+    label: ["Basketball"],
     href: "/basketball",
     img: "/categories/basketball_legends.png",
     bg: "#1a2e4a",
   },
   {
-    label: ["Football", "Collections"],
+    label: ["Football"],
     href: "/football",
     img: "/categories/football_legends.png",
     bg: "#2e1a4a",
