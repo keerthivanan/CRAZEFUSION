@@ -24,7 +24,7 @@ function MultiCard({ p }: { p: typeof products[0] }) {
   return (
     <div style={{ cursor: "pointer" }}>
       <div
-        style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", borderRadius: 50 }}
+        style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", borderRadius: 8 }}
         onMouseEnter={e => {
           (e.currentTarget.querySelector("img") as HTMLImageElement).style.transform = "scale(1.07)";
           const btn = e.currentTarget.querySelector(".multi-btn") as HTMLDivElement;

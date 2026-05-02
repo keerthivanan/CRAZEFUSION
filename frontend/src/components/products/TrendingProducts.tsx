@@ -23,7 +23,7 @@ function TCard({ p }: { p: typeof products[0] }) {
   return (
     <div>
       <div
-        style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", borderRadius: 50 }}
+        style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", borderRadius: 8 }}
         onMouseEnter={e => {
           (e.currentTarget.querySelector("img") as HTMLImageElement).style.transform = "scale(1.06)";
           (e.currentTarget.querySelector(".tcard-btn") as HTMLDivElement).style.opacity = "1";
