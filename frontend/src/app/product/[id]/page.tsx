@@ -61,7 +61,7 @@ export default function ProductPage() {
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <main style={{ paddingTop: 124 }}>
+      <main style={{ paddingTop: 134 }}>
 
         {/* Breadcrumb */}
         <div style={{ borderBottom: "1px solid var(--c-border)", padding: "16px 32px" }}>

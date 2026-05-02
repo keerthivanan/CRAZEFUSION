@@ -162,7 +162,7 @@ export default function Navbar() {
     <>
       {/* Floating wrapper */}
       <div style={{
-        position: "fixed", top: 50, left: "50%",
+        position: "fixed", top: 58, left: "50%",
         transform: "translateX(-50%)",
         width: "calc(100% - 32px)", maxWidth: 920,
         zIndex: 1000,

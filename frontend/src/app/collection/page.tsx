@@ -91,7 +91,7 @@ export default function CollectionPage() {
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
-      <div style={{ paddingTop: 124 }}>
+      <div style={{ paddingTop: 134 }}>
 
         {/* Breadcrumb + Header */}
         <div style={{ borderBottom: "1px solid var(--c-border)", background: "var(--c-bg)", padding: "20px 32px" }}>
