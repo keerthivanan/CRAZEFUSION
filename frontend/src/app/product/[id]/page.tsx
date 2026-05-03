@@ -33,7 +33,8 @@ export default function ProductPage() {
   );
 
   const discount = Math.round((1 - p.price / p.original) * 100);
-  const imgs = [p.img, p.img2];
+  // Poster first (full actual image), mockup second
+  const imgs = [p.img2, p.img];
 
   const handleAddToCart = () => {
     addItem({
@@ -79,9 +80,9 @@ export default function ProductPage() {
 
           {/* Images */}
           <div>
-            <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", background: "var(--c-bg-soft)", marginBottom: 12 }}>
+            <div style={{ position: "relative", background: "var(--c-bg-soft)", marginBottom: 12, display: "flex", alignItems: "center", justifyContent: "center" }}>
               <img src={imgs[activeImg]} alt={p.title}
-                style={{ width: "100%", height: "100%", objectFit: "cover", transition: "opacity 0.3s" }} />
+                style={{ width: "100%", height: "auto", display: "block", transition: "opacity 0.3s" }} />
               {p.badge && (
                 <span style={{ position: "absolute", top: 16, left: 16, background: p.badge === "Best Seller" ? "#e8a000" : p.badge === "Hot" ? "#dc2626" : p.badge === "Sale" ? "#dc2626" : "#111", color: p.badge === "Best Seller" ? "#000" : "#fff", fontFamily: F, fontSize: 10, fontWeight: 500, padding: "4px 10px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
                   {p.badge}
