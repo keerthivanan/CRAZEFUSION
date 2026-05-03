@@ -13,7 +13,7 @@ const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 const CARD_W = 260;
 const GAP    = 20;
 
-const bestSellers = products.filter(p => p.badge === "Best Seller" || p.badge === "Hot").slice(0, 8);
+const bestSellers = products.slice(0, 8);
 
 function ProductCard({ p }: { p: typeof products[0] }) {
   const { addItem } = useCart();

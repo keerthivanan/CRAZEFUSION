@@ -13,7 +13,7 @@ const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 const CARD_W = 260;
 const GAP    = 20;
 
-const multiProducts = products.filter(p => p.sub.includes("Panel") || p.sub.includes("Split")).slice(0, 8);
+const multiProducts = products.slice(8, 16);
 
 function MultiCard({ p }: { p: typeof products[0] }) {
   const { addItem } = useCart();
@@ -26,17 +26,21 @@ function MultiCard({ p }: { p: typeof products[0] }) {
       <div
         style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", borderRadius: 0, background: "var(--c-bg-soft)", marginBottom: 12 }}
         onMouseEnter={e => {
-          (e.currentTarget.querySelector("img") as HTMLImageElement).style.transform = "scale(1.06)";
+          const img = e.currentTarget.querySelector("img") as HTMLImageElement;
+          img.style.transform = "scale(1.06)";
+          img.src = p.img2;
           const btn = e.currentTarget.querySelector(".mp-qa") as HTMLElement;
           if (btn) { btn.style.opacity = "1"; btn.style.transform = "translateY(0)"; }
         }}
         onMouseLeave={e => {
-          (e.currentTarget.querySelector("img") as HTMLImageElement).style.transform = "scale(1)";
+          const img = e.currentTarget.querySelector("img") as HTMLImageElement;
+          img.style.transform = "scale(1)";
+          img.src = p.img;
           const btn = e.currentTarget.querySelector(".mp-qa") as HTMLElement;
           if (btn) { btn.style.opacity = "0"; btn.style.transform = "translateY(10px)"; }
         }}
       >
-        <img src={p.img} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease", display: "block" }} />
+        <img src={p.img} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "transform 0.5s ease", display: "block" }} />
         {p.badge && (
           <span style={{ position: "absolute", bottom: 10, left: 10, background: "#111", color: "#fff", fontFamily: FO, fontSize: 9, fontWeight: 700, padding: "5px 13px", borderRadius: 50, textTransform: "uppercase", letterSpacing: "0.07em" }}>
             {p.badge}
@@ -79,8 +83,8 @@ export default function MultiPosters() {
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 32px", marginBottom: 32, flexWrap: "wrap", gap: 12 }}>
           <h2 style={{ fontFamily: FE, fontSize: "clamp(22px,3vw,40px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0, display: "flex", gap: "0.2em", flexWrap: "wrap", alignItems: "center" }}>
-            <BlurText text="Multi Poster" delay={60} animateBy="words" direction="bottom" />
-            <span style={{ color: "#e8a000" }}><BlurText text="Collections" delay={200} animateBy="words" direction="bottom" /></span>
+            <BlurText text="Latest" delay={60} animateBy="words" direction="bottom" />
+            <span style={{ color: "#e8a000" }}><BlurText text="Arrivals" delay={200} animateBy="words" direction="bottom" /></span>
           </h2>
           <Link href="/collection"
             style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-btn-text)", background: "var(--c-btn-bg)", textDecoration: "none", padding: "9px 22px", borderRadius: 50, whiteSpace: "nowrap" }}
