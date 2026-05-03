@@ -19,5 +19,7 @@ node_modules/
 package.json
 package-lock.json
 /mockups/
+frontend/public/mockups/
+frontend/public/posters/
 make_mockups.js
 generate_data.js
