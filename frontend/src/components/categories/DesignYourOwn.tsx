@@ -10,8 +10,8 @@ const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const options = [
   { label: "Single Poster",    sub: "1 Piece · Any Size",     href: "/custom-builder", img: "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=600&h=400&fit=crop&q=80" },
-  { label: "3 Piece Split",    sub: "3 Panels · Wall Set",    href: "/custom-builder", img: "https://www.posterized.in/cdn/shop/files/NEWDWALL8SPILT_jpg.jpg?v=1769703364&width=600" },
-  { label: "4 Piece Grid",     sub: "2×2 Grid · Square Set",  href: "/custom-builder", img: "https://www.posterized.in/cdn/shop/files/NEWbWALL8SPILT_jpg.jpg?v=1769701721&width=600" },
+  { label: "3 Piece Split",    sub: "3 Panels · Wall Set",    href: "/custom-builder", img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777807993/crazefusion/mockups/mockup_ronaldo.jpg" },
+  { label: "4 Piece Grid",     sub: "2×2 Grid · Square Set",  href: "/custom-builder", img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777807959/crazefusion/mockups/mockup_naruto_-_jun_9.jpg" },
   { label: "Retro Prints",     sub: "Custom · Vintage Style",  href: "/custom-builder", img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop&q=80" },
   { label: "Pocket Photos",    sub: "Mini Set · Gift Ready",   href: "/custom-builder", img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&h=400&fit=crop&q=80" },
   { label: "Photobooth Strip", sub: "Strip · Fun Prints",      href: "/custom-builder", img: "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=400&fit=crop&q=80" },

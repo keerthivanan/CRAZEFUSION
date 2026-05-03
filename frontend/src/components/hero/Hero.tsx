@@ -3,9 +3,9 @@ import Link from "next/link";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 
 const heroImages = [
-  { src: "https://www.posterized.in/cdn/shop/files/NEWDWALL8SPILT_jpg.jpg?v=1769703364&width=533", label: "Best Seller" },
-  { src: "https://www.posterized.in/cdn/shop/files/NEWbWALL8SPILT_jpg.jpg?v=1769701721&width=533", label: "New" },
-  { src: "https://www.posterized.in/cdn/shop/files/blackpanther1_22c3b291-1166-4186-8189-936711466fec.jpg?v=1777101350&width=533", label: "Trending" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777808011/crazefusion/mockups/mockup_thala.jpg", label: "Best Seller" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777808027/crazefusion/mockups/mockup_virat_rcb.jpg", label: "New" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777808020/crazefusion/mockups/mockup_thomas_shelby.jpg", label: "Trending" },
 ];
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
