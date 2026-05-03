@@ -13,3 +13,11 @@ backend/.env
 .DS_Store
 Thumbs.db
 *.log
+
+# Root scripts / tooling
+node_modules/
+package.json
+package-lock.json
+/mockups/
+make_mockups.js
+generate_data.js
