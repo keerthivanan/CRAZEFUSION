@@ -1,7 +1,5 @@
 ﻿"use client";
 import Link from "next/link";
-import CountUp from "@/components/reactbits/CountUp";
-
 const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
@@ -48,7 +46,7 @@ export default function Footer() {
               Premium Quality Prints
             </div>
             <p style={{ fontFamily: F, fontSize: 14, color: "#888", lineHeight: 1.8, maxWidth: 300, marginBottom: 32 }}>
-              India&apos;s #1 destination for premium automotive and anime wall art. Over <CountUp to={2400} from={0} duration={2} />+ curated designs. Pan-India delivery in <CountUp to={5} from={0} />–<CountUp to={7} from={0} /> days.
+              India&apos;s #1 destination for premium poster wall art. Over 2,400+ curated designs. Pan-India delivery in 5–7 days.
             </p>
 
             {/* Contact */}

@@ -41,7 +41,7 @@ export default function CategoryIcons() {
             <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8a000", marginBottom: 6 }}>
               Shop by Sport
             </div>
-            <h2 style={{ fontFamily: FO, fontSize: "clamp(22px,3vw,36px)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--c-text)", margin: 0, textTransform: "uppercase" }}>
+            <h2 style={{ fontFamily: FO, fontSize: "clamp(16px,2vw,24px)", fontWeight: 700, letterSpacing: "-0.01em", color: "var(--c-text)", margin: 0, textTransform: "uppercase" }}>
               Your Favourite Sport
             </h2>
           </div>

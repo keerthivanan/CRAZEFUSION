@@ -96,9 +96,11 @@ export default function ProductPage() {
             </div>
             <div style={{ display: "flex", gap: 8 }}>
               {imgs.map((src, i) => (
-                <button key={i} onClick={() => setActiveImg(i)}
+                <button key={i}
+                  onMouseEnter={() => setActiveImg(i)}
+                  onClick={() => setActiveImg(i)}
                   style={{ width: 72, height: 72, overflow: "hidden", border: `2px solid ${activeImg === i ? "var(--c-text)" : "var(--c-border)"}`, background: "none", padding: 0, cursor: "pointer", transition: "border-color 0.2s", borderRadius: 6 }}>
-                  <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
                 </button>
               ))}
             </div>

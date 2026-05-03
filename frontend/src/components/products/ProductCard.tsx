@@ -3,7 +3,6 @@ import { useState } from "react";
 import Link from "next/link";
 import TiltedCard from "@/components/reactbits/TiltedCard";
 import ClickSpark from "@/components/reactbits/ClickSpark";
-import CountUp from "@/components/reactbits/CountUp";
 import { products } from "@/data";
 
 const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
@@ -46,7 +45,7 @@ export default function ProductCard({ p }: { p: typeof products[0] }) {
         <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 4, lineHeight: 1.3, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const, textAlign: "center" }}>{p.title}</div>
         <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.04em", textAlign: "center" }}>{p.sub}</div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>From ₹<CountUp to={p.price} from={0} duration={1} /></span>
+          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>From ₹{p.price}</span>
           {p.price < p.original && <span style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>}
         </div>
       </Link>
