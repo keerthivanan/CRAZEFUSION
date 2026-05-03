@@ -3,9 +3,9 @@ import Link from "next/link";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 
 const heroImages = [
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777808017/crazefusion/mockups/mockup_the_weeknd.jpg", label: "Best Seller" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777807993/crazefusion/mockups/mockup_ronaldo.jpg", label: "New" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777808038/crazefusion/mockups/mockup_wolf_of_wall_street.jpg", label: "Trending" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777809153/crazefusion/posters/poster_the_weeknd.jpg", label: "Best Seller" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777809133/crazefusion/posters/poster_ronaldo.jpg", label: "New" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777809171/crazefusion/posters/poster_wolf_of_wall_street.jpg", label: "Trending" },
 ];
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
