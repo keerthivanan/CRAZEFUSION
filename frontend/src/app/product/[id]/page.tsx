@@ -208,14 +208,20 @@ export default function ProductPage() {
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 24 }}>
                 {related.map(r => (
                   <Link key={r.id} href={`/product/${r.id}`} style={{ textDecoration: "none" }}>
-                    <div style={{ aspectRatio: "1/1", overflow: "hidden", background: "#f7f7f7", marginBottom: 10, position: "relative" }}>
-                      <img src={r.img} alt={r.title} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease" }}
-                        onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.04)")}
-                        onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")} />
+                    <div style={{ aspectRatio: "3/4", overflow: "hidden", background: "var(--c-bg-soft)", marginBottom: 10, position: "relative" }}
+                      onMouseEnter={e => {
+                        const img = e.currentTarget.querySelector("img") as HTMLImageElement;
+                        img.src = r.img2; img.style.transform = "scale(1.05)";
+                      }}
+                      onMouseLeave={e => {
+                        const img = e.currentTarget.querySelector("img") as HTMLImageElement;
+                        img.src = r.img; img.style.transform = "scale(1)";
+                      }}>
+                      <img src={r.img} alt={r.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "transform 0.4s ease" }} />
                     </div>
-                    <div style={{ fontFamily: FE, fontSize: 12, fontWeight: 500, color: "#111", textTransform: "uppercase", marginBottom: 2 }}>{r.title}</div>
-                    <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginBottom: 4 }}>{r.sub}</div>
-                    <div style={{ fontFamily: F, fontSize: 13, fontWeight: 500, color: "#111" }}>From ₹{r.price}</div>
+                    <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 400, color: "#1a6fa8", marginBottom: 2, lineHeight: 1.4, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{r.title}</div>
+                    <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.06em" }}>{r.sub}</div>
+                    <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 600, color: "var(--c-text)" }}>From ₹{r.price}</div>
                   </Link>
                 ))}
               </div>
