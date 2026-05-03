@@ -34,6 +34,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${epilogue.variable} ${spaceGrotesk.variable} ${poppins.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+      </head>
       <body style={{ margin: 0, fontFamily: "var(--font-poppins-var,'Poppins',sans-serif)" }}>
         <ThemeProvider>
           <CartProvider>
