@@ -43,6 +43,8 @@ const internationalTeams = [
   { name: "Nigeria",   short: "NGR", src: logoUrl("nbbf.com.ng"),           color: "#008751" },
 ];
 
+const allBasketballTeams = [...nbaTeams, ...internationalTeams];
+
 type AnyTeam = { name: string; short: string; src: string; color: string };
 
 function TeamCircle({
@@ -142,7 +144,6 @@ function ProductCard({ p }: { p: typeof products[0] }) {
         <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em", textAlign: "center" }}>{p.sub}</div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
           <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>From ₹{p.price}</span>
-          {p.original > p.price && <span style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>}
         </div>
       </Link>
     </div>
@@ -150,14 +151,10 @@ function ProductCard({ p }: { p: typeof products[0] }) {
 }
 
 export default function BasketballPage() {
-  const [activeTab, setActiveTab]   = useState<"nba" | "international">("nba");
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
 
-  const currentTeams = activeTab === "nba" ? nbaTeams : internationalTeams;
-
-  const handleTabSwitch = (tab: "nba" | "international") => {
-    setActiveTab(tab);
-    setActiveTeam(null);
+  const handleTeamClick = (short: string) => {
+    setActiveTeam(activeTeam === short ? null : short);
   };
 
   const basketballProducts = products.filter(p => p.cat === "Basketball");
@@ -166,7 +163,7 @@ export default function BasketballPage() {
     : basketballProducts;
 
   const activeTeamObj = activeTeam
-    ? currentTeams.find(t => t.short === activeTeam) ?? null
+    ? allBasketballTeams.find(t => t.short === activeTeam) ?? null
     : null;
 
   return (
@@ -198,55 +195,43 @@ export default function BasketballPage() {
               />
             </div>
 
-            {/* Tab Switcher */}
-            <div style={{ display: "flex", gap: 8 }}>
-              {(["nba", "international"] as const).map(tab => (
-                <button
-                  key={tab}
-                  onClick={() => handleTabSwitch(tab)}
-                  style={{
-                    padding: "10px 28px", borderRadius: 50,
-                    border: `1.5px solid ${activeTab === tab ? "var(--c-btn-bg)" : "var(--c-border)"}`,
-                    background: activeTab === tab ? "var(--c-btn-bg)" : "transparent",
-                    color: activeTab === tab ? "var(--c-btn-text)" : "var(--c-text-muted)",
-                    fontFamily: FO, fontSize: 11, fontWeight: 700,
-                    letterSpacing: "0.1em", textTransform: "uppercase",
-                    cursor: "pointer", transition: "all 0.2s",
-                  }}
-                  onMouseEnter={e => {
-                    if (activeTab !== tab) {
-                      (e.currentTarget as HTMLButtonElement).style.borderColor = "#888888";
-                      (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 12px rgba(160,160,160,0.2)";
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (activeTab !== tab) {
-                      (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--c-border)";
-                      (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
-                    }
-                  }}
-                >
-                  {tab === "nba" ? "NBA Franchises" : "International"}
-                </button>
-              ))}
-            </div>
           </div>
         </div>
 
         {/* Team Circles */}
         <div style={{ background: "var(--c-bg-soft)", padding: "28px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-            <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#aaa", marginBottom: 20 }}>
-              {activeTab === "nba" ? "NBA Franchises" : "International Teams"}
+            {/* NBA Section */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+              <img src={logoUrl("nba.com")} alt="NBA"
+                style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }} />
+              <span style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--c-text-muted)" }}>
+                NBA Franchises
+              </span>
             </div>
-            <div className="no-scrollbar basketball-teams" style={{ display: "flex", gap: 18, overflowX: "auto", paddingBottom: 4, justifyContent: "center", flexWrap: "wrap" }}>
-              {currentTeams.map(team => (
-                <TeamCircle
-                  key={team.short}
-                  team={team}
+            <div className="no-scrollbar" style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", marginBottom: 28 }}>
+              {nbaTeams.map(team => (
+                <TeamCircle key={team.short} team={team}
                   isActive={activeTeam === team.short}
-                  onClick={() => setActiveTeam(activeTeam === team.short ? null : team.short)}
-                />
+                  onClick={() => handleTeamClick(team.short)} />
+              ))}
+            </div>
+
+            <div style={{ height: 1, background: "var(--c-border)", margin: "4px 0 24px" }} />
+
+            {/* International Section */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+              <img src={logoUrl("fiba.basketball")} alt="FIBA"
+                style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }} />
+              <span style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--c-text-muted)" }}>
+                International
+              </span>
+            </div>
+            <div className="no-scrollbar" style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
+              {internationalTeams.map(team => (
+                <TeamCircle key={team.short} team={team}
+                  isActive={activeTeam === team.short}
+                  onClick={() => handleTeamClick(team.short)} />
               ))}
             </div>
           </div>
@@ -266,7 +251,7 @@ export default function BasketballPage() {
                   {activeTeamObj.name}
                 </span>
                 <span style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginLeft: 8 }}>
-                  {activeTab === "nba" ? "NBA" : "International"} · {activeTeamObj.short}
+                  Basketball · {activeTeamObj.short}
                 </span>
               </div>
               <button onClick={() => setActiveTeam(null)} style={{ marginLeft: "auto", background: "none", border: "none", cursor: "pointer", color: "#aaa", fontSize: 20, lineHeight: 1, borderRadius: 4, padding: "2px 6px" }}>×</button>
