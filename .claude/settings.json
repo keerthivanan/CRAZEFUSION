@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk '{sum+=$1; count++} END {print sum/count \"KB avg per file\"}')"
+    ]
+  }
+}
