@@ -27,12 +27,16 @@ function ProductCard({ p }: { p: typeof products[0] }) {
         <div
           style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", borderRadius: 0, background: "var(--c-bg-soft)", marginBottom: 12 }}
           onMouseEnter={e => {
-            (e.currentTarget.querySelector("img") as HTMLImageElement).style.transform = "scale(1.06)";
+            const img = e.currentTarget.querySelector("img") as HTMLImageElement;
+            img.style.transform = "scale(1.06)";
+            img.src = p.img2;
             const btn = e.currentTarget.querySelector(".bs-qa") as HTMLElement;
             if (btn) { btn.style.opacity = "1"; btn.style.transform = "translateY(0)"; }
           }}
           onMouseLeave={e => {
-            (e.currentTarget.querySelector("img") as HTMLImageElement).style.transform = "scale(1)";
+            const img = e.currentTarget.querySelector("img") as HTMLImageElement;
+            img.style.transform = "scale(1)";
+            img.src = p.img;
             const btn = e.currentTarget.querySelector(".bs-qa") as HTMLElement;
             if (btn) { btn.style.opacity = "0"; btn.style.transform = "translateY(10px)"; }
           }}
