@@ -14,109 +14,70 @@ const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
-const KEY = process.env.NEXT_PUBLIC_LOGODEV_KEY ?? "pk_X0d9dkoXSXC1bEBCAvNs-g";
+const KEY  = process.env.NEXT_PUBLIC_LOGODEV_KEY ?? "pk_X0d9dkoXSXC1bEBCAvNs-g";
 const logo = (domain: string) => `https://img.logo.dev/${domain}?token=${KEY}&size=160&format=png`;
 const flag = (iso: string)    => `https://flagcdn.com/w160/${iso}.png`;
 
 const clubTeams = [
-  { name: "Real Madrid",       short: "RMA", src: logo("realmadrid.com"),    color: "#00529f" },
-  { name: "FC Barcelona",      short: "FCB", src: logo("fcbarcelona.com"),   color: "#a50044" },
-  { name: "Manchester City",   short: "MCI", src: logo("mancity.com"),       color: "#6cabdd" },
-  { name: "Liverpool FC",      short: "LIV", src: logo("liverpoolfc.com"),   color: "#c8102e" },
-  { name: "PSG",               short: "PSG", src: logo("psg.fr"),            color: "#004170" },
-  { name: "Arsenal",           short: "ARS", src: logo("arsenal.com"),       color: "#ef0107" },
-  { name: "Manchester United", short: "MUN", src: logo("manutd.com"),        color: "#da291c" },
-  { name: "Chelsea FC",        short: "CHE", src: logo("chelseafc.com"),     color: "#034694" },
-  { name: "Bayern Munich",     short: "BAY", src: logo("fcbayern.com"),      color: "#dc052d" },
-  { name: "Juventus",          short: "JUV", src: logo("juventus.com"),      color: "#1a1a1a" },
-  { name: "AC Milan",          short: "MIL", src: logo("acmilan.com"),       color: "#fb090b" },
+  { name: "Real Madrid",       short: "RMA", src: logo("realmadrid.com"),       color: "#00529f" },
+  { name: "FC Barcelona",      short: "FCB", src: logo("fcbarcelona.com"),      color: "#a50044" },
+  { name: "Manchester City",   short: "MCI", src: logo("mancity.com"),          color: "#6cabdd" },
+  { name: "Liverpool FC",      short: "LIV", src: logo("liverpoolfc.com"),      color: "#c8102e" },
+  { name: "PSG",               short: "PSG", src: logo("psg.fr"),               color: "#004170" },
+  { name: "Arsenal",           short: "ARS", src: logo("arsenal.com"),          color: "#ef0107" },
+  { name: "Manchester United", short: "MUN", src: logo("manutd.com"),           color: "#da291c" },
+  { name: "Chelsea FC",        short: "CHE", src: logo("chelseafc.com"),        color: "#034694" },
+  { name: "Bayern Munich",     short: "BAY", src: logo("fcbayern.com"),         color: "#dc052d" },
+  { name: "Juventus",          short: "JUV", src: logo("juventus.com"),         color: "#1a1a1a" },
+  { name: "AC Milan",          short: "MIL", src: logo("acmilan.com"),          color: "#fb090b" },
   { name: "Atletico Madrid",   short: "ATM", src: logo("atleticodemadrid.com"), color: "#cb3524" },
 ];
 
 const internationalTeams = [
-  { name: "Brazil",      short: "BRA", src: flag("br"), color: "#009c3b" },
-  { name: "Argentina",   short: "ARG", src: flag("ar"), color: "#74acdf" },
-  { name: "France",      short: "FRA", src: flag("fr"), color: "#003189" },
-  { name: "Germany",     short: "GER", src: flag("de"), color: "#1a1a1a" },
-  { name: "Spain",       short: "ESP", src: flag("es"), color: "#aa151b" },
+  { name: "Brazil",      short: "BRA", src: flag("br"),     color: "#009c3b" },
+  { name: "Argentina",   short: "ARG", src: flag("ar"),     color: "#74acdf" },
+  { name: "France",      short: "FRA", src: flag("fr"),     color: "#003189" },
+  { name: "Germany",     short: "GER", src: flag("de"),     color: "#1a1a1a" },
+  { name: "Spain",       short: "ESP", src: flag("es"),     color: "#aa151b" },
   { name: "England",     short: "ENG", src: flag("gb-eng"), color: "#13297b" },
-  { name: "Portugal",    short: "POR", src: flag("pt"), color: "#006600" },
-  { name: "Italy",       short: "ITA", src: flag("it"), color: "#003399" },
-  { name: "Netherlands", short: "NED", src: flag("nl"), color: "#ff6900" },
-  { name: "Belgium",     short: "BEL", src: flag("be"), color: "#ed2939" },
-  { name: "Croatia",     short: "CRO", src: flag("hr"), color: "#cc0000" },
-  { name: "Japan",       short: "JPN", src: flag("jp"), color: "#bc002d" },
-  { name: "South Korea", short: "KOR", src: flag("kr"), color: "#003478" },
-  { name: "Morocco",     short: "MAR", src: flag("ma"), color: "#006233" },
-  { name: "Senegal",     short: "SEN", src: flag("sn"), color: "#00853f" },
-  { name: "USA",         short: "USA", src: flag("us"), color: "#002868" },
-  { name: "Mexico",      short: "MEX", src: flag("mx"), color: "#006847" },
-  { name: "Colombia",    short: "COL", src: flag("co"), color: "#fcd116" },
-  { name: "Uruguay",     short: "URU", src: flag("uy"), color: "#5aaae7" },
-  { name: "Ghana",       short: "GHA", src: flag("gh"), color: "#006b3f" },
+  { name: "Portugal",    short: "POR", src: flag("pt"),     color: "#006600" },
+  { name: "Italy",       short: "ITA", src: flag("it"),     color: "#003399" },
+  { name: "Netherlands", short: "NED", src: flag("nl"),     color: "#ff6900" },
+  { name: "Belgium",     short: "BEL", src: flag("be"),     color: "#ed2939" },
+  { name: "Croatia",     short: "CRO", src: flag("hr"),     color: "#cc0000" },
+  { name: "Japan",       short: "JPN", src: flag("jp"),     color: "#bc002d" },
+  { name: "South Korea", short: "KOR", src: flag("kr"),     color: "#003478" },
+  { name: "Morocco",     short: "MAR", src: flag("ma"),     color: "#006233" },
+  { name: "Senegal",     short: "SEN", src: flag("sn"),     color: "#00853f" },
+  { name: "USA",         short: "USA", src: flag("us"),     color: "#002868" },
+  { name: "Mexico",      short: "MEX", src: flag("mx"),     color: "#006847" },
+  { name: "Colombia",    short: "COL", src: flag("co"),     color: "#fcd116" },
+  { name: "Uruguay",     short: "URU", src: flag("uy"),     color: "#5aaae7" },
+  { name: "Ghana",       short: "GHA", src: flag("gh"),     color: "#006b3f" },
 ];
 
+const allFootballTeams = [...clubTeams, ...internationalTeams];
 type AnyTeam = { name: string; short: string; src: string; color: string };
 
-function TeamCircle({
-  team, isActive, onClick,
-}: { team: AnyTeam; isActive: boolean; onClick: () => void }) {
+function TeamCircle({ team, isActive, onClick }: { team: AnyTeam; isActive: boolean; onClick: () => void }) {
   const [failed, setFailed] = useState(false);
-
   return (
-    <button
-      onClick={onClick}
-      style={{
-        flexShrink: 0, display: "flex", flexDirection: "column",
-        alignItems: "center", gap: 8,
-        background: "none", border: "none", cursor: "pointer", padding: "4px 2px",
-      }}
-    >
+    <button onClick={onClick} style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 8, background: "none", border: "none", cursor: "pointer", padding: "4px 2px" }}>
       <div style={{
-        width: 76, height: 76, borderRadius: "50%", overflow: "hidden",
-        background: "#fff",
+        width: 76, height: 76, borderRadius: "50%", overflow: "hidden", background: "#fff",
         transition: "transform 0.22s ease, box-shadow 0.22s ease",
-        boxShadow: isActive
-          ? `0 0 0 2px var(--c-bg), 0 0 0 5px ${team.color}, 0 6px 24px ${team.color}33`
-          : "0 0 0 1.5px rgba(0,0,0,0.1)",
+        boxShadow: isActive ? `0 0 0 2px var(--c-bg), 0 0 0 5px ${team.color}, 0 6px 24px ${team.color}33` : "0 0 0 1.5px rgba(0,0,0,0.1)",
         transform: isActive ? "translateY(-4px) scale(1.07)" : "translateY(0) scale(1)",
-        display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+        display: "flex", alignItems: "center", justifyContent: "center",
       }}
-        onMouseEnter={e => {
-          if (!isActive) {
-            (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 2px var(--c-bg), 0 0 0 4px ${team.color}99`;
-            (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px) scale(1.04)";
-          }
-        }}
-        onMouseLeave={e => {
-          if (!isActive) {
-            (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 0 1.5px rgba(0,0,0,0.1)";
-            (e.currentTarget as HTMLDivElement).style.transform = "translateY(0) scale(1)";
-          }
-        }}
+        onMouseEnter={e => { if (!isActive) { (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 2px var(--c-bg), 0 0 0 4px ${team.color}99`; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px) scale(1.04)"; } }}
+        onMouseLeave={e => { if (!isActive) { (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 0 1.5px rgba(0,0,0,0.1)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0) scale(1)"; } }}
       >
-        {failed ? (
-          <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: team.color }}>{team.short}</span>
-        ) : (
-          <img src={team.src} alt={team.name}
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            onError={() => setFailed(true)}
-          />
-        )}
+        {failed ? <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: team.color }}>{team.short}</span>
+          : <img src={team.src} alt={team.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} onError={() => setFailed(true)} />}
       </div>
-      <span style={{
-        fontFamily: FO, fontSize: 9, fontWeight: isActive ? 700 : 600,
-        color: isActive ? team.color : "var(--c-text-muted)",
-        letterSpacing: "0.07em", textTransform: "uppercase",
-        transition: "color 0.2s", textAlign: "center", maxWidth: 72, lineHeight: 1.2,
-      }}>
-        {team.short}
-      </span>
-      <div style={{
-        width: 4, height: 4, borderRadius: "50%",
-        background: isActive ? team.color : "transparent",
-        transition: "background 0.2s",
-      }} />
+      <span style={{ fontFamily: FO, fontSize: 9, fontWeight: isActive ? 700 : 600, color: isActive ? team.color : "var(--c-text-muted)", letterSpacing: "0.07em", textTransform: "uppercase", transition: "color 0.2s", textAlign: "center", maxWidth: 72, lineHeight: 1.2 }}>{team.short}</span>
+      <div style={{ width: 4, height: 4, borderRadius: "50%", background: isActive ? team.color : "transparent", transition: "background 0.2s" }} />
     </button>
   );
 }
@@ -125,25 +86,14 @@ function ProductCard({ p }: { p: typeof products[0] }) {
   const { addItem } = useCart();
   const [hovered, setHovered] = useState(false);
   const [added, setAdded]     = useState(false);
-
   return (
     <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ cursor: "pointer" }}>
-      <div style={{
-        position: "relative", aspectRatio: "3/4", overflow: "hidden",
-        marginBottom: 12, background: "var(--c-bg-soft)",
-        borderRadius: 0, transition: "all 0.3s ease",
-      }}>
-        <img src={hovered ? p.img2 : p.img} alt={p.title}
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "all 0.5s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
-        {p.badge && (
-          <span style={{ position: "absolute", bottom: 10, left: 10, background: "#111", color: "#fff", fontFamily: FO, fontSize: 9, fontWeight: 700, padding: "5px 13px", borderRadius: 50, textTransform: "uppercase", letterSpacing: "0.07em" }}>
-            {p.badge}
-          </span>
-        )}
+      <div style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", transition: "all 0.3s ease" }}>
+        <img src={hovered ? p.img2 : p.img} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "all 0.5s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
+        {p.badge && <span style={{ position: "absolute", bottom: 10, left: 10, background: "#111", color: "#fff", fontFamily: FO, fontSize: 9, fontWeight: 700, padding: "5px 13px", borderRadius: 50, textTransform: "uppercase", letterSpacing: "0.07em" }}>{p.badge}</span>}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(10px)", transition: "all 0.3s ease" }}>
           <ClickSpark sparkColor="#fff" sparkCount={8} sparkRadius={20}>
-            <button
-              onClick={() => { addItem({ id: p.id, title: p.title, sub: p.sub, img: p.img, price: p.price, original: p.original, size: p.sizes[0], finish: p.finishes[0] }); setAdded(true); setTimeout(() => setAdded(false), 1500); }}
+            <button onClick={() => { addItem({ id: p.id, title: p.title, sub: p.sub, img: p.img, price: p.price, original: p.original, size: p.sizes[0], finish: p.finishes[0] }); setAdded(true); setTimeout(() => setAdded(false), 1500); }}
               style={{ width: "100%", padding: "13px 0", background: added ? "#16a34a" : "rgba(17,17,17,0.92)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.2s", borderRadius: 50 }}>
               {added ? "✓ Added!" : "Quick Add"}
             </button>
@@ -162,132 +112,101 @@ function ProductCard({ p }: { p: typeof products[0] }) {
   );
 }
 
-export default function FootballPage() {
-  const [activeTeam, setActiveTeam] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"clubs" | "international">("clubs");
+const sections = [
+  { key: "clubs",         label: "Top Clubs",    sub: "Top European clubs",  logo: logo("uefa.com"),       teams: clubTeams },
+  { key: "international", label: "International", sub: "National teams",      logo: logo("fifa.com"),       teams: internationalTeams },
+];
 
-  const handleTabSwitch = (tab: "clubs" | "international") => {
-    setActiveTab(tab);
+export default function FootballPage() {
+  const [activeSection, setActiveSection] = useState<"clubs" | "international" | null>(null);
+  const [activeTeam, setActiveTeam]       = useState<string | null>(null);
+
+  const handleSectionClick = (key: "clubs" | "international") => {
+    if (activeSection === key) { setActiveSection(null); setActiveTeam(null); return; }
+    setActiveSection(key);
     setActiveTeam(null);
   };
 
-  const currentTeams = activeTab === "clubs" ? clubTeams : internationalTeams;
-
+  const currentTeams    = activeSection === "clubs" ? clubTeams : internationalTeams;
   const footballProducts = products.filter(p => p.cat === "Football");
-  const displayProducts = activeTeam
-    ? footballProducts.filter(p => (p as any).team === activeTeam)
-    : footballProducts;
-
-  const activeTeamObj = activeTeam
-    ? currentTeams.find(t => t.short === activeTeam) ?? null
-    : null;
+  const displayProducts  = activeTeam ? footballProducts.filter(p => (p as any).team === activeTeam) : footballProducts;
+  const activeTeamObj    = activeTeam ? allFootballTeams.find(t => t.short === activeTeam) ?? null : null;
 
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
       <div style={{ paddingTop: 108 }}>
 
-        {/* Breadcrumb */}
         <div style={{ background: "var(--c-bg)", padding: "16px 32px" }}>
-          <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-            <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-              <Link href="/" style={{ color: "#aaa", textDecoration: "none" }}>Home</Link>
-              <span style={{ margin: "0 8px" }}>›</span>
-              <span style={{ color: "var(--c-text)" }}>Football</span>
-            </div>
+          <div style={{ maxWidth: 1400, margin: "0 auto", fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+            <Link href="/" style={{ color: "#aaa", textDecoration: "none" }}>Home</Link>
+            <span style={{ margin: "0 8px" }}>›</span>
+            <span style={{ color: "var(--c-text)" }}>Football</span>
           </div>
         </div>
 
-        {/* Page Header */}
         <div style={{ background: "var(--c-bg)", padding: "40px 32px 28px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-            <div style={{ marginBottom: 24 }}>
-              <SlashHeading
-                text="Football Posters"
-                subtitle="Shop by Club or International Team"
-                size="clamp(20px,2.2vw,32px)"
-                align="left"
-                as="h1"
-              />
-            </div>
-
-            {/* Tab Switcher */}
-            <div style={{ display: "flex", gap: 8 }}>
-              {(["clubs", "international"] as const).map(tab => (
-                <button
-                  key={tab}
-                  onClick={() => handleTabSwitch(tab)}
-                  style={{
-                    padding: "10px 28px", borderRadius: 50,
-                    border: `1.5px solid ${activeTab === tab ? "var(--c-btn-bg)" : "var(--c-border)"}`,
-                    background: activeTab === tab ? "var(--c-btn-bg)" : "transparent",
-                    color: activeTab === tab ? "var(--c-btn-text)" : "var(--c-text-muted)",
-                    fontFamily: FO, fontSize: 11, fontWeight: 700,
-                    letterSpacing: "0.1em", textTransform: "uppercase",
-                    cursor: "pointer", transition: "all 0.2s",
-                  }}
-                  onMouseEnter={e => {
-                    if (activeTab !== tab) {
-                      (e.currentTarget as HTMLButtonElement).style.borderColor = "#888888";
-                      (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 12px rgba(160,160,160,0.2)";
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (activeTab !== tab) {
-                      (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--c-border)";
-                      (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
-                    }
-                  }}
-                >
-                  {tab === "clubs" ? "Top Clubs" : "International"}
-                </button>
-              ))}
-            </div>
+            <SlashHeading text="Football Posters" subtitle="Select a league to browse teams" size="clamp(20px,2.2vw,32px)" align="left" as="h1" />
           </div>
         </div>
 
-        {/* Team Circles */}
         <div style={{ background: "var(--c-bg-soft)", padding: "28px 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-            <div style={{ fontFamily: F, fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#aaa", marginBottom: 20 }}>
-              {activeTab === "clubs" ? "Top Clubs" : "National Teams"}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, maxWidth: 560 }}>
+              {sections.map(sec => {
+                const isActive = activeSection === sec.key;
+                return (
+                  <button key={sec.key} onClick={() => handleSectionClick(sec.key as "clubs" | "international")}
+                    style={{ display: "flex", alignItems: "center", gap: 14, padding: "18px 20px", border: `2px solid ${isActive ? "var(--c-text)" : "var(--c-border)"}`, background: isActive ? "var(--c-bg-card)" : "var(--c-bg)", borderRadius: 0, cursor: "pointer", transition: "all 0.2s", textAlign: "left" }}
+                    onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.borderColor = "#888"; }}
+                    onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--c-border)"; }}
+                  >
+                    <div style={{ width: 44, height: 44, borderRadius: "50%", overflow: "hidden", background: "#fff", flexShrink: 0, border: "1px solid #eee" }}>
+                      <img src={sec.logo} alt={sec.label} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "0.04em" }}>{sec.label}</div>
+                      <div style={{ fontFamily: F, fontSize: 11, color: "var(--c-text-muted)", marginTop: 3 }}>{sec.teams.length} teams</div>
+                    </div>
+                    <div style={{ marginLeft: "auto", fontFamily: FO, fontSize: 16, color: isActive ? "var(--c-text)" : "var(--c-text-muted)", transition: "transform 0.2s", transform: isActive ? "rotate(90deg)" : "rotate(0deg)" }}>›</div>
+                  </button>
+                );
+              })}
             </div>
-            <div className="no-scrollbar football-teams" style={{ display: "flex", gap: 18, overflowX: "auto", paddingBottom: 4, justifyContent: "center", flexWrap: "wrap" }}>
-              {currentTeams.map(team => (
-                <TeamCircle
-                  key={team.short}
-                  team={team}
-                  isActive={activeTeam === team.short}
-                  onClick={() => setActiveTeam(activeTeam === team.short ? null : team.short)}
-                />
-              ))}
-            </div>
+
+            {activeSection && (
+              <AnimatedContent distance={16} duration={0.35}>
+                <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid var(--c-border)" }}>
+                  <div style={{ fontFamily: F, fontSize: 9, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#aaa", marginBottom: 20 }}>
+                    {activeSection === "clubs" ? "Top Clubs" : "National Teams"}
+                  </div>
+                  <div className="no-scrollbar" style={{ display: "flex", gap: 18, flexWrap: "wrap", justifyContent: "flex-start" }}>
+                    {currentTeams.map(team => (
+                      <TeamCircle key={team.short} team={team} isActive={activeTeam === team.short} onClick={() => setActiveTeam(activeTeam === team.short ? null : team.short)} />
+                    ))}
+                  </div>
+                </div>
+              </AnimatedContent>
+            )}
           </div>
         </div>
 
-        {/* Active team banner */}
         {activeTeamObj && (
           <div style={{ background: activeTeamObj.color + "18", padding: "14px 32px" }}>
             <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "center", gap: 12 }}>
-              <div style={{ width: 36, height: 36, borderRadius: "50%", overflow: "hidden", background: "#fff", border: `2px solid ${activeTeamObj.color}44`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <img src={activeTeamObj.src} alt={activeTeamObj.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%" }}
-                  onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+              <div style={{ width: 36, height: 36, borderRadius: "50%", overflow: "hidden", background: "#fff", border: `2px solid ${activeTeamObj.color}44`, flexShrink: 0 }}>
+                <img src={activeTeamObj.src} alt={activeTeamObj.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
               </div>
               <div>
-                <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: activeTeamObj.color }}>
-                  {activeTeamObj.name}
-                </span>
-                <span style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginLeft: 8 }}>
-                  {activeTab === "clubs" ? "Club" : "International"} · {activeTeamObj.short}
-                </span>
+                <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: activeTeamObj.color }}>{activeTeamObj.name}</span>
+                <span style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginLeft: 8 }}>Football · {activeTeamObj.short}</span>
               </div>
-              <button onClick={() => setActiveTeam(null)} style={{ marginLeft: "auto", background: "none", border: "none", cursor: "pointer", color: "#aaa", fontSize: 20, lineHeight: 1, borderRadius: 4, padding: "2px 6px" }}>×</button>
+              <button onClick={() => setActiveTeam(null)} style={{ marginLeft: "auto", background: "none", border: "none", cursor: "pointer", color: "#aaa", fontSize: 20, lineHeight: 1, padding: "2px 6px" }}>×</button>
             </div>
           </div>
         )}
 
-        {/* Products Grid */}
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "40px 32px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
             <h2 style={{ fontFamily: FE, fontSize: "clamp(18px,2.5vw,28px)", fontWeight: 400, color: "var(--c-text)", margin: 0, textTransform: "uppercase" }}>
@@ -307,22 +226,15 @@ export default function FootballPage() {
             <div style={{ textAlign: "center", padding: "64px 20px" }}>
               <div style={{ fontFamily: FE, fontSize: 22, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 8 }}>No posters yet</div>
               <p style={{ fontFamily: F, fontSize: 13, color: "#aaa" }}>We&apos;re adding {activeTeamObj?.name} posters soon.</p>
-              <button onClick={() => setActiveTeam(null)}
-                style={{ marginTop: 20, padding: "10px 28px", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50 }}>
+              <button onClick={() => setActiveTeam(null)} style={{ marginTop: 20, padding: "10px 28px", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50 }}>
                 View All Football Posters
               </button>
             </div>
           )}
         </div>
-
       </div>
       <Newsletter />
       <Footer />
-      <style>{`
-        @media (max-width: 768px) {
-          .football-teams { gap: 14px !important; }
-        }
-      `}</style>
     </div>
   );
 }
