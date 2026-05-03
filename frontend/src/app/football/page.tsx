@@ -56,8 +56,6 @@ const internationalTeams = [
   { name: "Ghana",       short: "GHA", src: flag("gh"), color: "#006b3f" },
 ];
 
-const allFootballTeams = [...clubTeams, ...internationalTeams];
-
 type AnyTeam = { name: string; short: string; src: string; color: string };
 
 function TeamCircle({
@@ -166,10 +164,14 @@ function ProductCard({ p }: { p: typeof products[0] }) {
 
 export default function FootballPage() {
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<"clubs" | "international">("clubs");
 
-  const handleTeamClick = (short: string) => {
-    setActiveTeam(activeTeam === short ? null : short);
+  const handleTabSwitch = (tab: "clubs" | "international") => {
+    setActiveTab(tab);
+    setActiveTeam(null);
   };
+
+  const currentTeams = activeTab === "clubs" ? clubTeams : internationalTeams;
 
   const footballProducts = products.filter(p => p.cat === "Football");
   const displayProducts = activeTeam
