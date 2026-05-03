@@ -129,7 +129,7 @@ function ProductCard({ p }: { p: typeof products[0] }) {
         borderRadius: 0, transition: "all 0.3s ease",
       }}>
         <img src={hovered ? p.img2 : p.img} alt={p.title}
-          style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.5s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "all 0.5s ease", transform: hovered ? "scale(1.06)" : "scale(1)" }} />
         {p.badge && (
           <span style={{ position: "absolute", bottom: 10, left: 10, background: "#111", color: "#fff", fontFamily: FO, fontSize: 9, fontWeight: 700, padding: "5px 13px", borderRadius: 50, textTransform: "uppercase", letterSpacing: "0.07em" }}>
             {p.badge}
