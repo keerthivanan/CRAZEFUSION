@@ -39,7 +39,7 @@ function TCard({ p }: { p: typeof products[0] }) {
           if (btn) { btn.style.opacity = "0"; btn.style.transform = "translateY(8px)"; }
         }}
       >
-        <img src={p.img} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease", display: "block" }} />
+        <img src={p.img} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "transform 0.5s ease", display: "block" }} />
         {p.badge && (
           <span style={{ position: "absolute", bottom: 10, left: 10, background: "#111", color: "#fff", fontFamily: FO, fontSize: 9, fontWeight: 700, padding: "5px 13px", borderRadius: 50, textTransform: "uppercase", letterSpacing: "0.07em" }}>
             {p.badge}
