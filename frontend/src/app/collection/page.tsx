@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
@@ -131,6 +131,10 @@ function ProductCard({ p }: { p: Product }) {
 
 // ── Main Collection Page ───────────────────────────────────────────────────────
 export default function CollectionPage() {
+  return <Suspense><CollectionInner /></Suspense>;
+}
+
+function CollectionInner() {
   const searchParams = useSearchParams();
   const catParam = searchParams.get("cat");
 
