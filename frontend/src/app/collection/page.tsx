@@ -39,24 +39,29 @@ const CAR_BRANDS = [
 ];
 
 // ── Movie Franchise Data ───────────────────────────────────────────────────────
+// domain = Logo.dev logo  |  letter = text fallback inside circle
 const MOVIE_FRANCHISES = [
-  { name: "Marvel",          keywords: ["Spider-Man","Avengers","Iron Man","Thor","Black Panther","Ant-Man","Captain America","Guardians","Doctor Strange","Black Widow","Captain Marvel","Eternals","Shang-Chi","Deadpool","Venom","Groot","Wolverine","X-Men","Daredevil","Wanda","Hawkeye","Moon Knight"] },
-  { name: "DC",              keywords: ["Batman","Joker","Aquaman","Wonder Woman","Suicide Squad","Birds of Prey","Flash","Superman","Shazam","Harley Quinn","Black Adam","Blue Beetle"] },
-  { name: "John Wick",       keywords: ["John Wick"] },
-  { name: "Action",          keywords: ["Fast","Furious","Mission Impossible","James Bond","Expendables","Die Hard","Terminator","Taken","Bourne","Rambo","Commando","Predator","Total Recall"] },
-  { name: "Sci-Fi",          keywords: ["Star Wars","Interstellar","Avatar","Arrival","Alien","Matrix","Dune","Inception","Blade Runner","Prometheus","Gravity","Tenet","Mad Max","2001","Oblivion"] },
-  { name: "Horror",          keywords: ["Scream","Halloween","Friday","Nightmare","Conjuring","Annabelle","Insidious","Saw","Sinister","It Chapter","Get Out","Us ","Hereditary"] },
-  { name: "Drama & Classic", keywords: ["Shawshank","Godfather","Forrest","Schindler","Rocky","Million Dollar","Good Will","Wolf of Wall Street","La La Land","Fight Club","Pulp Fiction","Goodfellas","Scarface","American Hustle","Begin Again"] },
+  { name: "Marvel",        domain: "marvel.com",       letter: null, keywords: ["Spider-Man","Avengers","Iron Man","Thor","Black Panther","Ant-Man","Captain America","Guardians","Doctor Strange","Black Widow","Captain Marvel","Groot","Wolverine","X-Men","Deadpool","Venom","Hulk","Wanda","Hawkeye","Moon Knight"] },
+  { name: "DC",            domain: "dc.com",           letter: null, keywords: ["Batman","Joker","Aquaman","Wonder Woman","Suicide Squad","Birds of Prey","Flash","Superman","Shazam","Harley Quinn","Black Adam","Blue Beetle"] },
+  { name: "Harry Potter",  domain: "harrypotter.com",  letter: null, keywords: ["Harry Potter","Hogwarts","Dumbledore","Hermione","Voldemort","Fantastic Beasts","Wizard"] },
+  { name: "Star Wars",     domain: "starwars.com",     letter: null, keywords: ["Star Wars","Darth Vader","Jedi","Mandalorian","Yoda","Obi-Wan","Han Solo","Luke Skywalker","Sith"] },
+  { name: "Disney",        domain: "disney.com",       letter: null, keywords: ["Aladdin","Lion King","Mulan","Frozen","Moana","Encanto","Luca","Coco","Tangled","Cinderella","Beauty and the Beast","Little Mermaid","Raya","Brave"] },
+  { name: "Pixar",         domain: "pixar.com",        letter: null, keywords: ["Toy Story","Finding","Incredibles","Inside Out","Soul","Turning Red","Onward","Cars "] },
+  { name: "John Wick",     domain: null,               letter: "JW", keywords: ["John Wick"] },
+  { name: "Sci-Fi",        domain: null,               letter: "SF", keywords: ["Interstellar","Avatar","Alien","Matrix","Dune","Inception","Blade Runner","Gravity","Mad Max","Tenet","Oblivion","Arrival","Prometheus"] },
+  { name: "Fast & Furious",domain: null,               letter: "FF", keywords: ["Fast","Furious"] },
+  { name: "James Bond",    domain: null,               letter: "007",keywords: ["James Bond","007"] },
+  { name: "Drama",         domain: null,               letter: "DR", keywords: ["Shawshank","Godfather","Forrest","Schindler","Rocky","Wolf of Wall Street","Fight Club","Pulp Fiction","Goodfellas","Scarface","La La Land","Good Will"] },
 ];
 
 // ── Coffee Type Data ───────────────────────────────────────────────────────────
 const COFFEE_TYPES = [
-  { name: "Espresso",    keywords: ["Espresso","Affogato","Americano","Lungo","Cortado","Cortadito","Antoccino","Ristretto","Doppio"] },
-  { name: "Latte",       keywords: ["Latte","Flat White","Flat Black","Caffe Misto","Breve","Marocchino"] },
-  { name: "Matcha",      keywords: ["Matcha"] },
-  { name: "Cappuccino",  keywords: ["Cappuccino","Macchiato"] },
-  { name: "Mocha",       keywords: ["Mocha","Mochaccino"] },
-  { name: "Iced & Cold", keywords: ["Iced","Cold Brew","Frappe","Frappuccino","Vietnamese"] },
+  { name: "Espresso",    letter: "ES", keywords: ["Espresso","Affogato","Americano","Lungo","Cortado","Cortadito","Antoccino","Ristretto","Doppio"] },
+  { name: "Latte",       letter: "LA", keywords: ["Latte","Flat White","Flat Black","Caffe Misto","Breve","Marocchino"] },
+  { name: "Matcha",      letter: "MA", keywords: ["Matcha"] },
+  { name: "Cappuccino",  letter: "CA", keywords: ["Cappuccino","Macchiato"] },
+  { name: "Mocha",       letter: "MO", keywords: ["Mocha","Mochaccino"] },
+  { name: "Iced & Cold", letter: "IC", keywords: ["Iced","Cold Brew","Frappe","Frappuccino","Vietnamese"] },
 ];
 
 // ── Brand matching helpers ─────────────────────────────────────────────────────
@@ -240,13 +245,21 @@ export default function CollectionPage() {
           <div style={{ padding: "14px 32px", background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", overflowX: "auto", scrollbarWidth: "none" }}>
             <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 10, alignItems: "center", minWidth: "max-content" }}>
               <button onClick={() => setActiveBrand(null)} style={{
-                flexShrink: 0, padding: "8px 18px",
-                border: `1.5px solid ${!activeBrand ? "var(--c-text)" : "var(--c-border)"}`,
-                background: !activeBrand ? "var(--c-btn-bg)" : "transparent",
-                color: !activeBrand ? "var(--c-btn-text)" : "var(--c-text-muted)",
-                fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.1em",
-                textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
-              }}>All Brands</button>
+                flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+                padding: 0, border: "none", background: "transparent", cursor: "pointer",
+              }}>
+                <div style={{
+                  width: 56, height: 56, borderRadius: "50%",
+                  border: `2px solid ${!activeBrand ? "var(--c-text)" : "var(--c-border)"}`,
+                  background: !activeBrand ? "var(--c-btn-bg)" : "var(--c-bg-soft)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  boxShadow: !activeBrand ? "0 0 0 2px var(--c-text)" : "none",
+                  transition: "all 0.15s",
+                }}>
+                  <span style={{ fontFamily: FO, fontSize: 9, fontWeight: 800, color: !activeBrand ? "var(--c-btn-text)" : "#888", letterSpacing: "0.05em" }}>ALL</span>
+                </div>
+                <span style={{ fontFamily: FO, fontSize: 8, fontWeight: 700, color: !activeBrand ? "var(--c-text)" : "#888", letterSpacing: "0.06em", textTransform: "uppercase" }}>All</span>
+              </button>
 
               {CAR_BRANDS.map(brand => {
                 const active = activeBrand === brand.name;
@@ -270,7 +283,7 @@ export default function CollectionPage() {
                       <img
                         src={`https://img.logo.dev/${brand.domain}?token=${LOGO_KEY}&size=80&format=png`}
                         alt={brand.name}
-                        style={{ width: 34, height: 34, objectFit: "contain" }}
+                        style={{ width: 28, height: 28, objectFit: "contain", borderRadius: 6 }}
                         onError={e => { (e.currentTarget as HTMLImageElement).closest("button")!.style.display = "none"; }}
                       />
                     </div>
@@ -287,30 +300,58 @@ export default function CollectionPage() {
         )}
 
         {activeCategory === "Movies" && (
-          <div style={{ padding: "12px 32px", background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", overflowX: "auto", scrollbarWidth: "none" }}>
-            <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 8, alignItems: "center", minWidth: "max-content" }}>
+          <div style={{ padding: "14px 32px", background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", overflowX: "auto", scrollbarWidth: "none" }}>
+            <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 14, alignItems: "center", minWidth: "max-content" }}>
+              {/* All reset */}
               <button onClick={() => setActiveBrand(null)} style={{
-                flexShrink: 0, padding: "9px 18px",
-                border: `1.5px solid ${!activeBrand ? "var(--c-text)" : "var(--c-border)"}`,
-                background: !activeBrand ? "var(--c-btn-bg)" : "transparent",
-                color: !activeBrand ? "var(--c-btn-text)" : "var(--c-text-muted)",
-                fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.1em",
-                textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
-              }}>All</button>
+                flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+                padding: 0, border: "none", background: "transparent", cursor: "pointer",
+              }}>
+                <div style={{
+                  width: 56, height: 56, borderRadius: "50%",
+                  border: `2px solid ${!activeBrand ? "var(--c-text)" : "var(--c-border)"}`,
+                  background: !activeBrand ? "var(--c-btn-bg)" : "var(--c-bg-soft)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  boxShadow: !activeBrand ? "0 0 0 2px var(--c-text)" : "none",
+                  transition: "all 0.15s",
+                }}>
+                  <span style={{ fontFamily: FO, fontSize: 9, fontWeight: 800, color: !activeBrand ? "var(--c-btn-text)" : "#888", letterSpacing: "0.05em" }}>ALL</span>
+                </div>
+                <span style={{ fontFamily: FO, fontSize: 8, fontWeight: 700, color: !activeBrand ? "var(--c-text)" : "#888", letterSpacing: "0.06em", textTransform: "uppercase" }}>All</span>
+              </button>
+
               {MOVIE_FRANCHISES.map(f => {
                 const active = activeBrand === f.name;
                 return (
                   <button key={f.name} onClick={() => setActiveBrand(active ? null : f.name)}
-                    style={{
-                      flexShrink: 0, display: "flex", alignItems: "center", gap: 7,
-                      padding: "9px 18px",
-                      border: `1.5px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
-                      background: active ? "var(--c-btn-bg)" : "transparent",
-                      color: active ? "var(--c-btn-text)" : "var(--c-text-muted)",
-                      fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.05em",
-                      textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
+                    style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: 0, border: "none", background: "transparent", cursor: "pointer", transition: "all 0.15s" }}>
+                    <div style={{
+                      width: 56, height: 56, borderRadius: "50%",
+                      border: `2px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
+                      background: active ? "var(--c-bg)" : "var(--c-bg-soft)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      boxShadow: active ? "0 0 0 2px var(--c-text)" : "none",
+                      transition: "all 0.15s", overflow: "hidden",
                     }}>
-                    <span>{f.name}</span>
+                      {f.domain ? (
+                        <img
+                          src={`https://img.logo.dev/${f.domain}?token=${LOGO_KEY}&size=80&format=png`}
+                          alt={f.name}
+                          style={{ width: 28, height: 28, objectFit: "contain", borderRadius: 6 }}
+                          onError={e => {
+                            const img = e.currentTarget as HTMLImageElement;
+                            img.style.display = "none";
+                            const span = document.createElement("span");
+                            span.textContent = f.name.substring(0, 2).toUpperCase();
+                            span.style.cssText = `font-family:${FO};font-size:13px;font-weight:800;color:${active ? "var(--c-text)" : "#888"}`;
+                            img.parentElement?.appendChild(span);
+                          }}
+                        />
+                      ) : (
+                        <span style={{ fontFamily: FO, fontSize: f.letter && f.letter.length >= 3 ? 11 : 13, fontWeight: 800, color: active ? "var(--c-text)" : "#888", letterSpacing: "0.02em" }}>{f.letter}</span>
+                      )}
+                    </div>
+                    <span style={{ fontFamily: FO, fontSize: 8, fontWeight: 700, color: active ? "var(--c-text)" : "#888", letterSpacing: "0.06em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{f.name}</span>
                   </button>
                 );
               })}
@@ -319,30 +360,41 @@ export default function CollectionPage() {
         )}
 
         {activeCategory === "Coffee Shop" && (
-          <div style={{ padding: "12px 32px", background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", overflowX: "auto", scrollbarWidth: "none" }}>
-            <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 8, alignItems: "center", minWidth: "max-content" }}>
+          <div style={{ padding: "14px 32px", background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", overflowX: "auto", scrollbarWidth: "none" }}>
+            <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 14, alignItems: "center", minWidth: "max-content" }}>
               <button onClick={() => setActiveBrand(null)} style={{
-                flexShrink: 0, padding: "9px 18px",
-                border: `1.5px solid ${!activeBrand ? "var(--c-text)" : "var(--c-border)"}`,
-                background: !activeBrand ? "var(--c-btn-bg)" : "transparent",
-                color: !activeBrand ? "var(--c-btn-text)" : "var(--c-text-muted)",
-                fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.1em",
-                textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
-              }}>All</button>
+                flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+                padding: 0, border: "none", background: "transparent", cursor: "pointer",
+              }}>
+                <div style={{
+                  width: 56, height: 56, borderRadius: "50%",
+                  border: `2px solid ${!activeBrand ? "var(--c-text)" : "var(--c-border)"}`,
+                  background: !activeBrand ? "var(--c-btn-bg)" : "var(--c-bg-soft)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  boxShadow: !activeBrand ? "0 0 0 2px var(--c-text)" : "none",
+                  transition: "all 0.15s",
+                }}>
+                  <span style={{ fontFamily: FO, fontSize: 9, fontWeight: 800, color: !activeBrand ? "var(--c-btn-text)" : "#888", letterSpacing: "0.05em" }}>ALL</span>
+                </div>
+                <span style={{ fontFamily: FO, fontSize: 8, fontWeight: 700, color: !activeBrand ? "var(--c-text)" : "#888", letterSpacing: "0.06em", textTransform: "uppercase" }}>All</span>
+              </button>
+
               {COFFEE_TYPES.map(t => {
                 const active = activeBrand === t.name;
                 return (
                   <button key={t.name} onClick={() => setActiveBrand(active ? null : t.name)}
-                    style={{
-                      flexShrink: 0, display: "flex", alignItems: "center", gap: 7,
-                      padding: "9px 18px",
-                      border: `1.5px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
-                      background: active ? "var(--c-btn-bg)" : "transparent",
-                      color: active ? "var(--c-btn-text)" : "var(--c-text-muted)",
-                      fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.05em",
-                      textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
+                    style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: 0, border: "none", background: "transparent", cursor: "pointer", transition: "all 0.15s" }}>
+                    <div style={{
+                      width: 56, height: 56, borderRadius: "50%",
+                      border: `2px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
+                      background: active ? "var(--c-bg)" : "var(--c-bg-soft)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      boxShadow: active ? "0 0 0 2px var(--c-text)" : "none",
+                      transition: "all 0.15s",
                     }}>
-                    <span>{t.name}</span>
+                      <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: active ? "var(--c-text)" : "#888", letterSpacing: "0.02em" }}>{t.letter}</span>
+                    </div>
+                    <span style={{ fontFamily: FO, fontSize: 8, fontWeight: 700, color: active ? "var(--c-text)" : "#888", letterSpacing: "0.06em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{t.name}</span>
                   </button>
                 );
               })}
