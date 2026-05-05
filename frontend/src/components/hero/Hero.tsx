@@ -72,8 +72,8 @@ export default function Hero() {
             maxWidth: 400, margin: "28px 0 0", lineHeight: 1.8,
             animation: "fadeUp 0.7s ease 0.5s both",
           }}>
-            Premium quality posters for Cricket, Basketball, Football & more.
-            Starting from ₹79 — free shipping on prepaid orders.
+            Premium quality posters for Cars, Movies, Coffee Shop & more.
+            Starting from £9.99 — free UK delivery on orders over £30.
           </p>
 
           {/* CTAs */}
@@ -135,7 +135,7 @@ export default function Hero() {
               ))}
             </div>
             <div style={{ fontFamily: FO, fontSize: 11, color: "var(--c-text-muted)", lineHeight: 1.4 }}>
-              <span style={{ color: "var(--c-text)", fontWeight: 700 }}>10,000+</span> happy customers across India
+              <span style={{ color: "var(--c-text)", fontWeight: 700 }}>10,000+</span> happy customers across the UK
             </div>
           </div>
         </div>

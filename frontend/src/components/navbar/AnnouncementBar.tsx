@@ -1,6 +1,6 @@
 "use client";
 
-const text = "Free Delivery for Prepaid Orders  ·  BUY 4 GET 3 FREE  ·  BUY 5 GET 5 FREE  ·  1,981+ Designs  ·  5–7 Day Delivery  ·  Starting ₹79  ·  7-Day Easy Returns  ·  10,000+ Happy Customers  · ";
+const text = "Free UK Delivery Over £30  ·  BUY 4 GET 3 FREE  ·  BUY 5 GET 5 FREE  ·  600+ Designs  ·  Printed & Shipped in 48hrs  ·  From £9.99  ·  30-Day Easy Returns  ·  10,000+ Happy Customers  · ";
 
 export default function AnnouncementBar() {
   return (

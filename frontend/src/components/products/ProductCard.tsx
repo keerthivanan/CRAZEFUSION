@@ -3,20 +3,28 @@ import { useState } from "react";
 import Link from "next/link";
 import TiltedCard from "@/components/reactbits/TiltedCard";
 import ClickSpark from "@/components/reactbits/ClickSpark";
-import { products } from "@/data";
+import { Product } from "@/lib/supabase";
+import { useCart } from "@/context/CartContext";
 
-const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
-export default function ProductCard({ p }: { p: typeof products[0] }) {
+export default function ProductCard({ p }: { p: Product }) {
+  const { addItem } = useCart();
   const [hovered, setHovered] = useState(false);
   const [added, setAdded]     = useState(false);
 
+  const handleQuickAdd = (e: React.MouseEvent) => {
+    e.preventDefault(); e.stopPropagation();
+    addItem({ id: p.id, title: p.name, sub: p.sub, img: p.img, price: Number(p.price), original: Number(p.original_price), size: "A4 (21×30cm)", finish: "Matte" });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500);
+  };
+
   return (
     <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-      <div style={{ position: "relative", aspectRatio: "3/4", marginBottom: 12, background: "#f7f7f7", overflow: "hidden" }}>
+      <div style={{ position: "relative", aspectRatio: "3/4", marginBottom: 12, background: "var(--c-bg-soft)", overflow: "hidden" }}>
         <TiltedCard
-          imageSrc={p.img} altText={p.title}
+          imageSrc={p.img} altText={p.name}
           containerHeight="100%" containerWidth="100%"
           imageHeight="100%" imageWidth="100%"
           scaleOnHover={1.05} rotateAmplitude={6} borderRadius="0px"
@@ -30,7 +38,7 @@ export default function ProductCard({ p }: { p: typeof products[0] }) {
               )}
               <div style={{ opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(8px)", transition: "all 0.25s ease" }}>
                 <ClickSpark sparkColor="#fff" sparkCount={6} sparkRadius={18}>
-                  <button onClick={e => { e.preventDefault(); setAdded(true); setTimeout(() => setAdded(false), 1500); }}
+                  <button onClick={handleQuickAdd}
                     style={{ width: "100%", padding: "10px 0", background: added ? "#16a34a" : "rgba(17,17,17,0.9)", backdropFilter: "blur(4px)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 8 }}>
                     {added ? "✓ Added!" : "Quick Add"}
                   </button>
@@ -42,11 +50,11 @@ export default function ProductCard({ p }: { p: typeof products[0] }) {
         <div style={{ position: "absolute", inset: 0, border: `1px solid ${hovered ? "#888888" : "#e8e8e8"}`, boxShadow: hovered ? "0 0 14px rgba(160,160,160,0.22)" : "none", pointerEvents: "none", transition: "border-color 0.25s, box-shadow 0.25s" }} />
       </div>
       <Link href={`/product/${p.id}`} style={{ textDecoration: "none" }}>
-        <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 4, lineHeight: 1.3, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const, textAlign: "center" }}>{p.title}</div>
-        <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.04em", textAlign: "center" }}>{p.sub}</div>
+        <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 4, lineHeight: 1.3, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const, textAlign: "center" }}>{p.name}</div>
+        <div style={{ fontFamily: FO, fontSize: 11, color: "#aaa", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.04em", textAlign: "center" }}>{p.sub}</div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>From ₹{p.price}</span>
-          {p.price < p.original && <span style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>}
+          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>From £{Number(p.price).toFixed(2)}</span>
+          {Number(p.original_price) > Number(p.price) && <span style={{ fontFamily: FO, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>£{Number(p.original_price).toFixed(2)}</span>}
         </div>
       </Link>
     </div>

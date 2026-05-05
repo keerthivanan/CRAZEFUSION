@@ -23,7 +23,7 @@ const features = [
   {
     num: "04",
     title: "Free Shipping",
-    desc: "Zero delivery fees on all prepaid orders. Delivered across India in 5–7 days.",
+    desc: "Free UK delivery on orders over £30. Printed and shipped within 48 hours.",
   },
 ];
 
@@ -48,7 +48,7 @@ export default function WhyChooseUs() {
               </h2>
             </div>
             <p style={{ fontFamily: FO, fontSize: 13, color: "var(--c-text-muted)", maxWidth: 320, lineHeight: 1.7, margin: 0 }}>
-              India&apos;s most obsessed poster brand — driven by quality, priced for everyone.
+              The UK&apos;s most obsessed poster brand — driven by quality, priced for everyone.
             </p>
           </div>
         </AnimatedContent>

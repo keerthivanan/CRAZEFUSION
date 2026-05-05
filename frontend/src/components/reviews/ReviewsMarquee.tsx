@@ -1,14 +1,14 @@
 "use client";
 
 const reviews = [
-  { name: "Arjun K.",   city: "Mumbai",    text: "Absolutely stunning quality! My room looks like a magazine shoot. The panels align perfectly.",  stars: 5, product: "CSK Wall Set" },
-  { name: "Priya S.",   city: "Delhi",     text: "The 8-panel split poster is incredible. Everyone who visits asks about it. Already recommended to 10 friends!", stars: 5, product: "RCB Collection" },
-  { name: "Rahul M.",   city: "Bangalore", text: "Best purchase of my life honestly. Packaging was perfect, no damage whatsoever. Print is fire.",  stars: 5, product: "Lakers Wall Set" },
-  { name: "Sneha R.",   city: "Chennai",   text: "Real Madrid set came out perfectly. The colors are so vibrant. Will definitely order again!",     stars: 5, product: "Real Madrid Set" },
-  { name: "Vikram T.",  city: "Hyderabad", text: "Delivery super fast, packaging excellent. 10/10 recommend. Colors are true to what I saw online.", stars: 5, product: "Warriors Set" },
-  { name: "Ananya P.",  city: "Pune",      text: "Print quality is insane for this price. Way better than expected. I was skeptical but now I'm a permanent customer!", stars: 5, product: "Barcelona Set" },
-  { name: "Karthik V.", city: "Kolkata",   text: "My living room looks legendary now. Worth every rupee! The split poster is absolutely fire.",     stars: 5, product: "GTR Poster" },
-  { name: "Divya N.",   city: "Ahmedabad", text: "Bought as a gift. My boyfriend cried happy tears. The quality, the packaging — everything premium!", stars: 5, product: "MI Fan Set" },
+  { name: "James H.",    city: "London",     text: "Absolutely stunning quality! My room looks like a magazine shoot. The print is razor sharp.",  stars: 5, product: "BMW M4 Poster" },
+  { name: "Sophie T.",   city: "Manchester", text: "The movie poster is incredible. Everyone who visits asks about it. Already recommended to 10 friends!", stars: 5, product: "Film Print Set" },
+  { name: "Oliver R.",   city: "Birmingham", text: "Best purchase of my life honestly. Packaging was perfect, no damage whatsoever. Print is fire.",  stars: 5, product: "Car Poster Set" },
+  { name: "Emily W.",    city: "Bristol",    text: "Coffee shop print is gorgeous. So atmospheric. Will definitely order again — next room sorted!", stars: 5, product: "Coffee Shop Print" },
+  { name: "Liam K.",     city: "Leeds",      text: "Delivery super fast, packaging excellent. 10/10 recommend. Colors are true to what I saw online.", stars: 5, product: "Ferrari Poster" },
+  { name: "Charlotte B.", city: "Edinburgh", text: "Print quality is insane for this price. Way better than expected. Now I'm a permanent customer!", stars: 5, product: "Latte Art Print" },
+  { name: "Noah M.",     city: "Cardiff",    text: "My living room looks legendary now. Worth every penny! The Porsche poster is absolutely fire.",   stars: 5, product: "Porsche 911 Print" },
+  { name: "Isla G.",     city: "Liverpool",  text: "Bought as a gift. My boyfriend loved it. The quality, the packaging — everything was premium!", stars: 5, product: "Ford GT Poster" },
 ];
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
@@ -80,7 +80,7 @@ export default function ReviewsMarquee() {
           </div>
           <div style={{ width: 1, height: 80, background: "var(--c-border)" }} />
           <div style={{ fontFamily: FO, fontSize: 11, color: "var(--c-text-muted)", maxWidth: 160, lineHeight: 1.6 }}>
-            Verified purchases across India
+            Verified purchases across the UK
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
@@ -10,13 +10,16 @@ const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
+const FREE_THRESHOLD = 30;
+const SHIPPING_COST  = 3.99;
+
 export default function CartPage() {
   const { items, updateQty, removeItem, subtotal } = useCart();
   const [promoCode, setPromoCode]   = useState("");
   const [promoApplied, setPromoApplied] = useState(false);
 
-  const discount = promoApplied ? Math.round(subtotal * 0.1) : 0;
-  const shipping  = subtotal >= 499 ? 0 : 49;
+  const discount = promoApplied ? Math.round(subtotal * 0.1 * 100) / 100 : 0;
+  const shipping  = subtotal >= FREE_THRESHOLD ? 0 : SHIPPING_COST;
   const total     = subtotal - discount + shipping;
 
   return (
@@ -41,11 +44,11 @@ export default function CartPage() {
           {/* Cart Items */}
           <div>
             {/* Free delivery banner */}
-            <div style={{ background: subtotal >= 499 ? "#111" : "#f9f9f9", color: subtotal >= 499 ? "#fff" : "#555", padding: "12px 20px", marginBottom: 24, display: "flex", alignItems: "center", gap: 10, border: `1px solid ${subtotal >= 499 ? "#111" : "#e0e0e0"}` }}>
+            <div style={{ background: subtotal >= FREE_THRESHOLD ? "#111" : "#f9f9f9", color: subtotal >= FREE_THRESHOLD ? "#fff" : "#555", padding: "12px 20px", marginBottom: 24, display: "flex", alignItems: "center", gap: 10, border: `1px solid ${subtotal >= FREE_THRESHOLD ? "#111" : "#e0e0e0"}` }}>
               <span style={{ fontFamily: F, fontSize: 12, fontWeight: 600 }}>
-                {subtotal >= 499
-                  ? "You qualify for FREE delivery on prepaid!"
-                  : `Add ₹${499 - subtotal} more for free delivery`}
+                {subtotal >= FREE_THRESHOLD
+                  ? "You qualify for FREE UK delivery!"
+                  : `Add £${(FREE_THRESHOLD - subtotal).toFixed(2)} more for free delivery`}
               </span>
             </div>
 
@@ -89,9 +92,9 @@ export default function CartPage() {
                       </div>
                     </div>
                     <div style={{ fontFamily: FE, fontSize: 18, fontWeight: 400, color: "var(--c-text)", textAlign: "right" }}>
-                      ₹{item.price * item.qty}
+                      £{(item.price * item.qty).toFixed(2)}
                       {item.price < item.original && (
-                        <div style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through", fontWeight: 400 }}>₹{item.original * item.qty}</div>
+                        <div style={{ fontFamily: F, fontSize: 11, color: "#bbb", textDecoration: "line-through", fontWeight: 400 }}>£{(item.original * item.qty).toFixed(2)}</div>
                       )}
                     </div>
                   </div>
@@ -114,7 +117,7 @@ export default function CartPage() {
               <h2 style={{ fontFamily: FE, fontSize: 20, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.01em", marginBottom: 24, paddingBottom: 20, borderBottom: "1px solid var(--c-border)" }}>Order Summary</h2>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 24 }}>
-                {[["Subtotal", `₹${subtotal}`], ["Discount", discount > 0 ? `-₹${discount}` : "—"], ["Shipping", shipping === 0 ? "FREE" : `₹${shipping}`]].map(([label, val]) => (
+                {[["Subtotal", `£${subtotal.toFixed(2)}`], ["Discount", discount > 0 ? `-£${discount.toFixed(2)}` : "—"], ["Shipping", shipping === 0 ? "FREE" : `£${shipping.toFixed(2)}`]].map(([label, val]) => (
                   <div key={label} style={{ display: "flex", justifyContent: "space-between" }}>
                     <span style={{ fontFamily: F, fontSize: 13, color: "#666" }}>{label}</span>
                     <span style={{ fontFamily: F, fontSize: 13, color: (val as string).startsWith("-") ? "#dc2626" : val === "FREE" ? "#16a34a" : "#111", fontWeight: 700 }}>{val}</span>
@@ -137,7 +140,7 @@ export default function CartPage() {
 
               <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 20, borderTop: "1px solid var(--c-border)", marginBottom: 20 }}>
                 <span style={{ fontFamily: FE, fontSize: 18, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase" }}>Total</span>
-                <span style={{ fontFamily: FE, fontSize: 22, fontWeight: 400, color: "var(--c-text)" }}>₹{total}</span>
+                <span style={{ fontFamily: FE, fontSize: 22, fontWeight: 400, color: "var(--c-text)" }}>£{total.toFixed(2)}</span>
               </div>
 
               <Link href="/checkout"
@@ -148,7 +151,7 @@ export default function CartPage() {
               </Link>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 16 }}>
-                {["Secured by Razorpay", "Free delivery on prepaid", "7-day easy returns"].map((text) => (
+                {["Secured by Stripe", "Free delivery on orders over £30", "30-day easy returns"].map((text) => (
                   <div key={text} style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <span style={{ fontFamily: F, fontSize: 11, color: "#888" }}>{text}</span>
                   </div>

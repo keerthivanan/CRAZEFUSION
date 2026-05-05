@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
 
 export type CartItem = {
-  id: number;
+  id: string | number;
   title: string;
   sub: string;
   img: string;
@@ -16,8 +16,8 @@ export type CartItem = {
 type CartContextType = {
   items: CartItem[];
   addItem: (item: Omit<CartItem, "qty">) => void;
-  removeItem: (id: number, size: string, finish: string) => void;
-  updateQty: (id: number, size: string, finish: string, delta: number) => void;
+  removeItem: (id: string | number, size: string, finish: string) => void;
+  updateQty: (id: string | number, size: string, finish: string, delta: number) => void;
   clearCart: () => void;
   count: number;
   subtotal: number;
@@ -57,11 +57,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const removeItem = useCallback((id: number, size: string, finish: string) => {
+  const removeItem = useCallback((id: string | number, size: string, finish: string) => {
     setItems(prev => prev.filter(i => !(i.id === id && i.size === size && i.finish === finish)));
   }, []);
 
-  const updateQty = useCallback((id: number, size: string, finish: string, delta: number) => {
+  const updateQty = useCallback((id: string | number, size: string, finish: string, delta: number) => {
     setItems(prev =>
       prev
         .map(i =>

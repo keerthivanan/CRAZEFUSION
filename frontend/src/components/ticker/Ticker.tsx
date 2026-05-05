@@ -1,6 +1,6 @@
 "use client";
 
-const text = "Free Delivery for Prepaid Orders &nbsp;·&nbsp; BUY 4 GET 3 FREE &nbsp;·&nbsp; BUY 5 GET 5 FREE &nbsp;·&nbsp; 1,981+ Designs &nbsp;·&nbsp; 5–7 Day Delivery &nbsp;·&nbsp; Starting ₹79 &nbsp;·&nbsp;";
+const text = "Free UK Delivery Over £30 &nbsp;·&nbsp; BUY 4 GET 3 FREE &nbsp;·&nbsp; BUY 5 GET 5 FREE &nbsp;·&nbsp; 600+ Designs &nbsp;·&nbsp; Printed & Shipped in 48hrs &nbsp;·&nbsp; From £9.99 &nbsp;·&nbsp;";
 
 export default function Ticker() {
   return (
