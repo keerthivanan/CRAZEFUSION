@@ -44,23 +44,23 @@ const CAR_BRANDS = [
 
 // ── Movie Franchise Data ───────────────────────────────────────────────────────
 const MOVIE_FRANCHISES = [
-  { name: "Marvel",           icon: "⚡", keywords: ["Spider-Man","Avengers","Iron Man","Thor","Black Panther","Ant-Man","Captain America","Guardians","Doctor Strange","Black Widow","Captain Marvel","Eternals","Shang-Chi","Deadpool","Venom","Groot","Wolverine","X-Men","Daredevil","Wanda","Hawkeye","Moon Knight"] },
-  { name: "DC",               icon: "🦇", keywords: ["Batman","Joker","Aquaman","Wonder Woman","Suicide Squad","Birds of Prey","Flash","Superman","Shazam","Harley Quinn","Black Adam","Blue Beetle"] },
-  { name: "John Wick",        icon: "🔫", keywords: ["John Wick"] },
-  { name: "Action",           icon: "💥", keywords: ["Fast","Furious","Mission Impossible","James Bond","Expendables","Die Hard","Terminator","Taken","Bourne","Rambo","Commando","Predator","Total Recall"] },
-  { name: "Sci-Fi",           icon: "🚀", keywords: ["Star Wars","Interstellar","Avatar","Arrival","Alien","Matrix","Dune","Inception","Blade Runner","Prometheus","Gravity","Tenet","Mad Max","2001","Oblivion"] },
-  { name: "Horror",           icon: "👻", keywords: ["Scream","Halloween","Friday","Nightmare","Conjuring","Annabelle","Insidious","Saw","Sinister","It Chapter","Get Out","Us ","Hereditary"] },
-  { name: "Drama & Classic",  icon: "🎭", keywords: ["Shawshank","Godfather","Forrest","Schindler","Rocky","Million Dollar","Good Will","Wolf of Wall Street","La La Land","Fight Club","Pulp Fiction","Goodfellas","Scarface","American Hustle","Begin Again"] },
+  { name: "Marvel",          keywords: ["Spider-Man","Avengers","Iron Man","Thor","Black Panther","Ant-Man","Captain America","Guardians","Doctor Strange","Black Widow","Captain Marvel","Eternals","Shang-Chi","Deadpool","Venom","Groot","Wolverine","X-Men","Daredevil","Wanda","Hawkeye","Moon Knight"] },
+  { name: "DC",              keywords: ["Batman","Joker","Aquaman","Wonder Woman","Suicide Squad","Birds of Prey","Flash","Superman","Shazam","Harley Quinn","Black Adam","Blue Beetle"] },
+  { name: "John Wick",       keywords: ["John Wick"] },
+  { name: "Action",          keywords: ["Fast","Furious","Mission Impossible","James Bond","Expendables","Die Hard","Terminator","Taken","Bourne","Rambo","Commando","Predator","Total Recall"] },
+  { name: "Sci-Fi",          keywords: ["Star Wars","Interstellar","Avatar","Arrival","Alien","Matrix","Dune","Inception","Blade Runner","Prometheus","Gravity","Tenet","Mad Max","2001","Oblivion"] },
+  { name: "Horror",          keywords: ["Scream","Halloween","Friday","Nightmare","Conjuring","Annabelle","Insidious","Saw","Sinister","It Chapter","Get Out","Us ","Hereditary"] },
+  { name: "Drama & Classic", keywords: ["Shawshank","Godfather","Forrest","Schindler","Rocky","Million Dollar","Good Will","Wolf of Wall Street","La La Land","Fight Club","Pulp Fiction","Goodfellas","Scarface","American Hustle","Begin Again"] },
 ];
 
 // ── Coffee Type Data ───────────────────────────────────────────────────────────
 const COFFEE_TYPES = [
-  { name: "Espresso",    icon: "☕", keywords: ["Espresso","Affogato","Americano","Lungo","Cortado","Cortadito","Antoccino","Ristretto","Doppio"] },
-  { name: "Latte",       icon: "🥛", keywords: ["Latte","Flat White","Flat Black","Caffe Misto","Breve","Marocchino"] },
-  { name: "Matcha",      icon: "🍵", keywords: ["Matcha"] },
-  { name: "Cappuccino",  icon: "☕", keywords: ["Cappuccino","Macchiato"] },
-  { name: "Mocha",       icon: "🍫", keywords: ["Mocha","Mochaccino"] },
-  { name: "Iced & Cold", icon: "🧊", keywords: ["Iced","Cold Brew","Frappe","Frappuccino","Vietnamese"] },
+  { name: "Espresso",    keywords: ["Espresso","Affogato","Americano","Lungo","Cortado","Cortadito","Antoccino","Ristretto","Doppio"] },
+  { name: "Latte",       keywords: ["Latte","Flat White","Flat Black","Caffe Misto","Breve","Marocchino"] },
+  { name: "Matcha",      keywords: ["Matcha"] },
+  { name: "Cappuccino",  keywords: ["Cappuccino","Macchiato"] },
+  { name: "Mocha",       keywords: ["Mocha","Mochaccino"] },
+  { name: "Iced & Cold", keywords: ["Iced","Cold Brew","Frappe","Frappuccino","Vietnamese"] },
 ];
 
 // ── Brand matching helpers ─────────────────────────────────────────────────────
@@ -301,7 +301,6 @@ export default function CollectionPage() {
                       fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.05em",
                       textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
                     }}>
-                    <span style={{ fontSize: 15 }}>{f.icon}</span>
                     <span>{f.name}</span>
                   </button>
                 );
@@ -334,7 +333,6 @@ export default function CollectionPage() {
                       fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.05em",
                       textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
                     }}>
-                    <span style={{ fontSize: 15 }}>{t.icon}</span>
                     <span>{t.name}</span>
                   </button>
                 );
