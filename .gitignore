@@ -1,3 +1,4 @@
+
 # Frontend
 frontend/node_modules
 frontend/.next
@@ -14,12 +15,20 @@ backend/.env
 Thumbs.db
 *.log
 
-# Root scripts / tooling
-node_modules/
-package.json
-package-lock.json
-/mockups/
-frontend/public/mockups/
-frontend/public/posters/
-make_mockups.js
-generate_data.js
+# ── Images & large asset folders ──────────────────────────────────────────────
+# All images live on Cloudinary CDN — never commit them to git
+assets/
+keerthicollections/
+mockups/
+posterzee_cropped/
+
+# Loose image files in root
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp
+/*.gif
+
+# Scripts
+scripts/node_modules/
+scripts/upload_3cats_progress.json

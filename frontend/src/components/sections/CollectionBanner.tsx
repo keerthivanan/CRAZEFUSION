@@ -35,8 +35,8 @@ export default function CollectionBanner() {
           </h2>
 
           <p style={{ fontFamily: F, fontSize: 15, color: "#555", marginBottom: 40, lineHeight: 1.8, maxWidth: 480, margin: "20px auto 40px" }}>
-            1,981+ premium designs. Cars, Anime, Movies, Sports, Custom & more.
-            Free shipping on all prepaid orders.
+            600+ premium designs. Cars, Movies, Coffee Shop & more.
+            Free UK delivery on orders over £30.
           </p>
 
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>

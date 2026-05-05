@@ -27,8 +27,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "PosterKing — India's Premium Poster Store",
-  description: "Shop the best quality wall posters, split sets, and custom prints. Cars, Anime, Movies, Sports and more. Free shipping on prepaid orders.",
+  title: "Premium UK Poster Store — Wall Art Prints",
+  description: "Shop premium wall posters printed on 200gsm art paper. Cars, Movies, Coffee Shop & more. Free UK delivery on orders over £30.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

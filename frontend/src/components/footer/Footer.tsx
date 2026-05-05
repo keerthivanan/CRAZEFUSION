@@ -46,15 +46,15 @@ export default function Footer() {
               Premium Quality Prints
             </div>
             <p style={{ fontFamily: F, fontSize: 14, color: "#888", lineHeight: 1.8, maxWidth: 300, marginBottom: 32 }}>
-              India&apos;s #1 destination for premium poster wall art. Over 2,400+ curated designs. Pan-India delivery in 5–7 days.
+              The UK&apos;s destination for premium poster wall art. Over 600+ curated designs. Printed &amp; shipped in 48 hours.
             </p>
 
             {/* Contact */}
             <div className="footer-contact" style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
-              <a href="mailto:support@posterking.in" style={{ fontFamily: F, fontSize: 13, color: "#aaa", textDecoration: "none", transition: "color 0.2s" }}
+              <a href="mailto:support@yourstore.co.uk" style={{ fontFamily: F, fontSize: 13, color: "#aaa", textDecoration: "none", transition: "color 0.2s" }}
                 onMouseEnter={e => (e.currentTarget.style.color = "#e8a000")}
                 onMouseLeave={e => (e.currentTarget.style.color = "#aaa")}>
-                support@posterking.in
+                support@yourstore.co.uk
               </a>
               <a href="https://wa.me/9191709xxxxx" target="_blank" rel="noreferrer"
                 style={{ fontFamily: F, fontSize: 13, color: "#aaa", textDecoration: "none", transition: "color 0.2s", display: "inline-flex", alignItems: "center", gap: 8 }}
@@ -122,7 +122,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="footer-bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
           <div style={{ fontFamily: F, fontSize: 12, color: "#555", letterSpacing: "0.02em" }}>
-            © 2026 PosterKing · All artwork is fan art, not official merchandise.
+            © 2026 All artwork is fan art, not official merchandise.
           </div>
           <div className="footer-bottom-links" style={{ display: "flex", gap: 24 }}>
             {[["Privacy Policy", "/collection"], ["Terms of Service", "/collection"], ["Refund Policy", "/collection"]].map(([label, href]) => (

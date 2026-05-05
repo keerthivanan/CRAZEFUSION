@@ -10,25 +10,25 @@ const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const reviews = [
-  { name: "Arjun K.", city: "Mumbai", text: "Absolutely stunning quality! My room looks like a magazine shoot. The panels align perfectly and the print quality is unreal.", stars: 5, product: "BMW M4 Poster", date: "Mar 2025" },
-  { name: "Priya S.", city: "Delhi", text: "The 9-piece split poster is incredible. Everyone who visits asks about it. I've recommended CrazeFusion to all my friends!", stars: 5, product: "Naruto 9-Piece Split", date: "Feb 2025" },
-  { name: "Rahul M.", city: "Bangalore", text: "Ordered the 50-piece collage kit. Best purchase of my life honestly. Packaging was perfect, no damage whatsoever.", stars: 5, product: "Anime Collage Kit", date: "Jan 2025" },
-  { name: "Sneha R.", city: "Chennai", text: "Custom portrait of my pet dog came out perfectly. So emotional when I saw it. Will definitely order again and again!", stars: 5, product: "Custom Print", date: "Mar 2025" },
-  { name: "Vikram T.", city: "Hyderabad", text: "Delivery super fast, packaging excellent. 10/10 recommend. The colors are so vibrant and true to what I saw online.", stars: 5, product: "F1 Collection", date: "Apr 2025" },
-  { name: "Ananya P.", city: "Pune", text: "Print quality is insane for this price. Way better than expected. I was skeptical but now I'm a permanent customer!", stars: 5, product: "Music Poster", date: "Feb 2025" },
-  { name: "Karthik V.", city: "Kolkata", text: "My gaming setup looks legendary now. Worth every rupee! The Cyberpunk poster is absolutely fire.", stars: 5, product: "Gaming Poster", date: "Jan 2025" },
-  { name: "Divya N.", city: "Ahmedabad", text: "Bought as a gift. My boyfriend cried happy tears. The quality, the packaging, everything was premium. Thank you!", stars: 5, product: "Ronaldo Poster", date: "Mar 2025" },
-  { name: "Saurabh L.", city: "Jaipur", text: "Ordered the 8-panel defender set. Looks absolutely menacing on my wall. Got so many compliments already.", stars: 5, product: "Defender 8-Panel", date: "Apr 2025" },
-  { name: "Meera P.", city: "Lucknow", text: "The retro photo prints of my family are so nostalgic and beautiful. Print resolution is crystal clear.", stars: 5, product: "Retro Photo Prints", date: "Mar 2025" },
-  { name: "Aditya S.", city: "Surat", text: "Was worried about the color accuracy but it matched my screen perfectly. Very happy with the purchase!", stars: 5, product: "Spider-Man Set", date: "Feb 2025" },
-  { name: "Pooja M.", city: "Chandigarh", text: "Ordered 5 different posters. Every single one is perfect. Super fast delivery and beautiful packaging!", stars: 5, product: "Multiple Products", date: "Jan 2025" },
+  { name: "James H.", city: "London", text: "Absolutely stunning quality! My room looks like a magazine shoot. The print is razor sharp and arrived perfectly packaged.", stars: 5, product: "BMW M4 Poster", date: "Mar 2025" },
+  { name: "Sophie T.", city: "Manchester", text: "The movie poster is incredible. Everyone who visits asks about it. Delivery was super fast — only 2 days!", stars: 5, product: "The Dark Knight Print", date: "Feb 2025" },
+  { name: "Oliver R.", city: "Birmingham", text: "Ordered three different car posters. Best purchase of my life honestly. Packaging was perfect, no damage whatsoever.", stars: 5, product: "Car Poster Set", date: "Jan 2025" },
+  { name: "Emily W.", city: "Bristol", text: "The coffee shop print is gorgeous. So atmospheric and moody. Perfect for my kitchen. Will definitely order again!", stars: 5, product: "Coffee Shop Print", date: "Mar 2025" },
+  { name: "Liam K.", city: "Leeds", text: "Delivery super fast, packaging excellent. 10/10 recommend. The colors are so vibrant and true to what I saw online.", stars: 5, product: "Ferrari Poster", date: "Apr 2025" },
+  { name: "Charlotte B.", city: "Edinburgh", text: "Print quality is insane for this price. Way better than expected. I was sceptical but now I'm a permanent customer!", stars: 5, product: "Coffee Shop Latte Art", date: "Feb 2025" },
+  { name: "Noah M.", city: "Cardiff", text: "My living room looks legendary now. The Porsche poster is absolutely fire. Ordered the A2 size and it's perfect.", stars: 5, product: "Porsche 911 Poster", date: "Jan 2025" },
+  { name: "Isla G.", city: "Liverpool", text: "Bought as a gift for my boyfriend. He loved it. The quality, the packaging, everything was premium. Thank you!", stars: 5, product: "Ford GT Print", date: "Mar 2025" },
+  { name: "George F.", city: "Sheffield", text: "Ordered a set of movie prints. Looks absolutely stunning on my wall. Got so many compliments already.", stars: 5, product: "Movie Poster Set", date: "Apr 2025" },
+  { name: "Amelia C.", city: "Glasgow", text: "The car prints are so nostalgic and beautiful. Print resolution is crystal clear. Arrived in 48 hours!", stars: 5, product: "Classic Car Prints", date: "Mar 2025" },
+  { name: "Harry P.", city: "Nottingham", text: "Was worried about the color accuracy but it matched my screen perfectly. Very happy with the purchase!", stars: 5, product: "Coffee Shop Rainy Day", date: "Feb 2025" },
+  { name: "Ella J.", city: "Newcastle", text: "Ordered 5 different posters. Every single one is perfect. Super fast delivery and beautiful packaging!", stars: 5, product: "Multiple Products", date: "Jan 2025" },
 ];
 
 const stats = [
   { val: "10,000+", label: "Happy Customers" },
   { val: "4.9 ★", label: "Average Rating" },
   { val: "2,400+", label: "Verified Reviews" },
-  { val: "1,981+", label: "Poster Designs" },
+  { val: "600+", label: "Poster Designs" },
 ];
 
 export default function ReviewsPage() {
@@ -44,7 +44,7 @@ export default function ReviewsPage() {
             10,000+ Happy <span style={{ color: "#e8a000" }}>Walls</span>
           </h1>
           <p style={{ fontFamily: F, fontSize: 15, color: "#888", maxWidth: 440, margin: "0 auto 36px" }}>
-            Real customers, real walls, real smiles. See what India is saying about CrazeFusion.
+            Real customers, real walls, real smiles. See what the UK is saying about us.
           </p>
           {/* Rating Summary */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
@@ -118,7 +118,7 @@ export default function ReviewsPage() {
         <div style={{ background: "#111", padding: "64px 32px", textAlign: "center" }}>
           <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#e8a000", marginBottom: 12 }}>Join Them</div>
           <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,4vw,48px)", fontWeight: 400, color: "#fff", textTransform: "uppercase", letterSpacing: "-0.03em", marginBottom: 20 }}>Your Wall is Waiting</h2>
-          <p style={{ fontFamily: F, fontSize: 14, color: "#666", marginBottom: 32 }}>Premium posters starting ₹79. Free shipping on prepaid orders.</p>
+          <p style={{ fontFamily: F, fontSize: 14, color: "#666", marginBottom: 32 }}>Premium posters starting £9.99. Free UK delivery on orders over £30.</p>
           <a href="/collection"
             style={{ display: "inline-block", padding: "16px 48px", background: "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", transition: "all 0.2s" }}
             onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = "#d09800"}

@@ -3,10 +3,10 @@
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const stats = [
-  { display: "10K+",   label: "Happy Customers", sub: "Across India" },
-  { display: "1,981+", label: "Poster Designs",   sub: "& counting" },
-  { display: "4.9★",   label: "Average Rating",   sub: "Verified reviews" },
-  { display: "₹79",    label: "Starting Price",    sub: "Free prepaid ship" },
+  { display: "10K+",  label: "Happy Customers", sub: "Across the UK" },
+  { display: "600+",  label: "Poster Designs",   sub: "& counting" },
+  { display: "4.9★",  label: "Average Rating",   sub: "Verified reviews" },
+  { display: "£9.99", label: "Starting Price",   sub: "Free delivery £30+" },
 ];
 
 export default function StatsBar() {

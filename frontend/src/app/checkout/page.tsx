@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
@@ -8,17 +8,20 @@ const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
 const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 
+const FREE_THRESHOLD = 30;
+const SHIPPING_COST  = 3.99;
+
 const steps = ["Delivery", "Payment", "Confirm"];
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
   const [step, setStep]       = useState(0);
-  const [form, setForm]       = useState({ name: "", email: "", phone: "", address: "", city: "", state: "", pincode: "" });
-  const [payMethod, setPayMethod] = useState("upi");
+  const [form, setForm]       = useState({ name: "", email: "", phone: "", address: "", city: "", county: "", postcode: "" });
+  const [payMethod, setPayMethod] = useState("card");
   const [ordered, setOrdered] = useState(false);
-  const orderIdRef            = useRef(`PK-${Math.random().toString(36).substring(2, 8).toUpperCase()}`);
+  const orderIdRef            = useRef(`PZ-${Math.random().toString(36).substring(2, 8).toUpperCase()}`);
 
-  const shipping = subtotal >= 499 ? 0 : 49;
+  const shipping = subtotal >= FREE_THRESHOLD ? 0 : SHIPPING_COST;
   const total    = subtotal + shipping;
 
   const handleField = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }));
@@ -42,7 +45,7 @@ export default function CheckoutPage() {
           <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 8 }}>Order ID</div>
           <div style={{ fontFamily: FE, fontSize: 22, fontWeight: 400, color: "var(--c-text)" }}>{orderIdRef.current}</div>
         </div>
-        <p style={{ fontFamily: F, fontSize: 12, color: "#aaa", marginBottom: 28 }}>Expected delivery: 5–7 business days</p>
+        <p style={{ fontFamily: F, fontSize: 12, color: "#aaa", marginBottom: 28 }}>Expected delivery: 2–4 business days (UK)</p>
         <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
           <Link href="/collection"
             style={{ display: "inline-block", padding: "14px 28px", border: "1px solid #111", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none" }}>
@@ -57,7 +60,6 @@ export default function CheckoutPage() {
     </div>
   );
 
-  // Empty cart redirect hint
   if (items.length === 0 && !ordered) return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, paddingTop: 64 }}>
       <Navbar />
@@ -106,14 +108,14 @@ export default function CheckoutPage() {
                 </div>
                 <div style={{ marginBottom: 16 }}>
                   <label style={labelStyle}>Phone Number</label>
-                  <input type="tel" placeholder="+91 XXXXX XXXXX" value={form.phone} onChange={e => handleField("phone", e.target.value)} style={inputStyle(form.phone)} />
+                  <input type="tel" placeholder="+44 7XXX XXXXXX" value={form.phone} onChange={e => handleField("phone", e.target.value)} style={inputStyle(form.phone)} />
                 </div>
                 <div style={{ marginBottom: 16 }}>
                   <label style={labelStyle}>Delivery Address</label>
                   <input type="text" placeholder="House no., Street, Area" value={form.address} onChange={e => handleField("address", e.target.value)} style={inputStyle(form.address)} />
                 </div>
                 <div className="checkout-3col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginBottom: 32 }}>
-                  {[["city", "City"], ["state", "State"], ["pincode", "Pincode"]].map(([k, l]) => (
+                  {[["city", "Town / City"], ["county", "County"], ["postcode", "Postcode"]].map(([k, l]) => (
                     <div key={k}>
                       <label style={labelStyle}>{l}</label>
                       <input type="text" placeholder={l} value={form[k as keyof typeof form]} onChange={e => handleField(k, e.target.value)} style={inputStyle(form[k as keyof typeof form])} />
@@ -133,9 +135,9 @@ export default function CheckoutPage() {
               <div>
                 <h2 style={{ fontFamily: FE, fontSize: 24, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", marginBottom: 28 }}>Payment Method</h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
-                  {[["upi", "UPI / Google Pay / PhonePe", "Instant · Most Popular"], ["card", "Credit / Debit Card", "Secured by Razorpay"], ["netbanking", "Net Banking", "All major banks supported"], ["cod", "Cash on Delivery", "+₹49 handling charge"]].map(([val, label, desc]) => (
+                  {[["card", "Credit / Debit Card", "Visa, Mastercard, Amex — secured by Stripe"], ["paypal", "PayPal", "Fast & secure PayPal checkout"], ["apple", "Apple Pay", "One-tap checkout with Apple Pay"], ["google", "Google Pay", "One-tap checkout with Google Pay"]].map(([val, label, desc]) => (
                     <label key={val} onClick={() => setPayMethod(val)}
-                      style={{ display: "flex", alignItems: "center", gap: 16, padding: "18px 20px", border: `1.5px solid ${payMethod === val ? "#111" : "#e0e0e0"}`, background: payMethod === val ? "#fafafa" : "#fff", cursor: "pointer", transition: "all 0.15s" }}>
+                      style={{ display: "flex", alignItems: "center", gap: 16, padding: "18px 20px", border: `1.5px solid ${payMethod === val ? "#111" : "#e0e0e0"}`, background: payMethod === val ? "#fafafa" : "var(--c-bg)", cursor: "pointer", transition: "all 0.15s" }}>
                       <div style={{ width: 18, height: 18, borderRadius: "50%", border: `2px solid ${payMethod === val ? "#111" : "#ccc"}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                         {payMethod === val && <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#111" }} />}
                       </div>
@@ -158,9 +160,9 @@ export default function CheckoutPage() {
             {step === 2 && (
               <div>
                 <h2 style={{ fontFamily: FE, fontSize: 24, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", marginBottom: 28 }}>Confirm Order</h2>
-                {[["Deliver To", `${form.name || "—"}, ${form.address || "—"}, ${form.city || "—"} ${form.pincode || ""}`],
-                  ["Payment", payMethod.toUpperCase()],
-                  ["Expected", "5–7 Business Days"],
+                {[["Deliver To", `${form.name || "—"}, ${form.address || "—"}, ${form.city || "—"} ${form.postcode || ""}`],
+                  ["Payment", payMethod.charAt(0).toUpperCase() + payMethod.slice(1)],
+                  ["Expected", "2–4 Business Days (UK)"],
                   ["Items", `${items.reduce((s, i) => s + i.qty, 0)} items`],
                 ].map(([label, val]) => (
                   <div key={label} style={{ display: "flex", gap: 20, padding: "16px 0", borderBottom: "1px solid var(--c-border)" }}>
@@ -172,7 +174,7 @@ export default function CheckoutPage() {
                   <button onClick={() => setStep(1)} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid var(--c-border)", cursor: "pointer" }}>← Back</button>
                   <button onClick={handlePlaceOrder}
                     style={{ flex: 1, padding: "15px 24px", background: "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 400, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer" }}>
-                    Place Order · ₹{total}
+                    Place Order · £{total.toFixed(2)}
                   </button>
                 </div>
               </div>
@@ -193,12 +195,12 @@ export default function CheckoutPage() {
                       <div style={{ fontFamily: FE, fontSize: 11, fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 2, lineHeight: 1.3 }}>{item.title}</div>
                       <div style={{ fontFamily: F, fontSize: 10, color: "#aaa" }}>{item.size} · {item.finish} · Qty: {item.qty}</div>
                     </div>
-                    <div style={{ fontFamily: FE, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>₹{item.price * item.qty}</div>
+                    <div style={{ fontFamily: FE, fontSize: 14, fontWeight: 500, color: "var(--c-text)" }}>£{(item.price * item.qty).toFixed(2)}</div>
                   </div>
                 ))}
               </div>
               <div style={{ borderTop: "1px solid var(--c-border)", paddingTop: 16, marginTop: 8 }}>
-                {[["Subtotal", `₹${subtotal}`], ["Shipping", shipping === 0 ? "FREE" : `₹${shipping}`], ["Total", `₹${total}`]].map(([label, val], i) => (
+                {[["Subtotal", `£${subtotal.toFixed(2)}`], ["Shipping", shipping === 0 ? "FREE" : `£${shipping.toFixed(2)}`], ["Total", `£${total.toFixed(2)}`]].map(([label, val], i) => (
                   <div key={label} style={{ display: "flex", justifyContent: "space-between", marginBottom: i < 2 ? 8 : 0 }}>
                     <span style={{ fontFamily: F, fontSize: i === 2 ? 14 : 12, fontWeight: i === 2 ? 800 : 400, color: "#555" }}>{label}</span>
                     <span style={{ fontFamily: FE, fontSize: i === 2 ? 18 : 12, fontWeight: 400, color: i === 2 ? "#111" : val === "FREE" ? "#16a34a" : "#555" }}>{val}</span>

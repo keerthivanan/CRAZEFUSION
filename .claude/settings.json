@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(awk '{sum+=$1; count++} END {print sum/count \"KB avg per file\"}')"
+      "Bash(awk '{sum+=$1; count++} END {print sum/count \"KB avg per file\"}')",
+      "Bash(node make_example_mockup.js)"
     ]
+  },
+  "mcpServers": {
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=wpwbszsproswffcjozvb"
+    }
   }
 }

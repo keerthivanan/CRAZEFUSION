@@ -1,63 +1,80 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import Newsletter from "@/components/footer/Newsletter";
-import { products } from "@/data";
+import { fetchProduct, fetchRelated, Product } from "@/lib/supabase";
 import { useCart } from "@/context/CartContext";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
-const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
+
+const SIZES    = ["A4 (21×30cm)", "A3 (30×42cm)", "A2 (42×60cm)"];
+const FINISHES = ["Matte", "Satin Gloss"];
 
 export default function ProductPage() {
   const { id } = useParams();
-  const router = useRouter();
+  const router  = useRouter();
   const { addItem } = useCart();
 
-  const p = products.find(x => x.id === Number(id));
+  const [p, setP]                           = useState<Product | null>(null);
+  const [loading, setLoading]               = useState(true);
+  const [related, setRelated]               = useState<Product[]>([]);
   const [selectedSize, setSelectedSize]     = useState(0);
   const [selectedFinish, setSelectedFinish] = useState(0);
   const [activeImg, setActiveImg]           = useState(0);
   const [added, setAdded]                   = useState(false);
 
-  if (!p) return (
-    <div style={{ background: "#fff", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
-      <Navbar />
-      <div style={{ fontFamily: FE, fontSize: 32, fontWeight: 400, color: "#111", paddingTop: 64 }}>Product not found</div>
-      <Link href="/collection" style={{ fontFamily: F, fontSize: 13, color: "#e8a000", textDecoration: "underline" }}>← Back to collection</Link>
-    </div>
-  );
+  useEffect(() => {
+    async function load() {
+      setLoading(true);
+      const product = await fetchProduct(Number(id));
+      if (product) {
+        setP(product);
+        const rel = await fetchRelated(product.category, Number(id), 4);
+        setRelated(rel);
+      }
+      setLoading(false);
+    }
+    load();
+  }, [id]);
 
-  const discount = Math.round((1 - p.price / p.original) * 100);
-  // Poster first (full actual image), mockup second
-  const imgs = [p.img2, p.img];
+  const imgs = p ? [p.img2, p.img] : [];
+  const price    = p ? Number(p.price) : 0;
+  const original = p ? Number(p.original_price) : 0;
+  const discount = original > price ? Math.round((1 - price / original) * 100) : 0;
 
-  const handleAddToCart = () => {
-    addItem({
-      id: p.id, title: p.title, sub: p.sub, img: p.img,
-      price: p.price, original: p.original,
-      size: p.sizes[selectedSize],
-      finish: p.finishes[selectedFinish],
-    });
+  const addToCart = () => {
+    if (!p) return;
+    addItem({ id: p.id, title: p.name, sub: p.sub, img: p.img, price, original, size: SIZES[selectedSize], finish: FINISHES[selectedFinish] });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
+  const buyNow = () => { addToCart(); router.push("/checkout"); };
 
-  const handleBuyNow = () => {
-    addItem({
-      id: p.id, title: p.title, sub: p.sub, img: p.img,
-      price: p.price, original: p.original,
-      size: p.sizes[selectedSize],
-      finish: p.finishes[selectedFinish],
-    });
-    router.push("/checkout");
-  };
+  if (loading) return (
+    <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
+      <Navbar />
+      <div style={{ paddingTop: 160, maxWidth: 1400, margin: "0 auto", padding: "160px 32px 64px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64 }}>
+        <div style={{ aspectRatio: "3/4", background: "var(--c-bg-soft)", borderRadius: 2, animation: "pulse 1.5s infinite" }} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 20, paddingTop: 40 }}>
+          {[300, 200, 100, 150, 100].map((w, i) => (
+            <div key={i} style={{ height: 20, width: w, background: "var(--c-bg-soft)", borderRadius: 4, animation: "pulse 1.5s infinite" }} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 
-  const related = products.filter(x => x.cat === p.cat && x.id !== p.id).slice(0, 4);
+  if (!p) return (
+    <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
+      <Navbar />
+      <div style={{ fontFamily: FO, fontSize: 32, fontWeight: 400, color: "var(--c-text)", paddingTop: 64 }}>Product not found</div>
+      <Link href="/collection" style={{ fontFamily: FO, fontSize: 13, color: "#e8a000", textDecoration: "underline" }}>← Back to collection</Link>
+    </div>
+  );
 
   return (
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
@@ -66,41 +83,39 @@ export default function ProductPage() {
 
         {/* Breadcrumb */}
         <div style={{ padding: "16px 32px" }}>
-          <div style={{ maxWidth: 1400, margin: "0 auto", fontFamily: F, fontSize: 10, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+          <div style={{ maxWidth: 1400, margin: "0 auto", fontFamily: FO, fontSize: 10, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase" }}>
             <Link href="/" style={{ color: "#aaa", textDecoration: "none" }}>Home</Link>
             <span style={{ margin: "0 8px" }}>›</span>
             <Link href="/collection" style={{ color: "#aaa", textDecoration: "none" }}>Collection</Link>
             <span style={{ margin: "0 8px" }}>›</span>
-            <span style={{ color: "var(--c-text)" }}>{p.title}</span>
+            <span style={{ color: "var(--c-text)" }}>{p.name}</span>
           </div>
         </div>
 
-        {/* Product Layout */}
+        {/* Layout */}
         <div className="product-detail-layout" style={{ maxWidth: 1400, margin: "0 auto", padding: "48px 32px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
 
           {/* Images */}
           <div>
-            <div style={{ position: "relative", background: "var(--c-bg-soft)", marginBottom: 12, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img src={imgs[activeImg]} alt={p.title}
+            <div style={{ position: "relative", background: "var(--c-bg-soft)", marginBottom: 12 }}>
+              <img src={imgs[activeImg]} alt={p.name}
                 style={{ width: "100%", height: "auto", display: "block", transition: "opacity 0.3s" }} />
               {p.badge && (
-                <span style={{ position: "absolute", top: 16, left: 16, background: p.badge === "Best Seller" ? "#e8a000" : p.badge === "Hot" ? "#dc2626" : p.badge === "Sale" ? "#dc2626" : "#111", color: p.badge === "Best Seller" ? "#000" : "#fff", fontFamily: F, fontSize: 10, fontWeight: 500, padding: "4px 10px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                <span style={{ position: "absolute", top: 16, left: 16, background: "#111", color: "#fff", fontFamily: FO, fontSize: 10, fontWeight: 700, padding: "4px 12px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
                   {p.badge}
                 </span>
               )}
               {discount > 0 && (
-                <span style={{ position: "absolute", top: 16, right: 16, background: "#111", color: "#fff", fontFamily: F, fontSize: 10, fontWeight: 500, padding: "4px 10px" }}>
+                <span style={{ position: "absolute", top: 16, right: 16, background: "#dc2626", color: "#fff", fontFamily: FO, fontSize: 10, fontWeight: 700, padding: "4px 10px" }}>
                   {discount}% OFF
                 </span>
               )}
             </div>
             <div style={{ display: "flex", gap: 8 }}>
               {imgs.map((src, i) => (
-                <button key={i}
-                  onMouseEnter={() => setActiveImg(i)}
-                  onClick={() => setActiveImg(i)}
-                  style={{ width: 72, height: 72, overflow: "hidden", border: `2px solid ${activeImg === i ? "var(--c-text)" : "var(--c-border)"}`, background: "none", padding: 0, cursor: "pointer", transition: "border-color 0.2s", borderRadius: 6 }}>
-                  <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+                <button key={i} onMouseEnter={() => setActiveImg(i)} onClick={() => setActiveImg(i)}
+                  style={{ width: 72, height: 72, overflow: "hidden", border: `2px solid ${activeImg === i ? "var(--c-text)" : "var(--c-border)"}`, background: "none", padding: 0, cursor: "pointer", borderRadius: 6 }}>
+                  <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </button>
               ))}
             </div>
@@ -108,31 +123,30 @@ export default function ProductPage() {
 
           {/* Details */}
           <div>
-            <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 500, color: "#999", letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 10 }}>{p.sub}</div>
+            <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 500, color: "#999", letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 10 }}>{p.category}</div>
             <h1 style={{ fontFamily: FO, fontSize: "clamp(20px,2.6vw,36px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "0.01em", marginBottom: 14, lineHeight: 1.15 }}>
-              {p.title}
+              {p.name}
             </h1>
 
-            {/* Rating */}
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
               <div style={{ color: "#e8a000", fontSize: 13, letterSpacing: 2 }}>★★★★★</div>
-              <span style={{ fontFamily: FO, fontSize: 12, fontWeight: 500, color: "#aaa" }}>4.9 (2,400+ reviews)</span>
+              <span style={{ fontFamily: FO, fontSize: 12, color: "#aaa" }}>4.9 (2,400+ reviews)</span>
             </div>
 
             {/* Price */}
             <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 24, paddingBottom: 24, borderBottom: "1px solid var(--c-border)" }}>
-              <span style={{ fontFamily: FO, fontSize: 40, fontWeight: 500, color: "var(--c-text)" }}>₹{p.price}</span>
-              <span style={{ fontFamily: FO, fontSize: 20, fontWeight: 400, color: "#bbb", textDecoration: "line-through" }}>₹{p.original}</span>
-              <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "#dc2626", background: "rgba(220,38,38,0.06)", padding: "4px 12px", borderRadius: 4 }}>{discount}% OFF</span>
+              <span style={{ fontFamily: FO, fontSize: 40, fontWeight: 600, color: "var(--c-text)" }}>£{price.toFixed(2)}</span>
+              {original > price && <span style={{ fontFamily: FO, fontSize: 20, color: "#bbb", textDecoration: "line-through" }}>£{original.toFixed(2)}</span>}
+              {discount > 0 && <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "#dc2626", background: "rgba(220,38,38,0.06)", padding: "4px 12px", borderRadius: 4 }}>{discount}% OFF</span>}
             </div>
 
-            {/* Size Selector */}
+            {/* Size */}
             <div style={{ marginBottom: 20 }}>
               <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#777", marginBottom: 10 }}>
-                Size: <span style={{ color: "var(--c-text)", fontWeight: 700 }}>{p.sizes[selectedSize]}</span>
+                Size: <span style={{ color: "var(--c-text)", fontWeight: 700 }}>{SIZES[selectedSize]}</span>
               </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                {p.sizes.map((s, i) => (
+                {SIZES.map((s, i) => (
                   <button key={s} onClick={() => setSelectedSize(i)}
                     style={{ padding: "10px 22px", border: `1.5px solid ${selectedSize === i ? "var(--c-text)" : "#e0e0e0"}`, background: selectedSize === i ? "var(--c-btn-bg)" : "var(--c-bg)", color: selectedSize === i ? "var(--c-btn-text)" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s", borderRadius: 50 }}>
                     {s}
@@ -141,13 +155,13 @@ export default function ProductPage() {
               </div>
             </div>
 
-            {/* Finish Selector */}
+            {/* Finish */}
             <div style={{ marginBottom: 24 }}>
               <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#777", marginBottom: 10 }}>
-                Finish: <span style={{ color: "var(--c-text)", fontWeight: 700 }}>{p.finishes[selectedFinish]}</span>
+                Finish: <span style={{ color: "var(--c-text)", fontWeight: 700 }}>{FINISHES[selectedFinish]}</span>
               </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                {p.finishes.map((f, i) => (
+                {FINISHES.map((f, i) => (
                   <button key={f} onClick={() => setSelectedFinish(i)}
                     style={{ padding: "10px 22px", border: `1.5px solid ${selectedFinish === i ? "var(--c-text)" : "#e0e0e0"}`, background: selectedFinish === i ? "var(--c-btn-bg)" : "var(--c-bg)", color: selectedFinish === i ? "var(--c-btn-text)" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s", borderRadius: 50 }}>
                     {f}
@@ -156,43 +170,40 @@ export default function ProductPage() {
               </div>
             </div>
 
-            {/* CTA Buttons */}
+            {/* CTAs */}
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 24 }}>
               <ClickSpark sparkColor="#fff" sparkCount={10} sparkRadius={28}>
-                <button onClick={handleAddToCart}
-                  style={{ width: "100%", padding: "16px 0", background: added ? "#16a34a" : "#111", color: "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.3s", borderRadius: 50, boxShadow: "0 4px 16px rgba(0,0,0,0.12)" }}>
+                <button onClick={addToCart}
+                  style={{ width: "100%", padding: "16px 0", background: added ? "#16a34a" : "#111", color: "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "background 0.3s", borderRadius: 50 }}>
                   {added ? "Added to Cart!" : "Add to Cart"}
                 </button>
               </ClickSpark>
               <ClickSpark sparkColor="#111" sparkCount={10} sparkRadius={28}>
-                <button onClick={handleBuyNow}
-                  style={{ width: "100%", padding: "16px 0", background: "#e8a000", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "all 0.3s", borderRadius: 50, boxShadow: "0 4px 16px rgba(232,160,0,0.2)" }}
+                <button onClick={buyNow}
+                  style={{ width: "100%", padding: "16px 0", background: "#e8a000", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50 }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#d09800")}
                   onMouseLeave={e => (e.currentTarget.style.background = "#e8a000")}>
-                  Buy Now — ₹{p.price}
+                  Buy Now — £{price.toFixed(2)}
                 </button>
               </ClickSpark>
             </div>
 
             {/* Trust badges */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 24 }}>
-              {[["Free delivery", "On prepaid orders"], ["Ships in 24hrs", "Mon–Sat"], ["7-day returns", "No questions asked"], ["Secure payment", "Razorpay secured"]].map(([title, sub]) => (
-                <div key={title} style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "12px 14px", border: "1px solid var(--c-border)", background: "var(--c-bg-card)" }}>
-                  <div>
-                    <div style={{ fontFamily: F, fontSize: 11, fontWeight: 700, color: "var(--c-text)" }}>{title}</div>
-                    <div style={{ fontFamily: F, fontSize: 10, color: "#aaa" }}>{sub}</div>
-                  </div>
+              {[["Free UK delivery", "Orders over £30"], ["Printed & shipped in 48hrs", "Mon–Fri"], ["30-day returns", "No questions asked"], ["Secure payment", "Stripe protected"]].map(([t, s]) => (
+                <div key={t} style={{ padding: "12px 14px", border: "1px solid var(--c-border)", background: "var(--c-bg-card)" }}>
+                  <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, color: "var(--c-text)" }}>{t}</div>
+                  <div style={{ fontFamily: FO, fontSize: 10, color: "#aaa" }}>{s}</div>
                 </div>
               ))}
             </div>
 
-            {/* Description */}
+            {/* Details */}
             <div style={{ paddingTop: 20, borderTop: "1px solid var(--c-border)" }}>
-              <div style={{ fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#aaa", marginBottom: 10 }}>Product Details</div>
-              <p style={{ fontFamily: F, fontSize: 13, color: "#555", lineHeight: 1.8 }}>{p.description}</p>
-              <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 6 }}>
-                {["200GSM premium art paper", "Vivid HD print, scratch-resistant", "Ready to hang (tape included)", "Pan-India shipping in 5–7 days"].map(f => (
-                  <div key={f} style={{ fontFamily: F, fontSize: 12, color: "#555", display: "flex", gap: 8 }}>
+              <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#aaa", marginBottom: 10 }}>Product Details</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {["Premium 200gsm art paper", "Vivid HD print, fade-resistant inks", "Ready to frame — standard sizes", "Printed on demand, shipped from UK"].map(f => (
+                  <div key={f} style={{ fontFamily: FO, fontSize: 12, color: "#555", display: "flex", gap: 8 }}>
                     <span style={{ color: "#16a34a" }}>✓</span> {f}
                   </div>
                 ))}
@@ -201,29 +212,22 @@ export default function ProductPage() {
           </div>
         </div>
 
-        {/* Related Products */}
+        {/* Related */}
         {related.length > 0 && (
           <div style={{ borderTop: "1px solid var(--c-border)", padding: "64px 32px" }}>
             <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-              <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#aaa", marginBottom: 8 }}>You Might Also Like</div>
-              <h2 style={{ fontFamily: FE, fontSize: "clamp(22px,3vw,36px)", fontWeight: 400, color: "#111", textTransform: "uppercase", letterSpacing: "-0.03em", marginBottom: 32 }}>Related <span style={{ color: "#e8a000" }}>Products</span></h2>
+              <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#aaa", marginBottom: 8 }}>You Might Also Like</div>
+              <h2 style={{ fontFamily: FO, fontSize: "clamp(22px,3vw,36px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 32 }}>Related <span style={{ color: "#e8a000" }}>Posters</span></h2>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 24 }}>
                 {related.map(r => (
                   <Link key={r.id} href={`/product/${r.id}`} style={{ textDecoration: "none" }}>
-                    <div style={{ aspectRatio: "3/4", overflow: "hidden", background: "var(--c-bg-soft)", marginBottom: 10, position: "relative" }}
-                      onMouseEnter={e => {
-                        const img = e.currentTarget.querySelector("img") as HTMLImageElement;
-                        img.src = r.img2; img.style.transform = "scale(1.05)";
-                      }}
-                      onMouseLeave={e => {
-                        const img = e.currentTarget.querySelector("img") as HTMLImageElement;
-                        img.src = r.img; img.style.transform = "scale(1)";
-                      }}>
-                      <img src={r.img} alt={r.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "transform 0.4s ease" }} />
+                    <div style={{ aspectRatio: "3/4", overflow: "hidden", background: "var(--c-bg-soft)", marginBottom: 10 }}
+                      onMouseEnter={e => { const img = e.currentTarget.querySelector("img") as HTMLImageElement; img.src = r.img2; img.style.transform = "scale(1.05)"; }}
+                      onMouseLeave={e => { const img = e.currentTarget.querySelector("img") as HTMLImageElement; img.src = r.img; img.style.transform = "scale(1)"; }}>
+                      <img src={r.img} alt={r.name} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease" }} />
                     </div>
-                    <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 400, color: "#1a6fa8", marginBottom: 2, lineHeight: 1.4, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{r.title}</div>
-                    <div style={{ fontFamily: F, fontSize: 10, color: "#aaa", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.06em" }}>{r.sub}</div>
-                    <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 600, color: "var(--c-text)" }}>From ₹{r.price}</div>
+                    <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 500, color: "var(--c-text)", marginBottom: 2, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{r.name}</div>
+                    <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 600, color: "var(--c-text)", marginTop: 4 }}>£{Number(r.price).toFixed(2)}</div>
                   </Link>
                 ))}
               </div>
@@ -234,6 +238,7 @@ export default function ProductPage() {
       <Newsletter />
       <Footer />
       <style>{`
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
         @media (max-width: 768px) {
           .product-detail-layout { grid-template-columns: 1fr !important; padding: 24px 16px !important; gap: 32px !important; }
         }
