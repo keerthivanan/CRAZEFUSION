@@ -98,7 +98,7 @@ export default function Hero() {
               </Link>
             </ClickSpark>
 
-            <Link href="/cricket" style={{
+            <Link href="/collection" style={{
               display: "inline-flex", alignItems: "center", gap: 8,
               padding: "16px 32px",
               border: "1px solid var(--c-border)",
@@ -110,7 +110,7 @@ export default function Hero() {
               onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.borderColor = "var(--c-text)"; el.style.color = "var(--c-text)"; }}
               onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.borderColor = "var(--c-border)"; el.style.color = "var(--c-text-muted)"; }}
             >
-              Sports Prints ↗
+              Browse All ↗
             </Link>
           </div>
 
