@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
@@ -11,7 +12,7 @@ import ClickSpark from "@/components/reactbits/ClickSpark";
 import SlashHeading from "@/components/ui/SlashHeading";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const LOGO_KEY = process.env.NEXT_PUBLIC_LOGODEV_KEY || "";
+const LOGO_KEY = "pk_X0d9dkoXSXC1bEBCAvNs-g";
 
 const CATEGORIES = ["All", "Cars", "Movies", "Coffee Shop"];
 
@@ -130,9 +131,12 @@ function ProductCard({ p }: { p: Product }) {
 
 // ── Main Collection Page ───────────────────────────────────────────────────────
 export default function CollectionPage() {
+  const searchParams = useSearchParams();
+  const catParam = searchParams.get("cat");
+
   const [products, setProducts]             = useState<Product[]>([]);
   const [loading, setLoading]               = useState(true);
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState(catParam && ["Cars","Movies","Coffee Shop"].includes(catParam) ? catParam : "All");
   const [activeBrand, setActiveBrand]       = useState<string | null>(null);
   const [sortBy, setSortBy]                 = useState("featured");
   const [filtersOpen, setFiltersOpen]       = useState(false);
