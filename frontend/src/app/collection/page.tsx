@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
@@ -131,20 +130,19 @@ function ProductCard({ p }: { p: Product }) {
 
 // ── Main Collection Page ───────────────────────────────────────────────────────
 export default function CollectionPage() {
-  return <Suspense><CollectionInner /></Suspense>;
-}
-
-function CollectionInner() {
-  const searchParams = useSearchParams();
-  const catParam = searchParams.get("cat");
-
   const [products, setProducts]             = useState<Product[]>([]);
   const [loading, setLoading]               = useState(true);
-  const [activeCategory, setActiveCategory] = useState(catParam && ["Cars","Movies","Coffee Shop"].includes(catParam) ? catParam : "All");
+  const [activeCategory, setActiveCategory] = useState("All");
   const [activeBrand, setActiveBrand]       = useState<string | null>(null);
   const [sortBy, setSortBy]                 = useState("featured");
   const [filtersOpen, setFiltersOpen]       = useState(false);
   const [priceFilter, setPriceFilter]       = useState<string[]>([]);
+
+  // Read ?cat= from URL client-side (avoids useSearchParams Suspense requirement)
+  useEffect(() => {
+    const cat = new URLSearchParams(window.location.search).get("cat");
+    if (cat && ["Cars", "Movies", "Coffee Shop"].includes(cat)) setActiveCategory(cat);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
