@@ -3,9 +3,9 @@ import Link from "next/link";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 
 const heroImages = [
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973760/crazefusion/originals/car-posters/3051_Ferrari_LaFerrari_Poster.webp", label: "Cars" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973794/crazefusion/originals/movies/2795_The_Batman_in_the_Rain_Poster.webp", label: "Movies" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777974050/crazefusion/originals/coffee-shop-posters/2902_More_Espresso_Less_Depresso_Poster.webp", label: "Coffee Shop" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973792/crazefusion/originals/movies/2792_Joker_Put_on_a_Happy_Face_Poster.webp", label: "Movies" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973902/crazefusion/originals/movies/3341_John_Wick_Chapter_4_Poster.webp", label: "Movies" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973767/crazefusion/originals/car-posters/3065_Lamborghini_Aventador_Poster.webp", label: "Cars" },
 ];
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
