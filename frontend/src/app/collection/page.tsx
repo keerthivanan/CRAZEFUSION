@@ -30,16 +30,12 @@ const CAR_BRANDS = [
   { name: "Ford",         domain: "ford.com" },
   { name: "Nissan",       domain: "nissan.com" },
   { name: "Acura",        domain: "acura.com" },
-  { name: "Hennessey",    domain: "hennesseyperformance.com" },
   { name: "Lotus",        domain: "lotuscars.com" },
   { name: "Audi",         domain: "audi.com" },
   { name: "Mercedes",     domain: "mercedes-benz.com" },
   { name: "Tesla",        domain: "tesla.com" },
   { name: "Toyota",       domain: "toyota.com" },
   { name: "Mazda",        domain: "mazda.com" },
-  { name: "Rimac",        domain: "rimac-automobili.com" },
-  { name: "SSC",          domain: "sscnorthamerica.com" },
-  { name: "Zenvo",        domain: "zenvomotorsport.com" },
 ];
 
 // ── Movie Franchise Data ───────────────────────────────────────────────────────
@@ -269,7 +265,7 @@ export default function CollectionPage() {
                       src={`https://img.logo.dev/${brand.domain}?token=${LOGO_KEY}&size=80&format=png`}
                       alt={brand.name}
                       style={{ width: 36, height: 36, objectFit: "contain" }}
-                      onError={e => { (e.currentTarget as HTMLImageElement).style.opacity = "0.3"; }}
+                      onError={e => { (e.currentTarget as HTMLImageElement).closest("button")!.style.display = "none"; }}
                     />
                     <span style={{
                       fontFamily: FO, fontSize: 8, fontWeight: 700,
