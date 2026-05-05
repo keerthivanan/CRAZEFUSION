@@ -1,8 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-export const supabase = createClient(url, key);
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
+const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '';
+// Lazy — only initialised when env vars are present (not needed for static-file mode)
+export const supabase = url && key ? createClient(url, key) : null as any;
 
 export interface Product {
   id: number;
@@ -16,36 +17,30 @@ export interface Product {
   img2: string;
 }
 
-// Static JSON served from /public/data/ — no DB round-trip, CDN-cached
-const FILE_MAP: Record<string, string> = {
-  Cars: '/data/cars.json',
-  Movies: '/data/movies.json',
-  'Coffee Shop': '/data/coffee.json',
+// Products loaded from static JSON — no DB round-trip, CDN-cached
+import carsData       from '../../public/data/cars.json';
+import moviesData     from '../../public/data/movies.json';
+import coffeeData     from '../../public/data/coffee.json';
+import allData        from '../../public/data/all.json';
+
+const STATIC: Record<string, Product[]> = {
+  Cars:          carsData   as Product[],
+  Movies:        moviesData as Product[],
+  'Coffee Shop': coffeeData as Product[],
+  All:           allData    as Product[],
 };
 
 export async function fetchProducts(category: string, limit?: number): Promise<Product[]> {
-  const file = FILE_MAP[category] ?? '/data/all.json';
-  try {
-    const res = await fetch(file);
-    let data: Product[] = await res.json();
-    if (!FILE_MAP[category]) data = data.filter(p => p.category === category);
-    return limit ? data.slice(0, limit) : data;
-  } catch {
-    return [];
-  }
+  const data = STATIC[category] ?? STATIC['All'].filter(p => p.category === category);
+  return limit ? data.slice(0, limit) : data;
 }
 
 export async function fetchProduct(id: number): Promise<Product | null> {
-  try {
-    const res = await fetch('/data/all.json');
-    const data: Product[] = await res.json();
-    return data.find(p => p.id === id) ?? null;
-  } catch {
-    return null;
-  }
+  return STATIC['All'].find(p => p.id === id) ?? null;
 }
 
 export async function fetchRelated(category: string, excludeId: number, limit = 4): Promise<Product[]> {
-  const all = await fetchProducts(category);
-  return all.filter(p => p.id !== excludeId).slice(0, limit);
+  return (STATIC[category] ?? STATIC['All'])
+    .filter(p => p.id !== excludeId)
+    .slice(0, limit);
 }
