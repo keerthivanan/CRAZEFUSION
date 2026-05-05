@@ -1,6 +1,5 @@
 import Navbar from "@/components/navbar/Navbar";
 import Hero from "@/components/hero/Hero";
-import CategoryIcons from "@/components/categories/CategoryIcons";
 import BestSelling from "@/components/products/BestSelling";
 import MultiPosters from "@/components/products/MultiPosters";
 import TrendingProducts from "@/components/products/TrendingProducts";
@@ -14,7 +13,6 @@ export default function Home() {
     <main style={{ background: "var(--c-bg)", minHeight: "100vh", paddingTop: 108 }}>
       <Navbar />
       <Hero />
-      <CategoryIcons />
       <BestSelling />
       <MultiPosters />
       <TrendingProducts />
