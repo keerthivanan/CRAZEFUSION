@@ -283,7 +283,7 @@ export default function CollectionPage() {
                       <img
                         src={`https://img.logo.dev/${brand.domain}?token=${LOGO_KEY}&size=80&format=png`}
                         alt={brand.name}
-                        style={{ width: 28, height: 28, objectFit: "contain", borderRadius: 6 }}
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
                         onError={e => { (e.currentTarget as HTMLImageElement).closest("button")!.style.display = "none"; }}
                       />
                     </div>
@@ -337,7 +337,7 @@ export default function CollectionPage() {
                         <img
                           src={`https://img.logo.dev/${f.domain}?token=${LOGO_KEY}&size=80&format=png`}
                           alt={f.name}
-                          style={{ width: 28, height: 28, objectFit: "contain", borderRadius: 6 }}
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
                           onError={e => {
                             const img = e.currentTarget as HTMLImageElement;
                             img.style.display = "none";
