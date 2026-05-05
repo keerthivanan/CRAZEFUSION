@@ -3,9 +3,9 @@ import Link from "next/link";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 
 const heroImages = [
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777809153/crazefusion/posters/poster_the_weeknd.jpg", label: "Best Seller" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777809133/crazefusion/posters/poster_ronaldo.jpg", label: "New" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777809171/crazefusion/posters/poster_wolf_of_wall_street.jpg", label: "Trending" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973760/crazefusion/originals/car-posters/3051_Ferrari_LaFerrari_Poster.webp", label: "Cars" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973794/crazefusion/originals/movies/2795_The_Batman_in_the_Rain_Poster.webp", label: "Movies" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777974050/crazefusion/originals/coffee-shop-posters/2902_More_Espresso_Less_Depresso_Poster.webp", label: "Coffee Shop" },
 ];
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
