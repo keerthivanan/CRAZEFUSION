@@ -254,19 +254,26 @@ export default function CollectionPage() {
                   <button key={brand.name}
                     onClick={() => setActiveBrand(active ? null : brand.name)}
                     style={{
-                      flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 5,
-                      padding: "8px 14px", minWidth: 72,
-                      border: `1.5px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
-                      background: active ? "var(--c-bg)" : "transparent",
-                      cursor: "pointer", borderRadius: 10, transition: "all 0.15s",
-                      boxShadow: active ? "0 0 0 1px var(--c-text)" : "none",
+                      flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+                      padding: "0", border: "none", background: "transparent",
+                      cursor: "pointer", transition: "all 0.15s",
                     }}>
-                    <img
-                      src={`https://img.logo.dev/${brand.domain}?token=${LOGO_KEY}&size=80&format=png`}
-                      alt={brand.name}
-                      style={{ width: 36, height: 36, objectFit: "contain" }}
-                      onError={e => { (e.currentTarget as HTMLImageElement).closest("button")!.style.display = "none"; }}
-                    />
+                    <div style={{
+                      width: 56, height: 56, borderRadius: "50%",
+                      border: `2px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
+                      background: active ? "var(--c-bg)" : "var(--c-bg-soft)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      boxShadow: active ? "0 0 0 2px var(--c-text)" : "none",
+                      transition: "all 0.15s",
+                      overflow: "hidden",
+                    }}>
+                      <img
+                        src={`https://img.logo.dev/${brand.domain}?token=${LOGO_KEY}&size=80&format=png`}
+                        alt={brand.name}
+                        style={{ width: 34, height: 34, objectFit: "contain" }}
+                        onError={e => { (e.currentTarget as HTMLImageElement).closest("button")!.style.display = "none"; }}
+                      />
+                    </div>
                     <span style={{
                       fontFamily: FO, fontSize: 8, fontWeight: 700,
                       color: active ? "var(--c-text)" : "#888",
