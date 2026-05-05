@@ -11,9 +11,72 @@ import ClickSpark from "@/components/reactbits/ClickSpark";
 import SlashHeading from "@/components/ui/SlashHeading";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
+const LOGO_KEY = process.env.NEXT_PUBLIC_LOGODEV_KEY || "";
 
 const CATEGORIES = ["All", "Cars", "Movies", "Coffee Shop"];
 
+// ── Car Brand Data ─────────────────────────────────────────────────────────────
+const CAR_BRANDS = [
+  { name: "Porsche",      domain: "porsche.com" },
+  { name: "Ferrari",      domain: "ferrari.com" },
+  { name: "Lamborghini",  domain: "lamborghini.com" },
+  { name: "McLaren",      domain: "mclaren.com" },
+  { name: "Bugatti",      domain: "bugatti.com" },
+  { name: "Koenigsegg",   domain: "koenigsegg.com" },
+  { name: "Aston Martin", domain: "astonmartin.com" },
+  { name: "Pagani",       domain: "pagani.com" },
+  { name: "Dodge",        domain: "dodge.com" },
+  { name: "Chevrolet",    domain: "chevrolet.com" },
+  { name: "Ford",         domain: "ford.com" },
+  { name: "Nissan",       domain: "nissan.com" },
+  { name: "Acura",        domain: "acura.com" },
+  { name: "Hennessey",    domain: "hennesseyperformance.com" },
+  { name: "Lotus",        domain: "lotuscars.com" },
+  { name: "Audi",         domain: "audi.com" },
+  { name: "Mercedes",     domain: "mercedes-benz.com" },
+  { name: "Tesla",        domain: "tesla.com" },
+  { name: "Toyota",       domain: "toyota.com" },
+  { name: "Mazda",        domain: "mazda.com" },
+  { name: "Rimac",        domain: "rimac-automobili.com" },
+  { name: "SSC",          domain: "sscnorthamerica.com" },
+  { name: "Zenvo",        domain: "zenvomotorsport.com" },
+];
+
+// ── Movie Franchise Data ───────────────────────────────────────────────────────
+const MOVIE_FRANCHISES = [
+  { name: "Marvel",           icon: "⚡", keywords: ["Spider-Man","Avengers","Iron Man","Thor","Black Panther","Ant-Man","Captain America","Guardians","Doctor Strange","Black Widow","Captain Marvel","Eternals","Shang-Chi","Deadpool","Venom","Groot","Wolverine","X-Men","Daredevil","Wanda","Hawkeye","Moon Knight"] },
+  { name: "DC",               icon: "🦇", keywords: ["Batman","Joker","Aquaman","Wonder Woman","Suicide Squad","Birds of Prey","Flash","Superman","Shazam","Harley Quinn","Black Adam","Blue Beetle"] },
+  { name: "John Wick",        icon: "🔫", keywords: ["John Wick"] },
+  { name: "Action",           icon: "💥", keywords: ["Fast","Furious","Mission Impossible","James Bond","Expendables","Die Hard","Terminator","Taken","Bourne","Rambo","Commando","Predator","Total Recall"] },
+  { name: "Sci-Fi",           icon: "🚀", keywords: ["Star Wars","Interstellar","Avatar","Arrival","Alien","Matrix","Dune","Inception","Blade Runner","Prometheus","Gravity","Tenet","Mad Max","2001","Oblivion"] },
+  { name: "Horror",           icon: "👻", keywords: ["Scream","Halloween","Friday","Nightmare","Conjuring","Annabelle","Insidious","Saw","Sinister","It Chapter","Get Out","Us ","Hereditary"] },
+  { name: "Drama & Classic",  icon: "🎭", keywords: ["Shawshank","Godfather","Forrest","Schindler","Rocky","Million Dollar","Good Will","Wolf of Wall Street","La La Land","Fight Club","Pulp Fiction","Goodfellas","Scarface","American Hustle","Begin Again"] },
+];
+
+// ── Coffee Type Data ───────────────────────────────────────────────────────────
+const COFFEE_TYPES = [
+  { name: "Espresso",    icon: "☕", keywords: ["Espresso","Affogato","Americano","Lungo","Cortado","Cortadito","Antoccino","Ristretto","Doppio"] },
+  { name: "Latte",       icon: "🥛", keywords: ["Latte","Flat White","Flat Black","Caffe Misto","Breve","Marocchino"] },
+  { name: "Matcha",      icon: "🍵", keywords: ["Matcha"] },
+  { name: "Cappuccino",  icon: "☕", keywords: ["Cappuccino","Macchiato"] },
+  { name: "Mocha",       icon: "🍫", keywords: ["Mocha","Mochaccino"] },
+  { name: "Iced & Cold", icon: "🧊", keywords: ["Iced","Cold Brew","Frappe","Frappuccino","Vietnamese"] },
+];
+
+// ── Brand matching helpers ─────────────────────────────────────────────────────
+function matchesCarBrand(name: string, brand: string): boolean {
+  const clean = name.replace(/^\d{4}\s+/, ""); // strip year prefix e.g. "2005 Ford..."
+  const lower = clean.toLowerCase();
+  const b = brand.toLowerCase();
+  return lower === b || lower.startsWith(b + " ");
+}
+
+function matchesKeywords(name: string, keywords: string[]): boolean {
+  const lower = name.toLowerCase();
+  return keywords.some(k => lower.includes(k.toLowerCase()));
+}
+
+// ── Product Card ───────────────────────────────────────────────────────────────
 function ProductCard({ p }: { p: Product }) {
   const { addItem } = useCart();
   const [hovered, setHovered] = useState(false);
@@ -21,37 +84,18 @@ function ProductCard({ p }: { p: Product }) {
 
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.preventDefault();
-    addItem({
-      id: p.id,
-      title: p.name,
-      sub: p.sub,
-      img: p.img,
-      price: Number(p.price),
-      original: Number(p.original_price),
-      size: "A4",
-      finish: "Matte",
-    });
+    addItem({ id: p.id, title: p.name, sub: p.sub, img: p.img, price: Number(p.price), original: Number(p.original_price), size: "A4", finish: "Matte" });
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   };
 
   return (
     <Link href={`/product/${p.id}`} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
-      <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{ cursor: "pointer" }}
-      >
-        {/* Image with hover swap */}
+      <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ cursor: "pointer" }}>
         <div style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", marginBottom: 12, background: "var(--c-bg-soft)", borderRadius: 2 }}>
           <img
-            src={hovered ? p.img2 : p.img}
-            alt={p.name}
-            style={{
-              width: "100%", height: "100%", objectFit: "cover", objectPosition: "center",
-              transition: "transform 0.5s ease",
-              transform: hovered ? "scale(1.05)" : "scale(1)",
-            }}
+            src={hovered ? p.img2 : p.img} alt={p.name}
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", transition: "transform 0.5s ease", transform: hovered ? "scale(1.05)" : "scale(1)" }}
           />
           {p.badge && (
             <span style={{ position: "absolute", bottom: 10, left: 10, background: "#111", color: "#fff", fontFamily: FO, fontSize: 9, fontWeight: 700, padding: "5px 13px", borderRadius: 50, textTransform: "uppercase", letterSpacing: "0.07em" }}>
@@ -67,8 +111,6 @@ function ProductCard({ p }: { p: Product }) {
             </ClickSpark>
           </div>
         </div>
-
-        {/* Info */}
         <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 500, color: "var(--c-text)", marginBottom: 3, lineHeight: 1.45, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>
           {p.name}
         </div>
@@ -76,13 +118,9 @@ function ProductCard({ p }: { p: Product }) {
           {p.sub}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 600, color: "var(--c-text)" }}>
-            £{Number(p.price).toFixed(2)}
-          </span>
+          <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 600, color: "var(--c-text)" }}>£{Number(p.price).toFixed(2)}</span>
           {Number(p.original_price) > Number(p.price) && (
-            <span style={{ fontFamily: FO, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>
-              £{Number(p.original_price).toFixed(2)}
-            </span>
+            <span style={{ fontFamily: FO, fontSize: 11, color: "#bbb", textDecoration: "line-through" }}>£{Number(p.original_price).toFixed(2)}</span>
           )}
         </div>
       </div>
@@ -90,13 +128,15 @@ function ProductCard({ p }: { p: Product }) {
   );
 }
 
+// ── Main Collection Page ───────────────────────────────────────────────────────
 export default function CollectionPage() {
-  const [products, setProducts]         = useState<Product[]>([]);
-  const [loading, setLoading]           = useState(true);
+  const [products, setProducts]             = useState<Product[]>([]);
+  const [loading, setLoading]               = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
-  const [sortBy, setSortBy]             = useState("featured");
-  const [filtersOpen, setFiltersOpen]   = useState(false);
-  const [priceFilter, setPriceFilter]   = useState<string[]>([]);
+  const [activeBrand, setActiveBrand]       = useState<string | null>(null);
+  const [sortBy, setSortBy]                 = useState("featured");
+  const [filtersOpen, setFiltersOpen]       = useState(false);
+  const [priceFilter, setPriceFilter]       = useState<string[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -106,7 +146,21 @@ export default function CollectionPage() {
     });
   }, [activeCategory]);
 
+  // reset brand filter when category changes
+  useEffect(() => { setActiveBrand(null); }, [activeCategory]);
+
   const filtered = products.filter(p => {
+    if (activeBrand) {
+      if (activeCategory === "Cars") {
+        if (!matchesCarBrand(p.name, activeBrand)) return false;
+      } else if (activeCategory === "Movies") {
+        const f = MOVIE_FRANCHISES.find(f => f.name === activeBrand);
+        if (f && !matchesKeywords(p.name, f.keywords)) return false;
+      } else if (activeCategory === "Coffee Shop") {
+        const t = COFFEE_TYPES.find(t => t.name === activeBrand);
+        if (t && !matchesKeywords(p.name, t.keywords)) return false;
+      }
+    }
     if (priceFilter.length === 0) return true;
     return priceFilter.some(f => {
       if (f === "Under £9.99")   return p.price < 9.99;
@@ -140,7 +194,7 @@ export default function CollectionPage() {
             <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
               <div>
                 <SlashHeading
-                  text={activeCategory === "All" ? "Collections" : activeCategory}
+                  text={activeBrand ? activeBrand : (activeCategory === "All" ? "Collections" : activeCategory)}
                   subtitle={activeCategory === "All" ? "Your Style, Your Wall • Find The Perfect Poster" : undefined}
                   size="clamp(32px,4.5vw,56px)"
                   align="left"
@@ -168,16 +222,126 @@ export default function CollectionPage() {
         </div>
 
         {/* Category Pills */}
-        <div style={{ padding: "16px 32px", overflowX: "auto", background: "var(--c-bg-card)" }}>
+        <div style={{ padding: "12px 32px", background: "var(--c-bg-card)", borderBottom: "1px solid var(--c-border)" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 8 }}>
             {CATEGORIES.map(cat => (
               <button key={cat} onClick={() => setActiveCategory(cat)}
-                style={{ flexShrink: 0, padding: "7px 18px", border: `1px solid ${activeCategory === cat ? "var(--c-btn-bg)" : "var(--c-border)"}`, background: activeCategory === cat ? "var(--c-btn-bg)" : "transparent", color: activeCategory === cat ? "var(--c-btn-text)" : "var(--c-text-muted)", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", cursor: "pointer", transition: "all 0.15s", whiteSpace: "nowrap" }}>
+                style={{ flexShrink: 0, padding: "7px 18px", border: `1px solid ${activeCategory === cat ? "var(--c-btn-bg)" : "var(--c-border)"}`, background: activeCategory === cat ? "var(--c-btn-bg)" : "transparent", color: activeCategory === cat ? "var(--c-btn-text)" : "var(--c-text-muted)", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", cursor: "pointer", transition: "all 0.15s", whiteSpace: "nowrap", borderRadius: 50 }}>
                 {cat}
               </button>
             ))}
           </div>
         </div>
+
+        {/* ── Brand / Franchise Filter Row ──────────────────────────────────────── */}
+        {activeCategory === "Cars" && (
+          <div style={{ padding: "14px 32px", background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", overflowX: "auto", scrollbarWidth: "none" }}>
+            <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 10, alignItems: "center", minWidth: "max-content" }}>
+              <button onClick={() => setActiveBrand(null)} style={{
+                flexShrink: 0, padding: "8px 18px",
+                border: `1.5px solid ${!activeBrand ? "var(--c-text)" : "var(--c-border)"}`,
+                background: !activeBrand ? "var(--c-btn-bg)" : "transparent",
+                color: !activeBrand ? "var(--c-btn-text)" : "var(--c-text-muted)",
+                fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.1em",
+                textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
+              }}>All Brands</button>
+
+              {CAR_BRANDS.map(brand => {
+                const active = activeBrand === brand.name;
+                return (
+                  <button key={brand.name}
+                    onClick={() => setActiveBrand(active ? null : brand.name)}
+                    style={{
+                      flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 5,
+                      padding: "8px 14px", minWidth: 72,
+                      border: `1.5px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
+                      background: active ? "var(--c-bg)" : "transparent",
+                      cursor: "pointer", borderRadius: 10, transition: "all 0.15s",
+                      boxShadow: active ? "0 0 0 1px var(--c-text)" : "none",
+                    }}>
+                    <img
+                      src={`https://img.logo.dev/${brand.domain}?token=${LOGO_KEY}&size=80&format=png`}
+                      alt={brand.name}
+                      style={{ width: 36, height: 36, objectFit: "contain" }}
+                      onError={e => { (e.currentTarget as HTMLImageElement).style.opacity = "0.3"; }}
+                    />
+                    <span style={{
+                      fontFamily: FO, fontSize: 8, fontWeight: 700,
+                      color: active ? "var(--c-text)" : "#888",
+                      letterSpacing: "0.06em", textTransform: "uppercase", whiteSpace: "nowrap",
+                    }}>{brand.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {activeCategory === "Movies" && (
+          <div style={{ padding: "12px 32px", background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", overflowX: "auto", scrollbarWidth: "none" }}>
+            <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 8, alignItems: "center", minWidth: "max-content" }}>
+              <button onClick={() => setActiveBrand(null)} style={{
+                flexShrink: 0, padding: "9px 18px",
+                border: `1.5px solid ${!activeBrand ? "var(--c-text)" : "var(--c-border)"}`,
+                background: !activeBrand ? "var(--c-btn-bg)" : "transparent",
+                color: !activeBrand ? "var(--c-btn-text)" : "var(--c-text-muted)",
+                fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.1em",
+                textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
+              }}>All</button>
+              {MOVIE_FRANCHISES.map(f => {
+                const active = activeBrand === f.name;
+                return (
+                  <button key={f.name} onClick={() => setActiveBrand(active ? null : f.name)}
+                    style={{
+                      flexShrink: 0, display: "flex", alignItems: "center", gap: 7,
+                      padding: "9px 18px",
+                      border: `1.5px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
+                      background: active ? "var(--c-btn-bg)" : "transparent",
+                      color: active ? "var(--c-btn-text)" : "var(--c-text-muted)",
+                      fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.05em",
+                      textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
+                    }}>
+                    <span style={{ fontSize: 15 }}>{f.icon}</span>
+                    <span>{f.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {activeCategory === "Coffee Shop" && (
+          <div style={{ padding: "12px 32px", background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", overflowX: "auto", scrollbarWidth: "none" }}>
+            <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 8, alignItems: "center", minWidth: "max-content" }}>
+              <button onClick={() => setActiveBrand(null)} style={{
+                flexShrink: 0, padding: "9px 18px",
+                border: `1.5px solid ${!activeBrand ? "var(--c-text)" : "var(--c-border)"}`,
+                background: !activeBrand ? "var(--c-btn-bg)" : "transparent",
+                color: !activeBrand ? "var(--c-btn-text)" : "var(--c-text-muted)",
+                fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.1em",
+                textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
+              }}>All</button>
+              {COFFEE_TYPES.map(t => {
+                const active = activeBrand === t.name;
+                return (
+                  <button key={t.name} onClick={() => setActiveBrand(active ? null : t.name)}
+                    style={{
+                      flexShrink: 0, display: "flex", alignItems: "center", gap: 7,
+                      padding: "9px 18px",
+                      border: `1.5px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
+                      background: active ? "var(--c-btn-bg)" : "transparent",
+                      color: active ? "var(--c-btn-text)" : "var(--c-text-muted)",
+                      fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.05em",
+                      textTransform: "uppercase", cursor: "pointer", borderRadius: 50, transition: "all 0.15s",
+                    }}>
+                    <span style={{ fontSize: 15 }}>{t.icon}</span>
+                    <span>{t.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Filter Panel */}
         {filtersOpen && (
@@ -196,7 +360,7 @@ export default function CollectionPage() {
           </div>
         )}
 
-        {/* Grid */}
+        {/* Product Grid */}
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "40px 32px" }}>
           {/* Offer Banner */}
           <div style={{ background: "#111", color: "#fff", padding: "14px 24px", marginBottom: 32, display: "flex", alignItems: "center", justifyContent: "center", gap: 32, flexWrap: "wrap" }}>
@@ -229,8 +393,13 @@ export default function CollectionPage() {
             </div>
           ) : (
             <div style={{ textAlign: "center", padding: "80px 20px" }}>
-              <h2 style={{ fontFamily: FO, fontSize: 24, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase" }}>No products found</h2>
-              <p style={{ fontFamily: FO, fontSize: 14, color: "#aaa", marginTop: 8 }}>Try a different category or remove filters.</p>
+              <div style={{ fontFamily: FO, fontSize: 40, marginBottom: 16 }}>🔍</div>
+              <h2 style={{ fontFamily: FO, fontSize: 24, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase" }}>No posters found</h2>
+              <p style={{ fontFamily: FO, fontSize: 14, color: "#aaa", marginTop: 8 }}>Try a different filter or browse all.</p>
+              <button onClick={() => { setActiveBrand(null); setPriceFilter([]); }}
+                style={{ marginTop: 20, padding: "10px 28px", border: "1px solid var(--c-border)", background: "transparent", color: "var(--c-text)", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer", borderRadius: 50 }}>
+                Clear Filters
+              </button>
             </div>
           )}
         </div>
@@ -240,6 +409,7 @@ export default function CollectionPage() {
 
       <style>{`
         @keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:0.4 } }
+        ::-webkit-scrollbar { display: none; }
         @media (max-width: 768px) {
           .collection-grid { grid-template-columns: repeat(2, 1fr) !important; padding: 24px 12px !important; }
         }
