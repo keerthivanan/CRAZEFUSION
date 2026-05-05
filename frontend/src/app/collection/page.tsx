@@ -39,29 +39,29 @@ const CAR_BRANDS = [
 ];
 
 // ── Movie Franchise Data ───────────────────────────────────────────────────────
-// domain = Logo.dev logo  |  letter = text fallback inside circle
+// domain = Logo.dev logo  |  letter + color + textColor = styled circle
 const MOVIE_FRANCHISES = [
-  { name: "Marvel",        domain: "marvel.com",       letter: null, keywords: ["Spider-Man","Avengers","Iron Man","Thor","Black Panther","Ant-Man","Captain America","Guardians","Doctor Strange","Black Widow","Captain Marvel","Groot","Wolverine","X-Men","Deadpool","Venom","Hulk","Wanda","Hawkeye","Moon Knight"] },
-  { name: "DC",            domain: "dc.com",           letter: null, keywords: ["Batman","Joker","Aquaman","Wonder Woman","Suicide Squad","Birds of Prey","Flash","Superman","Shazam","Harley Quinn","Black Adam","Blue Beetle"] },
-  { name: "Harry Potter",  domain: "harrypotter.com",  letter: null, keywords: ["Harry Potter","Hogwarts","Dumbledore","Hermione","Voldemort","Fantastic Beasts","Wizard"] },
-  { name: "Star Wars",     domain: "starwars.com",     letter: null, keywords: ["Star Wars","Darth Vader","Jedi","Mandalorian","Yoda","Obi-Wan","Han Solo","Luke Skywalker","Sith"] },
-  { name: "Disney",        domain: "disney.com",       letter: null, keywords: ["Aladdin","Lion King","Mulan","Frozen","Moana","Encanto","Luca","Coco","Tangled","Cinderella","Beauty and the Beast","Little Mermaid","Raya","Brave"] },
-  { name: "Pixar",         domain: "pixar.com",        letter: null, keywords: ["Toy Story","Finding","Incredibles","Inside Out","Soul","Turning Red","Onward","Cars "] },
-  { name: "John Wick",     domain: null,               letter: "JW", keywords: ["John Wick"] },
-  { name: "Sci-Fi",        domain: null,               letter: "SF", keywords: ["Interstellar","Avatar","Alien","Matrix","Dune","Inception","Blade Runner","Gravity","Mad Max","Tenet","Oblivion","Arrival","Prometheus"] },
-  { name: "Fast & Furious",domain: null,               letter: "FF", keywords: ["Fast","Furious"] },
-  { name: "James Bond",    domain: null,               letter: "007",keywords: ["James Bond","007"] },
-  { name: "Drama",         domain: null,               letter: "DR", keywords: ["Shawshank","Godfather","Forrest","Schindler","Rocky","Wolf of Wall Street","Fight Club","Pulp Fiction","Goodfellas","Scarface","La La Land","Good Will"] },
+  { name: "Marvel",        domain: "marvel.com",      letter: null,  bg: null,       fg: null,        keywords: ["Spider-Man","Avengers","Iron Man","Thor","Black Panther","Ant-Man","Captain America","Guardians","Doctor Strange","Black Widow","Captain Marvel","Groot","Wolverine","X-Men","Deadpool","Venom","Hulk","Wanda","Hawkeye","Moon Knight"] },
+  { name: "DC",            domain: "dc.com",          letter: null,  bg: null,       fg: null,        keywords: ["Batman","Joker","Aquaman","Wonder Woman","Suicide Squad","Birds of Prey","Flash","Superman","Shazam","Harley Quinn","Black Adam","Blue Beetle"] },
+  { name: "Harry Potter",  domain: "harrypotter.com", letter: null,  bg: null,       fg: null,        keywords: ["Harry Potter","Hogwarts","Dumbledore","Hermione","Voldemort","Fantastic Beasts","Wizard"] },
+  { name: "Disney",        domain: "disney.com",      letter: null,  bg: null,       fg: null,        keywords: ["Aladdin","Lion King","Mulan","Frozen","Moana","Encanto","Luca","Coco","Tangled","Cinderella","Beauty and the Beast","Little Mermaid","Raya","Brave"] },
+  { name: "Pixar",         domain: "pixar.com",       letter: null,  bg: null,       fg: null,        keywords: ["Toy Story","Finding","Incredibles","Inside Out","Soul","Turning Red","Onward","Cars "] },
+  { name: "Star Wars",     domain: null,              letter: "SW",  bg: "#0d0d0d",  fg: "#FFE81F",   keywords: ["Star Wars","Darth Vader","Jedi","Mandalorian","Yoda","Obi-Wan","Han Solo","Luke Skywalker","Sith"] },
+  { name: "John Wick",     domain: null,              letter: "JW",  bg: "#111111",  fg: "#e8a000",   keywords: ["John Wick"] },
+  { name: "James Bond",    domain: null,              letter: "007", bg: "#1a1a1a",  fg: "#c9a227",   keywords: ["James Bond","007"] },
+  { name: "Fast & Furious",domain: null,              letter: "FF",  bg: "#1a0800",  fg: "#ff6600",   keywords: ["Fast","Furious"] },
+  { name: "Sci-Fi",        domain: null,              letter: "SF",  bg: "#050d1a",  fg: "#38bdf8",   keywords: ["Interstellar","Avatar","Alien","Matrix","Dune","Inception","Blade Runner","Gravity","Mad Max","Tenet","Oblivion","Arrival","Prometheus"] },
+  { name: "Drama",         domain: null,              letter: "DR",  bg: "#1a1025",  fg: "#c084fc",   keywords: ["Shawshank","Godfather","Forrest","Schindler","Rocky","Wolf of Wall Street","Fight Club","Pulp Fiction","Goodfellas","Scarface","La La Land","Good Will"] },
 ];
 
 // ── Coffee Type Data ───────────────────────────────────────────────────────────
 const COFFEE_TYPES = [
-  { name: "Espresso",    letter: "ES", keywords: ["Espresso","Affogato","Americano","Lungo","Cortado","Cortadito","Antoccino","Ristretto","Doppio"] },
-  { name: "Latte",       letter: "LA", keywords: ["Latte","Flat White","Flat Black","Caffe Misto","Breve","Marocchino"] },
-  { name: "Matcha",      letter: "MA", keywords: ["Matcha"] },
-  { name: "Cappuccino",  letter: "CA", keywords: ["Cappuccino","Macchiato"] },
-  { name: "Mocha",       letter: "MO", keywords: ["Mocha","Mochaccino"] },
-  { name: "Iced & Cold", letter: "IC", keywords: ["Iced","Cold Brew","Frappe","Frappuccino","Vietnamese"] },
+  { name: "Espresso",    letter: "ES", bg: "#1a0a00", fg: "#d4956a", keywords: ["Espresso","Affogato","Americano","Lungo","Cortado","Cortadito","Antoccino","Ristretto","Doppio"] },
+  { name: "Latte",       letter: "LA", bg: "#3b2212", fg: "#f5cba7", keywords: ["Latte","Flat White","Flat Black","Caffe Misto","Breve","Marocchino"] },
+  { name: "Matcha",      letter: "MA", bg: "#1a2e0d", fg: "#86c940", keywords: ["Matcha"] },
+  { name: "Cappuccino",  letter: "CA", bg: "#2e1a0a", fg: "#e8b88a", keywords: ["Cappuccino","Macchiato"] },
+  { name: "Mocha",       letter: "MO", bg: "#1a0d00", fg: "#ff9500", keywords: ["Mocha","Mochaccino"] },
+  { name: "Iced & Cold", letter: "IC", bg: "#0a1e2e", fg: "#67e8f9", keywords: ["Iced","Cold Brew","Frappe","Frappuccino","Vietnamese"] },
 ];
 
 // ── Brand matching helpers ─────────────────────────────────────────────────────
@@ -328,7 +328,7 @@ export default function CollectionPage() {
                     <div style={{
                       width: 56, height: 56, borderRadius: "50%",
                       border: `2px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
-                      background: active ? "var(--c-bg)" : "var(--c-bg-soft)",
+                      background: f.bg ?? (active ? "var(--c-bg)" : "var(--c-bg-soft)"),
                       display: "flex", alignItems: "center", justifyContent: "center",
                       boxShadow: active ? "0 0 0 2px var(--c-text)" : "none",
                       transition: "all 0.15s", overflow: "hidden",
@@ -343,12 +343,12 @@ export default function CollectionPage() {
                             img.style.display = "none";
                             const span = document.createElement("span");
                             span.textContent = f.name.substring(0, 2).toUpperCase();
-                            span.style.cssText = `font-family:${FO};font-size:13px;font-weight:800;color:${active ? "var(--c-text)" : "#888"}`;
+                            span.style.cssText = `font-family:${FO};font-size:13px;font-weight:800;color:${f.fg ?? "#fff"}`;
                             img.parentElement?.appendChild(span);
                           }}
                         />
                       ) : (
-                        <span style={{ fontFamily: FO, fontSize: f.letter && f.letter.length >= 3 ? 11 : 13, fontWeight: 800, color: active ? "var(--c-text)" : "#888", letterSpacing: "0.02em" }}>{f.letter}</span>
+                        <span style={{ fontFamily: FO, fontSize: f.letter && f.letter.length >= 3 ? 11 : 13, fontWeight: 800, color: f.fg ?? "#888", letterSpacing: "0.02em" }}>{f.letter}</span>
                       )}
                     </div>
                     <span style={{ fontFamily: FO, fontSize: 8, fontWeight: 700, color: active ? "var(--c-text)" : "#888", letterSpacing: "0.06em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{f.name}</span>
@@ -387,12 +387,12 @@ export default function CollectionPage() {
                     <div style={{
                       width: 56, height: 56, borderRadius: "50%",
                       border: `2px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
-                      background: active ? "var(--c-bg)" : "var(--c-bg-soft)",
+                      background: t.bg,
                       display: "flex", alignItems: "center", justifyContent: "center",
                       boxShadow: active ? "0 0 0 2px var(--c-text)" : "none",
                       transition: "all 0.15s",
                     }}>
-                      <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: active ? "var(--c-text)" : "#888", letterSpacing: "0.02em" }}>{t.letter}</span>
+                      <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: t.fg, letterSpacing: "0.02em" }}>{t.letter}</span>
                     </div>
                     <span style={{ fontFamily: FO, fontSize: 8, fontWeight: 700, color: active ? "var(--c-text)" : "#888", letterSpacing: "0.06em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{t.name}</span>
                   </button>
