@@ -45,8 +45,8 @@ const MOVIE_FRANCHISES = [
   { name: "DC",            domain: "dc.com",          img: null, keywords: ["Batman","Joker","Aquaman","Wonder Woman","Suicide Squad","Birds of Prey","Flash","Superman","Shazam","Harley Quinn","Black Adam","Blue Beetle"] },
   { name: "Harry Potter",  domain: "harrypotter.com", img: null, keywords: ["Harry Potter","Hogwarts","Dumbledore","Hermione","Voldemort","Fantastic Beasts","Wizard"] },
   { name: "Disney",        domain: "disney.com",      img: null, keywords: ["Aladdin","Lion King","Mulan","Frozen","Moana","Encanto","Luca","Coco","Tangled","Cinderella","Beauty and the Beast","Little Mermaid","Raya","Brave"] },
-  { name: "Pixar",         domain: "pixar.com",       img: null, keywords: ["Toy Story","Finding","Incredibles","Inside Out","Soul","Turning Red","Onward","Cars "] },
-  { name: "Star Wars",     domain: null, img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973945/crazefusion/originals/movies/3424_Star_Wars_The_Force_Awakens_Poster.webp", keywords: ["Star Wars","Darth Vader","Jedi","Mandalorian","Yoda","Obi-Wan","Han Solo","Luke Skywalker","Sith"] },
+  { name: "Pixar",         domain: null, img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973892/crazefusion/originals/movies/3324_Incredibles_2_Family_Poster.webp", bg: null, keywords: ["Toy Story","Finding","Incredibles","Inside Out","Soul","Turning Red","Onward","Cars "] },
+  { name: "Star Wars",     domain: null, img: "https://cdn.simpleicons.org/starwars/FFE81F", bg: "#0d0d0d", keywords: ["Star Wars","Darth Vader","Jedi","Mandalorian","Yoda","Obi-Wan","Han Solo","Luke Skywalker","Sith"] },
   { name: "John Wick",     domain: null, img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973902/crazefusion/originals/movies/3341_John_Wick_Chapter_4_Poster.webp",        keywords: ["John Wick"] },
   { name: "James Bond",    domain: null, img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973899/crazefusion/originals/movies/3336_James_Bond_007_Poster.webp",               keywords: ["James Bond","007"] },
   { name: "Fast & Furious",domain: null, img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973859/crazefusion/originals/movies/3260_Fast_X_Poster.webp",                      keywords: ["Fast","Furious"] },
@@ -328,7 +328,7 @@ export default function CollectionPage() {
                     <div style={{
                       width: 56, height: 56, borderRadius: "50%",
                       border: `2px solid ${active ? "var(--c-text)" : "var(--c-border)"}`,
-                      background: "var(--c-bg-soft)",
+                      background: f.bg ?? "var(--c-bg-soft)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       boxShadow: active ? "0 0 0 2px var(--c-text)" : "none",
                       transition: "all 0.15s", overflow: "hidden",
@@ -340,7 +340,11 @@ export default function CollectionPage() {
                         />
                       ) : f.img ? (
                         <img src={f.img} alt={f.name}
-                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                          style={{
+                            width:  f.bg ? "68%" : "100%",
+                            height: f.bg ? "68%" : "100%",
+                            objectFit: f.bg ? "contain" : "cover",
+                          }}
                         />
                       ) : null}
                     </div>
