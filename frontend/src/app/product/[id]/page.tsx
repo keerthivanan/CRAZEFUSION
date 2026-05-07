@@ -33,7 +33,7 @@ export default function ProductPage() {
       const product = await fetchProduct(Number(id));
       if (product) {
         setP(product);
-        const rel = await fetchRelated(product.category, Number(id), 4);
+        const rel = await fetchRelated(product.category, Number(id), 5);
         setRelated(rel);
       }
       setLoading(false);
@@ -210,7 +210,7 @@ export default function ProductPage() {
             <div style={{ maxWidth: 1400, margin: "0 auto" }}>
               <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#aaa", marginBottom: 8 }}>You Might Also Like</div>
               <h2 style={{ fontFamily: FO, fontSize: "clamp(22px,3vw,36px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 32 }}>Related <span style={{ color: "#e8a000" }}>Posters</span></h2>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 24 }}>
+              <div className="related-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 24 }}>
                 {related.map(r => (
                   <Link key={r.id} href={`/product/${r.id}`} style={{ textDecoration: "none" }}>
                     <div style={{ aspectRatio: "3/4", overflow: "hidden", background: "var(--c-bg-soft)", marginBottom: 10 }}
@@ -233,6 +233,10 @@ export default function ProductPage() {
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
         @media (max-width: 768px) {
           .product-detail-layout { grid-template-columns: 1fr !important; padding: 24px 16px !important; gap: 32px !important; }
+          .related-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 1100px) and (min-width: 769px) {
+          .related-grid { grid-template-columns: repeat(3, 1fr) !important; }
         }
       `}</style>
     </div>
