@@ -5,24 +5,24 @@ const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const links = {
   Shop: [
-    ["All Posters",     "/collection"],
-    ["Cars & Bikes",    "/collection"],
-    ["Anime",           "/collection"],
-    ["Movies",          "/collection"],
-    ["Gaming",          "/collection"],
+    ["All Posters",    "/collection"],
+    ["Cars",           "/collection?cat=Cars"],
+    ["Movies",         "/collection?cat=Movies"],
+    ["Coffee Shop",    "/collection?cat=Coffee+Shop"],
+    ["New Arrivals",   "/collection"],
   ],
-  Collections: [
-    ["Split Posters",   "/collection"],
-    ["Collage Kits",    "/collection"],
-    ["Retro Prints",    "/collection"],
-    ["8-Panel Sets",    "/collection"],
-    ["Bulk Orders",     "/collection"],
+  Info: [
+    ["Free UK Delivery",   "/collection"],
+    ["Printed in 48hrs",   "/collection"],
+    ["30-Day Returns",     "/collection"],
+    ["Bulk Orders",        "/collection"],
+    ["Gift Wrapping",      "/collection"],
   ],
   Help: [
-    ["Returns & Refunds", "/collection"],
-    ["Shipping Policy",   "/collection"],
-    ["FAQs",              "/collection"],
-    ["Contact Us",        "/collection"],
+    ["Returns & Refunds",  "/collection"],
+    ["Shipping Policy",    "/collection"],
+    ["FAQs",               "/collection"],
+    ["Contact Us",         "/collection"],
   ],
 };
 
@@ -56,7 +56,7 @@ export default function Footer() {
                 onMouseLeave={e => (e.currentTarget.style.color = "#aaa")}>
                 support@yourstore.co.uk
               </a>
-              <a href="https://wa.me/9191709xxxxx" target="_blank" rel="noreferrer"
+              <a href="https://wa.me/447700900000" target="_blank" rel="noreferrer"
                 style={{ fontFamily: F, fontSize: 13, color: "#aaa", textDecoration: "none", transition: "color 0.2s", display: "inline-flex", alignItems: "center", gap: 8 }}
                 onMouseEnter={e => (e.currentTarget.style.color = "#34c759")}
                 onMouseLeave={e => (e.currentTarget.style.color = "#aaa")}>

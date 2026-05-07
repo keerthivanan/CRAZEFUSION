@@ -50,9 +50,9 @@ export default function LoginPage() {
                 Phone Number
               </label>
               <div style={{ display: "flex" }}>
-                <div style={{ padding: "13px 14px", border: "1px solid var(--c-border)", borderRight: "none", background: "var(--c-bg-soft)", fontFamily: F, fontSize: 14, color: "var(--c-text-muted)", flexShrink: 0 }}>+91</div>
-                <input type="tel" placeholder="10-digit mobile" value={phone}
-                  onChange={e => setPhone(e.target.value)} maxLength={10}
+                <div style={{ padding: "13px 14px", border: "1px solid var(--c-border)", borderRight: "none", background: "var(--c-bg-soft)", fontFamily: F, fontSize: 14, color: "var(--c-text-muted)", flexShrink: 0 }}>+44</div>
+                <input type="tel" placeholder="11-digit mobile" value={phone}
+                  onChange={e => setPhone(e.target.value)} maxLength={11}
                   style={{ ...inputStyle, flex: 1 }}
                   onFocus={e => (e.currentTarget.style.borderColor = "#111")}
                   onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")} />
@@ -61,7 +61,7 @@ export default function LoginPage() {
 
             {!otpSent ? (
               <button onClick={handleSendOtp}
-                style={{ width: "100%", padding: "15px 0", background: phone.length >= 10 ? "var(--c-btn-bg)" : "var(--c-bg-soft)", color: phone.length >= 10 ? "var(--c-btn-text)" : "var(--c-text-muted)", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: phone.length >= 10 ? "pointer" : "not-allowed", transition: "background 0.2s", borderRadius: 50 }}>
+                style={{ width: "100%", padding: "15px 0", background: phone.length >= 11 ? "var(--c-btn-bg)" : "var(--c-bg-soft)", color: phone.length >= 11 ? "var(--c-btn-text)" : "var(--c-text-muted)", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: phone.length >= 11 ? "pointer" : "not-allowed", transition: "background 0.2s", borderRadius: 50 }}>
                 {loading ? "Sending OTP..." : "Send OTP"}
               </button>
             ) : (
@@ -74,7 +74,7 @@ export default function LoginPage() {
                     onFocus={e => (e.currentTarget.style.borderColor = "#111")}
                     onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")} />
                   <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", marginTop: 6 }}>
-                    Sent to +91 {phone}.{" "}
+                    Sent to +44 {phone}.{" "}
                     <button onClick={() => setOtpSent(false)} style={{ background: "none", border: "none", fontFamily: F, fontSize: 11, color: "var(--c-text)", cursor: "pointer", textDecoration: "underline" }}>Change?</button>
                   </div>
                 </div>
