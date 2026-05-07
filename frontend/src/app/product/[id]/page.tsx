@@ -11,7 +11,7 @@ import ClickSpark from "@/components/reactbits/ClickSpark";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
-const SIZES    = ["A4 (21×30cm)", "A3 (30×42cm)", "A2 (42×60cm)"];
+
 const FINISHES = ["Matte", "Satin Gloss"];
 
 export default function ProductPage() {
@@ -22,7 +22,7 @@ export default function ProductPage() {
   const [p, setP]                           = useState<Product | null>(null);
   const [loading, setLoading]               = useState(true);
   const [related, setRelated]               = useState<Product[]>([]);
-  const [selectedSize, setSelectedSize]     = useState(0);
+
   const [selectedFinish, setSelectedFinish] = useState(0);
   const [activeImg, setActiveImg]           = useState(0);
   const [added, setAdded]                   = useState(false);
@@ -48,7 +48,7 @@ export default function ProductPage() {
 
   const addToCart = () => {
     if (!p) return;
-    addItem({ id: p.id, title: p.name, sub: p.sub, img: p.img, price, original, size: SIZES[selectedSize], finish: FINISHES[selectedFinish] });
+    addItem({ id: p.id, title: p.name, sub: p.sub, img: p.img, price, original, size: "A4 (21×30cm)", finish: FINISHES[selectedFinish] });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
@@ -140,18 +140,10 @@ export default function ProductPage() {
               {discount > 0 && <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "#dc2626", background: "rgba(220,38,38,0.06)", padding: "4px 12px", borderRadius: 4 }}>{discount}% OFF</span>}
             </div>
 
-            {/* Size */}
+            {/* Size — A4 only */}
             <div style={{ marginBottom: 20 }}>
-              <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#777", marginBottom: 10 }}>
-                Size: <span style={{ color: "var(--c-text)", fontWeight: 700 }}>{SIZES[selectedSize]}</span>
-              </div>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                {SIZES.map((s, i) => (
-                  <button key={s} onClick={() => setSelectedSize(i)}
-                    style={{ padding: "10px 22px", border: `1.5px solid ${selectedSize === i ? "var(--c-text)" : "#e0e0e0"}`, background: selectedSize === i ? "var(--c-btn-bg)" : "var(--c-bg)", color: selectedSize === i ? "var(--c-btn-text)" : "#555", fontFamily: FO, fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s", borderRadius: 50 }}>
-                    {s}
-                  </button>
-                ))}
+              <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#777" }}>
+                Size: <span style={{ color: "var(--c-text)", fontWeight: 700 }}>A4 (21×30cm)</span>
               </div>
             </div>
 
