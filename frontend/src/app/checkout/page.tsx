@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
 import { useCart } from "@/context/CartContext";
+import PaymentIcons from "@/components/ui/PaymentIcons";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
@@ -206,6 +207,9 @@ export default function CheckoutPage() {
                     <span style={{ fontFamily: FE, fontSize: i === 2 ? 18 : 12, fontWeight: 400, color: i === 2 ? "#111" : val === "FREE" ? "#16a34a" : "#555" }}>{val}</span>
                   </div>
                 ))}
+              </div>
+              <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid var(--c-border)" }}>
+                <PaymentIcons />
               </div>
             </div>
           </div>

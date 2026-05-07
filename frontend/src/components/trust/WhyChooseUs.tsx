@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
                 onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = "var(--c-bg-card)"}
                 onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.background = "var(--c-bg-soft)"}
               >
-                <div style={{ fontFamily: FO, fontSize: 48, fontWeight: 700, letterSpacing: "-0.04em", color: "var(--c-border)", lineHeight: 1, marginBottom: 28 }}>
+                <div style={{ fontFamily: FO, fontSize: 48, fontWeight: 700, letterSpacing: "-0.04em", color: "var(--c-text)", opacity: 0.18, lineHeight: 1, marginBottom: 28 }}>
                   {num}
                 </div>
                 <div style={{ width: 28, height: 2, background: "#e8a000", marginBottom: 20 }} />

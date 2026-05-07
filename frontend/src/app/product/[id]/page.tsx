@@ -163,11 +163,11 @@ export default function ProductPage() {
             </div>
 
             {/* CTAs */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 24 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 16 }}>
               <ClickSpark sparkColor="#fff" sparkCount={10} sparkRadius={28}>
                 <button onClick={addToCart}
                   style={{ width: "100%", padding: "16px 0", background: added ? "#16a34a" : "#111", color: "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "background 0.3s", borderRadius: 50 }}>
-                  {added ? "Added to Cart!" : "Add to Cart"}
+                  {added ? "✓ Added to Cart!" : "Add to Cart"}
                 </button>
               </ClickSpark>
               <ClickSpark sparkColor="#111" sparkCount={10} sparkRadius={28}>
@@ -180,23 +180,85 @@ export default function ProductPage() {
               </ClickSpark>
             </div>
 
+            {/* Payment methods */}
+            <div style={{ marginBottom: 24 }}>
+              <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 600, color: "#aaa", letterSpacing: "0.12em", textTransform: "uppercase", textAlign: "center", marginBottom: 10 }}>
+                🔒 Secure checkout — Accepted payments
+              </div>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap", justifyContent: "center" }}>
+                {/* Visa */}
+                <div style={{ background: "#1a1f71", borderRadius: 6, padding: "5px 10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 12, fontWeight: 900, color: "#fff", letterSpacing: "0.02em", fontStyle: "italic" }}>VISA</span>
+                </div>
+                {/* Mastercard */}
+                <div style={{ background: "#fff", border: "1px solid #e5e5e5", borderRadius: 6, padding: "5px 8px", display: "flex", alignItems: "center", gap: 2 }}>
+                  <div style={{ width: 16, height: 16, borderRadius: "50%", background: "#eb001b" }} />
+                  <div style={{ width: 16, height: 16, borderRadius: "50%", background: "#f79e1b", marginLeft: -8, opacity: 0.9 }} />
+                </div>
+                {/* Amex */}
+                <div style={{ background: "#2E77BC", borderRadius: 6, padding: "5px 9px", display: "flex", alignItems: "center" }}>
+                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 10, fontWeight: 800, color: "#fff", letterSpacing: "0.05em" }}>AMEX</span>
+                </div>
+                {/* PayPal */}
+                <div style={{ background: "#fff", border: "1px solid #e5e5e5", borderRadius: 6, padding: "5px 10px", display: "flex", alignItems: "center", gap: 2 }}>
+                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 11, fontWeight: 800, color: "#003087" }}>Pay</span>
+                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 11, fontWeight: 800, color: "#009cde" }}>Pal</span>
+                </div>
+                {/* Apple Pay */}
+                <div style={{ background: "#000", borderRadius: 6, padding: "5px 10px", display: "flex", alignItems: "center" }}>
+                  <span style={{ fontFamily: "-apple-system, sans-serif", fontSize: 11, fontWeight: 600, color: "#fff", letterSpacing: "-0.02em" }}> Pay</span>
+                </div>
+                {/* Google Pay */}
+                <div style={{ background: "#fff", border: "1px solid #e5e5e5", borderRadius: 6, padding: "5px 8px", display: "flex", alignItems: "center" }}>
+                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 11, fontWeight: 700 }}>
+                    <span style={{ color: "#4285F4" }}>G</span>
+                    <span style={{ color: "#EA4335" }}>o</span>
+                    <span style={{ color: "#FBBC05" }}>o</span>
+                    <span style={{ color: "#4285F4" }}>g</span>
+                    <span style={{ color: "#34A853" }}>l</span>
+                    <span style={{ color: "#EA4335" }}>e</span>
+                  </span>
+                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 11, fontWeight: 700, color: "#5f6368", marginLeft: 3 }}>Pay</span>
+                </div>
+              </div>
+            </div>
+
             {/* Trust badges */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 24 }}>
-              {[["Free UK delivery", "Orders over £30"], ["Printed & shipped in 48hrs", "Mon–Fri"], ["30-day returns", "No questions asked"], ["Secure payment", "Stripe protected"]].map(([t, s]) => (
-                <div key={t} style={{ padding: "12px 14px", border: "1px solid var(--c-border)", background: "var(--c-bg-card)" }}>
-                  <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, color: "var(--c-text)" }}>{t}</div>
+              {[
+                ["🚚 Free UK Delivery",        "On all orders, tracked"],
+                ["🏭 Fulfilled by Prodigi",     "Professional UK print lab"],
+                ["↩ 30-Day Returns",            "No questions asked"],
+                ["🔒 Secure Payment",           "Stripe encrypted checkout"],
+              ].map(([t, s]) => (
+                <div key={t} style={{ padding: "12px 14px", border: "1px solid var(--c-border)", background: "var(--c-bg-card)", borderRadius: 4 }}>
+                  <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, color: "var(--c-text)", marginBottom: 2 }}>{t}</div>
                   <div style={{ fontFamily: FO, fontSize: 10, color: "#aaa" }}>{s}</div>
                 </div>
               ))}
+            </div>
+
+            {/* Prodigi delivery strip */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", borderRadius: 4, marginBottom: 24 }}>
+              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#16a34a", flexShrink: 0 }} />
+              <span style={{ fontFamily: FO, fontSize: 11, color: "var(--c-text-muted)" }}>
+                Printed &amp; shipped by <strong style={{ color: "var(--c-text)" }}>Prodigi</strong> — UK&apos;s leading professional print lab. Delivered in <strong style={{ color: "var(--c-text)" }}>2–4 working days</strong> via Royal Mail Tracked.
+              </span>
             </div>
 
             {/* Details */}
             <div style={{ paddingTop: 20, borderTop: "1px solid var(--c-border)" }}>
               <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#aaa", marginBottom: 10 }}>Product Details</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                {["Premium 200gsm art paper", "Vivid HD print, fade-resistant inks", "Ready to frame — standard sizes", "Printed on demand, shipped from UK"].map(f => (
+                {[
+                  "Premium 200gsm fine art paper",
+                  "Vivid HD print, fade-resistant inks",
+                  "Ready to frame — standard A4 size",
+                  "Printed on demand in the UK",
+                  "Arrives flat in a protective board-backed envelope",
+                ].map(f => (
                   <div key={f} style={{ fontFamily: FO, fontSize: 12, color: "#555", display: "flex", gap: 8 }}>
-                    <span style={{ color: "#16a34a" }}>✓</span> {f}
+                    <span style={{ color: "#16a34a", flexShrink: 0 }}>✓</span> {f}
                   </div>
                 ))}
               </div>
