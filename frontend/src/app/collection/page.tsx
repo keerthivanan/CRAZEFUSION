@@ -46,7 +46,7 @@ const MOVIE_FRANCHISES = [
   { name: "Harry Potter",  domain: "harrypotter.com", img: null, keywords: ["Harry Potter","Hogwarts","Dumbledore","Hermione","Voldemort","Fantastic Beasts","Wizard"] },
   { name: "Disney",        domain: "disney.com",      img: null, keywords: ["Aladdin","Lion King","Mulan","Frozen","Moana","Encanto","Luca","Coco","Tangled","Cinderella","Beauty and the Beast","Little Mermaid","Raya","Brave"] },
   { name: "Pixar",         domain: "pixar.com",          img: null, bg: null, keywords: ["Toy Story","Finding","Incredibles","Inside Out","Soul","Turning Red","Onward","Cars "] },
-  { name: "Star Wars",     domain: "starwars.com",       img: null, bg: null, keywords: ["Star Wars","Darth Vader","Jedi","Mandalorian","Yoda","Obi-Wan","Han Solo","Luke Skywalker","Sith"] },
+  { name: "Star Wars",     domain: "lucasfilm.com",      img: null, bg: null, keywords: ["Star Wars","Darth Vader","Jedi","Mandalorian","Yoda","Obi-Wan","Han Solo","Luke Skywalker","Sith"] },
   { name: "John Wick",     domain: "lionsgate.com",      img: null, bg: null, keywords: ["John Wick"] },
   { name: "James Bond",    domain: "007.com",            img: null, bg: null, keywords: ["James Bond","007"] },
   { name: "Fast & Furious",domain: "fastandfurious.com", img: null, bg: null,      keywords: ["Fast","Furious"] },
