@@ -45,13 +45,13 @@ const MOVIE_FRANCHISES = [
   { name: "DC",            domain: "dc.com",          img: null, keywords: ["Batman","Joker","Aquaman","Wonder Woman","Suicide Squad","Birds of Prey","Flash","Superman","Shazam","Harley Quinn","Black Adam","Blue Beetle"] },
   { name: "Harry Potter",  domain: "harrypotter.com", img: null, keywords: ["Harry Potter","Hogwarts","Dumbledore","Hermione","Voldemort","Fantastic Beasts","Wizard"] },
   { name: "Disney",        domain: "disney.com",      img: null, keywords: ["Aladdin","Lion King","Mulan","Frozen","Moana","Encanto","Luca","Coco","Tangled","Cinderella","Beauty and the Beast","Little Mermaid","Raya","Brave"] },
-  { name: "Pixar",         domain: "pixar.com",          img: null, bg: "#06357a", keywords: ["Toy Story","Finding","Incredibles","Inside Out","Soul","Turning Red","Onward","Cars "] },
-  { name: "Star Wars",     domain: "starwars.com",       img: null, bg: null,      keywords: ["Star Wars","Darth Vader","Jedi","Mandalorian","Yoda","Obi-Wan","Han Solo","Luke Skywalker","Sith"] },
-  { name: "John Wick",     domain: "lionsgate.com",      img: null, bg: "#111",    keywords: ["John Wick"] },
-  { name: "James Bond",    domain: "007.com",            img: null, bg: "#1a1a1a", keywords: ["James Bond","007"] },
+  { name: "Pixar",         domain: "pixar.com",          img: null, bg: null, keywords: ["Toy Story","Finding","Incredibles","Inside Out","Soul","Turning Red","Onward","Cars "] },
+  { name: "Star Wars",     domain: "starwars.com",       img: null, bg: null, keywords: ["Star Wars","Darth Vader","Jedi","Mandalorian","Yoda","Obi-Wan","Han Solo","Luke Skywalker","Sith"] },
+  { name: "John Wick",     domain: "lionsgate.com",      img: null, bg: null, keywords: ["John Wick"] },
+  { name: "James Bond",    domain: "007.com",            img: null, bg: null, keywords: ["James Bond","007"] },
   { name: "Fast & Furious",domain: "fastandfurious.com", img: null, bg: null,      keywords: ["Fast","Furious"] },
   { name: "Sci-Fi",        domain: null, img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973893/crazefusion/originals/movies/3323_Inception_City_Street_Scene_Poster.webp", bg: null, keywords: ["Interstellar","Avatar","Alien","Matrix","Dune","Inception","Blade Runner","Gravity","Mad Max","Tenet","Oblivion","Arrival","Prometheus"] },
-  { name: "Drama",         domain: "a24films.com",       img: null, bg: "#000",    keywords: ["Shawshank","Godfather","Forrest","Schindler","Rocky","Wolf of Wall Street","Fight Club","Pulp Fiction","Goodfellas","Scarface","La La Land","Good Will","Oppenheimer","Bohemian"] },
+  { name: "Drama",         domain: "a24films.com",       img: null, bg: null,    keywords: ["Shawshank","Godfather","Forrest","Schindler","Rocky","Wolf of Wall Street","Fight Club","Pulp Fiction","Goodfellas","Scarface","La La Land","Good Will","Oppenheimer","Bohemian"] },
 ];
 
 // ── Coffee Type Data ───────────────────────────────────────────────────────────
