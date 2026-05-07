@@ -1,5 +1,6 @@
 ﻿"use client";
 import Link from "next/link";
+import PaymentIcons from "@/components/ui/PaymentIcons";
 const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
@@ -117,6 +118,11 @@ export default function Footer() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Payment icons */}
+        <div style={{ marginBottom: 32 }}>
+          <PaymentIcons label={false} />
         </div>
 
         {/* Bottom bar */}

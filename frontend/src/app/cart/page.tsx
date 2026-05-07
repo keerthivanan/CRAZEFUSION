@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import Newsletter from "@/components/footer/Newsletter";
 import { useCart } from "@/context/CartContext";
+import PaymentIcons from "@/components/ui/PaymentIcons";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
@@ -150,11 +151,12 @@ export default function CartPage() {
                 Proceed to Checkout →
               </Link>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 16 }}>
-                {["Secured by Stripe", "Free delivery on orders over £30", "30-day easy returns"].map((text) => (
-                  <div key={text} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ fontFamily: F, fontSize: 11, color: "#888" }}>{text}</span>
-                  </div>
+              <div style={{ marginTop: 16 }}>
+                <PaymentIcons />
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 14 }}>
+                {["✓ Free UK delivery on all orders", "✓ 30-day easy returns", "✓ Fulfilled by Prodigi UK"].map(text => (
+                  <div key={text} style={{ fontFamily: F, fontSize: 11, color: "#888" }}>{text}</div>
                 ))}
               </div>
             </div>
