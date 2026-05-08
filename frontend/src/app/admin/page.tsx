@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Partner, PartnerDesign, Order, adminGetPartners, adminGetDesigns, adminUpdatePartner, adminUpdateDesign, adminRemoveInactivePartners, adminGetOrders, adminUpdateOrderStatus } from "@/lib/supabase";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const ADMIN_PASSWORD = "crazefusion2026";
+const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? "crazefusion2026";
 
 const STATUS_COLOUR: Record<string, string> = {
   pending:  "#e8a000",

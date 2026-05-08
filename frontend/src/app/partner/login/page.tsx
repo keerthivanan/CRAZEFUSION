@@ -28,6 +28,7 @@ export default function PartnerLogin() {
     if (error || !partner) { setErr(error ?? "Login failed"); return; }
     if (partner.status === "rejected") { setErr("Your application was not approved."); return; }
     if (partner.status === "removed")  { setErr("Your account has been removed due to inactivity."); return; }
+    setPassword("");
     router.push("/partner/dashboard");
   };
 

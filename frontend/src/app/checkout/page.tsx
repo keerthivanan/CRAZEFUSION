@@ -40,7 +40,7 @@ export default function CheckoutPage() {
         customer_name:  form.name,
         customer_email: form.email,
         customer_phone: form.phone,
-        address:        form.address,
+        address:        form.county ? `${form.address}, ${form.county}` : form.address,
         city:           form.city,
         postcode:       form.postcode,
         pay_method:     payMethod,

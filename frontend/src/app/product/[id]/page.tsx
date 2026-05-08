@@ -42,7 +42,7 @@ export default function ProductPage() {
     load();
   }, [id]);
 
-  const imgs = p ? [p.img2, p.img] : [];
+  const imgs = p ? [...new Set([p.img2, p.img].filter(Boolean))] as string[] : [];
   const price    = p ? Number(p.price) : 0;
   const original = p ? Number(p.original_price) : 0;
   const discount = original > price ? Math.round((1 - price / original) * 100) : 0;
