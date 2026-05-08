@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Partner, PartnerDesign, adminGetPartners, adminGetDesigns, adminUpdatePartner, adminUpdateDesign, adminRemoveInactivePartners } from "@/lib/supabase";
+import { Partner, PartnerDesign, Order, adminGetPartners, adminGetDesigns, adminUpdatePartner, adminUpdateDesign, adminRemoveInactivePartners, adminGetOrders, adminUpdateOrderStatus } from "@/lib/supabase";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const ADMIN_PASSWORD = "crazefusion2026";
@@ -18,10 +18,12 @@ export default function AdminPanel() {
   const [pw, setPw]               = useState("");
   const [pwErr, setPwErr]         = useState("");
 
-  const [tab, setTab]             = useState<"partners" | "designs">("partners");
+  const [tab, setTab]             = useState<"partners" | "designs" | "orders">("partners");
   const [partners, setPartners]   = useState<Partner[]>([]);
   const [designs,  setDesigns]    = useState<PartnerDesign[]>([]);
+  const [orders,   setOrders]     = useState<Order[]>([]);
   const [loading,  setLoading]    = useState(false);
+  const [trackingInputs, setTrackingInputs] = useState<Record<string, string>>({});
 
   const login = () => {
     if (pw === ADMIN_PASSWORD) { setAuthed(true); }
@@ -31,8 +33,8 @@ export default function AdminPanel() {
   useEffect(() => {
     if (!authed) return;
     setLoading(true);
-    Promise.all([adminGetPartners(), adminGetDesigns()]).then(([p, d]) => {
-      setPartners(p); setDesigns(d); setLoading(false);
+    Promise.all([adminGetPartners(), adminGetDesigns(), adminGetOrders()]).then(([p, d, o]) => {
+      setPartners(p); setDesigns(d); setOrders(o); setLoading(false);
     });
   }, [authed]);
 
@@ -50,6 +52,11 @@ export default function AdminPanel() {
     await adminRemoveInactivePartners();
     const updated = await adminGetPartners();
     setPartners(updated);
+  };
+
+  const updateOrderStatus = async (id: string, status: Order['status'], tracking?: string) => {
+    await adminUpdateOrderStatus(id, status, tracking);
+    setOrders(prev => prev.map(o => o.id === id ? { ...o, status, tracking_number: tracking ?? o.tracking_number } : o));
   };
 
   const statusBadge = (s: string) => (
@@ -99,12 +106,14 @@ export default function AdminPanel() {
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 32px" }}>
 
         {/* Stats */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, marginBottom: 40 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 16, marginBottom: 40 }}>
           {[
             ["Total Partners", partners.length],
             ["Approved",       partners.filter(p => p.status === "approved").length],
             ["Total Designs",  designs.length],
             ["Live Designs",   designs.filter(d => d.status === "approved").length],
+            ["Total Orders",   orders.length],
+            ["Pending Orders", orders.filter(o => o.status === "pending").length],
           ].map(([label, val]) => (
             <div key={label as string} style={{ padding: "24px 20px", border: "1px solid var(--c-border)", background: "var(--c-bg-soft)", borderRadius: 4, textAlign: "center" }}>
               <div style={{ fontFamily: FO, fontSize: 28, fontWeight: 700, color: "var(--c-text)" }}>{val}</div>
@@ -123,12 +132,19 @@ export default function AdminPanel() {
 
         {/* Tabs */}
         <div style={{ display: "flex", gap: 0, borderBottom: "1px solid var(--c-border)", marginBottom: 32 }}>
-          {(["partners", "designs"] as const).map(t => (
-            <button key={t} onClick={() => setTab(t)}
-              style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", background: "none", border: "none", borderBottom: tab === t ? "2px solid var(--c-text)" : "2px solid transparent", color: tab === t ? "var(--c-text)" : "#aaa", cursor: "pointer" }}>
-              {t === "partners" ? `Partners ${pendingPartners > 0 ? `(${pendingPartners} pending)` : ""}` : `Designs ${pendingDesigns > 0 ? `(${pendingDesigns} pending)` : ""}`}
-            </button>
-          ))}
+          {(["partners", "designs", "orders"] as const).map(t => {
+            const label = t === "partners"
+              ? `Partners${pendingPartners > 0 ? ` (${pendingPartners} pending)` : ""}`
+              : t === "designs"
+              ? `Designs${pendingDesigns > 0 ? ` (${pendingDesigns} pending)` : ""}`
+              : `Orders (${orders.length})`;
+            return (
+              <button key={t} onClick={() => setTab(t)}
+                style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", background: "none", border: "none", borderBottom: tab === t ? "2px solid var(--c-text)" : "2px solid transparent", color: tab === t ? "var(--c-text)" : "#aaa", cursor: "pointer" }}>
+                {label}
+              </button>
+            );
+          })}
         </div>
 
         {loading && <div style={{ fontFamily: FO, fontSize: 13, color: "#aaa", textAlign: "center", padding: 40 }}>Loading...</div>}
@@ -155,6 +171,57 @@ export default function AdminPanel() {
                   {p.status === "pending"  && <>{btn("Approve", () => updatePartner(p.id, "approved"), "#16a34a")}{btn("Reject", () => updatePartner(p.id, "rejected"), "#dc2626")}</>}
                   {p.status === "approved" && btn("Remove", () => updatePartner(p.id, "removed"), "#dc2626")}
                   {(p.status === "rejected" || p.status === "removed") && btn("Re-approve", () => updatePartner(p.id, "approved"), "#16a34a")}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Orders tab */}
+        {!loading && tab === "orders" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 0, border: "1px solid var(--c-border)", borderRadius: 4, overflow: "hidden" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 160px 120px 140px 200px", padding: "12px 20px", background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)" }}>
+              {["Customer / Items", "Date", "Total", "Status", "Actions"].map(h => (
+                <div key={h} style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#aaa" }}>{h}</div>
+              ))}
+            </div>
+            {orders.length === 0 && <div style={{ padding: "32px 20px", fontFamily: FO, fontSize: 13, color: "#aaa", textAlign: "center" }}>No orders yet.</div>}
+            {orders.map(o => (
+              <div key={o.id} style={{ borderBottom: "1px solid var(--c-border)" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 160px 120px 140px 200px", padding: "16px 20px", alignItems: "start" }}>
+                  <div>
+                    <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>{o.customer_name}</div>
+                    <div style={{ fontFamily: FO, fontSize: 11, color: "#aaa" }}>{o.customer_email}</div>
+                    <div style={{ fontFamily: FO, fontSize: 11, color: "#aaa", marginTop: 2 }}>{o.address}, {o.city}, {o.postcode}</div>
+                    {o.items && o.items.length > 0 && (
+                      <div style={{ marginTop: 8, display: "flex", flexDirection: "column", gap: 3 }}>
+                        {o.items.map(item => (
+                          <div key={item.id} style={{ fontFamily: FO, fontSize: 11, color: "#888" }}>
+                            × {item.qty} {item.title} ({item.size} · {item.finish})
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {o.tracking_number && (
+                      <div style={{ fontFamily: FO, fontSize: 11, color: "#16a34a", marginTop: 4 }}>Tracking: {o.tracking_number}</div>
+                    )}
+                  </div>
+                  <div style={{ fontFamily: FO, fontSize: 12, color: "#aaa" }}>{new Date(o.created_at).toLocaleDateString("en-GB")}</div>
+                  <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>£{o.total.toFixed(2)}</div>
+                  <div>{statusBadge(o.status)}</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    {o.status === "pending"  && btn("Mark Printing", () => updateOrderStatus(o.id, "printing"), "#e8a000")}
+                    {o.status === "printing" && btn("Mark Shipped",  () => updateOrderStatus(o.id, "shipped", trackingInputs[o.id] || undefined), "#2563eb")}
+                    {o.status === "shipped"  && btn("Mark Delivered", () => updateOrderStatus(o.id, "delivered"), "#16a34a")}
+                    {(o.status === "printing" || o.status === "pending") && (
+                      <input
+                        placeholder="Tracking number"
+                        value={trackingInputs[o.id] ?? ""}
+                        onChange={e => setTrackingInputs(prev => ({ ...prev, [o.id]: e.target.value }))}
+                        style={{ padding: "5px 10px", border: "1px solid var(--c-border)", background: "var(--c-bg)", fontFamily: FO, fontSize: 11, color: "var(--c-text)", outline: "none", borderRadius: 4, width: "100%" }}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             ))}

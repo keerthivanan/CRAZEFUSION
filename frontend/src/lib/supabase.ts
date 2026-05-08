@@ -206,3 +206,86 @@ export async function adminRemoveInactivePartners() {
   }
   return toRemove.length;
 }
+
+// ── Orders ────────────────────────────────────────────────────────────────────
+
+export interface Order {
+  id: string;
+  customer_name: string;
+  customer_email: string;
+  customer_phone: string;
+  address: string;
+  city: string;
+  postcode: string;
+  pay_method: string;
+  subtotal: number;
+  shipping: number;
+  total: number;
+  status: 'pending' | 'printing' | 'shipped' | 'delivered';
+  tracking_number: string | null;
+  created_at: string;
+  items?: OrderItem[];
+}
+
+export interface OrderItem {
+  id: string;
+  order_id: string;
+  product_id: number;
+  title: string;
+  img: string;
+  size: string;
+  finish: string;
+  qty: number;
+  price: number;
+}
+
+export async function createOrder(
+  order: Omit<Order, 'id' | 'created_at' | 'status' | 'tracking_number' | 'items'>,
+  items: Omit<OrderItem, 'id' | 'order_id'>[]
+): Promise<{ orderId: string | null; error: string | null }> {
+  const { data, error } = await supabase
+    .from('orders')
+    .insert({ ...order, status: 'pending', tracking_number: null })
+    .select('id')
+    .single();
+  if (error || !data) return { orderId: null, error: error?.message ?? 'Order failed' };
+  const orderId = data.id;
+
+  await supabase.from('order_items').insert(
+    items.map(i => ({ ...i, order_id: orderId }))
+  );
+
+  // Credit partner 30% for any partner design items (product_id >= 10000)
+  for (const item of items) {
+    if (item.product_id >= 10000) {
+      const { data: design } = await supabase
+        .from('partner_designs')
+        .select('id, partner_id, price')
+        .eq('product_id', item.product_id)
+        .single();
+      if (design) {
+        await supabase.from('partner_sales').insert({
+          partner_id:   design.partner_id,
+          design_id:    design.id,
+          order_amount: item.price * item.qty,
+          partner_cut:  Math.round(item.price * item.qty * 0.30 * 100) / 100,
+          paid_out:     false,
+        });
+      }
+    }
+  }
+
+  return { orderId, error: null };
+}
+
+export async function adminGetOrders(): Promise<Order[]> {
+  const { data } = await supabase
+    .from('orders')
+    .select('*, order_items(*)')
+    .order('created_at', { ascending: false });
+  return (data ?? []).map((o: any) => ({ ...o, items: o.order_items })) as Order[];
+}
+
+export async function adminUpdateOrderStatus(id: string, status: Order['status'], tracking_number?: string) {
+  await supabase.from('orders').update({ status, ...(tracking_number ? { tracking_number } : {}) }).eq('id', id);
+}

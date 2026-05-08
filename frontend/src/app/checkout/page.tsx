@@ -1,9 +1,10 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
 import { useCart } from "@/context/CartContext";
 import PaymentIcons from "@/components/ui/PaymentIcons";
+import { createOrder } from "@/lib/supabase";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
@@ -16,11 +17,13 @@ const steps = ["Delivery", "Payment", "Confirm"];
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
-  const [step, setStep]       = useState(0);
-  const [form, setForm]       = useState({ name: "", email: "", phone: "", address: "", city: "", county: "", postcode: "" });
+  const [step, setStep]           = useState(0);
+  const [form, setForm]           = useState({ name: "", email: "", phone: "", address: "", city: "", county: "", postcode: "" });
   const [payMethod, setPayMethod] = useState("card");
-  const [ordered, setOrdered] = useState(false);
-  const orderIdRef            = useRef(`PZ-${Math.random().toString(36).substring(2, 8).toUpperCase()}`);
+  const [ordered, setOrdered]     = useState(false);
+  const [placing, setPlacing]     = useState(false);
+  const [placeErr, setPlaceErr]   = useState("");
+  const [orderId, setOrderId]     = useState("");
 
   const shipping = subtotal >= FREE_THRESHOLD ? 0 : SHIPPING_COST;
   const total    = subtotal + shipping;
@@ -29,9 +32,40 @@ export default function CheckoutPage() {
   const inputStyle = (val: string) => ({ width: "100%", padding: "14px 18px", border: `1.5px solid ${val ? "var(--c-text)" : "#ebebeb"}`, background: "var(--c-bg)", fontFamily: FO, fontSize: 13, color: "var(--c-text)", outline: "none", transition: "all 0.2s", boxSizing: "border-box" as const });
   const labelStyle = { fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: "#999", marginBottom: 8, display: "block" };
 
-  const handlePlaceOrder = () => {
-    setOrdered(true);
+  const handlePlaceOrder = async () => {
+    setPlacing(true);
+    setPlaceErr("");
+    const { orderId: newId, error } = await createOrder(
+      {
+        customer_name:  form.name,
+        customer_email: form.email,
+        customer_phone: form.phone,
+        address:        form.address,
+        city:           form.city,
+        postcode:       form.postcode,
+        pay_method:     payMethod,
+        subtotal,
+        shipping,
+        total,
+      },
+      items.map(i => ({
+        product_id: Number(i.id),
+        title:      i.title,
+        img:        i.img,
+        size:       i.size,
+        finish:     i.finish,
+        qty:        i.qty,
+        price:      i.price,
+      }))
+    );
+    setPlacing(false);
+    if (error || !newId) {
+      setPlaceErr("Something went wrong. Please try again.");
+      return;
+    }
+    setOrderId(newId);
     clearCart();
+    setOrdered(true);
   };
 
   if (ordered) return (
@@ -44,7 +78,7 @@ export default function CheckoutPage() {
         </p>
         <div style={{ background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", padding: 20, margin: "24px 0", textAlign: "left" }}>
           <div style={{ fontFamily: F, fontSize: 11, color: "#aaa", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 8 }}>Order ID</div>
-          <div style={{ fontFamily: FE, fontSize: 22, fontWeight: 400, color: "var(--c-text)" }}>{orderIdRef.current}</div>
+          <div style={{ fontFamily: FE, fontSize: 22, fontWeight: 400, color: "var(--c-text)" }}>{orderId}</div>
         </div>
         <p style={{ fontFamily: F, fontSize: 12, color: "#aaa", marginBottom: 28 }}>Expected delivery: 2–4 business days (UK)</p>
         <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
@@ -171,11 +205,12 @@ export default function CheckoutPage() {
                     <div style={{ fontFamily: F, fontSize: 13, color: "var(--c-text)" }}>{val}</div>
                   </div>
                 ))}
+                {placeErr && <div style={{ fontFamily: F, fontSize: 12, color: "#dc2626", marginTop: 16 }}>{placeErr}</div>}
                 <div style={{ display: "flex", gap: 12, marginTop: 28 }}>
-                  <button onClick={() => setStep(1)} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid var(--c-border)", cursor: "pointer" }}>← Back</button>
-                  <button onClick={handlePlaceOrder}
-                    style={{ flex: 1, padding: "15px 24px", background: "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 400, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer" }}>
-                    Place Order · £{total.toFixed(2)}
+                  <button onClick={() => setStep(1)} disabled={placing} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid var(--c-border)", cursor: "pointer" }}>← Back</button>
+                  <button onClick={handlePlaceOrder} disabled={placing}
+                    style={{ flex: 1, padding: "15px 24px", background: placing ? "#ccc" : "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 400, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: placing ? "not-allowed" : "pointer" }}>
+                    {placing ? "Placing Order…" : `Place Order · £${total.toFixed(2)}`}
                   </button>
                 </div>
               </div>
