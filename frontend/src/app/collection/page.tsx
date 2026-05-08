@@ -147,10 +147,10 @@ export default function CollectionPage() {
 
   useEffect(() => {
     setLoading(true);
-    fetchProductsData(activeCategory).then(data => {
-      setProducts(data);
-      setLoading(false);
-    });
+    fetchProductsData(activeCategory)
+      .then(data => setProducts(data))
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, [activeCategory]);
 
   // reset brand filter when category changes

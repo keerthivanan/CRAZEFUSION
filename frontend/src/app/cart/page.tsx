@@ -16,8 +16,9 @@ const SHIPPING_COST  = 3.99;
 
 export default function CartPage() {
   const { items, updateQty, removeItem, subtotal } = useCart();
-  const [promoCode, setPromoCode]   = useState("");
+  const [promoCode, setPromoCode]     = useState("");
   const [promoApplied, setPromoApplied] = useState(false);
+  const [promoErr, setPromoErr]       = useState("");
 
   const discount = promoApplied ? Math.round(subtotal * 0.1 * 100) / 100 : 0;
   const shipping  = subtotal >= FREE_THRESHOLD ? 0 : SHIPPING_COST;
@@ -131,12 +132,18 @@ export default function CartPage() {
                 <div style={{ display: "flex" }}>
                   <input type="text" placeholder="Promo code" value={promoCode} onChange={e => setPromoCode(e.target.value)}
                     style={{ flex: 1, padding: "10px 14px", border: "1px solid var(--c-border)", borderRight: "none", fontFamily: F, fontSize: 12, color: "var(--c-text)", outline: "none" }} />
-                  <button onClick={() => { if (promoCode.trim()) setPromoApplied(true); }}
+                  <button onClick={() => {
+                    const code = promoCode.trim().toUpperCase();
+                    if (!code) { setPromoErr("Enter a promo code."); return; }
+                    if (code === "POSTER10") { setPromoApplied(true); setPromoErr(""); }
+                    else { setPromoErr("Invalid promo code."); setPromoApplied(false); }
+                  }}
                     style={{ padding: "10px 16px", background: "#111", color: "#fff", fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", border: "none", cursor: "pointer", borderRadius: "0 50px 50px 0" }}>
                     Apply
                   </button>
                 </div>
                 {promoApplied && <div style={{ fontFamily: F, fontSize: 11, color: "#16a34a", marginTop: 6 }}>✓ 10% discount applied!</div>}
+                {promoErr && !promoApplied && <div style={{ fontFamily: F, fontSize: 11, color: "#dc2626", marginTop: 6 }}>{promoErr}</div>}
               </div>
 
               <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 20, borderTop: "1px solid var(--c-border)", marginBottom: 20 }}>

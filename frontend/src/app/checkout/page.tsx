@@ -24,11 +24,24 @@ export default function CheckoutPage() {
   const [placing, setPlacing]     = useState(false);
   const [placeErr, setPlaceErr]   = useState("");
   const [orderId, setOrderId]     = useState("");
+  const [formErr, setFormErr]     = useState("");
 
   const shipping = subtotal >= FREE_THRESHOLD ? 0 : SHIPPING_COST;
   const total    = subtotal + shipping;
 
-  const handleField = (k: string, v: string) => setForm(p => ({ ...p, [k]: v }));
+  const handleField = (k: string, v: string) => { setForm(p => ({ ...p, [k]: v })); setFormErr(""); }
+
+  const validateDelivery = () => {
+    if (!form.name.trim())     { setFormErr("Full name is required."); return false; }
+    if (!form.email.includes("@") || !form.email.includes(".")) { setFormErr("Enter a valid email address."); return false; }
+    if (!form.phone.trim())    { setFormErr("Phone number is required."); return false; }
+    if (!form.address.trim())  { setFormErr("Delivery address is required."); return false; }
+    if (!form.city.trim())     { setFormErr("Town / City is required."); return false; }
+    if (!form.postcode.trim()) { setFormErr("Postcode is required."); return false; }
+    const ukPostcode = /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i;
+    if (!ukPostcode.test(form.postcode.trim())) { setFormErr("Enter a valid UK postcode (e.g. SW1A 1AA)."); return false; }
+    return true;
+  };
   const inputStyle = (val: string) => ({ width: "100%", padding: "14px 18px", border: `1.5px solid ${val ? "var(--c-text)" : "#ebebeb"}`, background: "var(--c-bg)", fontFamily: FO, fontSize: 13, color: "var(--c-text)", outline: "none", transition: "all 0.2s", boxSizing: "border-box" as const });
   const labelStyle = { fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: "#999", marginBottom: 8, display: "block" };
 
@@ -157,7 +170,8 @@ export default function CheckoutPage() {
                     </div>
                   ))}
                 </div>
-                <button onClick={() => setStep(1)}
+                {formErr && <div style={{ fontFamily: F, fontSize: 12, color: "#dc2626", marginBottom: 12, padding: "10px 14px", background: "rgba(220,38,38,0.06)", border: "1px solid rgba(220,38,38,0.2)" }}>{formErr}</div>}
+                <button onClick={() => { if (validateDelivery()) setStep(1); }}
                   style={{ padding: "15px 40px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#333")}
                   onMouseLeave={e => (e.currentTarget.style.background = "#111")}>

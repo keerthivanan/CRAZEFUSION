@@ -31,6 +31,7 @@ export default function PartnerDashboard() {
 
   const [form, setForm]           = useState({ title: "", category: "Cars", image_url: "", price: 11.99 });
   const [uploading, setUploading] = useState(false);
+  const [imgUploading, setImgUploading] = useState(false);
   const [uploadErr, setUploadErr] = useState("");
   const [uploadOk,  setUploadOk]  = useState(false);
 
@@ -52,14 +53,25 @@ export default function PartnerDashboard() {
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", "partner_designs");
-    data.append("cloud_name", "dxosc5jfy");
-    const res  = await fetch("https://api.cloudinary.com/v1_1/dxosc5jfy/image/upload", { method: "POST", body: data });
-    const json = await res.json();
-    if (json.secure_url) setForm(f => ({ ...f, image_url: json.secure_url }));
-    else setUploadErr("Image upload failed. Please try again.");
+    const allowed = ["image/jpeg", "image/png", "image/webp"];
+    if (!allowed.includes(file.type)) { setUploadErr("Only JPG, PNG or WEBP images allowed."); return; }
+    if (file.size > 15 * 1024 * 1024) { setUploadErr("Image must be under 15MB."); return; }
+    setUploadErr("");
+    setImgUploading(true);
+    try {
+      const data = new FormData();
+      data.append("file", file);
+      data.append("upload_preset", "partner_designs");
+      data.append("cloud_name", "dxosc5jfy");
+      const res  = await fetch("https://api.cloudinary.com/v1_1/dxosc5jfy/image/upload", { method: "POST", body: data });
+      const json = await res.json();
+      if (json.secure_url) setForm(f => ({ ...f, image_url: json.secure_url }));
+      else setUploadErr("Image upload failed. Please try again.");
+    } catch {
+      setUploadErr("Network error. Please check your connection and try again.");
+    } finally {
+      setImgUploading(false);
+    }
   };
 
   const submitForm = async () => {
@@ -187,8 +199,10 @@ export default function PartnerDashboard() {
                   </div>
                   <div>
                     <label style={{ display: "block", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 6 }}>Upload Artwork *</label>
-                    <input type="file" accept="image/*" onChange={handleImageUpload} style={{ fontFamily: FO, fontSize: 13, color: "var(--c-text)" }} />
-                    <div style={{ fontFamily: FO, fontSize: 10, color: "#aaa", marginTop: 4 }}>Minimum 2000×2800px. JPG or PNG.</div>
+                    <input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleImageUpload} disabled={imgUploading} style={{ fontFamily: FO, fontSize: 13, color: "var(--c-text)" }} />
+                    <div style={{ fontFamily: FO, fontSize: 10, color: "#aaa", marginTop: 4 }}>
+                      {imgUploading ? "Uploading image…" : "Minimum 2000×2800px. JPG, PNG or WEBP. Max 15MB."}
+                    </div>
                     {form.image_url && (
                       <div style={{ marginTop: 12, width: 120, aspectRatio: "3/4", overflow: "hidden", borderRadius: 4, border: "1px solid var(--c-border)" }}>
                         <img src={form.image_url} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
@@ -199,7 +213,7 @@ export default function PartnerDashboard() {
                   {uploadErr && <div style={{ fontFamily: FO, fontSize: 12, color: "#dc2626", padding: "10px 14px", background: "rgba(220,38,38,0.06)", border: "1px solid rgba(220,38,38,0.2)", borderRadius: 4 }}>{uploadErr}</div>}
                   {uploadOk  && <div style={{ fontFamily: FO, fontSize: 12, color: "#16a34a", padding: "10px 14px", background: "rgba(22,163,74,0.06)", border: "1px solid rgba(22,163,74,0.2)", borderRadius: 4 }}>Design submitted! We&apos;ll review it within 24 hours.</div>}
 
-                  <button onClick={submitForm} disabled={uploading}
+                  <button onClick={submitForm} disabled={uploading || imgUploading}
                     style={{ padding: "14px 0", background: "#111", color: "#fff", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50 }}>
                     {uploading ? "Submitting..." : "Submit for Review"}
                   </button>

@@ -31,12 +31,16 @@ export default function ProductPage() {
   useEffect(() => {
     async function load() {
       setLoading(true);
-      const product = await fetchProduct(Number(id));
-      if (product) {
-        setP(product);
-        const rel = await fetchRelated(product.category, Number(id), 5);
-        setRelated(rel);
-      }
+      try {
+        const product = await fetchProduct(Number(id));
+        if (product) {
+          setP(product);
+          try {
+            const rel = await fetchRelated(product.category, Number(id), 5);
+            setRelated(rel);
+          } catch {}
+        }
+      } catch {}
       setLoading(false);
     }
     load();
