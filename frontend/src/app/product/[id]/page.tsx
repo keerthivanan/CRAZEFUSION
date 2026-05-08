@@ -8,6 +8,7 @@ import Newsletter from "@/components/footer/Newsletter";
 import { fetchProduct, fetchRelated, Product } from "@/lib/supabase";
 import { useCart } from "@/context/CartContext";
 import ClickSpark from "@/components/reactbits/ClickSpark";
+import PaymentIcons from "@/components/ui/PaymentIcons";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
@@ -182,45 +183,7 @@ export default function ProductPage() {
 
             {/* Payment methods */}
             <div style={{ marginBottom: 24 }}>
-              <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 600, color: "#aaa", letterSpacing: "0.12em", textTransform: "uppercase", textAlign: "center", marginBottom: 10 }}>
-                🔒 Secure checkout — Accepted payments
-              </div>
-              <div style={{ display: "flex", gap: 6, flexWrap: "wrap", justifyContent: "center" }}>
-                {/* Visa */}
-                <div style={{ background: "#1a1f71", borderRadius: 6, padding: "5px 10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 12, fontWeight: 900, color: "#fff", letterSpacing: "0.02em", fontStyle: "italic" }}>VISA</span>
-                </div>
-                {/* Mastercard */}
-                <div style={{ background: "#fff", border: "1px solid #e5e5e5", borderRadius: 6, padding: "5px 8px", display: "flex", alignItems: "center", gap: 2 }}>
-                  <div style={{ width: 16, height: 16, borderRadius: "50%", background: "#eb001b" }} />
-                  <div style={{ width: 16, height: 16, borderRadius: "50%", background: "#f79e1b", marginLeft: -8, opacity: 0.9 }} />
-                </div>
-                {/* Amex */}
-                <div style={{ background: "#2E77BC", borderRadius: 6, padding: "5px 9px", display: "flex", alignItems: "center" }}>
-                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 10, fontWeight: 800, color: "#fff", letterSpacing: "0.05em" }}>AMEX</span>
-                </div>
-                {/* PayPal */}
-                <div style={{ background: "#fff", border: "1px solid #e5e5e5", borderRadius: 6, padding: "5px 10px", display: "flex", alignItems: "center", gap: 2 }}>
-                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 11, fontWeight: 800, color: "#003087" }}>Pay</span>
-                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 11, fontWeight: 800, color: "#009cde" }}>Pal</span>
-                </div>
-                {/* Apple Pay */}
-                <div style={{ background: "#000", borderRadius: 6, padding: "5px 10px", display: "flex", alignItems: "center" }}>
-                  <span style={{ fontFamily: "-apple-system, sans-serif", fontSize: 11, fontWeight: 600, color: "#fff", letterSpacing: "-0.02em" }}> Pay</span>
-                </div>
-                {/* Google Pay */}
-                <div style={{ background: "#fff", border: "1px solid #e5e5e5", borderRadius: 6, padding: "5px 8px", display: "flex", alignItems: "center" }}>
-                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 11, fontWeight: 700 }}>
-                    <span style={{ color: "#4285F4" }}>G</span>
-                    <span style={{ color: "#EA4335" }}>o</span>
-                    <span style={{ color: "#FBBC05" }}>o</span>
-                    <span style={{ color: "#4285F4" }}>g</span>
-                    <span style={{ color: "#34A853" }}>l</span>
-                    <span style={{ color: "#EA4335" }}>e</span>
-                  </span>
-                  <span style={{ fontFamily: "Arial, sans-serif", fontSize: 11, fontWeight: 700, color: "#5f6368", marginLeft: 3 }}>Pay</span>
-                </div>
-              </div>
+              <PaymentIcons />
             </div>
 
             {/* Trust badges */}
