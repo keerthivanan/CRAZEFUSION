@@ -177,13 +177,22 @@ export default function ProductPage() {
               </ClickSpark>
               <ClickSpark sparkColor="#111" sparkCount={10} sparkRadius={28}>
                 <button onClick={buyNow}
-                  style={{ width: "100%", padding: "16px 0", background: "#e8a000", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50 }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "#d09800")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "#e8a000")}>
+                  style={{ width: "100%", padding: "16px 0", background: "#e8a000", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50, transition: "all 0.2s", boxShadow: "0 0 24px rgba(232,160,0,0.3)" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "#d09800"; e.currentTarget.style.boxShadow = "0 0 40px rgba(232,160,0,0.5)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "#e8a000"; e.currentTarget.style.boxShadow = "0 0 24px rgba(232,160,0,0.3)"; e.currentTarget.style.transform = "translateY(0)"; }}>
                   Buy Now — £{price.toFixed(2)}
                 </button>
               </ClickSpark>
             </div>
+
+            {/* Edit with AI */}
+            <Link href={`/create?edit=${p.id}`}
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, width: "100%", padding: "14px 0", background: "rgba(232,160,0,0.06)", border: "1px solid rgba(232,160,0,0.25)", borderRadius: 50, textDecoration: "none", marginBottom: 16, transition: "all 0.2s" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(232,160,0,0.12)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(232,160,0,0.06)"; }}>
+              <span style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#e8a000" }}>Edit This Poster With AI</span>
+              <span style={{ fontFamily: FO, fontSize: 11, color: "#e8a000", opacity: 0.6 }}>— 5 credits</span>
+            </Link>
 
             {/* Payment methods */}
             <div style={{ marginBottom: 24 }}>
@@ -193,10 +202,10 @@ export default function ProductPage() {
             {/* Trust badges */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 24 }}>
               {[
-                ["🚚 Free UK Delivery",        "On all orders, tracked"],
-                ["🏭 Fulfilled by Prodigi",     "Professional UK print lab"],
-                ["↩ 30-Day Returns",            "No questions asked"],
-                ["🔒 Secure Payment",           "Stripe encrypted checkout"],
+                ["Free UK Delivery",        "On all orders, tracked"],
+                ["Fulfilled by Prodigi",     "Professional UK print lab"],
+                ["30-Day Returns",            "No questions asked"],
+                ["Secure Payment",           "Encrypted checkout"],
               ].map(([t, s]) => (
                 <div key={t} style={{ padding: "12px 14px", border: "1px solid var(--c-border)", background: "var(--c-bg-card)", borderRadius: 4 }}>
                   <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, color: "var(--c-text)", marginBottom: 2 }}>{t}</div>
@@ -243,8 +252,8 @@ export default function ProductPage() {
                 {related.map(r => (
                   <Link key={r.id} href={`/product/${r.id}`} style={{ textDecoration: "none" }}>
                     <div style={{ aspectRatio: "3/4", overflow: "hidden", background: "var(--c-bg-soft)", marginBottom: 10 }}
-                      onMouseEnter={e => { const img = e.currentTarget.querySelector("img") as HTMLImageElement; img.src = r.img2; img.style.transform = "scale(1.05)"; }}
-                      onMouseLeave={e => { const img = e.currentTarget.querySelector("img") as HTMLImageElement; img.src = r.img; img.style.transform = "scale(1)"; }}>
+                      onMouseEnter={e => { const img = e.currentTarget.querySelector("img") as HTMLImageElement | null; if (img) { if (r.img2) img.src = r.img2; img.style.transform = "scale(1.05)"; } }}
+                      onMouseLeave={e => { const img = e.currentTarget.querySelector("img") as HTMLImageElement | null; if (img) { img.src = r.img; img.style.transform = "scale(1)"; } }}>
                       <img src={r.img} alt={r.name} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease" }} />
                     </div>
                     <div style={{ fontFamily: FO, fontSize: 12, fontWeight: 500, color: "var(--c-text)", marginBottom: 2, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const }}>{r.name}</div>

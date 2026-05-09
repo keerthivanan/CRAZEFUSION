@@ -2,7 +2,12 @@ import { createClient } from '@supabase/supabase-js';
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
 const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '';
+
+if (!url || !key) console.warn('[Supabase] Missing env vars — database features disabled');
+
 export const supabase = url && key ? createClient(url, key) : null as any;
+
+// ── Product types ─────────────────────────────────────────────────────────────
 
 export interface Product {
   id: number;
@@ -28,35 +33,57 @@ const STATIC: Record<string, Product[]> = {
   All:           allData    as Product[],
 };
 
-// Map an approved partner design row → Product shape
+// ── PartnerDesign — matches actual DB schema ──────────────────────────────────
+// DB columns: id(bigint), partner_id, title, description, img, price,
+//             status, sales, earnings, category, created_at
+// IDs start at 10000 (ALTER SEQUENCE partner_designs_id_seq RESTART WITH 10000)
+
+export interface PartnerDesign {
+  id:           number;
+  partner_id:   string;
+  partner_name?: string;
+  title:        string;
+  description?: string;
+  img:          string;
+  price:        number;
+  status:       'pending' | 'approved' | 'rejected';
+  sales:        number;
+  earnings:     number;
+  category?:    string;
+  created_at:   string;
+}
+
 function designToProduct(d: PartnerDesign): Product {
   return {
-    id:             d.product_id!,
+    id:             d.id,           // bigserial starting at 10000
     name:           d.title,
-    category:       d.category,
-    sub:            'Wall Poster · A4 · Artist',
+    category:       d.category ?? 'Artist',
+    sub:            'AI Studio · Artist Design',
     price:          Number(d.price),
     original_price: Number(d.price),
     badge:          'Artist',
-    img:            d.image_url,
-    img2:           d.image_url,
+    img:            d.img,
+    img2:           d.img,
   };
 }
 
 async function fetchApprovedDesigns(): Promise<PartnerDesign[]> {
   if (!supabase) return [];
-  const { data } = await supabase
-    .from('partner_designs')
-    .select('*')
-    .eq('status', 'approved');
-  return (data ?? []) as PartnerDesign[];
+  try {
+    const { data, error } = await supabase
+      .from('partner_designs')
+      .select('*')
+      .eq('status', 'approved');
+    if (error) { console.error('[Supabase] fetchApprovedDesigns:', error.message); return []; }
+    return (data ?? []) as PartnerDesign[];
+  } catch { return []; }
 }
 
 export async function fetchProducts(category: string, limit?: number): Promise<Product[]> {
   const staticData = STATIC[category] ?? STATIC['All'].filter(p => p.category === category);
   const designs    = await fetchApprovedDesigns();
   const designData = designs
-    .filter(d => category === 'All' || d.category === category)
+    .filter(d => category === 'All' || !d.category || d.category === category)
     .map(designToProduct);
   const combined = [...staticData, ...designData];
   return limit ? combined.slice(0, limit) : combined;
@@ -65,15 +92,17 @@ export async function fetchProducts(category: string, limit?: number): Promise<P
 export async function fetchProduct(id: number): Promise<Product | null> {
   const fromStatic = STATIC['All'].find(p => p.id === id) ?? null;
   if (fromStatic) return fromStatic;
-  // Check partner designs (ids start at 10000)
+  // Partner designs have ids >= 10000
   if (id >= 10000 && supabase) {
-    const { data } = await supabase
-      .from('partner_designs')
-      .select('*')
-      .eq('product_id', id)
-      .eq('status', 'approved')
-      .single();
-    if (data) return designToProduct(data as PartnerDesign);
+    try {
+      const { data } = await supabase
+        .from('partner_designs')
+        .select('*')
+        .eq('id', id)            // query by primary key 'id', not 'product_id'
+        .eq('status', 'approved')
+        .single();
+      if (data) return designToProduct(data as PartnerDesign);
+    } catch { return null; }
   }
   return null;
 }
@@ -86,41 +115,28 @@ export async function fetchRelated(category: string, excludeId: number, limit = 
 // ── Partner types ─────────────────────────────────────────────────────────────
 
 export interface Partner {
-  id: string;
-  name: string;
-  email: string;
-  bio: string;
-  payout_email: string;
-  status: 'pending' | 'approved' | 'rejected' | 'removed';
-  created_at: string;
-  last_submitted_at: string | null;
-}
-
-export interface PartnerDesign {
-  id: string;
-  partner_id: string;
-  partner_name?: string;
-  product_id?: number;
-  title: string;
-  category: string;
-  image_url: string;
-  price: number;
-  status: 'pending' | 'approved' | 'rejected';
-  created_at: string;
+  id:                  string;
+  name:                string;
+  email:               string;
+  bio:                 string;
+  payout_email:        string;
+  status:              'pending' | 'approved' | 'rejected' | 'removed';
+  created_at:          string;
+  last_submitted_at:   string | null;
 }
 
 export interface PartnerSale {
-  id: string;
-  partner_id: string;
-  design_id: string;
+  id:           string;
+  partner_id:   string;
+  design_id:    string;
   design_title?: string;
   order_amount: number;
-  partner_cut: number;
-  paid_out: boolean;
-  created_at: string;
+  partner_cut:  number;
+  paid_out:     boolean;
+  created_at:   string;
 }
 
-// ── Partner auth (Supabase Auth) ──────────────────────────────────────────────
+// ── Partner auth ──────────────────────────────────────────────────────────────
 
 export async function registerPartner(data: {
   name: string; email: string; password: string; bio: string; payout_email: string;
@@ -130,7 +146,9 @@ export async function registerPartner(data: {
   if (authErr) return { error: authErr.message };
   const uid = authData.user?.id;
   if (!uid) return { error: 'Signup failed. Try again.' };
-  const { error } = await supabase.from('partners').insert({ id: uid, name, email, bio, payout_email, status: 'pending' });
+  const { error } = await supabase.from('partners').insert({
+    id: uid, name, email, bio, payout_email, status: 'pending',
+  });
   return { error: error?.message ?? null };
 }
 
@@ -151,56 +169,85 @@ export async function getCurrentPartner(): Promise<Partner | null> {
 }
 
 export async function logoutPartner() {
-  await supabase.auth.signOut();
+  if (supabase) await supabase.auth.signOut();
 }
 
-// ── Partner dashboard helpers ─────────────────────────────────────────────────
+// ── Partner dashboard ─────────────────────────────────────────────────────────
 
 export async function getPartnerDesigns(partnerId: string): Promise<PartnerDesign[]> {
-  const { data } = await supabase.from('partner_designs').select('*').eq('partner_id', partnerId).order('created_at', { ascending: false });
+  if (!supabase) return [];
+  const { data } = await supabase
+    .from('partner_designs')
+    .select('*')
+    .eq('partner_id', partnerId)
+    .order('created_at', { ascending: false });
   return (data ?? []) as PartnerDesign[];
 }
 
 export async function getPartnerSales(partnerId: string): Promise<PartnerSale[]> {
-  const { data } = await supabase.from('partner_sales').select('*, partner_designs(title)').eq('partner_id', partnerId).order('created_at', { ascending: false });
+  if (!supabase) return [];
+  const { data } = await supabase
+    .from('partner_sales')
+    .select('*, partner_designs(title)')
+    .eq('partner_id', partnerId)
+    .order('created_at', { ascending: false });
   return (data ?? []).map((s: any) => ({ ...s, design_title: s.partner_designs?.title })) as PartnerSale[];
 }
 
-export async function submitDesign(partnerId: string, design: { title: string; category: string; image_url: string; price: number }) {
-  const { error } = await supabase.from('partner_designs').insert({ partner_id: partnerId, ...design, status: 'pending' });
-  if (!error) await supabase.from('partners').update({ last_submitted_at: new Date().toISOString() }).eq('id', partnerId);
+export async function submitDesign(partnerId: string, design: {
+  title: string; img: string; price: number; category?: string; description?: string;
+}) {
+  if (!supabase) return { error: 'Database not configured' };
+  const { error } = await supabase.from('partner_designs').insert({
+    partner_id: partnerId,
+    ...design,
+    status: 'pending',
+    sales: 0,
+    earnings: 0,
+  });
+  if (!error) {
+    await supabase.from('partners')
+      .update({ last_submitted_at: new Date().toISOString() })
+      .eq('id', partnerId);
+  }
   return { error: error?.message ?? null };
 }
 
 // ── Admin helpers ─────────────────────────────────────────────────────────────
 
 export async function adminGetPartners(): Promise<Partner[]> {
+  if (!supabase) return [];
   const { data } = await supabase.from('partners').select('*').order('created_at', { ascending: false });
   return (data ?? []) as Partner[];
 }
 
 export async function adminGetDesigns(): Promise<PartnerDesign[]> {
-  const { data } = await supabase.from('partner_designs').select('*, partners(name)').order('created_at', { ascending: false });
+  if (!supabase) return [];
+  const { data } = await supabase
+    .from('partner_designs')
+    .select('*, partners(name)')
+    .order('created_at', { ascending: false });
   return (data ?? []).map((d: any) => ({ ...d, partner_name: d.partners?.name })) as PartnerDesign[];
 }
 
 export async function adminUpdatePartner(id: string, status: Partner['status']) {
+  if (!supabase) return;
   await supabase.from('partners').update({ status }).eq('id', id);
 }
 
 export async function adminUpdateDesign(id: string, status: PartnerDesign['status']) {
+  if (!supabase) return;
   await supabase.from('partner_designs').update({ status }).eq('id', id);
 }
 
 export async function adminRemoveInactivePartners() {
+  if (!supabase) return 0;
   const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString();
   const { data: partners } = await supabase
-    .from('partners')
-    .select('id, last_submitted_at')
-    .eq('status', 'approved');
-  const toRemove = (partners ?? []).filter((p: any) =>
-    !p.last_submitted_at || new Date(p.last_submitted_at) < new Date(threeDaysAgo)
-  ).map((p: any) => p.id);
+    .from('partners').select('id, last_submitted_at').eq('status', 'approved');
+  const toRemove = (partners ?? [])
+    .filter((p: any) => !p.last_submitted_at || new Date(p.last_submitted_at) < new Date(threeDaysAgo))
+    .map((p: any) => p.id);
   if (toRemove.length > 0) {
     await supabase.from('partners').update({ status: 'removed' }).in('id', toRemove);
   }
@@ -210,75 +257,39 @@ export async function adminRemoveInactivePartners() {
 // ── Orders ────────────────────────────────────────────────────────────────────
 
 export interface Order {
-  id: string;
-  customer_name: string;
-  customer_email: string;
-  customer_phone: string;
-  address: string;
-  city: string;
-  postcode: string;
-  pay_method: string;
-  subtotal: number;
-  shipping: number;
-  total: number;
-  status: 'pending' | 'printing' | 'shipped' | 'delivered';
-  tracking_number: string | null;
-  created_at: string;
-  items?: OrderItem[];
+  id:                string;
+  customer_name:     string;
+  customer_email:    string;
+  customer_phone:    string;
+  address:           string;
+  city:              string;
+  postcode:          string;
+  pay_method:        string;
+  subtotal:          number;
+  shipping:          number;
+  total:             number;
+  status:            'pending' | 'confirmed' | 'in_production' | 'shipped' | 'delivered';
+  tracking_number:   string | null;
+  prodigi_order_id?: string | null;
+  stripe_payment_id?: string | null;
+  created_at:        string;
+  items?:            OrderItem[];
 }
 
 export interface OrderItem {
-  id: string;
-  order_id: string;
-  product_id: number;
-  title: string;
-  img: string;
-  size: string;
-  finish: string;
-  qty: number;
-  price: number;
-}
-
-export async function createOrder(
-  order: Omit<Order, 'id' | 'created_at' | 'status' | 'tracking_number' | 'items'>,
-  items: Omit<OrderItem, 'id' | 'order_id'>[]
-): Promise<{ orderId: string | null; error: string | null }> {
-  const { data, error } = await supabase
-    .from('orders')
-    .insert({ ...order, status: 'pending', tracking_number: null })
-    .select('id')
-    .single();
-  if (error || !data) return { orderId: null, error: error?.message ?? 'Order failed' };
-  const orderId = data.id;
-
-  await supabase.from('order_items').insert(
-    items.map(i => ({ ...i, order_id: orderId }))
-  );
-
-  // Credit partner 30% for any partner design items (product_id >= 10000)
-  for (const item of items) {
-    if (item.product_id >= 10000) {
-      const { data: design } = await supabase
-        .from('partner_designs')
-        .select('id, partner_id, price')
-        .eq('product_id', item.product_id)
-        .single();
-      if (design) {
-        await supabase.from('partner_sales').insert({
-          partner_id:   design.partner_id,
-          design_id:    design.id,
-          order_amount: item.price * item.qty,
-          partner_cut:  Math.round(item.price * item.qty * 0.30 * 100) / 100,
-          paid_out:     false,
-        });
-      }
-    }
-  }
-
-  return { orderId, error: null };
+  id:         string;
+  order_id:   string;
+  product_id: number | null;
+  title:      string;
+  img:        string | null;
+  size:       string;
+  finish:     string;
+  qty:        number;
+  price:      number;
 }
 
 export async function adminGetOrders(): Promise<Order[]> {
+  if (!supabase) return [];
   const { data } = await supabase
     .from('orders')
     .select('*, order_items(*)')
@@ -286,6 +297,14 @@ export async function adminGetOrders(): Promise<Order[]> {
   return (data ?? []).map((o: any) => ({ ...o, items: o.order_items })) as Order[];
 }
 
-export async function adminUpdateOrderStatus(id: string, status: Order['status'], tracking_number?: string) {
-  await supabase.from('orders').update({ status, ...(tracking_number ? { tracking_number } : {}) }).eq('id', id);
+export async function adminUpdateOrderStatus(
+  id: string,
+  status: Order['status'],
+  tracking_number?: string
+) {
+  if (!supabase) return;
+  await supabase.from('orders').update({
+    status,
+    ...(tracking_number ? { tracking_number } : {}),
+  }).eq('id', id);
 }

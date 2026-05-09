@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
 import { useCart } from "@/context/CartContext";
 import PaymentIcons from "@/components/ui/PaymentIcons";
-import { createOrder } from "@/lib/supabase";
+
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const FE = "var(--font-poppins-var,'Poppins',sans-serif)";
@@ -26,6 +26,15 @@ export default function CheckoutPage() {
   const [orderId, setOrderId]     = useState("");
   const [formErr, setFormErr]     = useState("");
 
+  // Load Razorpay checkout script
+  useEffect(() => {
+    const s = document.createElement("script");
+    s.src = "https://checkout.razorpay.com/v1/checkout.js";
+    s.async = true;
+    document.body.appendChild(s);
+    return () => { document.body.removeChild(s); };
+  }, []);
+
   const shipping = subtotal >= FREE_THRESHOLD ? 0 : SHIPPING_COST;
   const total    = subtotal + shipping;
 
@@ -42,43 +51,78 @@ export default function CheckoutPage() {
     if (!ukPostcode.test(form.postcode.trim())) { setFormErr("Enter a valid UK postcode (e.g. SW1A 1AA)."); return false; }
     return true;
   };
-  const inputStyle = (val: string) => ({ width: "100%", padding: "14px 18px", border: `1.5px solid ${val ? "var(--c-text)" : "#ebebeb"}`, background: "var(--c-bg)", fontFamily: FO, fontSize: 13, color: "var(--c-text)", outline: "none", transition: "all 0.2s", boxSizing: "border-box" as const });
-  const labelStyle = { fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: "#999", marginBottom: 8, display: "block" };
+  const inputStyle = (val: string): React.CSSProperties => ({ width: "100%", padding: "14px 18px", border: `1.5px solid ${val ? "var(--c-text)" : "var(--c-border)"}`, background: "var(--c-bg)", fontFamily: FO, fontSize: 13, color: "var(--c-text)", outline: "none", transition: "border-color 0.2s", boxSizing: "border-box", borderRadius: 8 });
+  const labelStyle: React.CSSProperties = { fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 8, display: "block" };
+  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => (e.currentTarget.style.borderColor = "#e8a000");
+  const onBlur  = (e: React.FocusEvent<HTMLInputElement>, val: string) => (e.currentTarget.style.borderColor = val ? "var(--c-text)" : "var(--c-border)");
 
   const handlePlaceOrder = async () => {
-    setPlacing(true);
-    setPlaceErr("");
-    const { orderId: newId, error } = await createOrder(
-      {
-        customer_name:  form.name,
-        customer_email: form.email,
-        customer_phone: form.phone,
-        address:        form.county ? `${form.address}, ${form.county}` : form.address,
-        city:           form.city,
-        postcode:       form.postcode,
-        pay_method:     payMethod,
-        subtotal,
-        shipping,
-        total,
-      },
-      items.map(i => ({
-        product_id: Number(i.id),
-        title:      i.title,
-        img:        i.img,
-        size:       i.size,
-        finish:     i.finish,
-        qty:        i.qty,
-        price:      i.price,
-      }))
-    );
-    setPlacing(false);
-    if (error || !newId) {
+    setPlacing(true); setPlaceErr("");
+
+    const orderData = {
+      customer_name:  form.name,
+      customer_email: form.email,
+      customer_phone: form.phone,
+      address: form.county ? `${form.address}, ${form.county}` : form.address,
+      city:     form.city,
+      postcode: form.postcode,
+      pay_method: payMethod,
+      subtotal, shipping, total,
+    };
+
+    const cartItems = items.map(i => ({
+      id:         i.id,
+      product_id: typeof i.id === "string" && i.id.startsWith("ai-") ? null : Number(i.id),
+      title:      i.title,
+      img:        i.img,
+      size:       i.size,
+      finish:     i.finish,
+      qty:        i.qty,
+      price:      i.price,
+    }));
+
+    try {
+      // Step 1: Create Razorpay order
+      const payRes  = await fetch("/api/payment/create", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ amount: total, currency: "GBP", receipt: `order_${Date.now()}` }) });
+      const payData = await payRes.json();
+
+      if (payData.error) { setPlaceErr(payData.error); setPlacing(false); return; }
+
+      // Step 2: If mock (no Razorpay key yet), proceed directly
+      if (payData.mock) {
+        const verRes  = await fetch("/api/payment/verify", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ razorpay_order_id: payData.orderId, razorpay_payment_id: "mock_payment", razorpay_signature: "mock_sig", orderData, items: cartItems }) });
+        const verData = await verRes.json();
+        if (verData.error || !verData.orderId) { setPlaceErr("Something went wrong. Please try again."); setPlacing(false); return; }
+        setOrderId(String(verData.orderId)); clearCart(); setOrdered(true);
+        setPlacing(false); return;
+      }
+
+      // Step 3: Open Razorpay payment widget
+      const Razorpay = (window as any).Razorpay;
+      if (!Razorpay) { setPlaceErr("Payment system loading. Please try again."); setPlacing(false); return; }
+
+      const rzp = new Razorpay({
+        key:         process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount:      payData.amount,
+        currency:    payData.currency,
+        order_id:    payData.orderId,
+        name:        "CrazeFusion",
+        description: `Order — ${cartItems.length} item${cartItems.length > 1 ? "s" : ""}`,
+        prefill:     { name: form.name, email: form.email, contact: form.phone },
+        theme:       { color: "#e8a000" },
+        handler: async (response: any) => {
+          const verRes  = await fetch("/api/payment/verify", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...response, orderData, items: cartItems }) });
+          const verData = await verRes.json();
+          if (verData.error || !verData.orderId) { setPlaceErr("Payment verified but order failed. Contact support."); setPlacing(false); return; }
+          setOrderId(String(verData.orderId)); clearCart(); setOrdered(true); setPlacing(false);
+        },
+        modal: { ondismiss: () => setPlacing(false) },
+      });
+      rzp.open();
+    } catch (e: any) {
       setPlaceErr("Something went wrong. Please try again.");
-      return;
+      setPlacing(false);
     }
-    setOrderId(newId);
-    clearCart();
-    setOrdered(true);
   };
 
   if (ordered) return (
@@ -150,32 +194,32 @@ export default function CheckoutPage() {
                   {[["name", "Full Name"], ["email", "Email Address"]].map(([k, l]) => (
                     <div key={k}>
                       <label style={labelStyle}>{l}</label>
-                      <input type={k === "email" ? "email" : "text"} placeholder={l} value={form[k as keyof typeof form]} onChange={e => handleField(k, e.target.value)} style={inputStyle(form[k as keyof typeof form])} />
+                      <input type={k === "email" ? "email" : "text"} placeholder={l} value={form[k as keyof typeof form]} onChange={e => handleField(k, e.target.value)} style={inputStyle(form[k as keyof typeof form])} onFocus={onFocus} onBlur={e => onBlur(e, form[k as keyof typeof form])} />
                     </div>
                   ))}
                 </div>
                 <div style={{ marginBottom: 16 }}>
                   <label style={labelStyle}>Phone Number</label>
-                  <input type="tel" placeholder="+44 7XXX XXXXXX" value={form.phone} onChange={e => handleField("phone", e.target.value)} style={inputStyle(form.phone)} />
+                  <input type="tel" placeholder="+44 7XXX XXXXXX" value={form.phone} onChange={e => handleField("phone", e.target.value)} style={inputStyle(form.phone)} onFocus={onFocus} onBlur={e => onBlur(e, form.phone)} />
                 </div>
                 <div style={{ marginBottom: 16 }}>
                   <label style={labelStyle}>Delivery Address</label>
-                  <input type="text" placeholder="House no., Street, Area" value={form.address} onChange={e => handleField("address", e.target.value)} style={inputStyle(form.address)} />
+                  <input type="text" placeholder="House no., Street, Area" value={form.address} onChange={e => handleField("address", e.target.value)} style={inputStyle(form.address)} onFocus={onFocus} onBlur={e => onBlur(e, form.address)} />
                 </div>
                 <div className="checkout-3col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginBottom: 32 }}>
                   {[["city", "Town / City"], ["county", "County"], ["postcode", "Postcode"]].map(([k, l]) => (
                     <div key={k}>
                       <label style={labelStyle}>{l}</label>
-                      <input type="text" placeholder={l} value={form[k as keyof typeof form]} onChange={e => handleField(k, e.target.value)} style={inputStyle(form[k as keyof typeof form])} />
+                      <input type="text" placeholder={l} value={form[k as keyof typeof form]} onChange={e => handleField(k, e.target.value)} style={inputStyle(form[k as keyof typeof form])} onFocus={onFocus} onBlur={e => onBlur(e, form[k as keyof typeof form])} />
                     </div>
                   ))}
                 </div>
                 {formErr && <div style={{ fontFamily: F, fontSize: 12, color: "#dc2626", marginBottom: 12, padding: "10px 14px", background: "rgba(220,38,38,0.06)", border: "1px solid rgba(220,38,38,0.2)" }}>{formErr}</div>}
                 <button onClick={() => { if (validateDelivery()) setStep(1); }}
-                  style={{ padding: "15px 40px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "#333")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "#111")}>
-                  Continue to Payment →
+                  style={{ padding: "15px 40px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50, transition: "background 0.2s, transform 0.15s" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "#333"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "#111"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                  Continue to Payment
                 </button>
               </div>
             )}
@@ -198,9 +242,13 @@ export default function CheckoutPage() {
                   ))}
                 </div>
                 <div style={{ display: "flex", gap: 12 }}>
-                  <button onClick={() => setStep(0)} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid var(--c-border)", cursor: "pointer" }}>← Back</button>
-                  <button onClick={() => setStep(2)} style={{ flex: 1, padding: "15px 24px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer" }}>
-                    Review Order →
+                  <button onClick={() => setStep(0)} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid var(--c-border)", cursor: "pointer", borderRadius: 50, transition: "all 0.15s" }}
+                    onMouseEnter={e => (e.currentTarget.style.borderColor = "var(--c-text)")}
+                    onMouseLeave={e => (e.currentTarget.style.borderColor = "var(--c-border)")}>Back</button>
+                  <button onClick={() => setStep(2)} style={{ flex: 1, padding: "15px 24px", background: "#111", color: "#fff", fontFamily: F, fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50, transition: "background 0.2s" }}
+                    onMouseEnter={e => (e.currentTarget.style.background = "#333")}
+                    onMouseLeave={e => (e.currentTarget.style.background = "#111")}>
+                    Review Order
                   </button>
                 </div>
               </div>
@@ -221,10 +269,12 @@ export default function CheckoutPage() {
                 ))}
                 {placeErr && <div style={{ fontFamily: F, fontSize: 12, color: "#dc2626", marginTop: 16 }}>{placeErr}</div>}
                 <div style={{ display: "flex", gap: 12, marginTop: 28 }}>
-                  <button onClick={() => setStep(1)} disabled={placing} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid var(--c-border)", cursor: "pointer" }}>← Back</button>
+                  <button onClick={() => setStep(1)} disabled={placing} style={{ padding: "15px 24px", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: F, fontSize: 12, fontWeight: 700, border: "1px solid var(--c-border)", cursor: "pointer", borderRadius: 50, transition: "all 0.15s" }}
+                    onMouseEnter={e => (e.currentTarget.style.borderColor = "var(--c-text)")}
+                    onMouseLeave={e => (e.currentTarget.style.borderColor = "var(--c-border)")}>Back</button>
                   <button onClick={handlePlaceOrder} disabled={placing}
-                    style={{ flex: 1, padding: "15px 24px", background: placing ? "#ccc" : "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 400, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: placing ? "not-allowed" : "pointer" }}>
-                    {placing ? "Placing Order…" : `Place Order · £${total.toFixed(2)}`}
+                    style={{ flex: 1, padding: "15px 24px", background: placing ? "#ccc" : "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: placing ? "not-allowed" : "pointer", borderRadius: 50, transition: "all 0.2s", boxShadow: placing ? "none" : "0 0 24px rgba(232,160,0,0.3)" }}>
+                    {placing ? "Placing Order…" : `Place Order — £${total.toFixed(2)}`}
                   </button>
                 </div>
               </div>

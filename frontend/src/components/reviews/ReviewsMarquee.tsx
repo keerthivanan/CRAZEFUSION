@@ -100,9 +100,19 @@ export default function ReviewsMarquee() {
       </div>
 
       <style>{`
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
         @keyframes marquee-rev {
           from { transform: translateX(-50%); }
           to   { transform: translateX(0); }
+        }
+        .marquee-track {
+          animation: marquee 35s linear infinite;
+        }
+        .marquee-track:hover {
+          animation-play-state: paused;
         }
         .marquee-track-rev {
           animation: marquee-rev 40s linear infinite;

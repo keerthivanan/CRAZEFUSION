@@ -21,15 +21,15 @@ function MultiCard({ p }: { p: Product }) {
       <div
         style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", background: "var(--c-bg-soft)", marginBottom: 12 }}
         onMouseEnter={e => {
-          const img = e.currentTarget.querySelector("img") as HTMLImageElement;
-          img.style.transform = "scale(1.06)"; img.src = p.img2;
-          const btn = e.currentTarget.querySelector(".mp-qa") as HTMLElement;
+          const img = e.currentTarget.querySelector("img") as HTMLImageElement | null;
+          if (img) { img.style.transform = "scale(1.06)"; if (p.img2) img.src = p.img2; }
+          const btn = e.currentTarget.querySelector(".mp-qa") as HTMLElement | null;
           if (btn) { btn.style.opacity = "1"; btn.style.transform = "translateY(0)"; }
         }}
         onMouseLeave={e => {
-          const img = e.currentTarget.querySelector("img") as HTMLImageElement;
-          img.style.transform = "scale(1)"; img.src = p.img;
-          const btn = e.currentTarget.querySelector(".mp-qa") as HTMLElement;
+          const img = e.currentTarget.querySelector("img") as HTMLImageElement | null;
+          if (img) { img.style.transform = "scale(1)"; img.src = p.img; }
+          const btn = e.currentTarget.querySelector(".mp-qa") as HTMLElement | null;
           if (btn) { btn.style.opacity = "0"; btn.style.transform = "translateY(10px)"; }
         }}
       >

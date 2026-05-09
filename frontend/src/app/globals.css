@@ -80,13 +80,13 @@ body {
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar       { width: 3px; }
-::-webkit-scrollbar-track { background: #f0f0f0; }
-::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: #111; }
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-thumb { background: #e8a000; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #d09800; }
 
 /* ── Selection ── */
-::selection { background: #111; color: #fff; }
+::selection { background: #e8a000; color: #000; }
 
 /* ── Utilities ── */
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

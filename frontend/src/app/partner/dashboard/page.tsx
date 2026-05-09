@@ -29,7 +29,7 @@ export default function PartnerDashboard() {
   const [loading, setLoading] = useState(true);
   const [tab, setTab]         = useState<"designs" | "upload" | "earnings">("designs");
 
-  const [form, setForm]           = useState({ title: "", category: "Cars", image_url: "", price: 11.99 });
+  const [form, setForm]           = useState({ title: "", category: "Cars", img: "", price: 11.99 });
   const [uploading, setUploading] = useState(false);
   const [imgUploading, setImgUploading] = useState(false);
   const [uploadErr, setUploadErr] = useState("");
@@ -65,7 +65,7 @@ export default function PartnerDashboard() {
       data.append("cloud_name", "dxosc5jfy");
       const res  = await fetch("https://api.cloudinary.com/v1_1/dxosc5jfy/image/upload", { method: "POST", body: data });
       const json = await res.json();
-      if (json.secure_url) setForm(f => ({ ...f, image_url: json.secure_url }));
+      if (json.secure_url) setForm(f => ({ ...f, img: json.secure_url }));
       else setUploadErr("Image upload failed. Please try again.");
     } catch {
       setUploadErr("Network error. Please check your connection and try again.");
@@ -75,14 +75,14 @@ export default function PartnerDashboard() {
   };
 
   const submitForm = async () => {
-    if (!form.title || !form.image_url) { setUploadErr("Please fill title and upload an image."); return; }
+    if (!form.title || !form.img) { setUploadErr("Please fill title and upload an image."); return; }
     if (!partner) return;
     setUploading(true); setUploadErr("");
     const { error } = await submitDesign(partner.id, form);
     setUploading(false);
     if (error) { setUploadErr(error); return; }
     setUploadOk(true);
-    setForm({ title: "", category: "Cars", image_url: "", price: 11.99 });
+    setForm({ title: "", category: "Cars", img: "", price: 11.99 });
     getPartnerDesigns(partner.id).then(setDesigns);
     setTimeout(() => setUploadOk(false), 3000);
   };
@@ -164,7 +164,7 @@ export default function PartnerDashboard() {
                 {designs.map(d => (
                   <div key={d.id} style={{ border: "1px solid var(--c-border)", background: "var(--c-bg-soft)", borderRadius: 4, overflow: "hidden" }}>
                     <div style={{ aspectRatio: "3/4", background: "var(--c-bg)", overflow: "hidden" }}>
-                      <img src={d.image_url} alt={d.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      <img src={d.img} alt={d.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     </div>
                     <div style={{ padding: "16px" }}>
                       <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "var(--c-text)", marginBottom: 4 }}>{d.title}</div>
@@ -203,9 +203,9 @@ export default function PartnerDashboard() {
                     <div style={{ fontFamily: FO, fontSize: 10, color: "#aaa", marginTop: 4 }}>
                       {imgUploading ? "Uploading image…" : "Minimum 2000×2800px. JPG, PNG or WEBP. Max 15MB."}
                     </div>
-                    {form.image_url && (
+                    {form.img && (
                       <div style={{ marginTop: 12, width: 120, aspectRatio: "3/4", overflow: "hidden", borderRadius: 4, border: "1px solid var(--c-border)" }}>
-                        <img src={form.image_url} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <img src={form.img} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
                     )}
                   </div>

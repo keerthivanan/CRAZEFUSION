@@ -82,13 +82,19 @@ export default function CartPage() {
                       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                         <div style={{ display: "flex", alignItems: "center", border: "1px solid var(--c-border)" }}>
                           <button onClick={() => updateQty(item.id, item.size, item.finish, -1)}
-                            style={{ width: 34, height: 34, background: "var(--c-bg)", border: "none", fontSize: 18, cursor: "pointer", color: "var(--c-text)" }}>−</button>
+                            style={{ width: 34, height: 34, background: "var(--c-bg)", border: "none", fontSize: 18, cursor: "pointer", color: "var(--c-text)", transition: "background 0.15s" }}
+                            onMouseEnter={e => (e.currentTarget.style.background = "var(--c-bg-soft)")}
+                            onMouseLeave={e => (e.currentTarget.style.background = "var(--c-bg)")}>−</button>
                           <span style={{ width: 34, textAlign: "center", fontFamily: FE, fontSize: 14, fontWeight: 700 }}>{item.qty}</span>
-                          <button onClick={() => updateQty(item.id, item.size, item.finish, +1)}
-                            style={{ width: 34, height: 34, background: "var(--c-bg)", border: "none", fontSize: 18, cursor: "pointer", color: "var(--c-text)" }}>+</button>
+                          <button onClick={() => updateQty(item.id, item.size, item.finish, +1)} disabled={item.qty >= 10}
+                            style={{ width: 34, height: 34, background: "var(--c-bg)", border: "none", fontSize: 18, cursor: item.qty >= 10 ? "not-allowed" : "pointer", color: item.qty >= 10 ? "#ccc" : "var(--c-text)", transition: "background 0.15s" }}
+                            onMouseEnter={e => { if (item.qty < 10) e.currentTarget.style.background = "var(--c-bg-soft)"; }}
+                            onMouseLeave={e => (e.currentTarget.style.background = "var(--c-bg)")}>+</button>
                         </div>
                         <button onClick={() => removeItem(item.id, item.size, item.finish)}
-                          style={{ background: "none", border: "none", fontFamily: F, fontSize: 11, color: "#dc2626", cursor: "pointer", textDecoration: "underline" }}>
+                          style={{ background: "none", border: "none", fontFamily: F, fontSize: 11, color: "#aaa", cursor: "pointer", letterSpacing: "0.06em", textTransform: "uppercase", transition: "color 0.15s" }}
+                          onMouseEnter={e => (e.currentTarget.style.color = "#dc2626")}
+                          onMouseLeave={e => (e.currentTarget.style.color = "#aaa")}>
                           Remove
                         </button>
                       </div>
@@ -105,10 +111,10 @@ export default function CartPage() {
             )}
 
             <div style={{ marginTop: 24 }}>
-              <Link href="/collection" style={{ fontFamily: F, fontSize: 12, color: "#555", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, letterSpacing: "0.05em" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#111")}
-                onMouseLeave={e => (e.currentTarget.style.color = "#555")}>
-                ← Continue Shopping
+              <Link href="/collection" style={{ fontFamily: F, fontSize: 11, fontWeight: 700, color: "var(--c-text-muted)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6, letterSpacing: "0.1em", textTransform: "uppercase", transition: "color 0.15s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "var(--c-text)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "var(--c-text-muted)")}>
+                Continue Shopping
               </Link>
             </div>
           </div>
@@ -131,7 +137,9 @@ export default function CartPage() {
               <div style={{ marginBottom: 20 }}>
                 <div style={{ display: "flex" }}>
                   <input type="text" placeholder="Promo code" value={promoCode} onChange={e => setPromoCode(e.target.value)}
-                    style={{ flex: 1, padding: "10px 14px", border: "1px solid var(--c-border)", borderRight: "none", fontFamily: F, fontSize: 12, color: "var(--c-text)", outline: "none" }} />
+                    style={{ flex: 1, padding: "10px 14px", border: "1px solid var(--c-border)", borderRight: "none", fontFamily: F, fontSize: 12, color: "var(--c-text)", outline: "none", transition: "border-color 0.2s", borderRadius: "50px 0 0 50px" }}
+                    onFocus={e => (e.currentTarget.style.borderColor = "#e8a000")}
+                    onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")} />
                   <button onClick={() => {
                     const code = promoCode.trim().toUpperCase();
                     if (!code) { setPromoErr("Enter a promo code."); return; }

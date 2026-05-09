@@ -14,7 +14,7 @@ export default function PaymentIcons({ label = true }: { label?: boolean }) {
     <div>
       {label && (
         <div style={{ fontFamily: "var(--font-poppins-var,'Poppins',sans-serif)", fontSize: 9, fontWeight: 600, color: "#aaa", letterSpacing: "0.12em", textTransform: "uppercase", textAlign: "center", marginBottom: 8 }}>
-          🔒 Secure checkout
+          Secure checkout
         </div>
       )}
       <div style={{ display: "flex", gap: 6, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>

@@ -10,14 +10,14 @@ const links = {
     ["Cars",           "/collection?cat=Cars"],
     ["Movies",         "/collection?cat=Movies"],
     ["Coffee Shop",    "/collection?cat=Coffee+Shop"],
-    ["New Arrivals",   "/collection"],
+    ["AI Studio",      "/create"],
   ],
   Info: [
     ["Free UK Delivery",   "/collection"],
     ["Printed in 48hrs",   "/collection"],
     ["30-Day Returns",     "/collection"],
-    ["Bulk Orders",        "/collection"],
-    ["Gift Wrapping",      "/collection"],
+    ["Partner Program",    "/partner"],
+    ["Buy Credits",        "/credits"],
   ],
   Help: [
     ["Returns & Refunds",  "/collection"],
@@ -52,16 +52,15 @@ export default function Footer() {
 
             {/* Contact */}
             <div className="footer-contact" style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
-              <a href="mailto:support@yourstore.co.uk" style={{ fontFamily: F, fontSize: 13, color: "#aaa", textDecoration: "none", transition: "color 0.2s" }}
+              <a href="mailto:miakataria4@gmail.com" style={{ fontFamily: F, fontSize: 13, color: "#aaa", textDecoration: "none", transition: "color 0.2s" }}
                 onMouseEnter={e => (e.currentTarget.style.color = "#e8a000")}
                 onMouseLeave={e => (e.currentTarget.style.color = "#aaa")}>
-                support@yourstore.co.uk
+                miakataria4@gmail.com
               </a>
-              <a href="https://wa.me/447700900000" target="_blank" rel="noreferrer"
-                style={{ fontFamily: F, fontSize: 13, color: "#aaa", textDecoration: "none", transition: "color 0.2s", display: "inline-flex", alignItems: "center", gap: 8 }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#34c759")}
+              <a href="/partner" style={{ fontFamily: F, fontSize: 13, color: "#aaa", textDecoration: "none", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#e8a000")}
                 onMouseLeave={e => (e.currentTarget.style.color = "#aaa")}>
-                WhatsApp Support
+                Partner Program
               </a>
             </div>
 
@@ -131,7 +130,7 @@ export default function Footer() {
             © 2026 All artwork is fan art, not official merchandise.
           </div>
           <div className="footer-bottom-links" style={{ display: "flex", gap: 24 }}>
-            {[["Privacy Policy", "/collection"], ["Terms of Service", "/collection"], ["Refund Policy", "/collection"]].map(([label, href]) => (
+            {[["Privacy Policy", "/collection"], ["Terms of Service", "/collection"], ["Refund Policy", "/collection"], ["AI Studio", "/create"]].map(([label, href]) => (
               <Link key={label} href={href}
                 style={{ fontFamily: F, fontSize: 12, color: "#555", textDecoration: "none", transition: "color 0.2s" }}
                 onMouseEnter={e => (e.currentTarget.style.color = "#aaa")}

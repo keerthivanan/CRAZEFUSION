@@ -9,8 +9,11 @@ const inputStyle: React.CSSProperties = {
   width: "100%", padding: "13px 16px",
   border: "1px solid var(--c-border)", background: "var(--c-bg)",
   fontFamily: FO, fontSize: 14, color: "var(--c-text)",
-  outline: "none", boxSizing: "border-box", borderRadius: 4,
+  outline: "none", boxSizing: "border-box", borderRadius: 8,
+  transition: "border-color 0.2s",
 };
+const iFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => (e.currentTarget.style.borderColor = "#e8a000");
+const iBlur  = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => (e.currentTarget.style.borderColor = "var(--c-border)");
 
 const TERMS = [
   "I own 100% of all artwork I submit. I will not upload copyrighted or trademarked material.",
@@ -71,32 +74,32 @@ export default function PartnerRegister() {
             {/* Name */}
             <div>
               <label style={{ display: "block", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 6 }}>Full Name *</label>
-              <input type="text" placeholder="Your name" value={form.name} onChange={e => set("name", e.target.value)} style={inputStyle} />
+              <input type="text" placeholder="Your name" value={form.name} onChange={e => set("name", e.target.value)} style={inputStyle} onFocus={iFocus} onBlur={iBlur} />
             </div>
 
             {/* Email */}
             <div>
               <label style={{ display: "block", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 6 }}>Email Address *</label>
-              <input type="email" placeholder="your@email.com" value={form.email} onChange={e => set("email", e.target.value)} style={inputStyle} />
+              <input type="email" placeholder="your@email.com" value={form.email} onChange={e => set("email", e.target.value)} style={inputStyle} onFocus={iFocus} onBlur={iBlur} />
             </div>
 
             {/* Password */}
             <div>
               <label style={{ display: "block", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 6 }}>Password *</label>
-              <input type="password" placeholder="Min 8 characters" value={form.password} onChange={e => set("password", e.target.value)} style={inputStyle} />
+              <input type="password" placeholder="Min 8 characters" value={form.password} onChange={e => set("password", e.target.value)} style={inputStyle} onFocus={iFocus} onBlur={iBlur} />
             </div>
 
             {/* Bio */}
             <div>
               <label style={{ display: "block", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 6 }}>Short Bio</label>
               <textarea placeholder="Tell us about yourself and your art style..." value={form.bio} onChange={e => set("bio", e.target.value)}
-                style={{ ...inputStyle, height: 90, resize: "vertical" as const }} />
+                style={{ ...inputStyle, height: 90, resize: "vertical" as const }} onFocus={iFocus} onBlur={iBlur} />
             </div>
 
             {/* Payout email */}
             <div>
               <label style={{ display: "block", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 6 }}>Payout Email (PayPal/Bank) *</label>
-              <input type="email" placeholder="Where to send your earnings" value={form.payout_email} onChange={e => set("payout_email", e.target.value)} style={inputStyle} />
+              <input type="email" placeholder="Where to send your earnings" value={form.payout_email} onChange={e => set("payout_email", e.target.value)} style={inputStyle} onFocus={iFocus} onBlur={iBlur} />
               <div style={{ fontFamily: FO, fontSize: 10, color: "#aaa", marginTop: 4 }}>We send your 30% earnings here monthly</div>
             </div>
 

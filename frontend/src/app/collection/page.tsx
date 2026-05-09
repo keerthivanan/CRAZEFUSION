@@ -284,7 +284,7 @@ export default function CollectionPage() {
                         src={`https://img.logo.dev/${brand.domain}?token=${LOGO_KEY}&size=80&format=png`}
                         alt={brand.name}
                         style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                        onError={e => { (e.currentTarget as HTMLImageElement).closest("button")!.style.display = "none"; }}
+                        onError={e => { const btn = (e.currentTarget as HTMLImageElement).closest("button"); if (btn) (btn as HTMLElement).style.display = "none"; }}
                       />
                     </div>
                     <span style={{
@@ -453,7 +453,7 @@ export default function CollectionPage() {
             </div>
           ) : (
             <div style={{ textAlign: "center", padding: "80px 20px" }}>
-              <div style={{ fontFamily: FO, fontSize: 40, marginBottom: 16 }}>🔍</div>
+              <div style={{ width: 48, height: 48, border: "1px solid var(--c-border)", borderRadius: 12, margin: "0 auto 16px" }} />
               <h2 style={{ fontFamily: FO, fontSize: 24, fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase" }}>No posters found</h2>
               <p style={{ fontFamily: FO, fontSize: 14, color: "#aaa", marginTop: 8 }}>Try a different filter or browse all.</p>
               <button onClick={() => { setActiveBrand(null); setPriceFilter([]); }}

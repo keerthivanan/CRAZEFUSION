@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Partner, PartnerDesign, Order, adminGetPartners, adminGetDesigns, adminUpdatePartner, adminUpdateDesign, adminRemoveInactivePartners, adminGetOrders, adminUpdateOrderStatus } from "@/lib/supabase";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? "crazefusion2026";
+// Password verified server-side via /api/admin/auth — never in client bundle
 
 const STATUS_COLOUR: Record<string, string> = {
   pending:  "#e8a000",
@@ -25,8 +25,9 @@ export default function AdminPanel() {
   const [loading,  setLoading]    = useState(false);
   const [trackingInputs, setTrackingInputs] = useState<Record<string, string>>({});
 
-  const login = () => {
-    if (pw === ADMIN_PASSWORD) { setAuthed(true); }
+  const login = async () => {
+    const res = await fetch("/api/admin/auth", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw }) });
+    if (res.ok) { setAuthed(true); setPwErr(""); }
     else setPwErr("Wrong password.");
   };
 
@@ -43,9 +44,9 @@ export default function AdminPanel() {
     setPartners(prev => prev.map(p => p.id === id ? { ...p, status } : p));
   };
 
-  const updateDesign = async (id: string, status: PartnerDesign["status"]) => {
-    await adminUpdateDesign(id, status);
-    setDesigns(prev => prev.map(d => d.id === id ? { ...d, status } : d));
+  const updateDesign = async (id: number | string, status: PartnerDesign["status"]) => {
+    await adminUpdateDesign(String(id), status);
+    setDesigns(prev => prev.map(d => String(d.id) === String(id) ? { ...d, status } : d));
   };
 
   const removeInactive = async () => {
@@ -97,8 +98,8 @@ export default function AdminPanel() {
         <div style={{ maxWidth: 1200, margin: "0 auto", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ fontFamily: FO, fontSize: 14, fontWeight: 700, color: "#fff", letterSpacing: "0.1em", textTransform: "uppercase" }}>Admin Panel</div>
           <div style={{ display: "flex", gap: 24 }}>
-            {pendingPartners > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#e8a000" }}>⚠ {pendingPartners} partner{pendingPartners > 1 ? "s" : ""} pending</span>}
-            {pendingDesigns  > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#e8a000" }}>⚠ {pendingDesigns} design{pendingDesigns > 1 ? "s" : ""} pending</span>}
+            {pendingPartners > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#e8a000" }}>{pendingPartners} partner{pendingPartners > 1 ? "s" : ""} pending</span>}
+            {pendingDesigns  > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#e8a000" }}>{pendingDesigns} design{pendingDesigns > 1 ? "s" : ""} pending</span>}
           </div>
         </div>
       </div>
@@ -210,10 +211,10 @@ export default function AdminPanel() {
                   <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>£{o.total.toFixed(2)}</div>
                   <div>{statusBadge(o.status)}</div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                    {o.status === "pending"  && btn("Mark Printing", () => updateOrderStatus(o.id, "printing"), "#e8a000")}
-                    {o.status === "printing" && btn("Mark Shipped",  () => updateOrderStatus(o.id, "shipped", trackingInputs[o.id] || undefined), "#2563eb")}
+                    {(o.status === "pending" || o.status === "confirmed") && btn("Mark Printing", () => updateOrderStatus(o.id, "in_production"), "#e8a000")}
+                    {o.status === "in_production" && btn("Mark Shipped", () => updateOrderStatus(o.id, "shipped", trackingInputs[o.id] || undefined), "#2563eb")}
                     {o.status === "shipped"  && btn("Mark Delivered", () => updateOrderStatus(o.id, "delivered"), "#16a34a")}
-                    {(o.status === "printing" || o.status === "pending") && (
+                    {(o.status === "in_production" || o.status === "pending" || o.status === "confirmed") && (
                       <input
                         placeholder="Tracking number"
                         value={trackingInputs[o.id] ?? ""}
@@ -235,7 +236,7 @@ export default function AdminPanel() {
             {designs.map(d => (
               <div key={d.id} style={{ border: "1px solid var(--c-border)", background: "var(--c-bg-soft)", borderRadius: 4, overflow: "hidden" }}>
                 <div style={{ aspectRatio: "3/4", background: "var(--c-bg)", overflow: "hidden" }}>
-                  <img src={d.image_url} alt={d.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <img src={d.img} alt={d.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </div>
                 <div style={{ padding: "16px" }}>
                   <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "var(--c-text)", marginBottom: 4 }}>{d.title}</div>
