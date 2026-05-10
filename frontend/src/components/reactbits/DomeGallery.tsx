@@ -185,21 +185,23 @@ export default function DomeGallery({
 
   useEffect(() => { applyTransform(rotationRef.current.x, rotationRef.current.y); }, []);
 
-  // Auto-rotation: slowly spins the dome so all images cycle through
+  // Auto-rotation — smooth slow spin, fully pauses during drag/inertia/open
   const autoRotateRAF = useRef<number | null>(null);
+  const lastAutoTime = useRef<number>(0);
   useEffect(() => {
     if (!autoRotate) return;
-    let lastTime = 0;
     const tick = (time: number) => {
-      // Only rotate when user isn't dragging, no inertia, and no image is open
-      if (!draggingRef.current && !inertiaRAF.current && !focusedElRef.current) {
-        const delta = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 0;
-        if (delta > 0) {
+      const active = draggingRef.current || !!inertiaRAF.current || !!focusedElRef.current;
+      if (!active) {
+        if (lastAutoTime.current) {
+          const delta = Math.min((time - lastAutoTime.current) / 1000, 0.032); // cap at ~30fps delta
           rotationRef.current.y = wrapAngleSigned(rotationRef.current.y + autoRotateSpeed * delta);
           applyTransform(rotationRef.current.x, rotationRef.current.y);
         }
+        lastAutoTime.current = time;
+      } else {
+        lastAutoTime.current = 0; // reset so there's no jump when resuming
       }
-      lastTime = time;
       autoRotateRAF.current = requestAnimationFrame(tick);
     };
     autoRotateRAF.current = requestAnimationFrame(tick);
@@ -384,7 +386,7 @@ export default function DomeGallery({
       <div
         ref={rootRef}
         className="sphere-root relative w-full h-full"
-        style={{ ['--segments-x' as any]: String(segments), ['--segments-y' as any]: String(segments), ['--overlay-blur-color' as any]: overlayBlurColor, ['--tile-radius' as any]: imageBorderRadius, ['--enlarge-radius' as any]: openedImageBorderRadius, ['--image-filter' as any]: grayscale ? 'grayscale(1)' : 'none' } as React.CSSProperties}
+        style={{ ['--segments-x' as any]: String(segments), ['--segments-y' as any]: String(segments), ['--overlay-blur-color' as any]: overlayBlurColor, ['--tile-radius' as any]: imageBorderRadius, ['--enlarge-radius' as any]: openedImageBorderRadius, ['--image-filter' as any]: grayscale ? 'grayscale(1)' : 'none', willChange: 'transform', contain: 'layout style' } as React.CSSProperties}
       >
         <div ref={mainRef} className="absolute inset-0 grid place-items-center overflow-hidden select-none bg-transparent" style={{ touchAction: 'none', WebkitUserSelect: 'none' }}>
           <div className="stage">
@@ -412,7 +414,7 @@ export default function DomeGallery({
                     onClick={e => { if (draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
                     onPointerUp={e => { if ((e.nativeEvent as PointerEvent).pointerType!=='touch'||draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
                     style={{ position:'absolute', inset:'10px', borderRadius:imageBorderRadius, overflow:'hidden', cursor:'pointer', backfaceVisibility:'hidden' as any, transition:'transform 300ms', pointerEvents:'auto', transform:'translateZ(0)' }}>
-                    <img src={it.src} draggable={false} alt={it.alt} style={{ width:'100%', height:'100%', objectFit:'cover', pointerEvents:'none', backfaceVisibility:'hidden' as any, filter: grayscale ? 'grayscale(1)' : 'none' }} />
+                    <img src={it.src} draggable={false} alt={it.alt} loading="lazy" decoding="async" style={{ width:'100%', height:'100%', objectFit:'cover', pointerEvents:'none', backfaceVisibility:'hidden' as any, filter: grayscale ? 'grayscale(1)' : 'none' }} />
                   </div>
                 </div>
                 );
