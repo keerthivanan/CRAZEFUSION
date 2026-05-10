@@ -207,10 +207,8 @@ export default function Navbar() {
                 );
               })}
 
-              {/* Direct AI Studio link */}
-              <Link href="/create" style={{ padding: "7px 14px", fontFamily: FH, fontSize: 13, fontWeight: 600, letterSpacing: "0.01em", textDecoration: "none", color: "#7c3aed", background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.2)", borderRadius: 10, whiteSpace: "nowrap", transition: "all 0.15s" }}
-                onMouseEnter={e => (e.currentTarget.style.background = "rgba(124,58,237,0.15)")}
-                onMouseLeave={e => (e.currentTarget.style.background = "rgba(124,58,237,0.08)")}>
+              {/* Direct AI Studio link — glowing pill */}
+              <Link href="/create" className="ai-studio-btn" style={{ padding: "7px 16px", fontFamily: FH, fontSize: 13, fontWeight: 700, letterSpacing: "0.02em", textDecoration: "none", color: "#c084fc", background: "rgba(124,58,237,0.1)", border: "1px solid rgba(192,132,252,0.4)", borderRadius: 10, whiteSpace: "nowrap", transition: "all 0.2s", display: "inline-flex", alignItems: "center", gap: 5 }}>
                 ✦ AI Studio
               </Link>
             </div>
@@ -321,6 +319,12 @@ export default function Navbar() {
           from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
           to   { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
+        @keyframes aiGlow {
+          0%, 100% { box-shadow: 0 0 8px rgba(192,132,252,0.5), 0 0 20px rgba(192,132,252,0.25); border-color: rgba(192,132,252,0.5); }
+          50%       { box-shadow: 0 0 16px rgba(244,114,182,0.6), 0 0 36px rgba(192,132,252,0.35), 0 0 48px rgba(56,189,248,0.15); border-color: rgba(244,114,182,0.6); }
+        }
+        .ai-studio-btn { animation: aiGlow 2.4s ease-in-out infinite; }
+        .ai-studio-btn:hover { background: rgba(124,58,237,0.2) !important; transform: translateY(-1px); }
         @media (max-width: 860px) {
           .nav-mega-links { display: none !important; }
           .nav-hamburger  { display: flex !important; }
