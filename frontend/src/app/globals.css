@@ -166,8 +166,8 @@ body {
    ══════════════════════════════════════════ */
 @media (max-width: 768px) {
 
-  /* ── Page top padding: mobile navbar is at top:42, height:60 → clear at 106px ── */
-  main { padding-top: 106px !important; }
+  /* ── Page top padding: mobile navbar is at top:12, height:60 → clear at 76px ── */
+  main > .hero-section-wrapper { padding-top: 76px !important; }
 
   /* ── Stats bar: 2×2 grid ── */
   .stats-grid {

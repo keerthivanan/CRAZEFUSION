@@ -467,7 +467,7 @@ export default function DomeGallery({
         className="sphere-root relative w-full h-full"
         style={{ ['--segments-x' as any]: segments, ['--segments-y' as any]: segments, ['--overlay-blur-color' as any]: overlayBlurColor, ['--tile-radius' as any]: imageBorderRadius, ['--enlarge-radius' as any]: openedImageBorderRadius, ['--image-filter' as any]: grayscale ? 'grayscale(1)' : 'none' } as React.CSSProperties}
       >
-        <main ref={mainRef} className="absolute inset-0 grid place-items-center overflow-hidden select-none bg-transparent" style={{ touchAction: 'none', WebkitUserSelect: 'none' }}>
+        <div ref={mainRef} className="absolute inset-0 grid place-items-center overflow-hidden select-none bg-transparent" style={{ touchAction: 'none', WebkitUserSelect: 'none' }}>
           <div className="stage">
             <div ref={sphereRef} className="sphere">
               {items.map((it, i) => (
@@ -491,7 +491,7 @@ export default function DomeGallery({
             <div ref={scrimRef} className="scrim absolute inset-0 z-10 pointer-events-none opacity-0 transition-opacity duration-500" style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(3px)' }} />
             <div ref={frameRef} className="viewer-frame h-full aspect-square flex" style={{ borderRadius: `var(--enlarge-radius,${openedImageBorderRadius})` }} />
           </div>
-        </main>
+        </div>
       </div>
     </>
   );

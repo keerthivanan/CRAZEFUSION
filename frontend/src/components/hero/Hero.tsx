@@ -4,17 +4,34 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import ClickSpark from "@/components/reactbits/ClickSpark";
 
-const Grainient = dynamic(() => import("@/components/reactbits/Grainient"), { ssr: false });
+const DomeGallery = dynamic(() => import("@/components/reactbits/DomeGallery"), { ssr: false });
 
 const FH = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 const FB = "var(--font-poppins-var,'Poppins',sans-serif)";
 
-// Your real Cloudinary poster images
-const P1 = "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973815/crazefusion/mockups/movies/3174_Avengers_Endgame_Poster.jpg";
-const P2 = "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973902/crazefusion/mockups/movies/3340_John_Wick_Chapter_3_Poster.jpg";
-const P3 = "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973780/crazefusion/mockups/car-posters/3104_Porsche_911_GT2_RS_Poster.jpg";
-const P4 = "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973745/crazefusion/mockups/car-posters/3014_Bugatti_La_Voiture_Noire_Poster.jpg";
-const P5 = "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777974050/crazefusion/mockups/coffee-shop-posters/2899_Lose_Yourself_in_Coffee_Books_Poster.jpg";
+// Raw Cloudinary URLs — no transformation prefix so they load correctly
+const IMAGES = [
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973815/crazefusion/mockups/movies/3174_Avengers_Endgame_Poster.jpg",            alt: "Avengers Endgame" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973902/crazefusion/mockups/movies/3340_John_Wick_Chapter_3_Poster.jpg",          alt: "John Wick" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973780/crazefusion/mockups/car-posters/3104_Porsche_911_GT2_RS_Poster.jpg",       alt: "Porsche 911 GT2 RS" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973745/crazefusion/mockups/car-posters/3014_Bugatti_La_Voiture_Noire_Poster.jpg", alt: "Bugatti La Voiture Noire" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/mockups/coffee-shop-posters/2899_Lose_Yourself_in_Coffee_Books_Poster.jpg", alt: "Coffee Books" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/mockups/movies/1107_Joker_Why_so_Serious_Poster.jpg",         alt: "Joker" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973775/crazefusion/mockups/car-posters/3087_McLaren_F1_Supercar_Poster.jpg",      alt: "McLaren F1" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973767/crazefusion/mockups/car-posters/3067_Lamborghini_Countach_Coastline_Poster.jpg", alt: "Lamborghini Countach" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974050/crazefusion/mockups/coffee-shop-posters/2904_Cold_Brew_Coffee_With_Ice_Poster.jpg", alt: "Cold Brew" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973967/crazefusion/mockups/movies/3460_The_Gentlemen_Cast_Poster.jpg",            alt: "The Gentlemen" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973747/crazefusion/mockups/car-posters/3042_Ferrari_288_GTO_Poster.jpg",          alt: "Ferrari 288 GTO" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973763/crazefusion/mockups/car-posters/3057_Hennessey_Venom_GT_Car_Poster.jpg",   alt: "Hennessey Venom GT" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973859/crazefusion/mockups/movies/3259_Fantastic_Four_4K_UHD_Poster.jpg",         alt: "Fantastic Four" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974061/crazefusion/mockups/coffee-shop-posters/3941_Latte_Macchiato_Drink_Poster.jpg", alt: "Latte Macchiato" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973800/crazefusion/mockups/movies/3135_22_Jump_Street_Poster.jpg",                alt: "22 Jump Street" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973760/crazefusion/mockups/car-posters/3048_Ferrari_F40_Coastal_Drive_Poster.jpg", alt: "Ferrari F40" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973765/crazefusion/mockups/car-posters/3062_Koenigsegg_Jesko_Roadster_Poster.jpg", alt: "Koenigsegg Jesko" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974073/crazefusion/mockups/coffee-shop-posters/4293_Greek_Coffee_Cup_Poster.jpg",  alt: "Greek Coffee" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973807/crazefusion/mockups/movies/3151_American_Hustle_Poster.jpg",               alt: "American Hustle" },
+  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973743/crazefusion/mockups/car-posters/2973_Aston_Martin_One-77_Roadster_Poster.jpg", alt: "Aston Martin One-77" },
+];
 
 const STATS = [
   { val: "10K+", label: "Customers" },
@@ -30,256 +47,135 @@ export default function Hero() {
   return (
     <section style={{
       position: "relative",
-      overflow: "hidden",
-      background: "#b8a5c8",
-      minHeight: "100vh",
-      display: "flex",
-      flexDirection: "column",
+      width: "100%",
+      height: "100vh",
+      background: "#080808",
+      // NO overflow:hidden — dome sphere needs to render freely
     }}>
 
-      {/* Grainient BG */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-        <Grainient
-          color1="#94a3b8" color2="#d77abf" color3="#e19de1"
-          timeSpeed={2.45} colorBalance={0} warpStrength={1}
-          warpFrequency={5} warpSpeed={2} warpAmplitude={50}
-          blendAngle={0} blendSoftness={0.05} rotationAmount={510}
-          noiseScale={0.75} grainAmount={0} grainScale={1.5}
-          grainAnimated={false} contrast={1.5} gamma={1} saturation={1}
-          centerX={0} centerY={0} zoom={0.9}
+      {/* DomeGallery fills full section */}
+      <div style={{ position: "absolute", inset: 0 }}>
+        <DomeGallery
+          images={IMAGES}
+          fit={0.8}
+          minRadius={650}
+          maxVerticalRotationDeg={16}
+          segments={34}
+          dragDampening={1.8}
+          grayscale={false}
+          overlayBlurColor="#080808"
+          imageBorderRadius="20px"
+          openedImageBorderRadius="16px"
+          openedImageWidth="320px"
+          openedImageHeight="460px"
         />
       </div>
 
-      {/* Navbar clearance */}
-      <div style={{ height: 84, flexShrink: 0 }} />
-
-      {/* Content */}
+      {/* Bottom overlay — headline + CTAs + stats */}
       <div style={{
-        flex: 1,
+        position: "absolute",
+        bottom: 0, left: 0, right: 0,
+        zIndex: 10,
+        padding: "0 64px 52px",
         display: "flex",
-        alignItems: "center",
-        maxWidth: 1400,
-        margin: "0 auto",
-        width: "100%",
-        padding: "24px 64px 64px",
-        position: "relative",
-        zIndex: 1,
-      }}>
-        <div style={{
-          width: "100%",
-          display: "grid",
-          gridTemplateColumns: "50% 50%",
-          alignItems: "center",
-        }} className="hero-grid">
+        alignItems: "flex-end",
+        justifyContent: "space-between",
+        background: "linear-gradient(to top, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.6) 45%, transparent 100%)",
+        opacity: mounted ? 1 : 0,
+        transition: "opacity 0.8s 0.4s",
+        pointerEvents: mounted ? "auto" : "none",
+      }} className="hero-bottom">
 
-          {/* ── LEFT ── */}
+        {/* Left */}
+        <div>
           <div style={{
-            paddingRight: 52,
-            opacity: mounted ? 1 : 0,
-            transform: mounted ? "translateY(0)" : "translateY(20px)",
-            transition: "opacity 0.6s, transform 0.6s",
+            display: "inline-flex", alignItems: "center", gap: 7,
+            background: "rgba(192,132,252,0.1)", border: "1px solid rgba(192,132,252,0.25)",
+            borderRadius: 50, padding: "5px 14px", marginBottom: 20,
           }}>
+            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#c084fc", display: "inline-block" }} />
+            <span style={{ fontFamily: FB, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.7)" }}>
+              Premium Wall Art · UK Delivery
+            </span>
+          </div>
 
-            <div style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              background: "rgba(26,10,46,0.1)", border: "1px solid rgba(26,10,46,0.18)",
-              borderRadius: 50, padding: "6px 16px", marginBottom: 28,
-            }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1a0a2e", display: "inline-block" }} />
-              <span style={{ fontFamily: FB, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#1a0a2e" }}>
-                Premium Wall Art · UK Delivery
-              </span>
-            </div>
+          <h1 style={{
+            fontFamily: FH,
+            fontSize: "clamp(44px, 5.5vw, 88px)",
+            fontWeight: 900,
+            lineHeight: 0.9,
+            letterSpacing: "-0.04em",
+            textTransform: "uppercase",
+            color: "#fff",
+            margin: "0 0 28px",
+          }}>
+            Your Walls<br />
+            <span style={{ color: "transparent", WebkitTextStroke: "2px rgba(255,255,255,0.9)" }}>Deserve</span><br />
+            The Best
+          </h1>
 
-            <h1 style={{
-              fontFamily: FH,
-              fontSize: "clamp(50px, 6vw, 96px)",
-              fontWeight: 900,
-              lineHeight: 0.88,
-              letterSpacing: "-0.04em",
-              textTransform: "uppercase",
-              color: "#1a0a2e",
-              margin: "0 0 28px",
-            }}>
-              Your<br />
-              Walls<br />
-              <span style={{ color: "#fff", WebkitTextStroke: "2.5px #1a0a2e" }}>Deserve</span><br />
-              The Best
-            </h1>
-
-            <p style={{
-              fontFamily: FB, fontSize: 14, color: "#2d1b4e",
-              lineHeight: 1.85, maxWidth: 400, margin: "0 0 36px", fontWeight: 500,
-            }}>
-              Premium quality posters for Cars, Movies, Coffee Shop &amp; more.
-              Starting from £9.99 — free UK delivery on orders over £30.
-            </p>
-
-            <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 52 }}>
-              <ClickSpark sparkColor="#1a0a2e" sparkCount={10} sparkRadius={24}>
-                <Link href="/collection" style={{
-                  display: "inline-flex", alignItems: "center", gap: 8,
-                  padding: "16px 36px", background: "#1a0a2e", color: "#fff",
-                  fontFamily: FB, fontSize: 12, fontWeight: 700,
-                  letterSpacing: "0.12em", textTransform: "uppercase",
-                  textDecoration: "none", borderRadius: 50,
-                  boxShadow: "0 8px 32px rgba(26,10,46,0.3)",
-                  transition: "transform 0.25s, box-shadow 0.25s",
-                }}
-                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(26,10,46,0.42)"; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(26,10,46,0.3)"; }}>
-                  Shop Collection →
-                </Link>
-              </ClickSpark>
-
-              <Link href="/create" style={{
-                display: "inline-flex", alignItems: "center", gap: 6,
-                fontFamily: FB, fontSize: 12, fontWeight: 700,
-                letterSpacing: "0.1em", textTransform: "uppercase",
-                color: "#1a0a2e", textDecoration: "none",
-                padding: "15px 28px",
-                border: "2px solid rgba(26,10,46,0.3)",
-                borderRadius: 50,
-                background: "rgba(255,255,255,0.2)",
-                backdropFilter: "blur(8px)",
-                transition: "all 0.25s",
+          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+            <ClickSpark sparkColor="#c084fc" sparkCount={10} sparkRadius={24}>
+              <Link href="/collection" style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                padding: "15px 34px",
+                background: "#fff", color: "#080808",
+                fontFamily: FB, fontSize: 12, fontWeight: 800,
+                letterSpacing: "0.12em", textTransform: "uppercase",
+                textDecoration: "none", borderRadius: 50,
+                boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+                transition: "transform 0.2s, box-shadow 0.2s",
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = "rgba(26,10,46,0.1)"; e.currentTarget.style.borderColor = "rgba(26,10,46,0.5)"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.2)"; e.currentTarget.style.borderColor = "rgba(26,10,46,0.3)"; }}>
-                ✦ AI Studio
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(0,0,0,0.6)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.5)"; }}>
+                Shop Collection →
               </Link>
-            </div>
+            </ClickSpark>
 
-            <div style={{
-              display: "grid", gridTemplateColumns: "repeat(4,1fr)",
-              borderTop: "1.5px solid rgba(26,10,46,0.18)", paddingTop: 28,
-            }} className="stats-grid">
-              {STATS.map((s, i) => (
-                <div key={i} style={{
-                  borderRight: i < STATS.length - 1 ? "1.5px solid rgba(26,10,46,0.18)" : "none",
-                  paddingRight: 16, paddingLeft: i > 0 ? 16 : 0,
-                }}>
-                  <div style={{ fontFamily: FH, fontSize: 26, fontWeight: 900, color: "#1a0a2e", letterSpacing: "-0.03em", lineHeight: 1 }}>{s.val}</div>
-                  <div style={{ fontFamily: FB, fontSize: 10, color: "#4a2a6e", marginTop: 6, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600 }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
+            <Link href="/create" style={{
+              display: "inline-flex", alignItems: "center", gap: 6,
+              fontFamily: FB, fontSize: 12, fontWeight: 700,
+              letterSpacing: "0.1em", textTransform: "uppercase",
+              color: "#fff", textDecoration: "none",
+              padding: "14px 26px",
+              border: "1.5px solid rgba(255,255,255,0.25)",
+              borderRadius: 50,
+              background: "rgba(255,255,255,0.07)",
+              backdropFilter: "blur(8px)",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.5)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.07)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)"; }}>
+              ✦ AI Studio
+            </Link>
           </div>
+        </div>
 
-          {/* ── RIGHT: poster collage ── */}
-          <div style={{
-            opacity: mounted ? 1 : 0,
-            transform: mounted ? "translateY(0)" : "translateY(20px)",
-            transition: "opacity 0.7s 0.2s, transform 0.7s 0.2s",
-            height: "min(68vh, 600px)",
-            position: "relative",
-          }} className="hero-images">
-
-            {/* Poster 1 — large, back-left, tilted */}
-            <div style={{
-              position: "absolute",
-              left: "2%", top: "0%",
-              width: "44%", height: "90%",
-              borderRadius: 14,
-              overflow: "hidden",
-              boxShadow: "0 32px 72px rgba(26,10,46,0.4)",
-              transform: "rotate(-4deg)",
-              transformOrigin: "bottom center",
-              transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.transform = "rotate(-4deg) translateY(-16px) scale(1.02)")}
-            onMouseLeave={e => (e.currentTarget.style.transform = "rotate(-4deg)")}>
-              <img src={P1} alt="Avengers" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              <span style={{ position: "absolute", top: 12, left: 12, background: "rgba(26,10,46,0.85)", backdropFilter: "blur(6px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", padding: "4px 11px", borderRadius: 50 }}>Movies</span>
+        {/* Right — stats */}
+        <div style={{ display: "flex", gap: 36, alignItems: "flex-end", paddingBottom: 4 }} className="hero-stats">
+          {STATS.map(s => (
+            <div key={s.label} style={{ textAlign: "center" }}>
+              <div style={{ fontFamily: FH, fontSize: 26, fontWeight: 900, color: "#fff", letterSpacing: "-0.03em", lineHeight: 1 }}>{s.val}</div>
+              <div style={{ fontFamily: FB, fontSize: 10, color: "rgba(255,255,255,0.35)", marginTop: 5, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600 }}>{s.label}</div>
             </div>
-
-            {/* Poster 2 — center, tallest, slightly forward */}
-            <div style={{
-              position: "absolute",
-              left: "28%", top: "2%",
-              width: "38%", height: "96%",
-              borderRadius: 14,
-              overflow: "hidden",
-              boxShadow: "0 40px 80px rgba(26,10,46,0.45)",
-              transform: "translateY(-8px)",
-              transformOrigin: "bottom center",
-              transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
-              zIndex: 2,
-            }}
-            onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-22px) scale(1.02)")}
-            onMouseLeave={e => (e.currentTarget.style.transform = "translateY(-8px)")}>
-              <img src={P2} alt="John Wick" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              <span style={{ position: "absolute", top: 12, left: 12, background: "rgba(26,10,46,0.85)", backdropFilter: "blur(6px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", padding: "4px 11px", borderRadius: 50 }}>Movies</span>
-            </div>
-
-            {/* Poster 3 — right, tilted */}
-            <div style={{
-              position: "absolute",
-              right: "0%", top: "8%",
-              width: "35%", height: "80%",
-              borderRadius: 12,
-              overflow: "hidden",
-              boxShadow: "0 24px 56px rgba(26,10,46,0.35)",
-              transform: "rotate(4deg) translateY(4px)",
-              transformOrigin: "bottom center",
-              transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.transform = "rotate(4deg) translateY(-10px) scale(1.02)")}
-            onMouseLeave={e => (e.currentTarget.style.transform = "rotate(4deg) translateY(4px)")}>
-              <img src={P3} alt="Porsche" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              <span style={{ position: "absolute", top: 11, left: 11, background: "rgba(26,10,46,0.85)", backdropFilter: "blur(6px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", padding: "4px 10px", borderRadius: 50 }}>Cars</span>
-            </div>
-
-            {/* Floating mini card — bottom left */}
-            <div style={{
-              position: "absolute",
-              left: "0%", bottom: "4%",
-              width: "26%", height: "30%",
-              borderRadius: 12,
-              overflow: "hidden",
-              boxShadow: "0 16px 40px rgba(26,10,46,0.3)",
-              transform: "rotate(-2deg)",
-              zIndex: 3,
-              transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.transform = "rotate(-2deg) translateY(-8px) scale(1.04)")}
-            onMouseLeave={e => (e.currentTarget.style.transform = "rotate(-2deg)")}>
-              <img src={P5} alt="Coffee" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-            </div>
-
-            {/* Floating mini card — bottom right */}
-            <div style={{
-              position: "absolute",
-              right: "2%", bottom: "2%",
-              width: "24%", height: "28%",
-              borderRadius: 12,
-              overflow: "hidden",
-              boxShadow: "0 16px 40px rgba(26,10,46,0.3)",
-              transform: "rotate(2deg)",
-              zIndex: 3,
-              transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.transform = "rotate(2deg) translateY(-8px) scale(1.04)")}
-            onMouseLeave={e => (e.currentTarget.style.transform = "rotate(2deg)")}>
-              <img src={P4} alt="Bugatti" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-            </div>
-
-          </div>
+          ))}
         </div>
       </div>
 
+      {/* Drag hint */}
+      <div style={{
+        position: "absolute", top: 90, left: "50%", transform: "translateX(-50%)",
+        zIndex: 10, textAlign: "center",
+        opacity: mounted ? 0.45 : 0, transition: "opacity 1s 1.2s",
+        pointerEvents: "none",
+      }}>
+        <div style={{ fontFamily: FB, fontSize: 10, color: "#fff", letterSpacing: "0.22em", textTransform: "uppercase" }}>Drag to Explore</div>
+      </div>
+
       <style>{`
-        @media (max-width: 960px) {
-          .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-          .hero-grid > div:first-child { padding-right: 0 !important; }
-          .hero-images { height: 300px !important; }
-          .stats-grid { grid-template-columns: repeat(2,1fr) !important; row-gap: 20px !important; }
-          .stats-grid > div:nth-child(2) { border-right: none !important; }
-          .stats-grid > div:nth-child(3) { padding-left: 0 !important; }
-        }
-        @media (max-width: 540px) {
-          .hero-images { height: 220px !important; }
-          .hero-grid { padding: 20px 18px 40px !important; }
+        @media (max-width: 768px) {
+          .hero-bottom { padding: 0 20px 36px !important; flex-direction: column !important; align-items: flex-start !important; gap: 20px !important; }
+          .hero-stats  { gap: 18px !important; }
         }
       `}</style>
     </section>
