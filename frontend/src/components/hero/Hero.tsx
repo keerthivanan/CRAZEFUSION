@@ -25,7 +25,7 @@ const POSTERS = [
 ];
 
 const STATS = [
-  { val: "10K+", label: "Customers" },
+  { val: "10K+", label: "Happy Customers" },
   { val: "609+", label: "Designs" },
   { val: "48hr", label: "Delivery" },
   { val: "4.8★", label: "Rating" },
@@ -36,9 +36,16 @@ export default function Hero() {
   useEffect(() => { setMounted(true); }, []);
 
   return (
-    <section style={{ position: "relative", overflow: "hidden", background: "#94a3b8", paddingTop: 108 }}>
+    <section style={{
+      position: "relative",
+      overflow: "hidden",
+      background: "#b8a5c8",
+      minHeight: "100vh",
+      display: "flex",
+      flexDirection: "column",
+    }}>
 
-      {/* Grainient background */}
+      {/* Grainient background — fills full section */}
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <Grainient
           color1="#94a3b8"
@@ -66,146 +73,222 @@ export default function Hero() {
         />
       </div>
 
-      {/* Main grid */}
+      {/* Navbar clearance: top(12) + height(60) = 72px */}
+      <div style={{ height: 72, flexShrink: 0 }} />
+
+      {/* Main layout */}
       <div style={{
-        maxWidth: 1280, margin: "0 auto",
-        display: "grid", gridTemplateColumns: "1fr 1fr",
-        gap: 48, alignItems: "center",
-        padding: "72px 48px 64px",
-        position: "relative", zIndex: 1,
+        flex: 1,
+        maxWidth: 1400,
+        margin: "0 auto",
+        width: "100%",
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        alignItems: "center",
+        padding: "48px 72px 72px",
+        position: "relative",
+        zIndex: 1,
+        gap: 0,
       }} className="hero-grid">
 
-        {/* LEFT — text */}
-        <div style={{ opacity: mounted ? 1 : 0, transition: "opacity 0.5s" }}>
+        {/* ── LEFT: Copy ── */}
+        <div style={{
+          paddingRight: 56,
+          opacity: mounted ? 1 : 0,
+          transform: mounted ? "translateY(0)" : "translateY(28px)",
+          transition: "opacity 0.65s ease, transform 0.65s ease",
+        }}>
 
-          {/* Headline — dark so it's readable on any pink/lavender */}
+          {/* Badge */}
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: 8,
+            background: "rgba(26,10,46,0.1)",
+            border: "1px solid rgba(26,10,46,0.18)",
+            borderRadius: 50,
+            padding: "7px 18px",
+            marginBottom: 32,
+          }}>
+            <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#1a0a2e", display: "inline-block" }} />
+            <span style={{ fontFamily: FB, fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#1a0a2e" }}>
+              Premium Wall Art · UK Delivery
+            </span>
+          </div>
+
+          {/* Headline */}
           <h1 style={{
             fontFamily: FH,
-            fontSize: "clamp(52px,6.5vw,96px)",
+            fontSize: "clamp(68px, 9vw, 136px)",
             fontWeight: 900,
-            lineHeight: 0.92,
-            letterSpacing: "-0.03em",
+            lineHeight: 0.87,
+            letterSpacing: "-0.04em",
             textTransform: "uppercase",
             color: "#1a0a2e",
-            margin: "0 0 28px",
+            margin: "0 0 36px",
           }}>
-            Your Walls<br />
-            <span style={{ color: "#fff", WebkitTextStroke: "2px #1a0a2e" }}>Deserve</span><br />
+            Your<br />
+            Walls<br />
+            <span style={{ color: "#fff", WebkitTextStroke: "3px #1a0a2e" }}>Deserve</span><br />
             The Best
           </h1>
 
           {/* Sub */}
           <p style={{
-            fontFamily: FB, fontSize: 15,
+            fontFamily: FB,
+            fontSize: 15,
             color: "#2d1b4e",
-            lineHeight: 1.75, maxWidth: 400,
-            margin: "0 0 36px", fontWeight: 500,
+            lineHeight: 1.85,
+            maxWidth: 430,
+            margin: "0 0 44px",
+            fontWeight: 500,
           }}>
             Premium quality posters for Cars, Movies, Coffee Shop &amp; more.
             Starting from £9.99 — free UK delivery on orders over £30.
           </p>
 
           {/* CTAs */}
-          <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", marginBottom: 52 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap", marginBottom: 60 }}>
             <ClickSpark sparkColor="#1a0a2e" sparkCount={10} sparkRadius={24}>
-              <Link href="/collection"
-                style={{
-                  display: "inline-flex", alignItems: "center",
-                  padding: "14px 32px",
-                  background: "#1a0a2e", color: "#fff",
-                  fontFamily: FB, fontSize: 12, fontWeight: 700,
-                  letterSpacing: "0.1em", textTransform: "uppercase",
-                  textDecoration: "none", borderRadius: 50,
-                  boxShadow: "0 4px 24px rgba(26,10,46,0.25)",
-                  transition: "opacity 0.2s",
-                }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
-                onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-                Shop Collection
+              <Link href="/collection" style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                padding: "17px 38px",
+                background: "#1a0a2e", color: "#fff",
+                fontFamily: FB, fontSize: 12, fontWeight: 700,
+                letterSpacing: "0.12em", textTransform: "uppercase",
+                textDecoration: "none", borderRadius: 50,
+                boxShadow: "0 8px 36px rgba(26,10,46,0.32)",
+                transition: "transform 0.25s, box-shadow 0.25s",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 14px 44px rgba(26,10,46,0.42)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 36px rgba(26,10,46,0.32)"; }}>
+                Shop Collection <span style={{ fontSize: 15 }}>→</span>
               </Link>
             </ClickSpark>
 
-            <Link href="/collection"
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 6,
-                fontFamily: FB, fontSize: 12, fontWeight: 700,
-                letterSpacing: "0.08em", textTransform: "uppercase",
-                color: "#1a0a2e", textDecoration: "none",
-                padding: "13px 24px",
-                border: "1.5px solid rgba(26,10,46,0.35)",
-                borderRadius: 50, transition: "all 0.2s",
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(26,10,46,0.08)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}>
-              Browse All ↗
+            <Link href="/create" style={{
+              display: "inline-flex", alignItems: "center", gap: 7,
+              fontFamily: FB, fontSize: 12, fontWeight: 700,
+              letterSpacing: "0.1em", textTransform: "uppercase",
+              color: "#1a0a2e", textDecoration: "none",
+              padding: "16px 30px",
+              border: "2px solid rgba(26,10,46,0.28)",
+              borderRadius: 50,
+              background: "rgba(255,255,255,0.18)",
+              backdropFilter: "blur(8px)",
+              transition: "all 0.25s",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(26,10,46,0.12)"; e.currentTarget.style.borderColor = "rgba(26,10,46,0.5)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.18)"; e.currentTarget.style.borderColor = "rgba(26,10,46,0.28)"; }}>
+              ✦ AI Studio
             </Link>
           </div>
 
           {/* Stats */}
           <div style={{
             display: "grid", gridTemplateColumns: "repeat(4,1fr)",
-            borderTop: "1.5px solid rgba(26,10,46,0.15)", paddingTop: 28,
+            borderTop: "1.5px solid rgba(26,10,46,0.18)",
+            paddingTop: 32,
           }} className="stats-grid">
             {STATS.map((s, i) => (
               <div key={i} style={{
-                borderRight: i < STATS.length - 1 ? "1.5px solid rgba(26,10,46,0.15)" : "none",
-                paddingRight: 16, paddingLeft: i > 0 ? 16 : 0,
+                borderRight: i < STATS.length - 1 ? "1.5px solid rgba(26,10,46,0.18)" : "none",
+                paddingRight: 20, paddingLeft: i > 0 ? 20 : 0,
               }}>
-                <div style={{ fontFamily: FH, fontSize: 22, fontWeight: 800, color: "#1a0a2e", letterSpacing: "-0.02em", lineHeight: 1 }}>{s.val}</div>
-                <div style={{ fontFamily: FB, fontSize: 10, color: "#5a3a7e", marginTop: 5, letterSpacing: "0.06em" }}>{s.label}</div>
+                <div style={{ fontFamily: FH, fontSize: 28, fontWeight: 900, color: "#1a0a2e", letterSpacing: "-0.03em", lineHeight: 1 }}>{s.val}</div>
+                <div style={{ fontFamily: FB, fontSize: 10, color: "#4a2a6e", marginTop: 7, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600 }}>{s.label}</div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* RIGHT — posters */}
+        {/* ── RIGHT: Fanned posters ── */}
         <div style={{
-          display: "grid",
-          gridTemplateColumns: "1.15fr 1fr",
-          gridTemplateRows: "auto auto",
-          gap: 12,
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "center",
+          gap: 16,
+          height: "min(72vh, 660px)",
           opacity: mounted ? 1 : 0,
-          transition: "opacity 0.6s 0.15s",
+          transform: mounted ? "translateY(0)" : "translateY(32px)",
+          transition: "opacity 0.75s 0.18s, transform 0.75s 0.18s",
+          paddingBottom: 12,
         }} className="hero-images">
 
-          {/* Large poster — spans 2 rows */}
-          <div style={{ gridRow: "1 / 3", borderRadius: 16, overflow: "hidden", position: "relative", boxShadow: "0 24px 64px rgba(26,10,46,0.25)", aspectRatio: "3/4" }}>
-            <img src={POSTERS[0].src} alt="poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease" }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.transform = "scale(1.04)")}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.transform = "scale(1)")} />
-            <span style={{ position: "absolute", top: 12, left: 12, background: "#1a0a2e", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", padding: "4px 10px", borderRadius: 50 }}>
+          {/* Poster 1 — tallest, tilts left */}
+          <div style={{
+            flex: "0 0 37%",
+            height: "100%",
+            borderRadius: 22,
+            overflow: "hidden",
+            position: "relative",
+            boxShadow: "0 48px 96px rgba(26,10,46,0.4), 0 16px 32px rgba(26,10,46,0.2)",
+            transform: "rotate(-5deg) translateY(-18px)",
+            transformOrigin: "bottom center",
+            transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
+          }}
+          onMouseEnter={e => (e.currentTarget.style.transform = "rotate(-5deg) translateY(-34px) scale(1.02)")}
+          onMouseLeave={e => (e.currentTarget.style.transform = "rotate(-5deg) translateY(-18px)")}>
+            <img src={POSTERS[0].src} alt="Movie poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            <span style={{ position: "absolute", top: 14, left: 14, background: "rgba(26,10,46,0.9)", backdropFilter: "blur(8px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase", padding: "5px 13px", borderRadius: 50 }}>
               {POSTERS[0].label}
             </span>
           </div>
 
-          {/* Small poster 1 */}
-          <div style={{ borderRadius: 14, overflow: "hidden", position: "relative", boxShadow: "0 12px 32px rgba(26,10,46,0.2)", aspectRatio: "3/4" }}>
-            <img src={POSTERS[1].src} alt="poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease" }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.transform = "scale(1.04)")}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.transform = "scale(1)")} />
-            <span style={{ position: "absolute", top: 10, left: 10, background: "#1a0a2e", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", padding: "3px 9px", borderRadius: 50 }}>
+          {/* Poster 2 — medium, center, highest */}
+          <div style={{
+            flex: "0 0 30%",
+            height: "86%",
+            borderRadius: 20,
+            overflow: "hidden",
+            position: "relative",
+            boxShadow: "0 48px 96px rgba(26,10,46,0.45), 0 16px 32px rgba(26,10,46,0.25)",
+            transform: "translateY(-36px)",
+            transformOrigin: "bottom center",
+            transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
+            zIndex: 2,
+          }}
+          onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-54px) scale(1.03)")}
+          onMouseLeave={e => (e.currentTarget.style.transform = "translateY(-36px)")}>
+            <img src={POSTERS[1].src} alt="Movie poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            <span style={{ position: "absolute", top: 12, left: 12, background: "rgba(26,10,46,0.9)", backdropFilter: "blur(8px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase", padding: "4px 11px", borderRadius: 50 }}>
               {POSTERS[1].label}
             </span>
           </div>
 
-          {/* Small poster 2 */}
-          <div style={{ borderRadius: 14, overflow: "hidden", position: "relative", boxShadow: "0 12px 32px rgba(26,10,46,0.2)", aspectRatio: "3/4" }}>
-            <img src={POSTERS[2].src} alt="poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease" }}
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.transform = "scale(1.04)")}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.transform = "scale(1)")} />
-            <span style={{ position: "absolute", top: 10, left: 10, background: "#1a0a2e", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", padding: "3px 9px", borderRadius: 50 }}>
+          {/* Poster 3 — smaller, tilts right */}
+          <div style={{
+            flex: "0 0 27%",
+            height: "72%",
+            borderRadius: 18,
+            overflow: "hidden",
+            position: "relative",
+            boxShadow: "0 36px 80px rgba(26,10,46,0.35), 0 12px 24px rgba(26,10,46,0.18)",
+            transform: "rotate(5deg) translateY(-6px)",
+            transformOrigin: "bottom center",
+            transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
+          }}
+          onMouseEnter={e => (e.currentTarget.style.transform = "rotate(5deg) translateY(-22px) scale(1.02)")}
+          onMouseLeave={e => (e.currentTarget.style.transform = "rotate(5deg) translateY(-6px)")}>
+            <img src={POSTERS[2].src} alt="Car poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            <span style={{ position: "absolute", top: 11, left: 11, background: "rgba(26,10,46,0.9)", backdropFilter: "blur(8px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase", padding: "4px 11px", borderRadius: 50 }}>
               {POSTERS[2].label}
             </span>
           </div>
         </div>
+
       </div>
 
       <style>{`
-        @media (max-width: 860px) {
-          .hero-grid   { grid-template-columns: 1fr !important; padding: 40px 20px 48px !important; gap: 36px !important; }
-          .hero-images { display: flex !important; gap: 10px !important; height: 240px !important; }
-          .hero-images > div { flex: 1 !important; aspect-ratio: unset !important; height: 100% !important; }
-          .stats-grid  { grid-template-columns: repeat(2,1fr) !important; row-gap: 20px !important; }
+        @media (max-width: 960px) {
+          .hero-grid   { grid-template-columns: 1fr !important; padding: 40px 28px 56px !important; gap: 44px !important; }
+          .hero-grid > div:first-child { padding-right: 0 !important; }
+          .hero-images { height: 280px !important; gap: 10px !important; }
+          .stats-grid  { grid-template-columns: repeat(2,1fr) !important; row-gap: 22px !important; }
+          .stats-grid > div:nth-child(2) { border-right: none !important; }
+          .stats-grid > div:nth-child(3) { padding-left: 0 !important; }
+        }
+        @media (max-width: 540px) {
+          .hero-grid   { padding: 28px 18px 44px !important; gap: 32px !important; }
+          .hero-images { height: 220px !important; gap: 8px !important; }
         }
       `}</style>
     </section>
