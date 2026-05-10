@@ -25,7 +25,7 @@ const POSTERS = [
 ];
 
 const STATS = [
-  { val: "10K+", label: "Happy Customers" },
+  { val: "10K+", label: "Customers" },
   { val: "609+", label: "Designs" },
   { val: "48hr", label: "Delivery" },
   { val: "4.8★", label: "Rating" },
@@ -45,250 +45,234 @@ export default function Hero() {
       flexDirection: "column",
     }}>
 
-      {/* Grainient background — fills full section */}
+      {/* Grainient BG */}
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <Grainient
-          color1="#94a3b8"
-          color2="#d77abf"
-          color3="#e19de1"
-          timeSpeed={2.45}
-          colorBalance={0}
-          warpStrength={1}
-          warpFrequency={5}
-          warpSpeed={2}
-          warpAmplitude={50}
-          blendAngle={0}
-          blendSoftness={0.05}
-          rotationAmount={510}
-          noiseScale={0.75}
-          grainAmount={0}
-          grainScale={1.5}
-          grainAnimated={false}
-          contrast={1.5}
-          gamma={1}
-          saturation={1}
-          centerX={0}
-          centerY={0}
-          zoom={0.9}
+          color1="#94a3b8" color2="#d77abf" color3="#e19de1"
+          timeSpeed={2.45} colorBalance={0} warpStrength={1}
+          warpFrequency={5} warpSpeed={2} warpAmplitude={50}
+          blendAngle={0} blendSoftness={0.05} rotationAmount={510}
+          noiseScale={0.75} grainAmount={0} grainScale={1.5}
+          grainAnimated={false} contrast={1.5} gamma={1} saturation={1}
+          centerX={0} centerY={0} zoom={0.9}
         />
       </div>
 
-      {/* Navbar clearance: top(12) + height(60) = 72px */}
-      <div style={{ height: 72, flexShrink: 0 }} />
+      {/* Navbar clearance */}
+      <div style={{ height: 84, flexShrink: 0 }} />
 
-      {/* Main layout */}
+      {/* Content */}
       <div style={{
         flex: 1,
-        maxWidth: 1400,
+        display: "flex",
+        alignItems: "center",
+        maxWidth: 1360,
         margin: "0 auto",
         width: "100%",
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        alignItems: "center",
-        padding: "48px 72px 72px",
+        padding: "32px 64px 56px",
         position: "relative",
         zIndex: 1,
-        gap: 0,
-      }} className="hero-grid">
-
-        {/* ── LEFT: Copy ── */}
+      }}>
         <div style={{
-          paddingRight: 56,
-          opacity: mounted ? 1 : 0,
-          transform: mounted ? "translateY(0)" : "translateY(28px)",
-          transition: "opacity 0.65s ease, transform 0.65s ease",
-        }}>
+          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "52% 48%",
+          gap: 0,
+          alignItems: "center",
+        }} className="hero-grid">
 
-          {/* Badge */}
+          {/* ── LEFT ── */}
           <div style={{
-            display: "inline-flex", alignItems: "center", gap: 8,
-            background: "rgba(26,10,46,0.1)",
-            border: "1px solid rgba(26,10,46,0.18)",
-            borderRadius: 50,
-            padding: "7px 18px",
-            marginBottom: 32,
+            paddingRight: 48,
+            opacity: mounted ? 1 : 0,
+            transform: mounted ? "translateY(0)" : "translateY(24px)",
+            transition: "opacity 0.6s, transform 0.6s",
           }}>
-            <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#1a0a2e", display: "inline-block" }} />
-            <span style={{ fontFamily: FB, fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#1a0a2e" }}>
-              Premium Wall Art · UK Delivery
-            </span>
-          </div>
 
-          {/* Headline */}
-          <h1 style={{
-            fontFamily: FH,
-            fontSize: "clamp(68px, 9vw, 136px)",
-            fontWeight: 900,
-            lineHeight: 0.87,
-            letterSpacing: "-0.04em",
-            textTransform: "uppercase",
-            color: "#1a0a2e",
-            margin: "0 0 36px",
-          }}>
-            Your<br />
-            Walls<br />
-            <span style={{ color: "#fff", WebkitTextStroke: "3px #1a0a2e" }}>Deserve</span><br />
-            The Best
-          </h1>
+            {/* Badge */}
+            <div style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              background: "rgba(26,10,46,0.1)", border: "1px solid rgba(26,10,46,0.18)",
+              borderRadius: 50, padding: "6px 16px", marginBottom: 28,
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1a0a2e", display: "inline-block" }} />
+              <span style={{ fontFamily: FB, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#1a0a2e" }}>
+                Premium Wall Art · UK Delivery
+              </span>
+            </div>
 
-          {/* Sub */}
-          <p style={{
-            fontFamily: FB,
-            fontSize: 15,
-            color: "#2d1b4e",
-            lineHeight: 1.85,
-            maxWidth: 430,
-            margin: "0 0 44px",
-            fontWeight: 500,
-          }}>
-            Premium quality posters for Cars, Movies, Coffee Shop &amp; more.
-            Starting from £9.99 — free UK delivery on orders over £30.
-          </p>
+            {/* Headline */}
+            <h1 style={{
+              fontFamily: FH,
+              fontSize: "clamp(48px, 5.8vw, 92px)",
+              fontWeight: 900,
+              lineHeight: 0.9,
+              letterSpacing: "-0.04em",
+              textTransform: "uppercase",
+              color: "#1a0a2e",
+              margin: "0 0 28px",
+            }}>
+              Your<br />
+              Walls<br />
+              <span style={{ color: "#fff", WebkitTextStroke: "2.5px #1a0a2e" }}>Deserve</span><br />
+              The Best
+            </h1>
 
-          {/* CTAs */}
-          <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap", marginBottom: 60 }}>
-            <ClickSpark sparkColor="#1a0a2e" sparkCount={10} sparkRadius={24}>
-              <Link href="/collection" style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                padding: "17px 38px",
-                background: "#1a0a2e", color: "#fff",
+            {/* Sub */}
+            <p style={{
+              fontFamily: FB, fontSize: 14, color: "#2d1b4e",
+              lineHeight: 1.8, maxWidth: 400, margin: "0 0 36px", fontWeight: 500,
+            }}>
+              Premium quality posters for Cars, Movies, Coffee Shop &amp; more.
+              Starting from £9.99 — free UK delivery on orders over £30.
+            </p>
+
+            {/* CTAs */}
+            <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 48 }}>
+              <ClickSpark sparkColor="#1a0a2e" sparkCount={10} sparkRadius={24}>
+                <Link href="/collection" style={{
+                  display: "inline-flex", alignItems: "center", gap: 8,
+                  padding: "15px 34px",
+                  background: "#1a0a2e", color: "#fff",
+                  fontFamily: FB, fontSize: 12, fontWeight: 700,
+                  letterSpacing: "0.12em", textTransform: "uppercase",
+                  textDecoration: "none", borderRadius: 50,
+                  boxShadow: "0 8px 32px rgba(26,10,46,0.3)",
+                  transition: "transform 0.25s, box-shadow 0.25s",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(26,10,46,0.42)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(26,10,46,0.3)"; }}>
+                  Shop Collection →
+                </Link>
+              </ClickSpark>
+
+              <Link href="/create" style={{
+                display: "inline-flex", alignItems: "center", gap: 6,
                 fontFamily: FB, fontSize: 12, fontWeight: 700,
-                letterSpacing: "0.12em", textTransform: "uppercase",
-                textDecoration: "none", borderRadius: 50,
-                boxShadow: "0 8px 36px rgba(26,10,46,0.32)",
-                transition: "transform 0.25s, box-shadow 0.25s",
+                letterSpacing: "0.1em", textTransform: "uppercase",
+                color: "#1a0a2e", textDecoration: "none",
+                padding: "14px 26px",
+                border: "2px solid rgba(26,10,46,0.3)",
+                borderRadius: 50,
+                background: "rgba(255,255,255,0.2)",
+                backdropFilter: "blur(8px)",
+                transition: "all 0.25s",
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 14px 44px rgba(26,10,46,0.42)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 36px rgba(26,10,46,0.32)"; }}>
-                Shop Collection <span style={{ fontSize: 15 }}>→</span>
+              onMouseEnter={e => { e.currentTarget.style.background = "rgba(26,10,46,0.1)"; e.currentTarget.style.borderColor = "rgba(26,10,46,0.5)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.2)"; e.currentTarget.style.borderColor = "rgba(26,10,46,0.3)"; }}>
+                ✦ AI Studio
               </Link>
-            </ClickSpark>
+            </div>
 
-            <Link href="/create" style={{
-              display: "inline-flex", alignItems: "center", gap: 7,
-              fontFamily: FB, fontSize: 12, fontWeight: 700,
-              letterSpacing: "0.1em", textTransform: "uppercase",
-              color: "#1a0a2e", textDecoration: "none",
-              padding: "16px 30px",
-              border: "2px solid rgba(26,10,46,0.28)",
-              borderRadius: 50,
-              background: "rgba(255,255,255,0.18)",
-              backdropFilter: "blur(8px)",
-              transition: "all 0.25s",
+            {/* Stats */}
+            <div style={{
+              display: "grid", gridTemplateColumns: "repeat(4,1fr)",
+              borderTop: "1.5px solid rgba(26,10,46,0.18)", paddingTop: 28,
+            }} className="stats-grid">
+              {STATS.map((s, i) => (
+                <div key={i} style={{
+                  borderRight: i < STATS.length - 1 ? "1.5px solid rgba(26,10,46,0.18)" : "none",
+                  paddingRight: 16, paddingLeft: i > 0 ? 16 : 0,
+                }}>
+                  <div style={{ fontFamily: FH, fontSize: 26, fontWeight: 900, color: "#1a0a2e", letterSpacing: "-0.03em", lineHeight: 1 }}>{s.val}</div>
+                  <div style={{ fontFamily: FB, fontSize: 10, color: "#4a2a6e", marginTop: 6, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600 }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ── RIGHT: posters ── */}
+          <div style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
+            gap: 14,
+            height: "min(64vh, 580px)",
+            opacity: mounted ? 1 : 0,
+            transform: mounted ? "translateY(0)" : "translateY(24px)",
+            transition: "opacity 0.75s 0.2s, transform 0.75s 0.2s",
+            paddingLeft: 16,
+          }} className="hero-images">
+
+            {/* Poster 1 — tallest, tilts left */}
+            <div style={{
+              flex: "0 0 36%",
+              height: "100%",
+              borderRadius: 14,
+              overflow: "hidden",
+              position: "relative",
+              boxShadow: "0 32px 72px rgba(26,10,46,0.38), 0 8px 24px rgba(26,10,46,0.2)",
+              transform: "rotate(-5deg) translateY(-12px)",
+              transformOrigin: "bottom center",
+              transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
+              flexShrink: 0,
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = "rgba(26,10,46,0.12)"; e.currentTarget.style.borderColor = "rgba(26,10,46,0.5)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.18)"; e.currentTarget.style.borderColor = "rgba(26,10,46,0.28)"; }}>
-              ✦ AI Studio
-            </Link>
-          </div>
+            onMouseEnter={e => (e.currentTarget.style.transform = "rotate(-5deg) translateY(-26px) scale(1.02)")}
+            onMouseLeave={e => (e.currentTarget.style.transform = "rotate(-5deg) translateY(-12px)")}>
+              <img src={POSTERS[0].src} alt="poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <span style={{ position: "absolute", top: 12, left: 12, background: "rgba(26,10,46,0.85)", backdropFilter: "blur(6px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", padding: "4px 11px", borderRadius: 50 }}>
+                {POSTERS[0].label}
+              </span>
+            </div>
 
-          {/* Stats */}
-          <div style={{
-            display: "grid", gridTemplateColumns: "repeat(4,1fr)",
-            borderTop: "1.5px solid rgba(26,10,46,0.18)",
-            paddingTop: 32,
-          }} className="stats-grid">
-            {STATS.map((s, i) => (
-              <div key={i} style={{
-                borderRight: i < STATS.length - 1 ? "1.5px solid rgba(26,10,46,0.18)" : "none",
-                paddingRight: 20, paddingLeft: i > 0 ? 20 : 0,
-              }}>
-                <div style={{ fontFamily: FH, fontSize: 28, fontWeight: 900, color: "#1a0a2e", letterSpacing: "-0.03em", lineHeight: 1 }}>{s.val}</div>
-                <div style={{ fontFamily: FB, fontSize: 10, color: "#4a2a6e", marginTop: 7, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600 }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+            {/* Poster 2 — middle, highest */}
+            <div style={{
+              flex: "0 0 30%",
+              height: "86%",
+              borderRadius: 12,
+              overflow: "hidden",
+              position: "relative",
+              boxShadow: "0 32px 72px rgba(26,10,46,0.42), 0 8px 24px rgba(26,10,46,0.22)",
+              transform: "translateY(-28px)",
+              transformOrigin: "bottom center",
+              transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
+              zIndex: 2,
+              flexShrink: 0,
+            }}
+            onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-44px) scale(1.03)")}
+            onMouseLeave={e => (e.currentTarget.style.transform = "translateY(-28px)")}>
+              <img src={POSTERS[1].src} alt="poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <span style={{ position: "absolute", top: 11, left: 11, background: "rgba(26,10,46,0.85)", backdropFilter: "blur(6px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", padding: "4px 10px", borderRadius: 50 }}>
+                {POSTERS[1].label}
+              </span>
+            </div>
 
-        {/* ── RIGHT: Fanned posters ── */}
-        <div style={{
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "center",
-          gap: 16,
-          height: "min(72vh, 660px)",
-          opacity: mounted ? 1 : 0,
-          transform: mounted ? "translateY(0)" : "translateY(32px)",
-          transition: "opacity 0.75s 0.18s, transform 0.75s 0.18s",
-          paddingBottom: 12,
-        }} className="hero-images">
+            {/* Poster 3 — smallest, tilts right */}
+            <div style={{
+              flex: "0 0 26%",
+              height: "70%",
+              borderRadius: 12,
+              overflow: "hidden",
+              position: "relative",
+              boxShadow: "0 24px 56px rgba(26,10,46,0.32), 0 8px 20px rgba(26,10,46,0.18)",
+              transform: "rotate(5deg) translateY(-4px)",
+              transformOrigin: "bottom center",
+              transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
+              flexShrink: 0,
+            }}
+            onMouseEnter={e => (e.currentTarget.style.transform = "rotate(5deg) translateY(-18px) scale(1.02)")}
+            onMouseLeave={e => (e.currentTarget.style.transform = "rotate(5deg) translateY(-4px)")}>
+              <img src={POSTERS[2].src} alt="poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <span style={{ position: "absolute", top: 10, left: 10, background: "rgba(26,10,46,0.85)", backdropFilter: "blur(6px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", padding: "4px 10px", borderRadius: 50 }}>
+                {POSTERS[2].label}
+              </span>
+            </div>
 
-          {/* Poster 1 — tallest, tilts left */}
-          <div style={{
-            flex: "0 0 37%",
-            height: "100%",
-            borderRadius: 22,
-            overflow: "hidden",
-            position: "relative",
-            boxShadow: "0 48px 96px rgba(26,10,46,0.4), 0 16px 32px rgba(26,10,46,0.2)",
-            transform: "rotate(-5deg) translateY(-18px)",
-            transformOrigin: "bottom center",
-            transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
-          }}
-          onMouseEnter={e => (e.currentTarget.style.transform = "rotate(-5deg) translateY(-34px) scale(1.02)")}
-          onMouseLeave={e => (e.currentTarget.style.transform = "rotate(-5deg) translateY(-18px)")}>
-            <img src={POSTERS[0].src} alt="Movie poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-            <span style={{ position: "absolute", top: 14, left: 14, background: "rgba(26,10,46,0.9)", backdropFilter: "blur(8px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase", padding: "5px 13px", borderRadius: 50 }}>
-              {POSTERS[0].label}
-            </span>
-          </div>
-
-          {/* Poster 2 — medium, center, highest */}
-          <div style={{
-            flex: "0 0 30%",
-            height: "86%",
-            borderRadius: 20,
-            overflow: "hidden",
-            position: "relative",
-            boxShadow: "0 48px 96px rgba(26,10,46,0.45), 0 16px 32px rgba(26,10,46,0.25)",
-            transform: "translateY(-36px)",
-            transformOrigin: "bottom center",
-            transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
-            zIndex: 2,
-          }}
-          onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-54px) scale(1.03)")}
-          onMouseLeave={e => (e.currentTarget.style.transform = "translateY(-36px)")}>
-            <img src={POSTERS[1].src} alt="Movie poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-            <span style={{ position: "absolute", top: 12, left: 12, background: "rgba(26,10,46,0.9)", backdropFilter: "blur(8px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase", padding: "4px 11px", borderRadius: 50 }}>
-              {POSTERS[1].label}
-            </span>
-          </div>
-
-          {/* Poster 3 — smaller, tilts right */}
-          <div style={{
-            flex: "0 0 27%",
-            height: "72%",
-            borderRadius: 18,
-            overflow: "hidden",
-            position: "relative",
-            boxShadow: "0 36px 80px rgba(26,10,46,0.35), 0 12px 24px rgba(26,10,46,0.18)",
-            transform: "rotate(5deg) translateY(-6px)",
-            transformOrigin: "bottom center",
-            transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2)",
-          }}
-          onMouseEnter={e => (e.currentTarget.style.transform = "rotate(5deg) translateY(-22px) scale(1.02)")}
-          onMouseLeave={e => (e.currentTarget.style.transform = "rotate(5deg) translateY(-6px)")}>
-            <img src={POSTERS[2].src} alt="Car poster" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-            <span style={{ position: "absolute", top: 11, left: 11, background: "rgba(26,10,46,0.9)", backdropFilter: "blur(8px)", color: "#fff", fontFamily: FB, fontSize: 9, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase", padding: "4px 11px", borderRadius: 50 }}>
-              {POSTERS[2].label}
-            </span>
           </div>
         </div>
-
       </div>
 
       <style>{`
         @media (max-width: 960px) {
-          .hero-grid   { grid-template-columns: 1fr !important; padding: 40px 28px 56px !important; gap: 44px !important; }
+          .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .hero-grid > div:first-child { padding-right: 0 !important; }
-          .hero-images { height: 280px !important; gap: 10px !important; }
-          .stats-grid  { grid-template-columns: repeat(2,1fr) !important; row-gap: 22px !important; }
+          .hero-images { height: 260px !important; padding-left: 0 !important; justify-content: center !important; }
+          .stats-grid { grid-template-columns: repeat(2,1fr) !important; row-gap: 20px !important; }
           .stats-grid > div:nth-child(2) { border-right: none !important; }
           .stats-grid > div:nth-child(3) { padding-left: 0 !important; }
         }
         @media (max-width: 540px) {
-          .hero-grid   { padding: 28px 18px 44px !important; gap: 32px !important; }
-          .hero-images { height: 220px !important; gap: 8px !important; }
+          .hero-images { height: 200px !important; gap: 8px !important; }
         }
       `}</style>
     </section>
