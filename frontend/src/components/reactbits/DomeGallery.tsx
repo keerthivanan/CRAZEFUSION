@@ -142,7 +142,7 @@ export default function DomeGallery({
         default: basis = aspect >= 1.3 ? w : minDim;
       }
       let radius = basis * fit;
-      radius = Math.min(radius, h * 1.35);
+      radius = Math.min(radius, Math.max(w, h) * 4); // allow very large radius to fill screen
       radius = clamp(radius, minRadius, maxRadius);
       lockedRadiusRef.current = Math.round(radius);
       const viewerPad = Math.max(8, Math.round(minDim * padFactor));

@@ -77,14 +77,15 @@ export default function Hero() {
       <div style={{ position: "absolute", inset: 0 }}>
         <DomeGallery
           images={IMAGES}
-          fit={0.8}
-          minRadius={650}
-          maxVerticalRotationDeg={16}
-          segments={34}
+          fit={1.6}
+          fitBasis="max"
+          minRadius={900}
+          maxVerticalRotationDeg={12}
+          segments={30}
           dragDampening={1.8}
           grayscale={false}
           overlayBlurColor="#080808"
-          imageBorderRadius="20px"
+          imageBorderRadius="16px"
           openedImageBorderRadius="16px"
           openedImageWidth="320px"
           openedImageHeight="460px"
@@ -194,8 +195,20 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 768px) {
-          .hero-bottom { padding: 0 20px 36px !important; flex-direction: column !important; align-items: flex-start !important; gap: 20px !important; }
-          .hero-stats  { gap: 18px !important; }
+          .hero-bottom {
+            padding: 0 18px 32px !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 16px !important;
+          }
+          .hero-bottom h1 { font-size: clamp(32px, 8vw, 56px) !important; margin-bottom: 16px !important; }
+          .hero-stats { gap: 16px !important; }
+          .hero-stats > div > div:first-child { font-size: 20px !important; }
+          .hero-stats > div > div:last-child { font-size: 9px !important; }
+        }
+        @media (max-width: 480px) {
+          .hero-bottom { padding: 0 14px 24px !important; }
+          .hero-stats { gap: 12px !important; }
         }
       `}</style>
     </section>
