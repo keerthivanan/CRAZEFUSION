@@ -406,7 +406,7 @@ export default function CreatePage() {
                   onKeyDown={e => { if (e.key === "Enter") handlePublish(); }} />
 
                 {/* Earnings calculator */}
-                <BorderGlow backgroundColor="#0a0814" borderRadius={14} borderWidth={1} colors={["#c084fc", "#f472b6", "#38bdf8"]} glowColor="192 132 252" glowOpacity={0.5} glowBlur={18} animated={false} style={{ marginBottom: 16 }}>
+                <BorderGlow backgroundColor="#0a0814" borderRadius={14} colors={["#c084fc", "#f472b6", "#38bdf8"]} glowColor="270 70 70" glowIntensity={1} glowRadius={32} edgeSensitivity={25} coneSpread={30} animated={false} className="mb-4">
                   <div style={{ padding: 16 }}>
                     <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 12 }}>Earnings Calculator</div>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
@@ -476,11 +476,12 @@ export default function CreatePage() {
                     key={c.title}
                     backgroundColor="#0d0d10"
                     borderRadius={14}
-                    borderWidth={1}
                     colors={["#c084fc", "#f472b6", "#38bdf8"]}
-                    glowColor="192 132 252"
-                    glowOpacity={0.45}
-                    glowBlur={20}
+                    glowColor="270 70 70"
+                    glowIntensity={1}
+                    glowRadius={32}
+                    edgeSensitivity={25}
+                    coneSpread={30}
                     animated={false}
                   >
                     <div style={{ padding: "16px 14px" }}>
