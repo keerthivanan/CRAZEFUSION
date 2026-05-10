@@ -23,6 +23,8 @@ type DomeGalleryProps = {
   imageBorderRadius?: string;
   openedImageBorderRadius?: string;
   grayscale?: boolean;
+  autoRotate?: boolean;
+  autoRotateSpeed?: number; // degrees per second, default 6
 };
 
 type ItemDef = { src: string; alt: string; x: number; y: number; sizeX: number; sizeY: number; };
@@ -77,7 +79,8 @@ export default function DomeGallery({
   padFactor = 0.25, overlayBlurColor = '#120F17', maxVerticalRotationDeg = DEFAULTS.maxVerticalRotationDeg,
   dragSensitivity = DEFAULTS.dragSensitivity, enlargeTransitionMs = DEFAULTS.enlargeTransitionMs,
   segments = DEFAULTS.segments, dragDampening = 2, openedImageWidth = '400px', openedImageHeight = '400px',
-  imageBorderRadius = '30px', openedImageBorderRadius = '30px', grayscale = true
+  imageBorderRadius = '30px', openedImageBorderRadius = '30px', grayscale = true,
+  autoRotate = false, autoRotateSpeed = 6
 }: DomeGalleryProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
@@ -181,6 +184,27 @@ export default function DomeGallery({
   }, [fit, fitBasis, minRadius, maxRadius, padFactor, overlayBlurColor, grayscale, imageBorderRadius, openedImageBorderRadius, openedImageWidth, openedImageHeight, segments]);
 
   useEffect(() => { applyTransform(rotationRef.current.x, rotationRef.current.y); }, []);
+
+  // Auto-rotation: slowly spins the dome so all images cycle through
+  const autoRotateRAF = useRef<number | null>(null);
+  useEffect(() => {
+    if (!autoRotate) return;
+    let lastTime = 0;
+    const tick = (time: number) => {
+      // Only rotate when user isn't dragging, no inertia, and no image is open
+      if (!draggingRef.current && !inertiaRAF.current && !focusedElRef.current) {
+        const delta = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 0;
+        if (delta > 0) {
+          rotationRef.current.y = wrapAngleSigned(rotationRef.current.y + autoRotateSpeed * delta);
+          applyTransform(rotationRef.current.x, rotationRef.current.y);
+        }
+      }
+      lastTime = time;
+      autoRotateRAF.current = requestAnimationFrame(tick);
+    };
+    autoRotateRAF.current = requestAnimationFrame(tick);
+    return () => { if (autoRotateRAF.current) cancelAnimationFrame(autoRotateRAF.current); };
+  }, [autoRotate, autoRotateSpeed]);
 
   const stopInertia = useCallback(() => {
     if (inertiaRAF.current) { cancelAnimationFrame(inertiaRAF.current); inertiaRAF.current = null; }

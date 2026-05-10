@@ -84,6 +84,8 @@ export default function Hero() {
           segments={30}
           dragDampening={1.8}
           grayscale={false}
+          autoRotate={true}
+          autoRotateSpeed={5}
           overlayBlurColor="#080808"
           imageBorderRadius="16px"
           openedImageBorderRadius="16px"
