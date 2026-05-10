@@ -338,16 +338,19 @@ export default function DomeGallery({
 
   useEffect(() => { return () => { document.body.classList.remove('dg-scroll-lock'); }; }, []);
 
+  // Bake segments directly into CSS — no CSS variable dependency for rotations
+  const deg = 360 / segments / 2;
+  const itemPct = (100 / segments).toFixed(6);
   const cssStyles = `
-    .sphere-root { --radius:520px; --viewer-pad:72px; --circ:calc(var(--radius)*3.14); --rot-y:calc((360deg/var(--segments-x))/2); --rot-x:calc((360deg/var(--segments-y))/2); --item-width:calc(var(--circ)/var(--segments-x)); --item-height:calc(var(--circ)/var(--segments-y)); }
+    .sphere-root { --radius:520px; --viewer-pad:72px; }
     .sphere-root * { box-sizing:border-box; }
     .sphere,.sphere-item,.item__image { transform-style:preserve-3d; }
     .stage { width:100%;height:100%;display:grid;place-items:center;position:absolute;inset:0;margin:auto;perspective:calc(var(--radius)*2);perspective-origin:50% 50%; }
     .sphere { transform:translateZ(calc(var(--radius)*-1));will-change:transform;position:absolute; }
-    .sphere-item { width:calc(var(--item-width)*var(--item-size-x));height:calc(var(--item-height)*var(--item-size-y));position:absolute;top:-999px;bottom:-999px;left:-999px;right:-999px;margin:auto;transform-origin:50% 50%;backface-visibility:hidden;transition:transform 300ms;transform:rotateY(calc(var(--rot-y)*(var(--offset-x)+((var(--item-size-x)-1)/2))+var(--rot-y-delta,0deg))) rotateX(calc(var(--rot-x)*(var(--offset-y)-((var(--item-size-y)-1)/2))+var(--rot-x-delta,0deg))) translateZ(var(--radius)); }
+    .sphere-item { position:absolute;top:-999px;bottom:-999px;left:-999px;right:-999px;margin:auto;width:calc(var(--radius)*3.14*2*${itemPct}/100);height:calc(var(--radius)*3.14*2*${itemPct}/100);transform-origin:50% 50%;backface-visibility:hidden;transition:transform 300ms; }
     .sphere-root[data-enlarging="true"] .scrim { opacity:1 !important;pointer-events:all !important; }
     @media (max-aspect-ratio:1/1) { .viewer-frame { height:auto !important;width:100% !important; } }
-    .item__image { position:absolute;inset:10px;border-radius:var(--tile-radius,12px);overflow:hidden;cursor:pointer;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 300ms;pointer-events:auto;-webkit-transform:translateZ(0);transform:translateZ(0); }
+    .item__image { position:absolute;inset:10px;border-radius:var(--tile-radius,12px);overflow:hidden;cursor:pointer;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 300ms;pointer-events:auto;transform:translateZ(0); }
     .item__image--reference { position:absolute;inset:10px;pointer-events:none; }
   `;
 
@@ -362,17 +365,34 @@ export default function DomeGallery({
         <div ref={mainRef} className="absolute inset-0 grid place-items-center overflow-hidden select-none bg-transparent" style={{ touchAction: 'none', WebkitUserSelect: 'none' }}>
           <div className="stage">
             <div ref={sphereRef} className="sphere">
-              {items.map((it, i) => (
-                <div key={`${it.x},${it.y},${i}`} className="sphere-item absolute m-auto" data-src={it.src} data-alt={it.alt} data-offset-x={it.x} data-offset-y={it.y} data-size-x={it.sizeX} data-size-y={it.sizeY}
-                  style={{ ['--offset-x' as any]: it.x, ['--offset-y' as any]: it.y, ['--item-size-x' as any]: it.sizeX, ['--item-size-y' as any]: it.sizeY, top:'-999px', bottom:'-999px', left:'-999px', right:'-999px' } as React.CSSProperties}>
-                  <div className="item__image absolute block overflow-hidden cursor-pointer bg-gray-200 transition-transform duration-300" role="button" tabIndex={0} aria-label={it.alt || 'Open image'}
+              {items.map((it, i) => {
+                // Compute rotations directly in JS — no CSS variable dependency
+                const rotY = deg * (it.x + (it.sizeX - 1) / 2);
+                const rotX = deg * (it.y - (it.sizeY - 1) / 2);
+                return (
+                <div key={`${it.x},${it.y},${i}`}
+                  className="sphere-item"
+                  data-src={it.src} data-alt={it.alt}
+                  data-offset-x={it.x} data-offset-y={it.y}
+                  data-size-x={it.sizeX} data-size-y={it.sizeY}
+                  style={{
+                    position: 'absolute', top: '-999px', bottom: '-999px', left: '-999px', right: '-999px', margin: 'auto',
+                    transformStyle: 'preserve-3d' as any,
+                    transformOrigin: '50% 50%',
+                    backfaceVisibility: 'hidden' as any,
+                    transition: 'transform 300ms',
+                    // Base transform hardcoded from JS; delta applied via CSS var on parent
+                    transform: `rotateY(calc(${rotY}deg + var(--rot-y-delta, 0deg))) rotateX(calc(${rotX}deg + var(--rot-x-delta, 0deg))) translateZ(var(--radius, 520px))`,
+                  } as React.CSSProperties}>
+                  <div className="item__image" role="button" tabIndex={0} aria-label={it.alt || 'Open image'}
                     onClick={e => { if (draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
                     onPointerUp={e => { if ((e.nativeEvent as PointerEvent).pointerType!=='touch'||draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
-                    style={{ inset:'10px', borderRadius:`var(--tile-radius,${imageBorderRadius})`, backfaceVisibility:'hidden' }}>
-                    <img src={it.src} draggable={false} alt={it.alt} className="w-full h-full object-cover pointer-events-none" style={{ backfaceVisibility:'hidden', filter:`var(--image-filter,${grayscale?'grayscale(1)':'none'})` }} />
+                    style={{ position:'absolute', inset:'10px', borderRadius:imageBorderRadius, overflow:'hidden', cursor:'pointer', backfaceVisibility:'hidden' as any, transition:'transform 300ms', pointerEvents:'auto', transform:'translateZ(0)' }}>
+                    <img src={it.src} draggable={false} alt={it.alt} style={{ width:'100%', height:'100%', objectFit:'cover', pointerEvents:'none', backfaceVisibility:'hidden' as any, filter: grayscale ? 'grayscale(1)' : 'none' }} />
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
           <div className="absolute inset-0 m-auto z-[3] pointer-events-none" style={{ backgroundImage:`radial-gradient(rgba(235,235,235,0) 65%,var(--overlay-blur-color,${overlayBlurColor}) 100%)` }} />
