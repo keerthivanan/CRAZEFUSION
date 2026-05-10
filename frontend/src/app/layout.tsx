@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Epilogue, Poppins, Space_Grotesk } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
-import AnnouncementBar from "@/components/navbar/AnnouncementBar";
 import "./globals.css";
 
 const epilogue = Epilogue({
@@ -114,7 +113,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body style={{ margin: 0, fontFamily: "var(--font-poppins-var,'Poppins',sans-serif)" }}>
         <ThemeProvider>
           <CartProvider>
-            <AnnouncementBar />
             {children}
           </CartProvider>
         </ThemeProvider>
