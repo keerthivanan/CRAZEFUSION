@@ -9,28 +9,21 @@ const DomeGallery = dynamic(() => import("@/components/reactbits/DomeGallery"), 
 const FH = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 const FB = "var(--font-poppins-var,'Poppins',sans-serif)";
 
-// Raw Cloudinary URLs — no transformation prefix so they load correctly
+// ORIGINALS — actual poster artwork, not room mockups
+const CLD = "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto";
 const IMAGES = [
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973815/crazefusion/mockups/movies/3174_Avengers_Endgame_Poster.jpg",            alt: "Avengers Endgame" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973902/crazefusion/mockups/movies/3340_John_Wick_Chapter_3_Poster.jpg",          alt: "John Wick" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973780/crazefusion/mockups/car-posters/3104_Porsche_911_GT2_RS_Poster.jpg",       alt: "Porsche 911 GT2 RS" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973745/crazefusion/mockups/car-posters/3014_Bugatti_La_Voiture_Noire_Poster.jpg", alt: "Bugatti La Voiture Noire" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/mockups/coffee-shop-posters/2899_Lose_Yourself_in_Coffee_Books_Poster.jpg", alt: "Coffee Books" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/mockups/movies/1107_Joker_Why_so_Serious_Poster.jpg",         alt: "Joker" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973775/crazefusion/mockups/car-posters/3087_McLaren_F1_Supercar_Poster.jpg",      alt: "McLaren F1" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973767/crazefusion/mockups/car-posters/3067_Lamborghini_Countach_Coastline_Poster.jpg", alt: "Lamborghini Countach" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974050/crazefusion/mockups/coffee-shop-posters/2904_Cold_Brew_Coffee_With_Ice_Poster.jpg", alt: "Cold Brew" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973967/crazefusion/mockups/movies/3460_The_Gentlemen_Cast_Poster.jpg",            alt: "The Gentlemen" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973747/crazefusion/mockups/car-posters/3042_Ferrari_288_GTO_Poster.jpg",          alt: "Ferrari 288 GTO" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973763/crazefusion/mockups/car-posters/3057_Hennessey_Venom_GT_Car_Poster.jpg",   alt: "Hennessey Venom GT" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973859/crazefusion/mockups/movies/3259_Fantastic_Four_4K_UHD_Poster.jpg",         alt: "Fantastic Four" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974061/crazefusion/mockups/coffee-shop-posters/3941_Latte_Macchiato_Drink_Poster.jpg", alt: "Latte Macchiato" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973800/crazefusion/mockups/movies/3135_22_Jump_Street_Poster.jpg",                alt: "22 Jump Street" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973760/crazefusion/mockups/car-posters/3048_Ferrari_F40_Coastal_Drive_Poster.jpg", alt: "Ferrari F40" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973765/crazefusion/mockups/car-posters/3062_Koenigsegg_Jesko_Roadster_Poster.jpg", alt: "Koenigsegg Jesko" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974073/crazefusion/mockups/coffee-shop-posters/4293_Greek_Coffee_Cup_Poster.jpg",  alt: "Greek Coffee" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973807/crazefusion/mockups/movies/3151_American_Hustle_Poster.jpg",               alt: "American Hustle" },
-  { src: "https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973743/crazefusion/mockups/car-posters/2973_Aston_Martin_One-77_Roadster_Poster.jpg", alt: "Aston Martin One-77" },
+  { src: `${CLD}/v1777973816/crazefusion/originals/movies/3174_Avengers_Endgame_Poster.webp`,      alt: "Avengers Endgame" },
+  { src: `${CLD}/v1777973904/crazefusion/originals/movies/3346_Joker_Movie_Poster.webp`,           alt: "Joker" },
+  { src: `${CLD}/v1777973739/crazefusion/originals/car-posters/2811_Porsche_911_Turbo_Marlboro_Edition_Poster.webp`, alt: "Porsche 911 Turbo" },
+  { src: `${CLD}/v1777973893/crazefusion/originals/movies/3323_Inception_City_Street_Scene_Poster.webp`, alt: "Inception" },
+  { src: `${CLD}/v1777973816/crazefusion/originals/movies/3174_Avengers_Endgame_Poster.webp`,      alt: "Avengers" },
+  { src: `${CLD}/v1777973739/crazefusion/originals/car-posters/2811_Porsche_911_Turbo_Marlboro_Edition_Poster.webp`, alt: "Porsche" },
+  { src: `${CLD}/v1777973904/crazefusion/originals/movies/3346_Joker_Movie_Poster.webp`,           alt: "Joker 2" },
+  { src: `${CLD}/v1777973893/crazefusion/originals/movies/3323_Inception_City_Street_Scene_Poster.webp`, alt: "Inception 2" },
+  { src: `${CLD}/v1777973816/crazefusion/originals/movies/3174_Avengers_Endgame_Poster.webp`,      alt: "Avengers 3" },
+  { src: `${CLD}/v1777973739/crazefusion/originals/car-posters/2811_Porsche_911_Turbo_Marlboro_Edition_Poster.webp`, alt: "Porsche 3" },
+  { src: `${CLD}/v1777973904/crazefusion/originals/movies/3346_Joker_Movie_Poster.webp`,           alt: "Joker 3" },
+  { src: `${CLD}/v1777973893/crazefusion/originals/movies/3323_Inception_City_Street_Scene_Poster.webp`, alt: "Inception 3" },
 ];
 
 const STATS = [
