@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main style={{ background: "var(--c-bg)", minHeight: "100vh", paddingTop: 108 }}>
+    <main style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
       <Hero />
       <AIBanner />
