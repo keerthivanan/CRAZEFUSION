@@ -6,6 +6,7 @@ import { useCart } from "@/context/CartContext";
 import { useTheme } from "@/context/ThemeContext";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
+const FH = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 
 // ── Mega Menu Data ─────────────────────────────────────────────────────────────
 
@@ -189,7 +190,7 @@ export default function Navbar() {
                   <div key={item.label} style={{ position: "relative" }}
                     onMouseEnter={() => handleEnter(item.label)}
                     onMouseLeave={handleLeave}>
-                    <button style={{ display: "flex", alignItems: "center", gap: 5, padding: "7px 12px", background: isActive ? (theme === "dark" ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)") : "transparent", border: "none", cursor: "pointer", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.04em", color: isActive ? iconClr : mutedClr, borderRadius: 10, transition: "all 0.15s" }}
+                    <button style={{ display: "flex", alignItems: "center", gap: 5, padding: "7px 14px", background: isActive ? (theme === "dark" ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)") : "transparent", border: "none", cursor: "pointer", fontFamily: FH, fontSize: 13, fontWeight: 600, letterSpacing: "0.01em", color: isActive ? iconClr : mutedClr, borderRadius: 10, transition: "all 0.15s" }}
                       onMouseEnter={e => (e.currentTarget.style.color = iconClr)}
                       onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = mutedClr; }}>
                       {item.label}
@@ -207,10 +208,10 @@ export default function Navbar() {
               })}
 
               {/* Direct AI Studio link */}
-              <Link href="/create" style={{ padding: "7px 12px", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.04em", textDecoration: "none", color: "#e8a000", background: "rgba(232,160,0,0.08)", border: "1px solid rgba(232,160,0,0.2)", borderRadius: 10, whiteSpace: "nowrap", transition: "all 0.15s" }}
+              <Link href="/create" style={{ padding: "7px 14px", fontFamily: FH, fontSize: 13, fontWeight: 600, letterSpacing: "0.01em", textDecoration: "none", color: "#e8a000", background: "rgba(232,160,0,0.08)", border: "1px solid rgba(232,160,0,0.2)", borderRadius: 10, whiteSpace: "nowrap", transition: "all 0.15s" }}
                 onMouseEnter={e => (e.currentTarget.style.background = "rgba(232,160,0,0.15)")}
                 onMouseLeave={e => (e.currentTarget.style.background = "rgba(232,160,0,0.08)")}>
-                AI Studio
+                ✦ AI Studio
               </Link>
             </div>
 
@@ -236,9 +237,9 @@ export default function Navbar() {
               </Link>
 
               {/* CTA */}
-              <Link href="/partner" className="nav-cta" style={{ fontFamily: FO, fontSize: 11, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none", padding: "8px 16px", borderRadius: 50, background: iconClr, color: theme === "dark" ? "#000" : "#fff", whiteSpace: "nowrap", transition: "opacity 0.15s" }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")}
-                onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+              <Link href="/partner" className="nav-cta" style={{ fontFamily: FH, fontSize: 12, fontWeight: 700, letterSpacing: "0.04em", textDecoration: "none", padding: "8px 20px", borderRadius: 50, background: "#e8a000", color: "#000", whiteSpace: "nowrap", transition: "all 0.2s", boxShadow: "0 0 20px rgba(232,160,0,0.25)" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.9"; (e.currentTarget as HTMLElement).style.transform = "scale(1.03)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; (e.currentTarget as HTMLElement).style.transform = "scale(1)"; }}>
                 Sell Art
               </Link>
 

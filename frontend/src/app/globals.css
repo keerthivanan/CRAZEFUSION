@@ -11,6 +11,10 @@ html { scroll-behavior: smooth; }
   --font-epilogue: var(--font-epilogue-var), "Epilogue", sans-serif;
   --font-poppins:  var(--font-poppins-var), "Poppins", sans-serif;
   --font-space:    var(--font-space-var), "Space Grotesk", sans-serif;
+
+  /* Semantic aliases — use these everywhere for consistency */
+  --font-heading: var(--font-epilogue-var), "Epilogue", sans-serif;
+  --font-body:    var(--font-poppins-var), "Poppins", sans-serif;
 }
 
 /* ── Keyframes ── */
@@ -307,8 +311,8 @@ body {
   .hero-grid { gap: 28px !important; }
 }
 
-/* ── Global font weight normalization ── */
-h1, h2, h3, h4, h5, h6 { font-weight: 400 !important; }
+/* ── Global heading defaults — let components control weight ── */
+h1, h2, h3, h4, h5, h6 { margin: 0; }
 
 /* Paragraphs */
 [data-theme="dark"] p { color: #999 !important; }
