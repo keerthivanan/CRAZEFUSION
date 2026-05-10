@@ -63,10 +63,10 @@ export default function MobileBottomNav() {
               flex: 1, display: "flex", flexDirection: "column",
               alignItems: "center", justifyContent: "center", gap: 3,
               textDecoration: "none",
-              color: gold ? "#e8a000" : active ? "#fff" : "#555",
+              color: gold ? "#7c3aed" : active ? "#fff" : "#555",
               position: "relative",
               transition: "color 0.15s",
-              background: gold && active ? "rgba(232,160,0,0.1)" : "transparent",
+              background: gold && active ? "rgba(124,58,237,0.1)" : "transparent",
             }}>
               {/* Active indicator */}
               {active && !gold && (
@@ -74,12 +74,12 @@ export default function MobileBottomNav() {
               )}
               {/* Gold glow for AI tab */}
               {gold && (
-                <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, rgba(232,160,0,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
+                <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, rgba(124,58,237,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
               )}
               <div style={{ position: "relative" }}>
                 <Icon />
                 {isCart && count > 0 && (
-                  <span style={{ position: "absolute", top: -6, right: -6, background: "#e8a000", color: "#000", borderRadius: "50%", width: 16, height: 16, fontSize: 8, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FO, lineHeight: 1 }}>
+                  <span style={{ position: "absolute", top: -6, right: -6, background: "#7c3aed", color: "#000", borderRadius: "50%", width: 16, height: 16, fontSize: 8, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FO, lineHeight: 1 }}>
                     {count > 9 ? "9+" : count}
                   </span>
                 )}

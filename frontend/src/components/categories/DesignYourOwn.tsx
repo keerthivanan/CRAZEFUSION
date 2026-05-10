@@ -29,7 +29,7 @@ export default function DesignYourOwn() {
             </div>
             <h2 style={{ fontFamily: FE, fontSize: "clamp(24px,3.5vw,48px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0, display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "0.25em" }}>
               <BlurText text="Design Your" delay={60} animateBy="words" direction="bottom" />
-              <span style={{ color: "#e8a000" }}>
+              <span style={{ color: "#7c3aed" }}>
                 <BlurText text="Own" delay={200} animateBy="words" direction="bottom" />
               </span>
             </h2>

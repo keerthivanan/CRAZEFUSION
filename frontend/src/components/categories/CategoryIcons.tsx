@@ -38,7 +38,7 @@ export default function CategoryIcons() {
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "48px 40px 24px" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
           <div>
-            <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8a000", marginBottom: 6 }}>
+            <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 6 }}>
               Shop by Sport
             </div>
             <h2 style={{ fontFamily: FO, fontSize: "clamp(16px,2vw,24px)", fontWeight: 700, letterSpacing: "-0.01em", color: "var(--c-text)", margin: 0, textTransform: "uppercase" }}>
@@ -133,7 +133,7 @@ export default function CategoryIcons() {
               display: "flex", justifyContent: "space-between", alignItems: "flex-end",
             }}>
               <div>
-                <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#e8a000", marginBottom: 4 }}>
+                <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 4 }}>
                   {sport.count}
                 </div>
                 <div style={{ fontFamily: FO, fontSize: 26, fontWeight: 700, letterSpacing: "-0.02em", color: "#fff", lineHeight: 1 }}>
@@ -142,7 +142,7 @@ export default function CategoryIcons() {
               </div>
               <div style={{
                 width: 40, height: 40, borderRadius: "50%",
-                background: "#e8a000",
+                background: "#7c3aed",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 flexShrink: 0,
               }}>

@@ -4,7 +4,7 @@ html { scroll-behavior: smooth; }
 
 /* ── Design Tokens ── */
 @theme {
-  --color-gold:        #e8a000;
+  --color-gold:        #7c3aed;
   --color-red:         #dc2626;
   --color-green:       #16a34a;
 
@@ -86,11 +86,11 @@ body {
 /* ── Scrollbar ── */
 ::-webkit-scrollbar       { width: 4px; }
 ::-webkit-scrollbar-track { background: #080808; }
-::-webkit-scrollbar-thumb { background: #e8a000; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: #d09800; }
+::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #6d28d9; }
 
 /* ── Selection ── */
-::selection { background: #e8a000; color: #000; }
+::selection { background: #7c3aed; color: #000; }
 
 /* ── Utilities ── */
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

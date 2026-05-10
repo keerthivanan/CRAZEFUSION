@@ -42,8 +42,8 @@ export default function Footer() {
                 onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
                 onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")} />
             </Link>
-            <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8a000", marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}>
-              <span style={{ width: 16, height: 2, background: "#e8a000" }} />
+            <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ width: 16, height: 2, background: "#7c3aed" }} />
               Premium Quality Prints
             </div>
             <p style={{ fontFamily: F, fontSize: 14, color: "#888", lineHeight: 1.8, maxWidth: 300, marginBottom: 32 }}>
@@ -53,12 +53,12 @@ export default function Footer() {
             {/* Contact */}
             <div className="footer-contact" style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
               <a href="mailto:miakataria4@gmail.com" style={{ fontFamily: F, fontSize: 13, color: "#aaa", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#e8a000")}
+                onMouseEnter={e => (e.currentTarget.style.color = "#7c3aed")}
                 onMouseLeave={e => (e.currentTarget.style.color = "#aaa")}>
                 miakataria4@gmail.com
               </a>
               <a href="/partner" style={{ fontFamily: F, fontSize: 13, color: "#aaa", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#e8a000")}
+                onMouseEnter={e => (e.currentTarget.style.color = "#7c3aed")}
                 onMouseLeave={e => (e.currentTarget.style.color = "#aaa")}>
                 Partner Program
               </a>
@@ -102,7 +102,7 @@ export default function Footer() {
           {/* Link columns */}
           {(Object.entries(links) as [string, string[][]][]).map(([cat, items]) => (
             <div key={cat} className="footer-links-col">
-              <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8a000", marginBottom: 28 }}>
+              <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 28 }}>
                 {cat}
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>

@@ -53,7 +53,7 @@ export default function CheckoutPage() {
   };
   const inputStyle = (val: string): React.CSSProperties => ({ width: "100%", padding: "14px 18px", border: `1.5px solid ${val ? "var(--c-text)" : "var(--c-border)"}`, background: "var(--c-bg)", fontFamily: FO, fontSize: 13, color: "var(--c-text)", outline: "none", transition: "border-color 0.2s", boxSizing: "border-box", borderRadius: 8 });
   const labelStyle: React.CSSProperties = { fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 8, display: "block" };
-  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => (e.currentTarget.style.borderColor = "#e8a000");
+  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => (e.currentTarget.style.borderColor = "#7c3aed");
   const onBlur  = (e: React.FocusEvent<HTMLInputElement>, val: string) => (e.currentTarget.style.borderColor = val ? "var(--c-text)" : "var(--c-border)");
 
   const handlePlaceOrder = async () => {
@@ -109,7 +109,7 @@ export default function CheckoutPage() {
         name:        "CrazeFusion",
         description: `Order — ${cartItems.length} item${cartItems.length > 1 ? "s" : ""}`,
         prefill:     { name: form.name, email: form.email, contact: form.phone },
-        theme:       { color: "#e8a000" },
+        theme:       { color: "#7c3aed" },
         handler: async (response: any) => {
           const verRes  = await fetch("/api/payment/verify", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...response, orderData, items: cartItems }) });
           const verData = await verRes.json();
@@ -273,7 +273,7 @@ export default function CheckoutPage() {
                     onMouseEnter={e => (e.currentTarget.style.borderColor = "var(--c-text)")}
                     onMouseLeave={e => (e.currentTarget.style.borderColor = "var(--c-border)")}>Back</button>
                   <button onClick={handlePlaceOrder} disabled={placing}
-                    style={{ flex: 1, padding: "15px 24px", background: placing ? "#ccc" : "#e8a000", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: placing ? "not-allowed" : "pointer", borderRadius: 50, transition: "all 0.2s", boxShadow: placing ? "none" : "0 0 24px rgba(232,160,0,0.3)" }}>
+                    style={{ flex: 1, padding: "15px 24px", background: placing ? "#ccc" : "#7c3aed", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: placing ? "not-allowed" : "pointer", borderRadius: 50, transition: "all 0.2s", boxShadow: placing ? "none" : "0 0 24px rgba(124,58,237,0.3)" }}>
                     {placing ? "Placing Order…" : `Place Order — £${total.toFixed(2)}`}
                   </button>
                 </div>

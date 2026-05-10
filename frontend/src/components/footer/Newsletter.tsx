@@ -19,8 +19,8 @@ export default function Newsletter() {
           borderRadius: 50, padding: "6px 16px 6px 10px",
           marginBottom: 28,
         }}>
-          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#e8a000" }} />
-          <span style={{ fontFamily: FO, fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#e8a000" }}>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7c3aed" }} />
+          <span style={{ fontFamily: FO, fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#7c3aed" }}>
             Join 10,000+ Customers
           </span>
         </div>
@@ -32,7 +32,7 @@ export default function Newsletter() {
           color: "var(--c-text)", textTransform: "uppercase",
           margin: "0 0 16px", lineHeight: 0.95,
         }}>
-          Get <span style={{ color: "#e8a000" }}>10% Off</span><br />Your First Order
+          Get <span style={{ color: "#7c3aed" }}>10% Off</span><br />Your First Order
         </h2>
 
         <p style={{ fontFamily: FO, fontSize: 13, color: "var(--c-text-muted)", margin: "0 0 40px", lineHeight: 1.8 }}>
@@ -69,13 +69,13 @@ export default function Newsletter() {
                 transition: "border-color 0.2s",
                 borderRadius: "50px 0 0 50px",
               }}
-              onFocus={e => (e.currentTarget.style.borderColor = "#e8a000")}
+              onFocus={e => (e.currentTarget.style.borderColor = "#7c3aed")}
               onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")}
             />
-            <ClickSpark sparkColor="#e8a000" sparkCount={8} sparkRadius={20}>
+            <ClickSpark sparkColor="#7c3aed" sparkCount={8} sparkRadius={20}>
               <button type="submit" style={{
                 padding: "16px 28px",
-                background: "#e8a000", color: "#000",
+                background: "#7c3aed", color: "#000",
                 fontFamily: FO, fontSize: 11, fontWeight: 700,
                 letterSpacing: "0.12em", textTransform: "uppercase",
                 border: "none", cursor: "pointer",

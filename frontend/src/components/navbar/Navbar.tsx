@@ -108,7 +108,7 @@ function MegaMenu({ item, onClose }: { item: typeof NAV_ITEMS[0]; onClose: () =>
       <div style={{ display: "flex", gap: 32, flex: 1 }}>
         {item.cols.map(col => (
           <div key={col.heading} style={{ minWidth: 160 }}>
-            <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8a000", marginBottom: 14 }}>{col.heading}</div>
+            <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 14 }}>{col.heading}</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {col.items.map(link => (
                 <Link key={link.label} href={link.href} onClick={onClose}
@@ -134,7 +134,7 @@ function MegaMenu({ item, onClose }: { item: typeof NAV_ITEMS[0]; onClose: () =>
           </div>
           <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: text, marginBottom: 4 }}>{item.featured.title}</div>
           <div style={{ fontFamily: FO, fontSize: 11, color: muted, marginBottom: 12, lineHeight: 1.5 }}>{item.featured.sub}</div>
-          <div style={{ display: "inline-block", padding: "7px 16px", background: "#e8a000", color: "#000", fontFamily: FO, fontSize: 11, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 50 }}>
+          <div style={{ display: "inline-block", padding: "7px 16px", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 11, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 50 }}>
             {item.featured.cta}
           </div>
         </Link>
@@ -208,9 +208,9 @@ export default function Navbar() {
               })}
 
               {/* Direct AI Studio link */}
-              <Link href="/create" style={{ padding: "7px 14px", fontFamily: FH, fontSize: 13, fontWeight: 600, letterSpacing: "0.01em", textDecoration: "none", color: "#e8a000", background: "rgba(232,160,0,0.08)", border: "1px solid rgba(232,160,0,0.2)", borderRadius: 10, whiteSpace: "nowrap", transition: "all 0.15s" }}
-                onMouseEnter={e => (e.currentTarget.style.background = "rgba(232,160,0,0.15)")}
-                onMouseLeave={e => (e.currentTarget.style.background = "rgba(232,160,0,0.08)")}>
+              <Link href="/create" style={{ padding: "7px 14px", fontFamily: FH, fontSize: 13, fontWeight: 600, letterSpacing: "0.01em", textDecoration: "none", color: "#7c3aed", background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.2)", borderRadius: 10, whiteSpace: "nowrap", transition: "all 0.15s" }}
+                onMouseEnter={e => (e.currentTarget.style.background = "rgba(124,58,237,0.15)")}
+                onMouseLeave={e => (e.currentTarget.style.background = "rgba(124,58,237,0.08)")}>
                 ✦ AI Studio
               </Link>
             </div>
@@ -230,14 +230,14 @@ export default function Navbar() {
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
                 <IconBag />
                 {count > 0 && (
-                  <span style={{ position: "absolute", top: -4, right: -4, background: "#e8a000", color: "#000", borderRadius: "50%", width: 16, height: 16, fontSize: 8, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <span style={{ position: "absolute", top: -4, right: -4, background: "#7c3aed", color: "#000", borderRadius: "50%", width: 16, height: 16, fontSize: 8, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     {count}
                   </span>
                 )}
               </Link>
 
               {/* CTA */}
-              <Link href="/partner" className="nav-cta" style={{ fontFamily: FH, fontSize: 12, fontWeight: 700, letterSpacing: "0.04em", textDecoration: "none", padding: "8px 20px", borderRadius: 50, background: "#e8a000", color: "#000", whiteSpace: "nowrap", transition: "all 0.2s", boxShadow: "0 0 20px rgba(232,160,0,0.25)" }}
+              <Link href="/partner" className="nav-cta" style={{ fontFamily: FH, fontSize: 12, fontWeight: 700, letterSpacing: "0.04em", textDecoration: "none", padding: "8px 20px", borderRadius: 50, background: "#7c3aed", color: "#000", whiteSpace: "nowrap", transition: "all 0.2s", boxShadow: "0 0 20px rgba(124,58,237,0.25)" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.9"; (e.currentTarget as HTMLElement).style.transform = "scale(1.03)"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; (e.currentTarget as HTMLElement).style.transform = "scale(1)"; }}>
                 Sell Art
@@ -273,7 +273,7 @@ export default function Navbar() {
             {/* Main nav sections */}
             {NAV_ITEMS.map(item => (
               <div key={item.label} style={{ marginBottom: 32 }}>
-                <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#e8a000", marginBottom: 12 }}>{item.label}</div>
+                <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 12 }}>{item.label}</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
                   {item.cols.flatMap(col => col.items).map(link => (
                     <Link key={link.label} href={link.href} onClick={() => setMobileOpen(false)}
@@ -294,7 +294,7 @@ export default function Navbar() {
             {/* Mobile CTA buttons */}
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 16 }}>
               <Link href="/create" onClick={() => setMobileOpen(false)}
-                style={{ display: "block", padding: "16px 0", background: "#e8a000", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50, textAlign: "center", boxShadow: "0 0 32px rgba(232,160,0,0.25)" }}>
+                style={{ display: "block", padding: "16px 0", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50, textAlign: "center", boxShadow: "0 0 32px rgba(124,58,237,0.25)" }}>
                 Open AI Studio
               </Link>
               <Link href="/collection" onClick={() => setMobileOpen(false)}

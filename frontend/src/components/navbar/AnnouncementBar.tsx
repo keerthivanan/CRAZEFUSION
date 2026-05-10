@@ -37,7 +37,7 @@ export default function AnnouncementBar() {
                 fontFamily: FO,
                 fontSize: 10, fontWeight: item.gold ? 700 : 500,
                 letterSpacing: "0.16em", textTransform: "uppercase",
-                color: item.gold ? "#e8a000" : "rgba(255,255,255,0.45)",
+                color: item.gold ? "#7c3aed" : "rgba(255,255,255,0.45)",
                 whiteSpace: "nowrap",
                 padding: "0 10px",
               }}>

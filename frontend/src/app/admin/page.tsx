@@ -6,7 +6,7 @@ const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 // Password verified server-side via /api/admin/auth — never in client bundle
 
 const STATUS_COLOUR: Record<string, string> = {
-  pending:  "#e8a000",
+  pending:  "#7c3aed",
   approved: "#16a34a",
   rejected: "#dc2626",
   removed:  "#888",
@@ -98,8 +98,8 @@ export default function AdminPanel() {
         <div style={{ maxWidth: 1200, margin: "0 auto", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ fontFamily: FO, fontSize: 14, fontWeight: 700, color: "#fff", letterSpacing: "0.1em", textTransform: "uppercase" }}>Admin Panel</div>
           <div style={{ display: "flex", gap: 24 }}>
-            {pendingPartners > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#e8a000" }}>{pendingPartners} partner{pendingPartners > 1 ? "s" : ""} pending</span>}
-            {pendingDesigns  > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#e8a000" }}>{pendingDesigns} design{pendingDesigns > 1 ? "s" : ""} pending</span>}
+            {pendingPartners > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#7c3aed" }}>{pendingPartners} partner{pendingPartners > 1 ? "s" : ""} pending</span>}
+            {pendingDesigns  > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#7c3aed" }}>{pendingDesigns} design{pendingDesigns > 1 ? "s" : ""} pending</span>}
           </div>
         </div>
       </div>
@@ -211,7 +211,7 @@ export default function AdminPanel() {
                   <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>£{o.total.toFixed(2)}</div>
                   <div>{statusBadge(o.status)}</div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                    {(o.status === "pending" || o.status === "confirmed") && btn("Mark Printing", () => updateOrderStatus(o.id, "in_production"), "#e8a000")}
+                    {(o.status === "pending" || o.status === "confirmed") && btn("Mark Printing", () => updateOrderStatus(o.id, "in_production"), "#7c3aed")}
                     {o.status === "in_production" && btn("Mark Shipped", () => updateOrderStatus(o.id, "shipped", trackingInputs[o.id] || undefined), "#2563eb")}
                     {o.status === "shipped"  && btn("Mark Delivered", () => updateOrderStatus(o.id, "delivered"), "#16a34a")}
                     {(o.status === "in_production" || o.status === "pending" || o.status === "confirmed") && (

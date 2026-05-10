@@ -77,7 +77,7 @@ export default function ProductPage() {
     <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
       <Navbar />
       <div style={{ fontFamily: FO, fontSize: 32, fontWeight: 400, color: "var(--c-text)", paddingTop: 64 }}>Product not found</div>
-      <Link href="/collection" style={{ fontFamily: FO, fontSize: 13, color: "#e8a000", textDecoration: "underline" }}>← Back to collection</Link>
+      <Link href="/collection" style={{ fontFamily: FO, fontSize: 13, color: "#7c3aed", textDecoration: "underline" }}>← Back to collection</Link>
     </div>
   );
 
@@ -134,7 +134,7 @@ export default function ProductPage() {
             </h1>
 
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-              <div style={{ color: "#e8a000", fontSize: 13, letterSpacing: 2 }}>★★★★★</div>
+              <div style={{ color: "#7c3aed", fontSize: 13, letterSpacing: 2 }}>★★★★★</div>
               <span style={{ fontFamily: FO, fontSize: 12, color: "#aaa" }}>4.9 (2,400+ reviews)</span>
             </div>
 
@@ -177,9 +177,9 @@ export default function ProductPage() {
               </ClickSpark>
               <ClickSpark sparkColor="#111" sparkCount={10} sparkRadius={28}>
                 <button onClick={buyNow}
-                  style={{ width: "100%", padding: "16px 0", background: "#e8a000", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50, transition: "all 0.2s", boxShadow: "0 0 24px rgba(232,160,0,0.3)" }}
-                  onMouseEnter={e => { e.currentTarget.style.background = "#d09800"; e.currentTarget.style.boxShadow = "0 0 40px rgba(232,160,0,0.5)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = "#e8a000"; e.currentTarget.style.boxShadow = "0 0 24px rgba(232,160,0,0.3)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                  style={{ width: "100%", padding: "16px 0", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50, transition: "all 0.2s", boxShadow: "0 0 24px rgba(124,58,237,0.3)" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "#6d28d9"; e.currentTarget.style.boxShadow = "0 0 40px rgba(124,58,237,0.5)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "#7c3aed"; e.currentTarget.style.boxShadow = "0 0 24px rgba(124,58,237,0.3)"; e.currentTarget.style.transform = "translateY(0)"; }}>
                   Buy Now — £{price.toFixed(2)}
                 </button>
               </ClickSpark>
@@ -187,11 +187,11 @@ export default function ProductPage() {
 
             {/* Edit with AI */}
             <Link href={`/create?edit=${p.id}`}
-              style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, width: "100%", padding: "14px 0", background: "rgba(232,160,0,0.06)", border: "1px solid rgba(232,160,0,0.25)", borderRadius: 50, textDecoration: "none", marginBottom: 16, transition: "all 0.2s" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(232,160,0,0.12)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(232,160,0,0.06)"; }}>
-              <span style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#e8a000" }}>Edit This Poster With AI</span>
-              <span style={{ fontFamily: FO, fontSize: 11, color: "#e8a000", opacity: 0.6 }}>— 5 credits</span>
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, width: "100%", padding: "14px 0", background: "rgba(124,58,237,0.06)", border: "1px solid rgba(124,58,237,0.25)", borderRadius: 50, textDecoration: "none", marginBottom: 16, transition: "all 0.2s" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(124,58,237,0.12)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(124,58,237,0.06)"; }}>
+              <span style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#7c3aed" }}>Edit This Poster With AI</span>
+              <span style={{ fontFamily: FO, fontSize: 11, color: "#7c3aed", opacity: 0.6 }}>— 5 credits</span>
             </Link>
 
             {/* Payment methods */}
@@ -247,7 +247,7 @@ export default function ProductPage() {
           <div style={{ borderTop: "1px solid var(--c-border)", padding: "64px 32px" }}>
             <div style={{ maxWidth: 1400, margin: "0 auto" }}>
               <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#aaa", marginBottom: 8 }}>You Might Also Like</div>
-              <h2 style={{ fontFamily: FO, fontSize: "clamp(22px,3vw,36px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 32 }}>Related <span style={{ color: "#e8a000" }}>Posters</span></h2>
+              <h2 style={{ fontFamily: FO, fontSize: "clamp(22px,3vw,36px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 32 }}>Related <span style={{ color: "#7c3aed" }}>Posters</span></h2>
               <div className="related-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 24 }}>
                 {related.map(r => (
                   <Link key={r.id} href={`/product/${r.id}`} style={{ textDecoration: "none" }}>

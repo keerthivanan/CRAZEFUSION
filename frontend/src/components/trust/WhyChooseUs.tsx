@@ -40,7 +40,7 @@ export default function WhyChooseUs() {
             gap: 24, marginBottom: 56,
           }}>
             <div>
-              <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#e8a000", marginBottom: 12 }}>
+              <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 12 }}>
                 Why Choose Us
               </div>
               <h2 style={{ fontFamily: FO, fontSize: "clamp(28px,4vw,52px)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--c-text)", margin: 0, textTransform: "uppercase", lineHeight: 0.95 }}>
@@ -72,7 +72,7 @@ export default function WhyChooseUs() {
                 <div style={{ fontFamily: FO, fontSize: 48, fontWeight: 700, letterSpacing: "-0.04em", color: "var(--c-text)", opacity: 0.18, lineHeight: 1, marginBottom: 28 }}>
                   {num}
                 </div>
-                <div style={{ width: 28, height: 2, background: "#e8a000", marginBottom: 20 }} />
+                <div style={{ width: 28, height: 2, background: "#7c3aed", marginBottom: 20 }} />
                 <div style={{ fontFamily: FO, fontSize: 15, fontWeight: 700, color: "var(--c-text)", letterSpacing: "-0.01em", marginBottom: 14 }}>
                   {title}
                 </div>

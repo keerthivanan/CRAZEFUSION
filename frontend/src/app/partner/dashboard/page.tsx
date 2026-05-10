@@ -14,7 +14,7 @@ const inputStyle: React.CSSProperties = {
 };
 
 const STATUS_COLOUR: Record<string, string> = {
-  pending:  "#e8a000",
+  pending:  "#7c3aed",
   approved: "#16a34a",
   rejected: "#dc2626",
   removed:  "#dc2626",
@@ -123,7 +123,7 @@ export default function PartnerDashboard() {
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 32px" }}>
 
         {partner.status === "pending" && (
-          <div style={{ padding: "16px 20px", background: "rgba(232,160,0,0.08)", border: "1px solid rgba(232,160,0,0.3)", borderRadius: 4, marginBottom: 32, fontFamily: FO, fontSize: 13, color: "#e8a000" }}>
+          <div style={{ padding: "16px 20px", background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.3)", borderRadius: 4, marginBottom: 32, fontFamily: FO, fontSize: 13, color: "#7c3aed" }}>
             ⏳ Your application is under review. We&apos;ll approve it within 24 hours. You must submit your first design within 3 days of approval.
           </div>
         )}
@@ -158,7 +158,7 @@ export default function PartnerDashboard() {
           designs.length === 0
             ? <div style={{ textAlign: "center", padding: "64px 32px", color: "#aaa", fontFamily: FO, fontSize: 13 }}>
                 No designs yet.{" "}
-                <button onClick={() => setTab("upload")} style={{ color: "#e8a000", background: "none", border: "none", cursor: "pointer", fontFamily: FO, fontSize: 13, textDecoration: "underline" }}>Upload your first design →</button>
+                <button onClick={() => setTab("upload")} style={{ color: "#7c3aed", background: "none", border: "none", cursor: "pointer", fontFamily: FO, fontSize: 13, textDecoration: "underline" }}>Upload your first design →</button>
               </div>
             : <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }} className="designs-grid">
                 {designs.map(d => (
@@ -228,7 +228,7 @@ export default function PartnerDashboard() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginBottom: 32 }} className="earn-stats">
               {[["Total Earned", `£${totalEarned.toFixed(2)}`], ["Paid Out", `£${totalPaid.toFixed(2)}`], ["Pending Payout", `£${totalPending.toFixed(2)}`]].map(([label, val]) => (
                 <div key={label} style={{ padding: "24px 20px", border: "1px solid var(--c-border)", background: "var(--c-bg-soft)", borderRadius: 4, textAlign: "center" }}>
-                  <div style={{ fontFamily: FO, fontSize: 28, fontWeight: 700, color: label === "Pending Payout" ? "#e8a000" : "var(--c-text)" }}>{val}</div>
+                  <div style={{ fontFamily: FO, fontSize: 28, fontWeight: 700, color: label === "Pending Payout" ? "#7c3aed" : "var(--c-text)" }}>{val}</div>
                   <div style={{ fontFamily: FO, fontSize: 11, color: "#aaa", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: 6 }}>{label}</div>
                 </div>
               ))}

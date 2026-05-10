@@ -42,8 +42,8 @@ export default function CustomCursor() {
 
   return (
     <>
-      <div ref={dot} style={{ position: "fixed", top: 0, left: 0, width: 8, height: 8, borderRadius: "50%", background: "#e8a000", pointerEvents: "none", zIndex: 99999, transition: "opacity 0.2s", mixBlendMode: "difference" }} />
-      <div ref={ring} style={{ position: "fixed", top: 0, left: 0, width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(232,160,0,0.7)", pointerEvents: "none", zIndex: 99998, transition: "width 0.3s, height 0.3s, opacity 0.3s", mixBlendMode: "difference" }} />
+      <div ref={dot} style={{ position: "fixed", top: 0, left: 0, width: 8, height: 8, borderRadius: "50%", background: "#7c3aed", pointerEvents: "none", zIndex: 99999, transition: "opacity 0.2s", mixBlendMode: "difference" }} />
+      <div ref={ring} style={{ position: "fixed", top: 0, left: 0, width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(124,58,237,0.7)", pointerEvents: "none", zIndex: 99998, transition: "width 0.3s, height 0.3s, opacity 0.3s", mixBlendMode: "difference" }} />
       <style>{`* { cursor: none !important; }`}</style>
     </>
   );

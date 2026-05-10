@@ -83,7 +83,7 @@ export default function MultiPosters() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 32px", marginBottom: 32, flexWrap: "wrap", gap: 12 }}>
           <h2 style={{ fontFamily: FO, fontSize: "clamp(22px,3vw,40px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0, display: "flex", gap: "0.2em", flexWrap: "wrap", alignItems: "center" }}>
             <BlurText text="Latest" delay={60} animateBy="words" direction="bottom" />
-            <span style={{ color: "#e8a000" }}><BlurText text="Arrivals" delay={200} animateBy="words" direction="bottom" /></span>
+            <span style={{ color: "#7c3aed" }}><BlurText text="Arrivals" delay={200} animateBy="words" direction="bottom" /></span>
           </h2>
           <Link href="/collection" style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--c-btn-text)", background: "var(--c-btn-bg)", textDecoration: "none", padding: "9px 22px", borderRadius: 50, whiteSpace: "nowrap" }}>
             View All
