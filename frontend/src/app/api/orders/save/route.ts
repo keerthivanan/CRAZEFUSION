@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-const sb = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
 export async function POST(req: NextRequest) {
   try {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (!url || !key) return NextResponse.json({ error: "Database not configured" }, { status: 503 });
+
+    const sb = createClient(url, key);
     const { orderData, items } = await req.json();
 
-    // Save order
     const { data: order, error: orderErr } = await sb.from("orders").insert({
       customer_name:     orderData.customer_name,
       customer_email:    orderData.customer_email,
@@ -31,9 +30,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: orderErr?.message ?? "Failed to save order" }, { status: 500 });
     }
 
-    const orderId = order.id;
-
-    // Save items — map AI poster ids safely
+    const orderId  = order.id;
     const itemRows = (items as any[]).map(i => ({
       order_id:   orderId,
       product_id: (typeof i.id === "string" && i.id === "ai") ? null : (Number(i.product_id ?? i.id) || null),
@@ -51,34 +48,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Failed to save order items" }, { status: 500 });
     }
 
-    // Credit partner 30% for partner designs (product_id >= 10000)
+    // Credit partner 30% for partner designs
     for (const item of itemRows) {
       if (!item.product_id || item.product_id < 10000) continue;
-
-      const { data: design } = await sb
-        .from("partner_designs")
-        .select("partner_id, sales, earnings")
-        .eq("id", item.product_id)
-        .single();
-
+      const { data: design } = await sb.from("partner_designs").select("partner_id, sales, earnings").eq("id", item.product_id).single();
       if (!design?.partner_id) continue;
-
-      const commission   = parseFloat((item.price * 0.3 * item.qty).toFixed(2));
-      const newSales     = (design.sales    ?? 0) + (item.qty ?? 1);
-      const newEarnings  = (design.earnings ?? 0) + commission;
-
-      // Record the sale
-      await sb.from("partner_sales").insert({
-        partner_id:  design.partner_id,
-        order_id:    orderId,
-        product_id:  item.product_id,
-        amount:      commission,
-      });
-
-      // Increment design stats (fetch-then-update — safe for our traffic level)
-      await sb.from("partner_designs")
-        .update({ sales: newSales, earnings: newEarnings })
-        .eq("id", item.product_id);
+      const commission  = parseFloat((item.price * 0.3 * item.qty).toFixed(2));
+      await sb.from("partner_sales").insert({ partner_id: design.partner_id, order_id: orderId, product_id: item.product_id, amount: commission });
+      await sb.from("partner_designs").update({ sales: (design.sales ?? 0) + item.qty, earnings: (design.earnings ?? 0) + commission }).eq("id", item.product_id);
     }
 
     return NextResponse.json({ orderId });

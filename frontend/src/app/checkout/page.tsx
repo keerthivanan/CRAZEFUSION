@@ -72,7 +72,7 @@ export default function CheckoutPage() {
 
     const cartItems = items.map(i => ({
       id:         i.id,
-      product_id: typeof i.id === "string" && i.id.startsWith("ai-") ? null : Number(i.id),
+      product_id: typeof i.id === "string" && (i.id === "ai" || i.id.startsWith("ai-")) ? null : Number(i.id),
       title:      i.title,
       img:        i.img,
       size:       i.size,

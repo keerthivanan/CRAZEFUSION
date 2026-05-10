@@ -1,16 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-const sb = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
 const PACKS: Record<string, { credits: number; price: number }> = {
   starter: { credits: 30,  price: 2.99 },
   creator: { credits: 100, price: 7.99 },
   pro:     { credits: 250, price: 14.99 },
 };
+
+function getClient(): SupabaseClient | null {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key);
+}
 
 // Step 1: Create Razorpay order for credit purchase
 export async function POST(req: NextRequest) {
@@ -24,8 +26,8 @@ export async function POST(req: NextRequest) {
     const secret = process.env.RAZORPAY_KEY_SECRET;
 
     if (!key || key === "your_razorpay_key_id") {
-      // Dev mode — add credits directly
-      await addCreditsToUser(userId, credits, "dev_mock");
+      const sb = getClient();
+      if (sb) await addCreditsToUser(sb, userId, credits, "dev_mock");
       return NextResponse.json({ mock: true, credits, message: "Dev mode: credits added directly" });
     }
 
@@ -61,16 +63,18 @@ export async function PUT(req: NextRequest) {
       if (expected !== razorpay_signature) return NextResponse.json({ error: "Payment verification failed" }, { status: 400 });
     }
 
+    const sb = getClient();
+    if (!sb) return NextResponse.json({ error: "Database not configured" }, { status: 503 });
+
     const { credits } = PACKS[pack] ?? { credits: 0 };
-    await addCreditsToUser(userId, credits, razorpay_payment_id);
+    await addCreditsToUser(sb, userId, credits, razorpay_payment_id);
     return NextResponse.json({ success: true, credits });
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
 }
 
-async function addCreditsToUser(userId: string, credits: number, paymentId: string) {
-  // Upsert: create row if not exists, otherwise increment
+async function addCreditsToUser(sb: SupabaseClient, userId: string, credits: number, paymentId: string) {
   const { data: existing } = await sb.from("user_credits").select("balance").eq("user_id", userId).single();
   const newBalance = (existing?.balance ?? 0) + credits;
 

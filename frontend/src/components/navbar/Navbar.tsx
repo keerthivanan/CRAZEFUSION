@@ -13,9 +13,10 @@ const SHOP_COLS = [
   {
     heading: "Poster Shop",
     items: [
-      { label: "All Posters",   href: "/collection",               sub: "609+ designs" },
-      { label: "Cars",          href: "/collection?cat=Cars",       sub: "Ferrari, Porsche, BMW" },
+      { label: "All Posters",   href: "/collection",               sub: "618+ designs" },
       { label: "Movies",        href: "/collection?cat=Movies",     sub: "Marvel, DC, classics" },
+      { label: "Cars",          href: "/collection?cat=Cars",       sub: "Ferrari, Porsche, BMW" },
+      { label: "Music",         href: "/collection?cat=Music",      sub: "Concerts, vinyl, artists" },
       { label: "Coffee Shop",   href: "/collection?cat=Coffee+Shop",sub: "Latte art, espresso" },
     ],
   },
@@ -62,7 +63,7 @@ const SELL_COLS = [
 ];
 
 const NAV_ITEMS = [
-  { label: "Shop",       cols: SHOP_COLS, featured: { title: "609+ Designs", sub: "Premium wall art from £11.99", img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973739/crazefusion/originals/car-posters/2811_Porsche_911_Turbo_Marlboro_Edition_Poster.webp", cta: "Browse All", href: "/collection" } },
+  { label: "Shop",       cols: SHOP_COLS, featured: { title: "618+ Designs", sub: "Premium wall art from £11.99", img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973739/crazefusion/originals/car-posters/2811_Porsche_911_Turbo_Marlboro_Edition_Poster.webp", cta: "Browse All", href: "/collection" } },
   { label: "AI Studio",  cols: AI_COLS,   featured: { title: "Generate in Seconds", sub: "Describe any poster. AI creates it.", img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973904/crazefusion/originals/movies/3346_Joker_Movie_Poster.webp",   cta: "Try Now",    href: "/create" } },
   { label: "Sell",       cols: SELL_COLS, featured: { title: "Earn £6 Per Sale", sub: "Publish your designs. Earn 30%.", img: "https://res.cloudinary.com/dxosc5jfy/image/upload/q_auto,f_auto/v1777973816/crazefusion/originals/movies/3174_Avengers_Endgame_Poster.webp",  cta: "Join Free",  href: "/partner" } },
 ];

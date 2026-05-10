@@ -87,8 +87,8 @@ export default function PartnerDashboard() {
     setTimeout(() => setUploadOk(false), 3000);
   };
 
-  const totalEarned  = sales.reduce((s, x) => s + Number(x.partner_cut), 0);
-  const totalPaid    = sales.filter(s => s.paid_out).reduce((s, x) => s + Number(x.partner_cut), 0);
+  const totalEarned  = sales.reduce((s, x) => s + Number(x.amount), 0);
+  const totalPaid    = sales.filter(s => s.paid_out).reduce((s, x) => s + Number(x.amount), 0);
   const totalPending = totalEarned - totalPaid;
 
   const statusBadge = (s: string) => (
@@ -245,7 +245,7 @@ export default function PartnerDashboard() {
                     <div key={s.id} style={{ display: "grid", gridTemplateColumns: "1fr 120px 100px 80px", padding: "14px 16px", borderBottom: "1px solid var(--c-border)" }}>
                       <div style={{ fontFamily: FO, fontSize: 13, color: "var(--c-text)" }}>{s.design_title ?? "—"}</div>
                       <div style={{ fontFamily: FO, fontSize: 12, color: "#aaa" }}>{new Date(s.created_at).toLocaleDateString("en-GB")}</div>
-                      <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "#16a34a" }}>£{Number(s.partner_cut).toFixed(2)}</div>
+                      <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "#16a34a" }}>£{Number(s.amount).toFixed(2)}</div>
                       <div>{statusBadge(s.paid_out ? "paid" : "pending")}</div>
                     </div>
                   ))}

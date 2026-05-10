@@ -20,6 +20,7 @@ Thumbs.db
 assets/
 keerthicollections/
 mockups/
+newposters/
 posterzee_cropped/
 
 # Loose image files in root
@@ -32,3 +33,6 @@ posterzee_cropped/
 # Scripts
 scripts/node_modules/
 scripts/upload_3cats_progress.json
+
+# Frontend download scripts (contain API keys, local use only)
+frontend/scripts/

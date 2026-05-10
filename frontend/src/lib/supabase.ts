@@ -24,13 +24,18 @@ export interface Product {
 import carsData   from '../../public/data/cars.json';
 import moviesData from '../../public/data/movies.json';
 import coffeeData from '../../public/data/coffee.json';
-import allData    from '../../public/data/all.json';
+import musicData  from '../../public/data/music.json';
 
-const STATIC: Record<string, Product[]> = {
+const CATEGORIES: Record<string, Product[]> = {
   Cars:          carsData   as Product[],
   Movies:        moviesData as Product[],
   'Coffee Shop': coffeeData as Product[],
-  All:           allData    as Product[],
+  Music:         musicData  as Product[],
+};
+
+const STATIC: Record<string, Product[]> = {
+  ...CATEGORIES,
+  All: Object.values(CATEGORIES).flat(),
 };
 
 // ── PartnerDesign — matches actual DB schema ──────────────────────────────────
@@ -126,14 +131,14 @@ export interface Partner {
 }
 
 export interface PartnerSale {
-  id:           string;
-  partner_id:   string;
-  design_id:    string;
+  id:            string;
+  partner_id:    string;
+  product_id:    number;
+  order_id:      string;
   design_title?: string;
-  order_amount: number;
-  partner_cut:  number;
-  paid_out:     boolean;
-  created_at:   string;
+  amount:        number;
+  paid_out:      boolean;
+  created_at:    string;
 }
 
 // ── Partner auth ──────────────────────────────────────────────────────────────

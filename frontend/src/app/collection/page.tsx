@@ -13,7 +13,17 @@ import SlashHeading from "@/components/ui/SlashHeading";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const LOGO_KEY = "pk_X0d9dkoXSXC1bEBCAvNs-g";
 
-const CATEGORIES = ["All", "Cars", "Movies", "Coffee Shop"];
+const CATEGORIES = ["All", "Movies", "Cars", "Music", "Football", "F1", "Gaming", "Motivation", "Cricket", "TV Shows", "Coffee Shop"];
+
+// ── Music Genre Data ───────────────────────────────────────────────────────────
+const MUSIC_GENRES = [
+  { name: "Guitar",    letter: "GT", bg: "#1a0d0d", fg: "#ef4444", keywords: ["Guitar","Guitar Solo","Acoustic","Electric Guitar"] },
+  { name: "Concert",   letter: "CO", bg: "#0a0a1a", fg: "#818cf8", keywords: ["Concert","Crowd","Stage","Spotlight","Smoke"] },
+  { name: "Vinyl",     letter: "VY", bg: "#111",    fg: "#e5e7eb", keywords: ["Vinyl","Record","LP","Turntable","DJ"] },
+  { name: "Piano",     letter: "PI", bg: "#0d0d0d", fg: "#f5f5f5", keywords: ["Piano","Keys"] },
+  { name: "Drums",     letter: "DR", bg: "#1a0d00", fg: "#f97316", keywords: ["Drum","Drum Kit"] },
+  { name: "Headphones",letter: "HP", bg: "#050505", fg: "#a3e635", keywords: ["Headphone","Bass"] },
+];
 
 // ── Car Brand Data ─────────────────────────────────────────────────────────────
 const CAR_BRANDS = [
@@ -142,7 +152,7 @@ export default function CollectionPage() {
   // Read ?cat= from URL client-side (avoids useSearchParams Suspense requirement)
   useEffect(() => {
     const cat = new URLSearchParams(window.location.search).get("cat");
-    if (cat && ["Cars", "Movies", "Coffee Shop"].includes(cat)) setActiveCategory(cat);
+    if (cat && ["Cars", "Movies", "Music", "Football", "F1", "Gaming", "Motivation", "Cricket", "TV Shows", "Coffee Shop"].includes(cat)) setActiveCategory(cat);
   }, []);
 
   useEffect(() => {
@@ -163,6 +173,9 @@ export default function CollectionPage() {
       } else if (activeCategory === "Movies") {
         const f = MOVIE_FRANCHISES.find(f => f.name === activeBrand);
         if (f && !matchesKeywords(p.name, f.keywords)) return false;
+      } else if (activeCategory === "Music") {
+        const g = MUSIC_GENRES.find(g => g.name === activeBrand);
+        if (g && !matchesKeywords(p.name, g.keywords)) return false;
       } else if (activeCategory === "Coffee Shop") {
         const t = COFFEE_TYPES.find(t => t.name === activeBrand);
         if (t && !matchesKeywords(p.name, t.keywords)) return false;
@@ -211,7 +224,11 @@ export default function CollectionPage() {
                   {loading ? "Loading…" : `${sorted.length} products`}
                 </p>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+                <select value={activeCategory} onChange={e => setActiveCategory(e.target.value)}
+                  style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: "var(--c-bg)", color: "var(--c-text)", fontFamily: FO, fontSize: 11, fontWeight: 700, cursor: "pointer", outline: "none", borderRadius: 50, letterSpacing: "0.05em" }}>
+                  {CATEGORIES.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                </select>
                 <button onClick={() => setFiltersOpen(!filtersOpen)}
                   style={{ padding: "8px 16px", border: "1px solid var(--c-border)", background: filtersOpen ? "var(--c-btn-bg)" : "transparent", color: filtersOpen ? "var(--c-btn-text)" : "var(--c-text)", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", transition: "all 0.2s", borderRadius: 50 }}>
                   Filters {filtersOpen ? "↑" : "↓"}
@@ -353,6 +370,31 @@ export default function CollectionPage() {
                       ) : null}
                     </div>
                     <span style={{ fontFamily: FO, fontSize: 8, fontWeight: 700, color: active ? "var(--c-text)" : "#888", letterSpacing: "0.06em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{f.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {activeCategory === "Music" && (
+          <div style={{ padding: "14px 32px", background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", overflowX: "auto", scrollbarWidth: "none" }}>
+            <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", gap: 14, alignItems: "center", minWidth: "max-content" }}>
+              <button onClick={() => setActiveBrand(null)} style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: 0, border: "none", background: "transparent", cursor: "pointer" }}>
+                <div style={{ width: 56, height: 56, borderRadius: "50%", border: `2px solid ${!activeBrand ? "var(--c-text)" : "var(--c-border)"}`, background: !activeBrand ? "var(--c-btn-bg)" : "var(--c-bg-soft)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: !activeBrand ? "0 0 0 2px var(--c-text)" : "none", transition: "all 0.15s" }}>
+                  <span style={{ fontFamily: FO, fontSize: 9, fontWeight: 800, color: !activeBrand ? "var(--c-btn-text)" : "#888", letterSpacing: "0.05em" }}>ALL</span>
+                </div>
+                <span style={{ fontFamily: FO, fontSize: 8, fontWeight: 700, color: !activeBrand ? "var(--c-text)" : "#888", letterSpacing: "0.06em", textTransform: "uppercase" }}>All</span>
+              </button>
+              {MUSIC_GENRES.map(g => {
+                const active = activeBrand === g.name;
+                return (
+                  <button key={g.name} onClick={() => setActiveBrand(active ? null : g.name)}
+                    style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: 0, border: "none", background: "transparent", cursor: "pointer", transition: "all 0.15s" }}>
+                    <div style={{ width: 56, height: 56, borderRadius: "50%", border: `2px solid ${active ? "var(--c-text)" : "var(--c-border)"}`, background: g.bg, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: active ? "0 0 0 2px var(--c-text)" : "none", transition: "all 0.15s" }}>
+                      <span style={{ fontFamily: FO, fontSize: 13, fontWeight: 800, color: g.fg, letterSpacing: "0.02em" }}>{g.letter}</span>
+                    </div>
+                    <span style={{ fontFamily: FO, fontSize: 8, fontWeight: 700, color: active ? "var(--c-text)" : "#888", letterSpacing: "0.06em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{g.name}</span>
                   </button>
                 );
               })}
