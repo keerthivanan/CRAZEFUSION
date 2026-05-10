@@ -4,6 +4,7 @@ import Link from "next/link";
 import Navbar from "@/components/navbar/Navbar";
 import { useCart } from "@/context/CartContext";
 import { supabase } from "@/lib/supabase";
+import BorderGlow from "@/components/reactbits/BorderGlow";
 
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 const CLOUD  = "dxosc5jfy";
@@ -405,19 +406,21 @@ export default function CreatePage() {
                   onKeyDown={e => { if (e.key === "Enter") handlePublish(); }} />
 
                 {/* Earnings calculator */}
-                <div style={{ background: "rgba(124,58,237,0.04)", border: "1px solid rgba(124,58,237,0.12)", borderRadius: 14, padding: 16, marginBottom: 16 }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 12 }}>Earnings Calculator</div>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
-                    <span style={{ fontSize: 12, color: "#555" }}>If {sales} people buy this:</span>
-                    <span style={{ fontSize: 16, fontWeight: 800, color: "#16a34a" }}>£{earnings}</span>
+                <BorderGlow backgroundColor="#0a0814" borderRadius={14} borderWidth={1} colors={["#c084fc", "#f472b6", "#38bdf8"]} glowColor="192 132 252" glowOpacity={0.5} glowBlur={18} animated={false} style={{ marginBottom: 16 }}>
+                  <div style={{ padding: 16 }}>
+                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 12 }}>Earnings Calculator</div>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
+                      <span style={{ fontSize: 12, color: "#555" }}>If {sales} people buy this:</span>
+                      <span style={{ fontSize: 16, fontWeight: 800, color: "#16a34a" }}>£{earnings}</span>
+                    </div>
+                    <input type="range" min={1} max={100} value={sales} onChange={e => setSales(Number(e.target.value))}
+                      style={{ width: "100%", accentColor: "#7c3aed" }} />
+                    <div style={{ display: "flex", justifyContent: "space-between", marginTop: 10 }}>
+                      <span style={{ fontSize: 10, color: "#333" }}>Sale price: £19.99</span>
+                      <span style={{ fontSize: 10, color: "#333" }}>Your cut: 30% = £6.00</span>
+                    </div>
                   </div>
-                  <input type="range" min={1} max={100} value={sales} onChange={e => setSales(Number(e.target.value))}
-                    style={{ width: "100%", accentColor: "#7c3aed" }} />
-                  <div style={{ display: "flex", justifyContent: "space-between", marginTop: 10 }}>
-                    <span style={{ fontSize: 10, color: "#333" }}>Sale price: £19.99</span>
-                    <span style={{ fontSize: 10, color: "#333" }}>Your cut: 30% = £6.00</span>
-                  </div>
-                </div>
+                </BorderGlow>
 
                 {pubErr && <div style={{ fontSize: 11, color: "#f87171", marginBottom: 10 }}>{pubErr}</div>}
 
@@ -464,15 +467,28 @@ export default function CreatePage() {
             {!result && !loading && (
               <div style={{ marginTop: 20, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                 {[
-                  { title: "Generate", body: "Describe any poster. AI creates it." },
-                  { title: "Buy", body: "Order it printed. Delivered in 2–4 days." },
-                  { title: "Publish", body: "List it in the shop for free." },
-                  { title: "Earn", body: "Get £6 every time it sells." },
+                  { title: "Generate", body: "Describe any poster. AI creates it.", icon: "✦" },
+                  { title: "Buy", body: "Order it printed. Delivered in 2–4 days.", icon: "◈" },
+                  { title: "Publish", body: "List it in the shop for free.", icon: "◉" },
+                  { title: "Earn", body: "Get £6 every time it sells.", icon: "⬡" },
                 ].map(c => (
-                  <div key={c.title} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 14, padding: "16px 14px" }}>
-                    <div style={{ fontSize: 11, fontWeight: 700, color: "#fff", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 6 }}>{c.title}</div>
-                    <div style={{ fontSize: 11, color: "#555", lineHeight: 1.6 }}>{c.body}</div>
-                  </div>
+                  <BorderGlow
+                    key={c.title}
+                    backgroundColor="#0d0d10"
+                    borderRadius={14}
+                    borderWidth={1}
+                    colors={["#c084fc", "#f472b6", "#38bdf8"]}
+                    glowColor="192 132 252"
+                    glowOpacity={0.45}
+                    glowBlur={20}
+                    animated={false}
+                  >
+                    <div style={{ padding: "16px 14px" }}>
+                      <div style={{ fontSize: 16, marginBottom: 6, opacity: 0.7 }}>{c.icon}</div>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: "#fff", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 6 }}>{c.title}</div>
+                      <div style={{ fontSize: 11, color: "#555", lineHeight: 1.6 }}>{c.body}</div>
+                    </div>
+                  </BorderGlow>
                 ))}
               </div>
             )}
