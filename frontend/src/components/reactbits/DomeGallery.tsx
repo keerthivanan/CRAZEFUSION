@@ -369,7 +369,7 @@ export default function DomeGallery({
     .sphere-root { --radius:520px; --viewer-pad:72px; }
     .sphere-root * { box-sizing:border-box; }
     .sphere,.sphere-item,.item__image { transform-style:preserve-3d; }
-    .stage { width:100%;height:100%;display:grid;place-items:center;position:absolute;inset:0;margin:auto;perspective:calc(var(--radius)*2);perspective-origin:50% 50%; }
+    .stage { width:100%;height:100%;display:grid;place-items:center;position:absolute;inset:0;margin:auto;perspective:calc(var(--radius)*1.4);perspective-origin:50% 50%; }
     .sphere { transform:translateZ(calc(var(--radius)*-1));will-change:transform;position:absolute; }
     .sphere-item { position:absolute;top:-999px;bottom:-999px;left:-999px;right:-999px;margin:auto;width:calc(var(--radius)*3.14*2*${itemPct}/100);height:calc(var(--radius)*3.14*2*${itemPct}/100);transform-origin:50% 50%;backface-visibility:hidden;transition:transform 300ms; }
     .sphere-root[data-enlarging="true"] .scrim { opacity:1 !important;pointer-events:all !important; }

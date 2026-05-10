@@ -77,11 +77,11 @@ export default function Hero() {
       <div style={{ position: "absolute", inset: 0 }}>
         <DomeGallery
           images={IMAGES}
-          fit={1.6}
+          fit={1.05}
           fitBasis="max"
-          minRadius={900}
-          maxVerticalRotationDeg={12}
-          segments={30}
+          minRadius={700}
+          maxVerticalRotationDeg={20}
+          segments={36}
           dragDampening={1.8}
           grayscale={false}
           autoRotate={true}
