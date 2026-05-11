@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import ClickSpark from "@/components/reactbits/ClickSpark";
+import { useTheme } from "@/context/ThemeContext";
 
 const DomeGallery = dynamic(() => import("@/components/reactbits/DomeGallery"), { ssr: false });
 
@@ -380,6 +381,21 @@ const STATS = [
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
   const [segments, setSegments] = useState(36);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
+  // Colour scheme switches with theme
+  const bg       = isDark ? "#080808" : "#f5f5f5";
+  const fade     = isDark ? "8,8,8"   : "245,245,245";
+  const textCol  = isDark ? "#fff"    : "#111";
+  const textMut  = isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)";
+  const outlineStroke = isDark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)";
+  const btnBg    = isDark ? "#fff"    : "#111";
+  const btnText  = isDark ? "#080808" : "#fff";
+  const outlineBtnColor  = isDark ? "#fff"    : "#111";
+  const outlineBtnBorder = isDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.2)";
+  const outlineBtnBg     = isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.05)";
+
   useEffect(() => {
     setMounted(true);
     const updateSegments = () => setSegments(window.innerWidth >= 1024 ? 44 : 36);
@@ -398,7 +414,8 @@ export default function Hero() {
       position: "relative",
       width: "100%",
       height: "100vh",
-      background: "#080808",
+      background: bg,
+      transition: "background 0.3s",
     }} className="hero-section">
 
       <div style={{ position: "absolute", inset: 0 }}>
@@ -414,7 +431,7 @@ export default function Hero() {
           grayscale={false}
           autoRotate={true}
           autoRotateSpeed={5}
-          overlayBlurColor="#080808"
+          overlayBlurColor={bg}
           imageBorderRadius="8px"
           openedImageBorderRadius="12px"
           openedImageWidth="320px"
@@ -422,15 +439,13 @@ export default function Hero() {
         />
       </div>
 
-      {/* Edge fades — blend sphere boundary into background */}
+      {/* Edge fades */}
       {segments === 44 && <>
-        <div style={{ position:"absolute", top:0, left:0, bottom:0, width:"16%", zIndex:5, background:"linear-gradient(to right, rgba(8,8,8,0.92) 0%, transparent 100%)", pointerEvents:"none" }} />
-        <div style={{ position:"absolute", top:0, right:0, bottom:0, width:"16%", zIndex:5, background:"linear-gradient(to left, rgba(8,8,8,0.92) 0%, transparent 100%)", pointerEvents:"none" }} />
+        <div style={{ position:"absolute", top:0, left:0, bottom:0, width:"16%", zIndex:5, background:`linear-gradient(to right, rgba(${fade},0.92) 0%, transparent 100%)`, pointerEvents:"none" }} />
+        <div style={{ position:"absolute", top:0, right:0, bottom:0, width:"16%", zIndex:5, background:`linear-gradient(to left, rgba(${fade},0.92) 0%, transparent 100%)`, pointerEvents:"none" }} />
       </>}
-      {/* Top fade — always shown (desktop + mobile) */}
-      <div style={{ position:"absolute", top:0, left:0, right:0, height:"14%", zIndex:5, background:"linear-gradient(to bottom, rgba(8,8,8,0.92) 0%, transparent 100%)", pointerEvents:"none" }} />
-      {/* Bottom fade — always shown */}
-      <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"10%", zIndex:5, background:"linear-gradient(to top, rgba(8,8,8,0.6) 0%, transparent 100%)", pointerEvents:"none" }} />
+      <div style={{ position:"absolute", top:0, left:0, right:0, height:"14%", zIndex:5, background:`linear-gradient(to bottom, rgba(${fade},0.92) 0%, transparent 100%)`, pointerEvents:"none" }} />
+      <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"10%", zIndex:5, background:`linear-gradient(to top, rgba(${fade},0.6) 0%, transparent 100%)`, pointerEvents:"none" }} />
 
       {/* Bottom overlay — headline + CTAs + stats */}
       <div style={{
@@ -441,7 +456,7 @@ export default function Hero() {
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "space-between",
-        background: "linear-gradient(to top, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.6) 45%, transparent 100%)",
+        background: `linear-gradient(to top, rgba(${fade},0.97) 0%, rgba(${fade},0.65) 45%, transparent 100%)`,
         opacity: mounted ? 1 : 0,
         transition: "opacity 0.8s 0.4s",
         pointerEvents: mounted ? "auto" : "none",
@@ -450,11 +465,11 @@ export default function Hero() {
         <div>
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 7,
-            background: "rgba(192,132,252,0.1)", border: "1px solid rgba(192,132,252,0.25)",
+            background: "rgba(192,132,252,0.12)", border: "1px solid rgba(192,132,252,0.3)",
             borderRadius: 50, padding: "5px 14px", marginBottom: 20,
           }}>
             <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#c084fc", display: "inline-block" }} />
-            <span style={{ fontFamily: FB, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.7)" }}>
+            <span style={{ fontFamily: FB, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)" }}>
               Premium Wall Art · UK Delivery
             </span>
           </div>
@@ -466,11 +481,12 @@ export default function Hero() {
             lineHeight: 0.9,
             letterSpacing: "-0.04em",
             textTransform: "uppercase",
-            color: "#fff",
+            color: textCol,
             margin: "0 0 28px",
+            transition: "color 0.3s",
           }}>
             Your Walls<br />
-            <span style={{ color: "transparent", WebkitTextStroke: "2px rgba(255,255,255,0.9)" }}>Deserve</span><br />
+            <span style={{ color: "transparent", WebkitTextStroke: `2px ${outlineStroke}` }}>Deserve</span><br />
             The Best
           </h1>
 
@@ -479,15 +495,15 @@ export default function Hero() {
               <Link href="/collection" style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
                 padding: "15px 34px",
-                background: "#fff", color: "#080808",
+                background: btnBg, color: btnText,
                 fontFamily: FB, fontSize: 12, fontWeight: 800,
                 letterSpacing: "0.12em", textTransform: "uppercase",
                 textDecoration: "none", borderRadius: 50,
-                boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.25)",
                 transition: "transform 0.2s, box-shadow 0.2s",
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(0,0,0,0.6)"; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.5)"; }}>
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(0,0,0,0.35)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.25)"; }}>
                 Shop Collection →
               </Link>
             </ClickSpark>
@@ -496,16 +512,16 @@ export default function Hero() {
               display: "inline-flex", alignItems: "center", gap: 6,
               fontFamily: FB, fontSize: 12, fontWeight: 700,
               letterSpacing: "0.1em", textTransform: "uppercase",
-              color: "#fff", textDecoration: "none",
+              color: outlineBtnColor, textDecoration: "none",
               padding: "14px 26px",
-              border: "1.5px solid rgba(255,255,255,0.25)",
+              border: `1.5px solid ${outlineBtnBorder}`,
               borderRadius: 50,
-              background: "rgba(255,255,255,0.07)",
+              background: outlineBtnBg,
               backdropFilter: "blur(8px)",
               transition: "all 0.2s",
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.5)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.07)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)"; }}>
+            onMouseEnter={e => { e.currentTarget.style.background = isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.1)"; e.currentTarget.style.borderColor = isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = outlineBtnBg; e.currentTarget.style.borderColor = outlineBtnBorder; }}>
               ✦ AI Studio
             </Link>
           </div>
@@ -514,8 +530,8 @@ export default function Hero() {
         <div style={{ display: "flex", gap: 36, alignItems: "flex-end", paddingBottom: 4 }} className="hero-stats">
           {STATS.map(s => (
             <div key={s.label} style={{ textAlign: "center" }}>
-              <div style={{ fontFamily: FH, fontSize: 26, fontWeight: 900, color: "#fff", letterSpacing: "-0.03em", lineHeight: 1 }}>{s.val}</div>
-              <div style={{ fontFamily: FB, fontSize: 10, color: "rgba(255,255,255,0.35)", marginTop: 5, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600 }}>{s.label}</div>
+              <div style={{ fontFamily: FH, fontSize: 26, fontWeight: 900, color: textCol, letterSpacing: "-0.03em", lineHeight: 1, transition: "color 0.3s" }}>{s.val}</div>
+              <div style={{ fontFamily: FB, fontSize: 10, color: textMut, marginTop: 5, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600 }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -528,7 +544,7 @@ export default function Hero() {
         opacity: mounted ? 0.45 : 0, transition: "opacity 1s 1.2s",
         pointerEvents: "none",
       }}>
-        <div style={{ fontFamily: FB, fontSize: 10, color: "#fff", letterSpacing: "0.22em", textTransform: "uppercase" }}>Drag to Explore</div>
+        <div style={{ fontFamily: FB, fontSize: 10, color: textCol, letterSpacing: "0.22em", textTransform: "uppercase" }}>Drag to Explore</div>
       </div>
 
       <style>{`
