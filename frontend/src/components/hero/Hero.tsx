@@ -386,6 +386,7 @@ export default function Hero() {
 
   // Colour scheme switches with theme
   const bg       = isDark ? "#080808" : "#f5f5f5";
+  const domeOverlayColor = isDark ? "#080808" : "rgba(245,245,245,0.35)";
   const fade     = isDark ? "8,8,8"   : "245,245,245";
   const textCol  = isDark ? "#fff"    : "#111";
   const textMut  = isDark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)";
@@ -431,7 +432,7 @@ export default function Hero() {
           grayscale={false}
           autoRotate={true}
           autoRotateSpeed={5}
-          overlayBlurColor={bg}
+          overlayBlurColor={domeOverlayColor}
           imageBorderRadius="8px"
           openedImageBorderRadius="12px"
           openedImageWidth="320px"
@@ -439,13 +440,13 @@ export default function Hero() {
         />
       </div>
 
-      {/* Edge fades */}
+      {/* Edge fades — soft in light, stronger in dark */}
       {segments === 44 && <>
-        <div style={{ position:"absolute", top:0, left:0, bottom:0, width:"16%", zIndex:5, background:`linear-gradient(to right, rgba(${fade},0.92) 0%, transparent 100%)`, pointerEvents:"none" }} />
-        <div style={{ position:"absolute", top:0, right:0, bottom:0, width:"16%", zIndex:5, background:`linear-gradient(to left, rgba(${fade},0.92) 0%, transparent 100%)`, pointerEvents:"none" }} />
+        <div style={{ position:"absolute", top:0, left:0, bottom:0, width:"14%", zIndex:5, background:`linear-gradient(to right, rgba(${fade},${isDark?0.88:0.55}) 0%, transparent 100%)`, pointerEvents:"none" }} />
+        <div style={{ position:"absolute", top:0, right:0, bottom:0, width:"14%", zIndex:5, background:`linear-gradient(to left, rgba(${fade},${isDark?0.88:0.55}) 0%, transparent 100%)`, pointerEvents:"none" }} />
       </>}
-      <div style={{ position:"absolute", top:0, left:0, right:0, height:"14%", zIndex:5, background:`linear-gradient(to bottom, rgba(${fade},0.92) 0%, transparent 100%)`, pointerEvents:"none" }} />
-      <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"10%", zIndex:5, background:`linear-gradient(to top, rgba(${fade},0.6) 0%, transparent 100%)`, pointerEvents:"none" }} />
+      <div style={{ position:"absolute", top:0, left:0, right:0, height:"12%", zIndex:5, background:`linear-gradient(to bottom, rgba(${fade},${isDark?0.88:0.55}) 0%, transparent 100%)`, pointerEvents:"none" }} />
+      <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"8%", zIndex:5, background:`linear-gradient(to top, rgba(${fade},${isDark?0.55:0.3}) 0%, transparent 100%)`, pointerEvents:"none" }} />
 
       {/* Bottom overlay — headline + CTAs + stats */}
       <div style={{
@@ -456,7 +457,7 @@ export default function Hero() {
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "space-between",
-        background: `linear-gradient(to top, rgba(${fade},0.97) 0%, rgba(${fade},0.65) 45%, transparent 100%)`,
+        background: `linear-gradient(to top, rgba(${fade},${isDark?0.96:0.82}) 0%, rgba(${fade},${isDark?0.6:0.3}) 42%, transparent 100%)`,
         opacity: mounted ? 1 : 0,
         transition: "opacity 0.8s 0.4s",
         pointerEvents: mounted ? "auto" : "none",
