@@ -27,7 +27,7 @@ const ITEMS = [
 export default function GalleryStrip() {
   return (
     <section style={{ background: "#080808", padding: "60px 0 0" }}>
-      <div style={{ height: 500, position: "relative" }}>
+      <div style={{ height: 320, position: "relative" }}>
         <CircularGallery
           items={ITEMS}
           bend={2}
