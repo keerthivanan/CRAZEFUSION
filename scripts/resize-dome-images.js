@@ -1,7 +1,7 @@
 /**
- * Build dome-images from BOTH keerthicollections AND newposters — 50/50 split
- * ~165 from each source = ~330 total for 324 sphere tiles
- * Output: 300×420 WebP at quality 82
+ * Build dome-images — keerthicollections (visual/aesthetic) + newposters cars & anime only
+ * Target ~340+ images for 324 sphere tiles (unique image per tile, zero repetition)
+ * Output: 300×420 WebP quality 82
  */
 const sharp = require('sharp');
 const fs = require('fs');
@@ -10,45 +10,39 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const DEST = path.join(ROOT, 'frontend', 'public', 'dome-images');
 
-// ── keerthicollections: visually striking aesthetic posters ──────────────────
+// ── keerthicollections — visually striking aesthetic posters ──────────────────
 const KC_SRC = path.join(ROOT, 'keerthicollections');
 const KC_PLAN = {
-  'art':                  15,  // actual art prints
-  'anime':                12,  // all anime
-  'cyberpunk-vaporwave':  10,  // all neon/cyber
-  'trippy':               15,  // psychedelic
-  'astronomy':            10,  // space
-  'car-posters':          12,  // car art
-  'wanderlust':           10,  // travel
-  'vintage':              10,  // retro
-  'botanical':            10,  // botanical art
-  'sneakerhead':          10,  // streetwear
-  'zodiac':               12,  // all zodiac
-  'k-pop':                10,  // k-pop
+  'art':                  20,  // Van Gogh, Klimt, Monet, Picasso
+  'anime':                12,  // all — Demon Slayer, Naruto, Death Note…
+  'cyberpunk-vaporwave':  10,  // all — neon city, vaporwave
+  'trippy':               28,  // psychedelic, optical illusion
+  'car-posters':          20,  // Bugatti, Koenigsegg, Ferrari art
+  'wanderlust':           15,  // travel city posters
+  'vintage':              15,  // retro / classic
+  'botanical':            12,  // floral / butterfly art
+  'sneakerhead':          15,  // Jordan, sneaker art
+  'zodiac':               12,  // all 12 signs
+  'k-pop':                15,  // BTS, K-pop idols
   'indie-aesthetics':      7,  // all indie
   'moodboard-aesthetics':  3,  // all moodboard
-  'football-posters':     10,  // football art
-  'movies':               10,  // movie art
-  'music':                10,  // album/music art
-  'random-aesthetics':     8,  // random aesthetic
+  'football-posters':     15,  // Ronaldo, Messi, Haaland, Mbappé
+  'movies':               22,  // Avengers, Star Wars, Wonder Woman…
+  'music':                22,  // Drake, Travis Scott, Beyoncé, Juice WRLD…
+  'random-aesthetics':    18,  // mixed aesthetic
+  'gaming':               20,  // from keerthicollections (77 available)
+  'cute':                 15,  // cute characters / kawaii
+  'tv-shows':             15,  // keerthicollections TV (29 available)
+  'polaroids':            15,  // polaroid aesthetic prints
 };
 
-// ── newposters: the poster photography — most visual categories only ─────────
+// ── newposters — ONLY cars and anime ─────────────────────────────────────────
 const NP_SRC = path.join(ROOT, 'newposters');
 const NP_PLAN = {
-  cars:          25,  // supercar photography
-  anime:         18,  // anime posters
-  movies:        18,  // movie posters
-  music:         15,  // music posters
-  astronomy:     15,  // space photography
-  nature:        15,  // nature photography
-  'real-artists': 14, // Billie Eilish / Taylor Swift
-  gaming:        10,  // gaming art
-  wanderlust:    10,  // travel photography
-  f1:             8,  // F1 racing
+  cars:   25,   // supercar photography — Bugatti, Lambo, Ferrari
+  anime:  18,   // anime photography posters
 };
 
-// Clean out old dome-images subfolders
 function cleanDest() {
   if (!fs.existsSync(DEST)) return;
   for (const entry of fs.readdirSync(DEST)) {
@@ -57,14 +51,12 @@ function cleanDest() {
   }
 }
 
-// Spread picks evenly across the folder so we don't just grab the first N
 function spreadPick(arr, n) {
   if (arr.length <= n) return arr;
   const step = arr.length / n;
   return Array.from({ length: n }, (_, i) => arr[Math.floor(i * step)]);
 }
 
-// Safe filename: lowercase, underscores, max 60 chars
 function safeName(file) {
   return path.parse(file).name
     .toLowerCase()
@@ -79,7 +71,6 @@ async function processFolder(srcBase, folder, limit, outFolderName) {
 
   const all = fs.readdirSync(srcDir).filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f)).sort();
   const files = spreadPick(all, limit);
-
   const outDir = path.join(DEST, outFolderName);
   fs.mkdirSync(outDir, { recursive: true });
 
@@ -100,7 +91,7 @@ async function processFolder(srcBase, folder, limit, outFolderName) {
       console.warn(`\n  warn: skip ${file} — ${e.message}`);
     }
   }
-  console.log(`\r  ${outFolderName}: ${done} images done          `);
+  console.log(`\r  ${outFolderName}: ${done} done          `);
   return urls;
 }
 
@@ -110,17 +101,15 @@ async function processFolder(srcBase, folder, limit, outFolderName) {
 
   const allUrls = [];
 
-  console.log('\n── keerthicollections ─────────────────────────────────');
+  console.log('\n── keerthicollections (aesthetic) ──────────────────────');
   for (const [folder, limit] of Object.entries(KC_PLAN)) {
-    const outName = `kc-${folder}`;
-    const urls = await processFolder(KC_SRC, folder, limit, outName);
+    const urls = await processFolder(KC_SRC, folder, limit, `kc-${folder}`);
     allUrls.push(...urls);
   }
 
-  console.log('\n── newposters ──────────────────────────────────────────');
+  console.log('\n── newposters (cars + anime only) ──────────────────────');
   for (const [folder, limit] of Object.entries(NP_PLAN)) {
-    const outName = `np-${folder}`;
-    const urls = await processFolder(NP_SRC, folder, limit, outName);
+    const urls = await processFolder(NP_SRC, folder, limit, `np-${folder}`);
     allUrls.push(...urls);
   }
 
@@ -129,5 +118,6 @@ async function processFolder(srcBase, folder, limit, outFolderName) {
 
   const kc = allUrls.filter(u => u.includes('/kc-')).length;
   const np = allUrls.filter(u => u.includes('/np-')).length;
-  console.log(`\nDone! ${allUrls.length} total images (${kc} keerthicollections + ${np} newposters)`);
+  console.log(`\nDone! ${allUrls.length} images (${kc} keerthicollections + ${np} newposters)`);
+  console.log(`324 sphere tiles → every tile gets a UNIQUE image`);
 })();

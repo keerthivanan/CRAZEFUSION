@@ -50,6 +50,18 @@ const getDataNumber = (el: HTMLElement, name: string, fallback: number) => {
   return Number.isFinite(n) ? n : fallback;
 };
 
+// Deterministic Fisher-Yates shuffle — same result every render for a given pool
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const out = [...arr];
+  let s = (seed ^ 0xdeadbeef) >>> 0;
+  for (let i = out.length - 1; i > 0; i--) {
+    s = Math.imul(s ^ (s >>> 15), s | 1); s ^= s + Math.imul(s ^ (s >>> 7), s | 61); s = (s ^ (s >>> 14)) >>> 0;
+    const j = s % (i + 1);
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
 function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
   const xCols = Array.from({ length: seg }, (_, i) => -37 + i * 2);
   // 9 rows → ±40° vertical coverage — true sphere feel
@@ -58,15 +70,10 @@ function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
   const coords = xCols.flatMap((x, c) => { const ys = c % 2 === 0 ? evenYs : oddYs; return ys.map(y => ({ x, y, sizeX: 2, sizeY: 2 })); });
   const totalSlots = coords.length;
   if (pool.length === 0) return coords.map(c => ({ ...c, src: '', alt: '' }));
-  const normalizedImages = pool.map(image => typeof image === 'string' ? { src: image, alt: '' } : { src: image.src || '', alt: image.alt || '' });
-  const usedImages = Array.from({ length: totalSlots }, (_, i) => normalizedImages[i % normalizedImages.length]);
-  for (let i = 1; i < usedImages.length; i++) {
-    if (usedImages[i].src === usedImages[i - 1].src) {
-      for (let j = i + 1; j < usedImages.length; j++) {
-        if (usedImages[j].src !== usedImages[i].src) { const tmp = usedImages[i]; usedImages[i] = usedImages[j]; usedImages[j] = tmp; break; }
-      }
-    }
-  }
+  const normalized = pool.map(img => typeof img === 'string' ? { src: img, alt: '' } : { src: img.src || '', alt: img.alt || '' });
+  // Shuffle so categories are mixed across the sphere — no category bands
+  const shuffled = seededShuffle(normalized, normalized.length * 31 + totalSlots);
+  const usedImages = Array.from({ length: totalSlots }, (_, i) => shuffled[i % shuffled.length]);
   return coords.map((c, i) => ({ ...c, src: usedImages[i].src, alt: usedImages[i].alt }));
 }
 
@@ -376,10 +383,10 @@ export default function DomeGallery({
     .sphere,.sphere-item,.item__image { transform-style:preserve-3d; }
     .stage { width:100%;height:100%;display:grid;place-items:center;position:absolute;inset:0;margin:auto;perspective:calc(var(--radius)*2.4);perspective-origin:50% 50%; }
     .sphere { transform:translateZ(calc(var(--radius)*-1));will-change:transform;position:absolute; }
-    .sphere-item { position:absolute;top:-999px;bottom:-999px;left:-999px;right:-999px;margin:auto;width:calc(var(--radius)*3.14*2*${itemPct}/100);height:calc(var(--radius)*3.14*2*${itemPct}/100);transform-origin:50% 50%;backface-visibility:hidden;transition:transform 300ms;background:#000; }
+    .sphere-item { position:absolute;top:-999px;bottom:-999px;left:-999px;right:-999px;margin:auto;width:calc(var(--radius)*3.14*2*${itemPct}/100);height:calc(var(--radius)*3.14*2*${itemPct}/100);transform-origin:50% 50%;backface-visibility:hidden;transition:transform 300ms;background:transparent; }
     .sphere-root[data-enlarging="true"] .scrim { opacity:1 !important;pointer-events:all !important; }
     @media (max-aspect-ratio:1/1) { .viewer-frame { height:auto !important;width:100% !important; } }
-    .item__image { position:absolute;inset:4px;border-radius:var(--tile-radius,12px);overflow:hidden;cursor:pointer;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 300ms;pointer-events:auto;transform:translateZ(0);background:#111; }
+    .item__image { position:absolute;inset:1px;border-radius:var(--tile-radius,12px);overflow:hidden;cursor:pointer;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 300ms;pointer-events:auto;transform:translateZ(0);background:transparent; }
     .item__image--reference { position:absolute;inset:10px;pointer-events:none; }
   `;
 
@@ -416,7 +423,7 @@ export default function DomeGallery({
                   <div className="item__image" role="button" tabIndex={0} aria-label={it.alt || 'Open image'}
                     onClick={e => { if (draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
                     onPointerUp={e => { if ((e.nativeEvent as PointerEvent).pointerType!=='touch'||draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
-                    style={{ position:'absolute', inset:'10px', borderRadius:imageBorderRadius, overflow:'hidden', cursor:'pointer', backfaceVisibility:'hidden' as any, transition:'transform 300ms', pointerEvents:'auto', transform:'translateZ(0)' }}>
+                    style={{ position:'absolute', inset:'0', borderRadius:imageBorderRadius, overflow:'hidden', cursor:'pointer', backfaceVisibility:'hidden' as any, transition:'transform 300ms', pointerEvents:'auto', transform:'translateZ(0)' }}>
                     <img src={it.src} draggable={false} alt={it.alt} loading="eager" decoding="async" style={{ width:'100%', height:'100%', objectFit:'cover', pointerEvents:'none', backfaceVisibility:'hidden' as any, filter: grayscale ? 'grayscale(1)' : 'none' }} />
                   </div>
                 </div>
