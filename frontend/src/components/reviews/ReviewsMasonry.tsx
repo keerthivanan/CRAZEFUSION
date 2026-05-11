@@ -4,51 +4,44 @@ import type { MasonryItem } from "@/components/reactbits/Masonry";
 
 const Masonry = dynamic(() => import("@/components/reactbits/Masonry"), { ssr: false });
 
-const FH = "var(--font-epilogue-var,'Epilogue',sans-serif)";
-const FB = "var(--font-poppins-var,'Poppins',sans-serif)";
-
-// 40 posters spread across categories — varied heights for natural masonry look
+// Heights alternate to create natural staggered masonry rhythm
 const ITEMS: MasonryItem[] = [
-  { id: "1",  img: "/dome-images/np-cars/0001_bugatti.webp",                          url: "/collection/car-posters",    height: 580 },
-  { id: "2",  img: "/dome-images/kc-movies/3333_iron_man_3_poster.webp",              url: "/collection/movies",         height: 480 },
-  { id: "3",  img: "/dome-images/kc-anime/2969_naruto_poster.webp",                   url: "/collection/anime",          height: 560 },
-  { id: "4",  img: "/dome-images/kc-music/3898_the_weeknd_poster.webp",               url: "/collection/music",          height: 500 },
-  { id: "5",  img: "/dome-images/np-cars/0065_lamborghini_aventado.webp",             url: "/collection/car-posters",    height: 520 },
-  { id: "6",  img: "/dome-images/kc-football-posters/3193_messi_world_cup_champion_poster.webp", url: "/collection/football", height: 560 },
-  { id: "7",  img: "/dome-images/kc-gaming/4257_half_life_2_poster.webp",             url: "/collection/gaming",         height: 480 },
-  { id: "8",  img: "/dome-images/kc-trippy/3947_psychedelic_trippy_aesthetic_wall_poster.webp",  url: "/collection/trippy", height: 540 },
-  { id: "9",  img: "/dome-images/kc-tv-shows/930_peaky_blinders_poster_tv_show_poster.webp", url: "/collection/tv-shows", height: 500 },
-  { id: "10", img: "/dome-images/np-cars/0073_ferrari_sports_car.webp",               url: "/collection/car-posters",    height: 520 },
-  { id: "11", img: "/dome-images/kc-music/3578_beyonce_poster.webp",                  url: "/collection/music",          height: 560 },
-  { id: "12", img: "/dome-images/kc-movies/3229_deadpool_2_poster_1.webp",            url: "/collection/movies",         height: 480 },
-  { id: "13", img: "/dome-images/kc-anime/194_demon_slayer_poster_anime_poster.webp", url: "/collection/anime",          height: 540 },
-  { id: "14", img: "/dome-images/kc-wanderlust/1081_big_ben_london_poster.webp",      url: "/collection/wanderlust",     height: 500 },
-  { id: "15", img: "/dome-images/kc-football-posters/3169_kylian_mbappe_1998_forward_poster.webp", url: "/collection/football", height: 560 },
-  { id: "16", img: "/dome-images/np-cars/0081_porsche_911_car.webp",                  url: "/collection/car-posters",    height: 480 },
-  { id: "17", img: "/dome-images/kc-tv-shows/932_game_of_thrones_poster_tv_show_poster.webp", url: "/collection/tv-shows", height: 520 },
-  { id: "18", img: "/dome-images/kc-music/619_kendrick_lamar_poster_music_poster.webp", url: "/collection/music",        height: 560 },
-  { id: "19", img: "/dome-images/kc-gaming/4272_shadow_of_the_colossus_poster.webp",  url: "/collection/gaming",         height: 500 },
-  { id: "20", img: "/dome-images/kc-art/249_caf_terrace_at_night_vincent_van_gogh_art_poster.webp", url: "/collection/art", height: 540 },
-  { id: "21", img: "/dome-images/kc-movies/3504_thor_the_dark_world_poster.webp",     url: "/collection/movies",         height: 480 },
-  { id: "22", img: "/dome-images/kc-sneakerhead/661_sneakerhead_art_poster.webp",     url: "/collection/sneakerhead",    height: 520 },
-  { id: "23", img: "/dome-images/np-anime/0001.webp",                                 url: "/collection/anime",          height: 560 },
-  { id: "24", img: "/dome-images/kc-football-posters/3147_erling_haaland_2000_poster.webp", url: "/collection/football", height: 500 },
-  { id: "25", img: "/dome-images/np-cars/0097_mclaren_supercar.webp",                 url: "/collection/car-posters",    height: 540 },
-  { id: "26", img: "/dome-images/kc-cyberpunk-vaporwave/1047_vaporwave_city_poster.webp", url: "/collection/cyberpunk",  height: 480 },
-  { id: "27", img: "/dome-images/kc-music/3684_green_day_poster.webp",                url: "/collection/music",          height: 560 },
-  { id: "28", img: "/dome-images/kc-tv-shows/912_breaking_bad_poster_tv_show_poster.webp", url: "/collection/tv-shows", height: 520 },
-  { id: "29", img: "/dome-images/kc-vintage/1077_vintage_cinema_poster.webp",         url: "/collection/vintage",        height: 500 },
-  { id: "30", img: "/dome-images/kc-anime/200_death_note_anime_poster.webp",          url: "/collection/anime",          height: 540 },
-  { id: "31", img: "/dome-images/kc-gaming/453_gta_gaming_poster.webp",               url: "/collection/gaming",         height: 480 },
-  { id: "32", img: "/dome-images/kc-movies/3462_the_gray_man_poster.webp",            url: "/collection/movies",         height: 520 },
-  { id: "33", img: "/dome-images/np-cars/0161_koenigsegg_car.webp",                   url: "/collection/car-posters",    height: 560 },
-  { id: "34", img: "/dome-images/kc-k-pop/464_bts_wall_poster_k_pop_poster_bts_poster.webp", url: "/collection/k-pop", height: 500 },
-  { id: "35", img: "/dome-images/kc-football-posters/3209_ronaldinho_football_icon_poster.webp", url: "/collection/football", height: 540 },
-  { id: "36", img: "/dome-images/kc-music/3855_roddy_ricch_poster.webp",              url: "/collection/music",          height: 480 },
-  { id: "37", img: "/dome-images/kc-trippy/902_trippy_art_poster_neon_green.webp",    url: "/collection/trippy",         height: 520 },
-  { id: "38", img: "/dome-images/kc-tv-shows/918_friends_poster_tv_show_poster.webp", url: "/collection/tv-shows",       height: 560 },
-  { id: "39", img: "/dome-images/np-cars/0185_ford_mustang_car.webp",                 url: "/collection/car-posters",    height: 500 },
-  { id: "40", img: "/dome-images/kc-movies/3271_friends_1994_6_poster.webp",          url: "/collection/movies",         height: 540 },
+  { id:"1",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2811_Porsche_911_Turbo_Marlboro_Edition_Poster.webp", url:"/product/2811", height:560 },
+  { id:"2",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/1107_Joker_Why_so_Serious_Poster.webp",                   url:"/product/1107", height:500 },
+  { id:"3",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2795_The_Batman_in_the_Rain_Poster.webp",                   url:"/product/2795", height:540 },
+  { id:"4",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/originals/coffee-shop-posters/2897_A_Glass_of_Iced_Matcha_Latte_Poster.webp", url:"/product/2897", height:480 },
+  { id:"5",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2971_Aston_Martin_DB11_Roadster_Poster.webp",           url:"/product/2971", height:520 },
+  { id:"6",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/1106_John_Wick_GTA_Poster.webp",                           url:"/product/1106", height:560 },
+  { id:"7",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974049/crazefusion/originals/coffee-shop-posters/2901_The_Breakfast_Club_Poster.webp",           url:"/product/2901", height:500 },
+  { id:"8",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973740/crazefusion/originals/car-posters/2876_2005_Ford_GT_Supercar_Poster.webp",               url:"/product/2876", height:540 },
+  { id:"9",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/2792_Joker_Put_on_a_Happy_Face_Poster.webp",               url:"/product/2792", height:480 },
+  { id:"10", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2972_Aston_Martin_DBS_Superleggera_Poster.webp",       url:"/product/2972", height:560 },
+  { id:"11", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/originals/coffee-shop-posters/2902_More_Espresso_Less_Depresso_Poster.webp", url:"/product/2902", height:520 },
+  { id:"12", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2794_The_Amazing_Spider-Man_Collage_Poster.webp",           url:"/product/2794", height:500 },
+  { id:"13", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2970_Aspark_Owl_Sports_Car_Poster.webp",               url:"/product/2970", height:540 },
+  { id:"14", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973790/crazefusion/originals/movies/1105_Baby_Groot_Working_Out_Poster.webp",                   url:"/product/1105", height:480 },
+  { id:"15", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2812_Porsche_911_Turbo_S_Collage_Poster.webp",         url:"/product/2812", height:560 },
+  { id:"16", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/originals/coffee-shop-posters/2899_Lose_Yourself_in_Coffee_Books_Poster.webp", url:"/product/2899", height:520 },
+  { id:"17", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2796_John_Wick_It_Wasn_t_Just_a_Dog_Poster.webp",           url:"/product/2796", height:500 },
+  { id:"18", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973740/crazefusion/originals/car-posters/2963_Acura_NSX_Coastal_Drive_Poster.webp",             url:"/product/2963", height:540 },
+  { id:"19", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/2797_Rocky_A_Million-To-One_Shot_Poster.webp",              url:"/product/2797", height:480 },
+  { id:"20", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974050/crazefusion/originals/coffee-shop-posters/2903_Coffee_Matcha_Drink_Close-Up_Poster.webp", url:"/product/2903", height:560 },
+  { id:"21", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973743/crazefusion/originals/car-posters/2973_Aston_Martin_One-77_Roadster_Poster.webp",         url:"/product/2973", height:520 },
+  { id:"22", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2793_Scream_Everybody_s_a_Suspect_Poster.webp",             url:"/product/2793", height:500 },
+  { id:"23", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2813_Porsche_918_Spyder_Poster.webp",                   url:"/product/2813", height:540 },
+  { id:"24", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/2802_Hunter_Games_Poster.webp",                             url:"/product/2802", height:480 },
+  { id:"25", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974046/crazefusion/originals/coffee-shop-posters/2782_Layered_Bicerin_Drink_Poster.webp",       url:"/product/2782", height:560 },
+  { id:"26", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2968_Arash_AF10_Supercar_Poster.webp",                 url:"/product/2968", height:520 },
+  { id:"27", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/3127_2_Guns_Movie_Poster.webp",                             url:"/product/3127", height:500 },
+  { id:"28", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2814_Porsche_911_Vintage_Car_Poster.webp",             url:"/product/2814", height:540 },
+  { id:"29", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/originals/coffee-shop-posters/2900_Yummy_Matcha_Latte_A_Need_Not_a_Want_Poster.webp", url:"/product/2900", height:480 },
+  { id:"30", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/3128_2_Hearts_Movie_Poster.webp",                           url:"/product/3128", height:560 },
+  { id:"31", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/2783_The_End_of_The_Fucking_World_Poster.webp",             url:"/product/2783", height:520 },
+  { id:"32", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2966_Apollo_Intensa_Emozione_Poster.webp",             url:"/product/2966", height:500 },
+  { id:"33", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973743/crazefusion/originals/car-posters/2976_Aston_Martin_V12_Vantage_Poster.webp",             url:"/product/2976", height:540 },
+  { id:"34", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/originals/coffee-shop-posters/2898_Il_Caffe_E_Pronto_Coffee_Is_Ready_Poster.webp", url:"/product/2898", height:480 },
+  { id:"35", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/3129_6_Underground_Poster.webp",                             url:"/product/3129", height:560 },
+  { id:"36", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973740/crazefusion/originals/car-posters/2964_Acura_NSX_Sports_Car_Poster.webp",               url:"/product/2964", height:520 },
 ];
 
 export default function ReviewsMasonry() {
@@ -57,33 +50,39 @@ export default function ReviewsMasonry() {
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 24px" }}>
 
         {/* Header */}
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 56, flexWrap: "wrap", gap: 24 }}>
+        <div style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", marginBottom:56, flexWrap:"wrap", gap:24 }}>
           <div>
-            <p style={{ fontFamily: FB, fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 12 }}>
+            <p style={{
+              fontSize: 11, fontWeight: 700, letterSpacing: "0.22em",
+              textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 12,
+              fontFamily: "'Poppins', sans-serif",
+            }}>
               Our Collection
             </p>
-            <h2 style={{ fontFamily: FH, fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 900, lineHeight: 0.9, letterSpacing: "-0.03em", color: "var(--c-text)", margin: 0 }}>
+            <h2 style={{
+              fontSize: "clamp(40px, 5vw, 80px)", fontWeight: 900,
+              lineHeight: 0.9, letterSpacing: "-0.03em", color: "var(--c-text)", margin: 0,
+              fontFamily: "'Epilogue', sans-serif",
+            }}>
               609+<br />
               <span style={{ color: "#7c3aed" }}>Designs</span>
             </h2>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 32, paddingBottom: 8 }}>
-            <div style={{ textAlign: "right" }}>
-              <div style={{ fontFamily: FH, fontSize: 56, fontWeight: 900, letterSpacing: "-0.04em", color: "var(--c-text)", lineHeight: 1 }}>4.8</div>
-              <div style={{ display: "flex", gap: 3, justifyContent: "flex-end", margin: "6px 0 4px" }}>
-                {[...Array(5)].map((_, i) => <span key={i} style={{ color: "#7c3aed", fontSize: 18 }}>★</span>)}
-              </div>
-              <div style={{ fontFamily: FB, fontSize: 11, color: "var(--c-text-muted)", letterSpacing: "0.1em", textTransform: "uppercase" }}>2,400+ Reviews</div>
+          <div style={{ paddingBottom: 8, textAlign:"right" }}>
+            <div style={{ fontSize: 60, fontWeight: 900, letterSpacing: "-0.04em", color: "var(--c-text)", lineHeight: 1, fontFamily: "'Epilogue', sans-serif" }}>4.8</div>
+            <div style={{ display:"flex", gap:3, justifyContent:"flex-end", margin:"6px 0 4px" }}>
+              {[...Array(5)].map((_,i) => <span key={i} style={{ color:"#7c3aed", fontSize:18 }}>★</span>)}
             </div>
+            <div style={{ fontSize:11, color:"var(--c-text-muted)", letterSpacing:"0.1em", textTransform:"uppercase", fontFamily:"'Poppins',sans-serif" }}>2,400+ Reviews</div>
           </div>
         </div>
 
-        {/* Masonry grid */}
+        {/* Masonry */}
         <Masonry
           items={ITEMS}
           ease="power3.out"
           duration={0.6}
-          stagger={0.04}
+          stagger={0.03}
           animateFrom="bottom"
           scaleOnHover
           hoverScale={0.97}
@@ -92,19 +91,23 @@ export default function ReviewsMasonry() {
         />
 
         {/* CTA */}
-        <div style={{ textAlign: "center", marginTop: 64 }}>
-          <a href="/collection" style={{
-            display: "inline-flex", alignItems: "center", gap: 8,
-            padding: "16px 40px",
-            background: "var(--c-btn-bg)", color: "var(--c-btn-text)",
-            fontFamily: FB, fontSize: 12, fontWeight: 800,
-            letterSpacing: "0.14em", textTransform: "uppercase",
-            textDecoration: "none", borderRadius: 50,
-            boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-            transition: "transform 0.2s, box-shadow 0.2s",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(0,0,0,0.2)"; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.12)"; }}>
+        <div style={{ textAlign:"center", marginTop:64 }}>
+          <a
+            href="/collection"
+            style={{
+              display:"inline-flex", alignItems:"center", gap:8,
+              padding:"16px 44px",
+              background:"var(--c-btn-bg)", color:"var(--c-btn-text)",
+              fontSize:12, fontWeight:800,
+              letterSpacing:"0.14em", textTransform:"uppercase",
+              textDecoration:"none", borderRadius:50,
+              boxShadow:"0 8px 32px rgba(0,0,0,0.12)",
+              transition:"transform 0.2s, box-shadow 0.2s",
+              fontFamily:"'Poppins',sans-serif",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform="translateY(-2px)"; e.currentTarget.style.boxShadow="0 14px 40px rgba(0,0,0,0.2)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform=""; e.currentTarget.style.boxShadow="0 8px 32px rgba(0,0,0,0.12)"; }}
+          >
             Browse Full Collection →
           </a>
         </div>
