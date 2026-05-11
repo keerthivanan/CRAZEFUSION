@@ -52,8 +52,9 @@ const getDataNumber = (el: HTMLElement, name: string, fallback: number) => {
 
 function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
   const xCols = Array.from({ length: seg }, (_, i) => -37 + i * 2);
-  const evenYs = [-4, -2, 0, 2, 4];
-  const oddYs = [-3, -1, 1, 3, 5];
+  // 9 rows → ±40° vertical coverage — true sphere feel
+  const evenYs = [-8, -6, -4, -2, 0, 2, 4, 6, 8];
+  const oddYs  = [-7, -5, -3, -1, 1, 3, 5, 7, 9];
   const coords = xCols.flatMap((x, c) => { const ys = c % 2 === 0 ? evenYs : oddYs; return ys.map(y => ({ x, y, sizeX: 2, sizeY: 2 })); });
   const totalSlots = coords.length;
   if (pool.length === 0) return coords.map(c => ({ ...c, src: '', alt: '' }));
@@ -196,7 +197,9 @@ export default function DomeGallery({
         if (lastAutoTime.current) {
           const delta = Math.min((time - lastAutoTime.current) / 1000, 0.032); // cap at ~30fps delta
           rotationRef.current.y = wrapAngleSigned(rotationRef.current.y + autoRotateSpeed * delta);
-          applyTransform(rotationRef.current.x, rotationRef.current.y);
+          // gentle vertical sway ±6° over ~21s — reveals top and bottom rows
+          const oscX = Math.sin(time * 0.0003) * 6;
+          applyTransform(rotationRef.current.x + oscX, rotationRef.current.y);
         }
         lastAutoTime.current = time;
       } else {
