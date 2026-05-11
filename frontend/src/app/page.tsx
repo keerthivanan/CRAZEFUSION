@@ -6,7 +6,7 @@ import BestSelling from "@/components/products/BestSelling";
 import MultiPosters from "@/components/products/MultiPosters";
 import TrendingProducts from "@/components/products/TrendingProducts";
 import WhyChooseUs from "@/components/trust/WhyChooseUs";
-import ReviewsMarquee from "@/components/reviews/ReviewsMarquee";
+import ReviewsMasonry from "@/components/reviews/ReviewsMasonry";
 import Newsletter from "@/components/footer/Newsletter";
 import Footer from "@/components/footer/Footer";
 
@@ -34,7 +34,7 @@ export default function Home() {
       <MultiPosters />
       <TrendingProducts />
       <WhyChooseUs />
-      <ReviewsMarquee />
+      <ReviewsMasonry />
       <Newsletter />
       <Footer />
     </main>
