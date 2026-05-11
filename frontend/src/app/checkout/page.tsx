@@ -273,7 +273,7 @@ export default function CheckoutPage() {
                     onMouseEnter={e => (e.currentTarget.style.borderColor = "var(--c-text)")}
                     onMouseLeave={e => (e.currentTarget.style.borderColor = "var(--c-border)")}>Back</button>
                   <button onClick={handlePlaceOrder} disabled={placing}
-                    style={{ flex: 1, padding: "15px 24px", background: placing ? "#ccc" : "#7c3aed", color: "#000", fontFamily: F, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: placing ? "not-allowed" : "pointer", borderRadius: 50, transition: "all 0.2s", boxShadow: placing ? "none" : "0 0 24px rgba(124,58,237,0.3)" }}>
+                    style={{ flex: 1, padding: "15px 24px", background: placing ? "var(--c-border)" : "var(--c-btn-bg)", color: placing ? "var(--c-text-dim)" : "var(--c-btn-text)", fontFamily: F, fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: placing ? "not-allowed" : "pointer", borderRadius: 50, transition: "all 0.2s" }}>
                     {placing ? "Placing Order…" : `Place Order — £${total.toFixed(2)}`}
                   </button>
                 </div>

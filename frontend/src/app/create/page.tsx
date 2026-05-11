@@ -172,10 +172,10 @@ export default function CreatePage() {
   return (
     <>
       <Navbar />
-      <div style={{ background: "#080808", minHeight: "100vh", fontFamily: FO }}>
+      <div style={{ background: "var(--c-bg)", minHeight: "100vh", fontFamily: FO }}>
 
         {/* ── HERO STRIP ── */}
-        <div style={{ background: "linear-gradient(to right, rgba(124,58,237,0.06), transparent, rgba(99,102,241,0.04))", borderBottom: "1px solid rgba(255,255,255,0.05)", paddingTop: 92 }}>
+        <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", paddingTop: 92 }}>
           <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 40px 0" }}>
 
             {/* Header */}

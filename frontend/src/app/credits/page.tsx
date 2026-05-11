@@ -108,7 +108,7 @@ export default function CreditsPage() {
   return (
     <>
       <Navbar />
-      <div style={{ background: "#080808", minHeight: "100vh", paddingTop: 100, fontFamily: FO }}>
+      <div style={{ background: "var(--c-bg)", minHeight: "100vh", paddingTop: 100, fontFamily: FO }}>
 
         {/* Header */}
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px 64px", textAlign: "center" }}>

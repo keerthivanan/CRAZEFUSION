@@ -85,12 +85,12 @@ body {
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar       { width: 4px; }
-::-webkit-scrollbar-track { background: #080808; }
-::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: #6d28d9; }
+::-webkit-scrollbar-track { background: var(--c-bg); }
+::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--c-text-dim); }
 
 /* ── Selection ── */
-::selection { background: #7c3aed; color: #000; }
+::selection { background: var(--c-text); color: var(--c-bg); }
 
 /* ── Utilities ── */
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

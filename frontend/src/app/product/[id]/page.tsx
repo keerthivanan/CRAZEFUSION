@@ -171,15 +171,15 @@ export default function ProductPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 16 }}>
               <ClickSpark sparkColor="#fff" sparkCount={10} sparkRadius={28}>
                 <button onClick={addToCart}
-                  style={{ width: "100%", padding: "16px 0", background: added ? "#16a34a" : "#111", color: "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "background 0.3s", borderRadius: 50 }}>
+                  style={{ width: "100%", padding: "16px 0", background: added ? "#16a34a" : "var(--c-btn-bg)", color: added ? "#fff" : "var(--c-btn-text)", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", transition: "background 0.3s", borderRadius: 50 }}>
                   {added ? "✓ Added to Cart!" : "Add to Cart"}
                 </button>
               </ClickSpark>
               <ClickSpark sparkColor="#111" sparkCount={10} sparkRadius={28}>
                 <button onClick={buyNow}
-                  style={{ width: "100%", padding: "16px 0", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50, transition: "all 0.2s", boxShadow: "0 0 24px rgba(124,58,237,0.3)" }}
-                  onMouseEnter={e => { e.currentTarget.style.background = "#6d28d9"; e.currentTarget.style.boxShadow = "0 0 40px rgba(124,58,237,0.5)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = "#7c3aed"; e.currentTarget.style.boxShadow = "0 0 24px rgba(124,58,237,0.3)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                  style={{ width: "100%", padding: "16px 0", background: "var(--c-text)", color: "var(--c-bg)", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50, transition: "all 0.2s" }}
+                  onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "translateY(0)"; }}>
                   Buy Now — £{price.toFixed(2)}
                 </button>
               </ClickSpark>
@@ -187,11 +187,11 @@ export default function ProductPage() {
 
             {/* Edit with AI */}
             <Link href={`/create?edit=${p.id}`}
-              style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, width: "100%", padding: "14px 0", background: "rgba(124,58,237,0.06)", border: "1px solid rgba(124,58,237,0.25)", borderRadius: 50, textDecoration: "none", marginBottom: 16, transition: "all 0.2s" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(124,58,237,0.12)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(124,58,237,0.06)"; }}>
-              <span style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#7c3aed" }}>Edit This Poster With AI</span>
-              <span style={{ fontFamily: FO, fontSize: 11, color: "#7c3aed", opacity: 0.6 }}>— 5 credits</span>
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, width: "100%", padding: "14px 0", background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", borderRadius: 50, textDecoration: "none", marginBottom: 16, transition: "all 0.2s" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "var(--c-bg-card)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "var(--c-bg-soft)"; }}>
+              <span style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text)" }}>Edit This Poster With AI</span>
+              <span style={{ fontFamily: FO, fontSize: 11, color: "var(--c-text-muted)", opacity: 0.6 }}>— 5 credits</span>
             </Link>
 
             {/* Payment methods */}

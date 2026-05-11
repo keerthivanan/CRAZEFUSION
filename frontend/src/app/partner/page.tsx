@@ -20,17 +20,17 @@ export default function PartnerLanding() {
 
         {/* Hero */}
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "80px 32px 64px", textAlign: "center" }}>
-          <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 16 }}>
+          <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 16 }}>
             Artist Partner Programme
           </div>
           <h1 style={{ fontFamily: FO, fontSize: "clamp(32px,5vw,72px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.02em", lineHeight: 0.95, margin: "0 0 24px" }}>
-            Sell Your Art.<br /><span style={{ color: "#7c3aed" }}>Earn Real Money.</span>
+            Sell Your Art.<br /><span style={{ color: "var(--c-text-muted)" }}>Earn Real Money.</span>
           </h1>
           <p style={{ fontFamily: FO, fontSize: 15, color: "var(--c-text-muted)", maxWidth: 520, margin: "0 auto 40px", lineHeight: 1.8 }}>
             Join our UK poster store as a creative partner. Upload your designs, we print and ship — you earn 30% of every sale.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/partner/register" style={{ display: "inline-block", padding: "16px 48px", background: "#111", color: "#fff", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50 }}>
+            <Link href="/partner/register" style={{ display: "inline-block", padding: "16px 48px", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50 }}>
               Apply Now — It&apos;s Free
             </Link>
             <Link href="/partner/login" style={{ display: "inline-block", padding: "16px 36px", background: "transparent", color: "var(--c-text)", border: "1.5px solid var(--c-border)", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50 }}>
@@ -54,7 +54,7 @@ export default function PartnerLanding() {
         {/* How it works */}
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "80px 32px" }}>
           <div style={{ textAlign: "center", marginBottom: 56 }}>
-            <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 12 }}>How It Works</div>
+            <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 12 }}>How It Works</div>
             <h2 style={{ fontFamily: FO, fontSize: "clamp(24px,3.5vw,48px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", margin: 0 }}>Simple as That</h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 1, background: "var(--c-border)" }} className="partner-grid">
@@ -70,20 +70,20 @@ export default function PartnerLanding() {
         </div>
 
         {/* Earnings example */}
-        <div style={{ background: "#111", padding: "80px 32px" }}>
+        <div style={{ background: "var(--c-bg-soft)", padding: "80px 32px" }}>
           <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
-            <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 16 }}>Earnings Example</div>
-            <h2 style={{ fontFamily: FO, fontSize: "clamp(24px,3.5vw,40px)", fontWeight: 700, color: "#fff", textTransform: "uppercase", marginBottom: 40 }}>How Much Could You Earn?</h2>
+            <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 16 }}>Earnings Example</div>
+            <h2 style={{ fontFamily: FO, fontSize: "clamp(24px,3.5vw,40px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 40 }}>How Much Could You Earn?</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }} className="earn-grid">
               {[["10 sales/mo", "£35.97"], ["50 sales/mo", "£179.85"], ["200 sales/mo", "£719.40"]].map(([sales, earn]) => (
-                <div key={sales} style={{ background: "#1a1a1a", border: "1px solid #2a2a2a", padding: "32px 20px", borderRadius: 4 }}>
-                  <div style={{ fontFamily: FO, fontSize: 13, color: "#888", marginBottom: 12 }}>{sales}</div>
-                  <div style={{ fontFamily: FO, fontSize: "clamp(24px,3vw,36px)", fontWeight: 700, color: "#7c3aed" }}>{earn}</div>
-                  <div style={{ fontFamily: FO, fontSize: 10, color: "#555", marginTop: 8 }}>30% of £11.99/sale</div>
+                <div key={sales} style={{ background: "var(--c-bg-card)", border: "1px solid var(--c-border)", padding: "32px 20px", borderRadius: 4 }}>
+                  <div style={{ fontFamily: FO, fontSize: 13, color: "var(--c-text-muted)", marginBottom: 12 }}>{sales}</div>
+                  <div style={{ fontFamily: FO, fontSize: "clamp(24px,3vw,36px)", fontWeight: 700, color: "var(--c-text)" }}>{earn}</div>
+                  <div style={{ fontFamily: FO, fontSize: 10, color: "var(--c-text-dim)", marginTop: 8 }}>30% of £11.99/sale</div>
                 </div>
               ))}
             </div>
-            <Link href="/partner/register" style={{ display: "inline-block", marginTop: 40, padding: "16px 48px", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50 }}>
+            <Link href="/partner/register" style={{ display: "inline-block", marginTop: 40, padding: "16px 48px", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50 }}>
               Start Earning Today
             </Link>
           </div>
@@ -101,13 +101,13 @@ export default function PartnerLanding() {
               "We reserve the right to reject any design that doesn't meet our quality standards",
             ].map((r, i) => (
               <div key={i} style={{ display: "flex", gap: 16, padding: "16px 20px", border: "1px solid var(--c-border)", background: "var(--c-bg-soft)" }}>
-                <span style={{ color: "#7c3aed", fontWeight: 700, flexShrink: 0 }}>→</span>
+                <span style={{ color: "var(--c-text-muted)", fontWeight: 700, flexShrink: 0 }}>→</span>
                 <span style={{ fontFamily: FO, fontSize: 13, color: "var(--c-text-muted)", lineHeight: 1.6 }}>{r}</span>
               </div>
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: 48 }}>
-            <Link href="/partner/register" style={{ display: "inline-block", padding: "16px 48px", background: "#111", color: "#fff", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50 }}>
+            <Link href="/partner/register" style={{ display: "inline-block", padding: "16px 48px", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50 }}>
               Apply as a Partner
             </Link>
           </div>
