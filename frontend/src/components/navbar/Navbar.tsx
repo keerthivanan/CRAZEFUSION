@@ -108,7 +108,7 @@ function MegaMenu({ item, onClose }: { item: typeof NAV_ITEMS[0]; onClose: () =>
       <div style={{ display: "flex", gap: 32, flex: 1 }}>
         {item.cols.map(col => (
           <div key={col.heading} style={{ minWidth: 160 }}>
-            <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 14 }}>{col.heading}</div>
+            <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: muted, marginBottom: 14 }}>{col.heading}</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {col.items.map(link => (
                 <Link key={link.label} href={link.href} onClick={onClose}
@@ -134,7 +134,7 @@ function MegaMenu({ item, onClose }: { item: typeof NAV_ITEMS[0]; onClose: () =>
           </div>
           <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: text, marginBottom: 4 }}>{item.featured.title}</div>
           <div style={{ fontFamily: FO, fontSize: 11, color: muted, marginBottom: 12, lineHeight: 1.5 }}>{item.featured.sub}</div>
-          <div style={{ display: "inline-block", padding: "7px 16px", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 11, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 50 }}>
+          <div style={{ display: "inline-block", padding: "7px 16px", background: text, color: theme === "dark" ? "#000" : "#fff", fontFamily: FO, fontSize: 11, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: 50 }}>
             {item.featured.cta}
           </div>
         </Link>
@@ -242,7 +242,7 @@ export default function Navbar() {
               })}
 
               {/* Direct AI Studio link — glowing pill */}
-              <Link href="/create" className="ai-studio-btn" style={{ padding: "7px 16px", fontFamily: FH, fontSize: 13, fontWeight: 700, letterSpacing: "0.02em", textDecoration: "none", color: "#c084fc", background: "rgba(124,58,237,0.1)", border: "1px solid rgba(192,132,252,0.4)", borderRadius: 10, whiteSpace: "nowrap", transition: "all 0.2s", display: "inline-flex", alignItems: "center", gap: 5 }}>
+              <Link href="/create" className="ai-studio-btn" style={{ padding: "7px 16px", fontFamily: FH, fontSize: 13, fontWeight: 700, letterSpacing: "0.02em", textDecoration: "none", color: iconClr, background: theme === "dark" ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)", border: `1px solid ${borderClr}`, borderRadius: 10, whiteSpace: "nowrap", transition: "all 0.2s", display: "inline-flex", alignItems: "center", gap: 5 }}>
                 ✦ AI Studio
               </Link>
             </div>
@@ -262,14 +262,14 @@ export default function Navbar() {
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
                 <IconBag />
                 {count > 0 && (
-                  <span style={{ position: "absolute", top: -4, right: -4, background: "#7c3aed", color: "#000", borderRadius: "50%", width: 16, height: 16, fontSize: 8, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <span style={{ position: "absolute", top: -4, right: -4, background: iconClr, color: theme === "dark" ? "#000" : "#fff", borderRadius: "50%", width: 16, height: 16, fontSize: 8, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     {count}
                   </span>
                 )}
               </Link>
 
               {/* CTA */}
-              <Link href="/partner" className="nav-cta" style={{ fontFamily: FH, fontSize: 12, fontWeight: 700, letterSpacing: "0.04em", textDecoration: "none", padding: "8px 20px", borderRadius: 50, background: "#7c3aed", color: "#000", whiteSpace: "nowrap", transition: "all 0.2s", boxShadow: "0 0 20px rgba(124,58,237,0.25)" }}
+              <Link href="/partner" className="nav-cta" style={{ fontFamily: FH, fontSize: 12, fontWeight: 700, letterSpacing: "0.04em", textDecoration: "none", padding: "8px 20px", borderRadius: 50, background: iconClr, color: theme === "dark" ? "#000" : "#fff", whiteSpace: "nowrap", transition: "all 0.2s" }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.9"; (e.currentTarget as HTMLElement).style.transform = "scale(1.03)"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; (e.currentTarget as HTMLElement).style.transform = "scale(1)"; }}>
                 Sell Art
@@ -355,12 +355,7 @@ export default function Navbar() {
           from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
           to   { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
-        @keyframes aiGlow {
-          0%, 100% { box-shadow: 0 0 8px rgba(192,132,252,0.5), 0 0 20px rgba(192,132,252,0.25); border-color: rgba(192,132,252,0.5); }
-          50%       { box-shadow: 0 0 16px rgba(244,114,182,0.6), 0 0 36px rgba(192,132,252,0.35), 0 0 48px rgba(56,189,248,0.15); border-color: rgba(244,114,182,0.6); }
-        }
-        .ai-studio-btn { animation: aiGlow 2.4s ease-in-out infinite; }
-        .ai-studio-btn:hover { background: rgba(124,58,237,0.2) !important; transform: translateY(-1px); }
+        .ai-studio-btn:hover { opacity: 0.8; transform: translateY(-1px); }
         @media (max-width: 860px) {
           .nav-mega-links { display: none !important; }
           .nav-hamburger  { display: flex !important; }
