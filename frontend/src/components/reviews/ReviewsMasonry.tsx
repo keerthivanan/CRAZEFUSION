@@ -46,8 +46,8 @@ const ITEMS: MasonryItem[] = [
 
 export default function ReviewsMasonry() {
   return (
-    <section style={{ background: "var(--c-bg)", padding: "80px 0 100px" }}>
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 24px" }}>
+    <section style={{ background: "var(--c-bg)", padding: "60px 0 80px" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 16px" }}>
 
         {/* Header */}
         <div style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", marginBottom:56, flexWrap:"wrap", gap:24 }}>

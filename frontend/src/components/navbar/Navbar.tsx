@@ -253,65 +253,75 @@ export default function Navbar() {
         </nav>
       </div>
 
-      {/* ── Mobile Full-Screen Menu ── */}
-      {mobileOpen && (
-        <div style={{ position: "fixed", inset: 0, background: "#080808", zIndex: 2000, overflowY: "auto", paddingTop: 110 }}>
-          <div style={{ padding: "0 24px 80px" }}>
+      {/* ── Mobile Sidebar ── */}
+      <div style={{
+        position: "fixed", top: 0, right: 0, bottom: 0, width: "min(360px, 100vw)",
+        background: theme === "dark" ? "#0a0a0a" : "#fff",
+        zIndex: 2000, overflowY: "auto",
+        boxShadow: "-20px 0 80px rgba(0,0,0,0.25)",
+        transform: mobileOpen ? "translateX(0)" : "translateX(100%)",
+        transition: "transform 0.35s cubic-bezier(0.4,0,0.2,1)",
+        display: "flex", flexDirection: "column",
+      }}>
+        {/* Sidebar header */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px", borderBottom: `1px solid ${theme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}` }}>
+          <Link href="/" onClick={() => setMobileOpen(false)}>
+            <img src="/logo.png" alt="Logo" style={{ height: 36, objectFit: "contain", filter: theme === "dark" ? "invert(1)" : "none" }} />
+          </Link>
+          <button onClick={() => setMobileOpen(false)} style={{ width: 36, height: 36, background: theme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)", border: "none", borderRadius: 10, cursor: "pointer", color: iconClr, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
 
-            {/* Search-style prompt */}
-            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, padding: "14px 18px", marginBottom: 32, display: "flex", alignItems: "center", gap: 10 }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-              </svg>
-              <Link href="/collection" onClick={() => setMobileOpen(false)} style={{ fontFamily: FO, fontSize: 14, color: "#555", textDecoration: "none", flex: 1 }}>
-                Search 609+ posters...
-              </Link>
-            </div>
-
-            {/* Main nav sections */}
-            {NAV_ITEMS.map(item => (
-              <div key={item.label} style={{ marginBottom: 32 }}>
-                <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 12 }}>{item.label}</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                  {item.cols.flatMap(col => col.items).map(link => (
-                    <Link key={link.label} href={link.href} onClick={() => setMobileOpen(false)}
-                      style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "13px 0", borderBottom: "1px solid rgba(255,255,255,0.04)", textDecoration: "none" }}>
-                      <div>
-                        <div style={{ fontFamily: FO, fontSize: 15, fontWeight: 600, color: "#fff" }}>{link.label}</div>
-                        <div style={{ fontFamily: FO, fontSize: 12, color: "#555", marginTop: 2 }}>{link.sub}</div>
-                      </div>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M9 18l6-6-6-6"/>
-                      </svg>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-
-            {/* Mobile CTA buttons */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 16 }}>
-              <Link href="/create" onClick={() => setMobileOpen(false)}
-                style={{ display: "block", padding: "16px 0", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50, textAlign: "center", boxShadow: "0 0 32px rgba(124,58,237,0.25)" }}>
-                Open AI Studio
-              </Link>
-              <Link href="/collection" onClick={() => setMobileOpen(false)}
-                style={{ display: "block", padding: "15px 0", background: "transparent", color: "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50, textAlign: "center", border: "1px solid rgba(255,255,255,0.12)" }}>
-                Browse Posters
-              </Link>
-            </div>
-
-            {/* Bottom info */}
-            <div style={{ marginTop: 40, display: "flex", gap: 16, flexWrap: "wrap" }}>
-              {[["609+", "Designs"], ["Free", "UK Delivery"], ["48hr", "Printing"], ["30%", "Creator Cut"]].map(([val, label]) => (
-                <div key={label} style={{ flex: "1 1 40%" }}>
-                  <div style={{ fontFamily: FO, fontSize: 20, fontWeight: 800, color: "#fff" }}>{val}</div>
-                  <div style={{ fontFamily: FO, fontSize: 11, color: "#555", letterSpacing: "0.06em" }}>{label}</div>
-                </div>
+        {/* Nav links */}
+        <div style={{ flex: 1, padding: "8px 16px 24px", overflowY: "auto" }}>
+          {NAV_ITEMS.map(item => (
+            <div key={item.label} style={{ marginBottom: 4 }}>
+              <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#7c3aed", padding: "16px 8px 8px" }}>{item.label}</div>
+              {item.cols.flatMap(col => col.items).map(link => (
+                <Link key={link.label} href={link.href} onClick={() => setMobileOpen(false)}
+                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 12px", borderRadius: 12, textDecoration: "none", transition: "background 0.15s", marginBottom: 2 }}
+                  onMouseEnter={e => e.currentTarget.style.background = theme === "dark" ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)"}
+                  onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
+                  <div>
+                    <div style={{ fontFamily: FO, fontSize: 14, fontWeight: 600, color: theme === "dark" ? "#f0f0f0" : "#111", marginBottom: 2 }}>{link.label}</div>
+                    <div style={{ fontFamily: FO, fontSize: 11, color: theme === "dark" ? "#555" : "#999" }}>{link.sub}</div>
+                  </div>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={theme === "dark" ? "#444" : "#ccc"} strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
+                </Link>
               ))}
             </div>
+          ))}
+        </div>
+
+        {/* CTAs */}
+        <div style={{ padding: "16px 20px 32px", borderTop: `1px solid ${theme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`, display: "flex", flexDirection: "column", gap: 10 }}>
+          <Link href="/create" onClick={() => setMobileOpen(false)}
+            style={{ display: "block", padding: "15px 0", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50, textAlign: "center" }}>
+            ✦ Open AI Studio
+          </Link>
+          <Link href="/collection" onClick={() => setMobileOpen(false)}
+            style={{ display: "block", padding: "14px 0", background: "transparent", color: theme === "dark" ? "#fff" : "#111", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50, textAlign: "center", border: `1.5px solid ${theme === "dark" ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)"}` }}>
+            Browse Posters
+          </Link>
+
+          {/* Theme + stats row */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 8 }}>
+            <button onClick={toggle} style={{ display: "flex", alignItems: "center", gap: 8, background: "transparent", border: `1px solid ${borderClr}`, borderRadius: 10, padding: "8px 14px", cursor: "pointer", color: iconClr, fontFamily: FO, fontSize: 12, fontWeight: 600 }}>
+              {theme === "dark" ? <IconSun /> : <IconMoon />}
+              {theme === "dark" ? "Light Mode" : "Dark Mode"}
+            </button>
+            <Link href="/cart" onClick={() => setMobileOpen(false)} style={{ position: "relative", width: 40, height: 40, display: "flex", alignItems: "center", justifyContent: "center", color: iconClr, textDecoration: "none", border: `1px solid ${borderClr}`, borderRadius: 10 }}>
+              <IconBag />
+              {count > 0 && <span style={{ position: "absolute", top: -4, right: -4, background: "#7c3aed", color: "#000", borderRadius: "50%", width: 16, height: 16, fontSize: 8, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>{count}</span>}
+            </Link>
           </div>
         </div>
+      </div>
+
+      {/* Backdrop */}
+      {mobileOpen && (
+        <div onClick={() => setMobileOpen(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 1999, backdropFilter: "blur(4px)" }} />
       )}
 
       <style>{`
