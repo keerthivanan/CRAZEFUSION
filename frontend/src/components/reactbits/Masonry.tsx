@@ -112,11 +112,11 @@ const Masonry: React.FC<MasonryProps> = ({
     const gap = 16;
     const totalGaps = (columns - 1) * gap;
     const columnWidth = (width - totalGaps) / columns;
-    const isMobile = width < 600;
+    const isMobile = width < 640;
     return items.map(child => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
-      const height = isMobile ? child.height / 3.2 : child.height / 2;
+      const height = isMobile ? child.height / 3 : child.height / 2;
       const y = colHeights[col];
       colHeights[col] += height + gap;
       return { ...child, x, y, w: columnWidth, h: height };

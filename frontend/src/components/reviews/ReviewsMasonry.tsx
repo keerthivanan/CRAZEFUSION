@@ -4,76 +4,61 @@ import type { MasonryItem } from "@/components/reactbits/Masonry";
 
 const Masonry = dynamic(() => import("@/components/reactbits/Masonry"), { ssr: false });
 
-// Heights alternate to create natural staggered masonry rhythm
+// Portrait heights (700–920) → desktop renders ~350–460px tall, mobile ~233–307px tall
+// No coffee/food — only visually striking posters
 const ITEMS: MasonryItem[] = [
-  { id:"1",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2811_Porsche_911_Turbo_Marlboro_Edition_Poster.webp", url:"/product/2811", height:560 },
-  { id:"2",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/1107_Joker_Why_so_Serious_Poster.webp",                   url:"/product/1107", height:500 },
-  { id:"3",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2795_The_Batman_in_the_Rain_Poster.webp",                   url:"/product/2795", height:540 },
-  { id:"4",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/originals/coffee-shop-posters/2897_A_Glass_of_Iced_Matcha_Latte_Poster.webp", url:"/product/2897", height:480 },
-  { id:"5",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2971_Aston_Martin_DB11_Roadster_Poster.webp",           url:"/product/2971", height:520 },
-  { id:"6",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/1106_John_Wick_GTA_Poster.webp",                           url:"/product/1106", height:560 },
-  { id:"7",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974049/crazefusion/originals/coffee-shop-posters/2901_The_Breakfast_Club_Poster.webp",           url:"/product/2901", height:500 },
-  { id:"8",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973740/crazefusion/originals/car-posters/2876_2005_Ford_GT_Supercar_Poster.webp",               url:"/product/2876", height:540 },
-  { id:"9",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/2792_Joker_Put_on_a_Happy_Face_Poster.webp",               url:"/product/2792", height:480 },
-  { id:"10", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2972_Aston_Martin_DBS_Superleggera_Poster.webp",       url:"/product/2972", height:560 },
-  { id:"11", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/originals/coffee-shop-posters/2902_More_Espresso_Less_Depresso_Poster.webp", url:"/product/2902", height:520 },
-  { id:"12", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2794_The_Amazing_Spider-Man_Collage_Poster.webp",           url:"/product/2794", height:500 },
-  { id:"13", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2970_Aspark_Owl_Sports_Car_Poster.webp",               url:"/product/2970", height:540 },
-  { id:"14", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973790/crazefusion/originals/movies/1105_Baby_Groot_Working_Out_Poster.webp",                   url:"/product/1105", height:480 },
-  { id:"15", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2812_Porsche_911_Turbo_S_Collage_Poster.webp",         url:"/product/2812", height:560 },
-  { id:"16", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/originals/coffee-shop-posters/2899_Lose_Yourself_in_Coffee_Books_Poster.webp", url:"/product/2899", height:520 },
-  { id:"17", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2796_John_Wick_It_Wasn_t_Just_a_Dog_Poster.webp",           url:"/product/2796", height:500 },
-  { id:"18", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973740/crazefusion/originals/car-posters/2963_Acura_NSX_Coastal_Drive_Poster.webp",             url:"/product/2963", height:540 },
-  { id:"19", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/2797_Rocky_A_Million-To-One_Shot_Poster.webp",              url:"/product/2797", height:480 },
-  { id:"20", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974050/crazefusion/originals/coffee-shop-posters/2903_Coffee_Matcha_Drink_Close-Up_Poster.webp", url:"/product/2903", height:560 },
-  { id:"21", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973743/crazefusion/originals/car-posters/2973_Aston_Martin_One-77_Roadster_Poster.webp",         url:"/product/2973", height:520 },
-  { id:"22", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2793_Scream_Everybody_s_a_Suspect_Poster.webp",             url:"/product/2793", height:500 },
-  { id:"23", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2813_Porsche_918_Spyder_Poster.webp",                   url:"/product/2813", height:540 },
-  { id:"24", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/2802_Hunter_Games_Poster.webp",                             url:"/product/2802", height:480 },
-  { id:"25", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974046/crazefusion/originals/coffee-shop-posters/2782_Layered_Bicerin_Drink_Poster.webp",       url:"/product/2782", height:560 },
-  { id:"26", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2968_Arash_AF10_Supercar_Poster.webp",                 url:"/product/2968", height:520 },
-  { id:"27", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/3127_2_Guns_Movie_Poster.webp",                             url:"/product/3127", height:500 },
-  { id:"28", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2814_Porsche_911_Vintage_Car_Poster.webp",             url:"/product/2814", height:540 },
-  { id:"29", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/originals/coffee-shop-posters/2900_Yummy_Matcha_Latte_A_Need_Not_a_Want_Poster.webp", url:"/product/2900", height:480 },
-  { id:"30", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/3128_2_Hearts_Movie_Poster.webp",                           url:"/product/3128", height:560 },
-  { id:"31", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/2783_The_End_of_The_Fucking_World_Poster.webp",             url:"/product/2783", height:520 },
-  { id:"32", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2966_Apollo_Intensa_Emozione_Poster.webp",             url:"/product/2966", height:500 },
-  { id:"33", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973743/crazefusion/originals/car-posters/2976_Aston_Martin_V12_Vantage_Poster.webp",             url:"/product/2976", height:540 },
-  { id:"34", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777974048/crazefusion/originals/coffee-shop-posters/2898_Il_Caffe_E_Pronto_Coffee_Is_Ready_Poster.webp", url:"/product/2898", height:480 },
-  { id:"35", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/3129_6_Underground_Poster.webp",                             url:"/product/3129", height:560 },
-  { id:"36", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973740/crazefusion/originals/car-posters/2964_Acura_NSX_Sports_Car_Poster.webp",               url:"/product/2964", height:520 },
+  { id:"1",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2811_Porsche_911_Turbo_Marlboro_Edition_Poster.webp", url:"/product/2811", height:860 },
+  { id:"2",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/1107_Joker_Why_so_Serious_Poster.webp",                   url:"/product/1107", height:780 },
+  { id:"3",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2795_The_Batman_in_the_Rain_Poster.webp",                   url:"/product/2795", height:920 },
+  { id:"4",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2971_Aston_Martin_DB11_Roadster_Poster.webp",           url:"/product/2971", height:820 },
+  { id:"5",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/1106_John_Wick_GTA_Poster.webp",                           url:"/product/1106", height:760 },
+  { id:"6",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2972_Aston_Martin_DBS_Superleggera_Poster.webp",       url:"/product/2972", height:900 },
+  { id:"7",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2794_The_Amazing_Spider-Man_Collage_Poster.webp",           url:"/product/2794", height:800 },
+  { id:"8",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973740/crazefusion/originals/car-posters/2876_2005_Ford_GT_Supercar_Poster.webp",               url:"/product/2876", height:840 },
+  { id:"9",  img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/2792_Joker_Put_on_a_Happy_Face_Poster.webp",               url:"/product/2792", height:760 },
+  { id:"10", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2970_Aspark_Owl_Sports_Car_Poster.webp",               url:"/product/2970", height:880 },
+  { id:"11", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973790/crazefusion/originals/movies/1105_Baby_Groot_Working_Out_Poster.webp",                   url:"/product/1105", height:800 },
+  { id:"12", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2812_Porsche_911_Turbo_S_Collage_Poster.webp",         url:"/product/2812", height:860 },
+  { id:"13", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2796_John_Wick_It_Wasn_t_Just_a_Dog_Poster.webp",           url:"/product/2796", height:820 },
+  { id:"14", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973740/crazefusion/originals/car-posters/2963_Acura_NSX_Coastal_Drive_Poster.webp",             url:"/product/2963", height:760 },
+  { id:"15", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/2797_Rocky_A_Million-To-One_Shot_Poster.webp",              url:"/product/2797", height:900 },
+  { id:"16", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973743/crazefusion/originals/car-posters/2973_Aston_Martin_One-77_Roadster_Poster.webp",         url:"/product/2973", height:840 },
+  { id:"17", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973794/crazefusion/originals/movies/2793_Scream_Everybody_s_a_Suspect_Poster.webp",             url:"/product/2793", height:780 },
+  { id:"18", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2813_Porsche_918_Spyder_Poster.webp",                   url:"/product/2813", height:860 },
+  { id:"19", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/2802_Hunter_Games_Poster.webp",                             url:"/product/2802", height:800 },
+  { id:"20", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2968_Arash_AF10_Supercar_Poster.webp",                 url:"/product/2968", height:920 },
+  { id:"21", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/3127_2_Guns_Movie_Poster.webp",                             url:"/product/3127", height:760 },
+  { id:"22", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973739/crazefusion/originals/car-posters/2814_Porsche_911_Vintage_Car_Poster.webp",             url:"/product/2814", height:840 },
+  { id:"23", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/3128_2_Hearts_Movie_Poster.webp",                           url:"/product/3128", height:880 },
+  { id:"24", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973792/crazefusion/originals/movies/2783_The_End_of_The_Fucking_World_Poster.webp",             url:"/product/2783", height:800 },
+  { id:"25", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973741/crazefusion/originals/car-posters/2966_Apollo_Intensa_Emozione_Poster.webp",             url:"/product/2966", height:820 },
+  { id:"26", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973743/crazefusion/originals/car-posters/2976_Aston_Martin_V12_Vantage_Poster.webp",             url:"/product/2976", height:860 },
+  { id:"27", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973796/crazefusion/originals/movies/3129_6_Underground_Poster.webp",                             url:"/product/3129", height:760 },
+  { id:"28", img:"https://res.cloudinary.com/dxosc5jfy/image/upload/v1777973740/crazefusion/originals/car-posters/2964_Acura_NSX_Sports_Car_Poster.webp",               url:"/product/2964", height:900 },
 ];
 
 export default function ReviewsMasonry() {
   return (
-    <section style={{ background: "var(--c-bg)", padding: "60px 0 80px" }}>
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 16px" }}>
+    <section style={{ background: "#080808", padding: "80px 0 100px" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 20px" }}>
 
         {/* Header */}
-        <div style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", marginBottom:56, flexWrap:"wrap", gap:24 }}>
+        <div style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", marginBottom: 52, flexWrap:"wrap", gap: 24 }}>
           <div>
-            <p style={{
-              fontSize: 11, fontWeight: 700, letterSpacing: "0.22em",
-              textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 12,
-              fontFamily: "'Poppins', sans-serif",
-            }}>
+            <p style={{ fontSize:11, fontWeight:700, letterSpacing:"0.22em", textTransform:"uppercase", color:"#555", marginBottom:12, fontFamily:"'Poppins',sans-serif" }}>
               Our Collection
             </p>
-            <h2 style={{
-              fontSize: "clamp(40px, 5vw, 80px)", fontWeight: 900,
-              lineHeight: 0.9, letterSpacing: "-0.03em", color: "var(--c-text)", margin: 0,
-              fontFamily: "'Epilogue', sans-serif",
-            }}>
-              609+<br />
-              <span style={{ color: "#7c3aed" }}>Designs</span>
+            <h2 style={{ fontSize:"clamp(40px, 5vw, 80px)", fontWeight:900, lineHeight:0.9, letterSpacing:"-0.03em", color:"#fff", margin:0, fontFamily:"'Epilogue',sans-serif" }}>
+              609+<br/>
+              <span style={{ color:"#7c3aed" }}>Designs</span>
             </h2>
           </div>
-          <div style={{ paddingBottom: 8, textAlign:"right" }}>
-            <div style={{ fontSize: 60, fontWeight: 900, letterSpacing: "-0.04em", color: "var(--c-text)", lineHeight: 1, fontFamily: "'Epilogue', sans-serif" }}>4.8</div>
+          <div style={{ textAlign:"right", paddingBottom:8 }}>
+            <div style={{ fontSize:60, fontWeight:900, letterSpacing:"-0.04em", color:"#fff", lineHeight:1, fontFamily:"'Epilogue',sans-serif" }}>4.8</div>
             <div style={{ display:"flex", gap:3, justifyContent:"flex-end", margin:"6px 0 4px" }}>
               {[...Array(5)].map((_,i) => <span key={i} style={{ color:"#7c3aed", fontSize:18 }}>★</span>)}
             </div>
-            <div style={{ fontSize:11, color:"var(--c-text-muted)", letterSpacing:"0.1em", textTransform:"uppercase", fontFamily:"'Poppins',sans-serif" }}>2,400+ Reviews</div>
+            <div style={{ fontSize:11, color:"#555", letterSpacing:"0.1em", textTransform:"uppercase", fontFamily:"'Poppins',sans-serif" }}>2,400+ Reviews</div>
           </div>
         </div>
 
@@ -87,27 +72,23 @@ export default function ReviewsMasonry() {
           scaleOnHover
           hoverScale={0.97}
           blurToFocus
-          colorShiftOnHover={false}
+          colorShiftOnHover
         />
 
         {/* CTA */}
         <div style={{ textAlign:"center", marginTop:64 }}>
-          <a
-            href="/collection"
-            style={{
-              display:"inline-flex", alignItems:"center", gap:8,
-              padding:"16px 44px",
-              background:"var(--c-btn-bg)", color:"var(--c-btn-text)",
-              fontSize:12, fontWeight:800,
-              letterSpacing:"0.14em", textTransform:"uppercase",
-              textDecoration:"none", borderRadius:50,
-              boxShadow:"0 8px 32px rgba(0,0,0,0.12)",
-              transition:"transform 0.2s, box-shadow 0.2s",
-              fontFamily:"'Poppins',sans-serif",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.transform="translateY(-2px)"; e.currentTarget.style.boxShadow="0 14px 40px rgba(0,0,0,0.2)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform=""; e.currentTarget.style.boxShadow="0 8px 32px rgba(0,0,0,0.12)"; }}
-          >
+          <a href="/collection" style={{
+            display:"inline-flex", alignItems:"center", gap:8,
+            padding:"16px 44px",
+            background:"#fff", color:"#111",
+            fontSize:12, fontWeight:800, letterSpacing:"0.14em", textTransform:"uppercase",
+            textDecoration:"none", borderRadius:50,
+            boxShadow:"0 8px 32px rgba(0,0,0,0.4)",
+            transition:"transform 0.2s, box-shadow 0.2s",
+            fontFamily:"'Poppins',sans-serif",
+          }}
+          onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-2px)"; e.currentTarget.style.boxShadow="0 16px 48px rgba(0,0,0,0.6)"; }}
+          onMouseLeave={e=>{ e.currentTarget.style.transform=""; e.currentTarget.style.boxShadow="0 8px 32px rgba(0,0,0,0.4)"; }}>
             Browse Full Collection →
           </a>
         </div>
