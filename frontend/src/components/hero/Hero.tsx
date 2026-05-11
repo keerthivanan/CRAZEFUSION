@@ -399,14 +399,14 @@ export default function Hero() {
       width: "100%",
       height: "100vh",
       background: "#080808",
-    }}>
+    }} className="hero-section">
 
       <div style={{ position: "absolute", inset: 0 }}>
         <DomeGallery
           images={IMAGES}
           fit={0.72}
           fitBasis="width"
-          minRadius={480}
+          minRadius={640}
           maxRadius={2400}
           maxVerticalRotationDeg={30}
           segments={segments}
@@ -422,12 +422,15 @@ export default function Hero() {
         />
       </div>
 
-      {/* Desktop edge fades — blend sphere boundary into background */}
+      {/* Edge fades — blend sphere boundary into background */}
       {segments === 44 && <>
         <div style={{ position:"absolute", top:0, left:0, bottom:0, width:"16%", zIndex:5, background:"linear-gradient(to right, rgba(8,8,8,0.92) 0%, transparent 100%)", pointerEvents:"none" }} />
         <div style={{ position:"absolute", top:0, right:0, bottom:0, width:"16%", zIndex:5, background:"linear-gradient(to left, rgba(8,8,8,0.92) 0%, transparent 100%)", pointerEvents:"none" }} />
-        <div style={{ position:"absolute", top:0, left:0, right:0, height:"14%", zIndex:5, background:"linear-gradient(to bottom, rgba(8,8,8,0.88) 0%, transparent 100%)", pointerEvents:"none" }} />
       </>}
+      {/* Top fade — always shown (desktop + mobile) */}
+      <div style={{ position:"absolute", top:0, left:0, right:0, height:"14%", zIndex:5, background:"linear-gradient(to bottom, rgba(8,8,8,0.92) 0%, transparent 100%)", pointerEvents:"none" }} />
+      {/* Bottom fade — always shown */}
+      <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"10%", zIndex:5, background:"linear-gradient(to top, rgba(8,8,8,0.6) 0%, transparent 100%)", pointerEvents:"none" }} />
 
       {/* Bottom overlay — headline + CTAs + stats */}
       <div style={{
@@ -529,6 +532,8 @@ export default function Hero() {
       </div>
 
       <style>{`
+        .hero-section { height: 100svh; }
+        @supports not (height: 100svh) { .hero-section { height: 100vh; } }
         @media (max-width: 768px) {
           .hero-bottom {
             padding: 0 18px 32px !important;
