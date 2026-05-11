@@ -465,10 +465,10 @@ export default function Hero() {
         <div>
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 7,
-            background: "rgba(192,132,252,0.12)", border: "1px solid rgba(192,132,252,0.3)",
+            background: isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.05)", border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}`,
             borderRadius: 50, padding: "5px 14px", marginBottom: 20,
           }}>
-            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#c084fc", display: "inline-block" }} />
+            <span style={{ width: 5, height: 5, borderRadius: "50%", background: isDark ? "#fff" : "#111", display: "inline-block" }} />
             <span style={{ fontFamily: FB, fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)" }}>
               Premium Wall Art · UK Delivery
             </span>
@@ -491,7 +491,7 @@ export default function Hero() {
           </h1>
 
           <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-            <ClickSpark sparkColor="#c084fc" sparkCount={10} sparkRadius={24}>
+            <ClickSpark sparkColor="#fff" sparkCount={10} sparkRadius={24}>
               <Link href="/collection" style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
                 padding: "15px 34px",

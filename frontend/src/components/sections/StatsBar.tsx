@@ -41,7 +41,7 @@ export default function StatsBar() {
             <div style={{
               fontFamily: FO, fontSize: 10, fontWeight: 700,
               letterSpacing: "0.18em", textTransform: "uppercase",
-              color: "#7c3aed", marginTop: 8,
+              color: "rgba(255,255,255,0.5)", marginTop: 8,
             }}>
               {s.label}
             </div>

@@ -50,13 +50,13 @@ export default function ReviewsMasonry() {
             </p>
             <h2 style={{ fontSize:"clamp(40px, 5vw, 80px)", fontWeight:900, lineHeight:0.9, letterSpacing:"-0.03em", color:"#fff", margin:0, fontFamily:"'Epilogue',sans-serif" }}>
               609+<br/>
-              <span style={{ color:"#7c3aed" }}>Designs</span>
+              <span>Designs</span>
             </h2>
           </div>
           <div style={{ textAlign:"right", paddingBottom:8 }}>
             <div style={{ fontSize:60, fontWeight:900, letterSpacing:"-0.04em", color:"#fff", lineHeight:1, fontFamily:"'Epilogue',sans-serif" }}>4.8</div>
             <div style={{ display:"flex", gap:3, justifyContent:"flex-end", margin:"6px 0 4px" }}>
-              {[...Array(5)].map((_,i) => <span key={i} style={{ color:"#7c3aed", fontSize:18 }}>★</span>)}
+              {[...Array(5)].map((_,i) => <span key={i} style={{ color:"#fff", fontSize:18 }}>★</span>)}
             </div>
             <div style={{ fontSize:11, color:"#555", letterSpacing:"0.1em", textTransform:"uppercase", fontFamily:"'Poppins',sans-serif" }}>2,400+ Reviews</div>
           </div>
