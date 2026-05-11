@@ -143,66 +143,39 @@ function MegaMenu({ item, onClose }: { item: typeof NAV_ITEMS[0]; onClose: () =>
   );
 }
 
-// ── Mobile Accordion Section ───────────────────────────────────────────────────
+// ── Mobile nav row item ────────────────────────────────────────────────────────
 
-function MobileAccordion({ item, onClose, theme }: { item: typeof NAV_ITEMS[0]; onClose: () => void; theme: string }) {
-  const [expanded, setExpanded] = useState(false);
+function SideNavItem({ href, icon, label, sub, onClose, theme, badge }: {
+  href: string; icon: React.ReactNode; label: string; sub?: string;
+  onClose: () => void; theme: string; badge?: number;
+}) {
   const isDark = theme === "dark";
-  const textCol = isDark ? "#f0f0f0" : "#111";
-  const mutedCol = isDark ? "#555" : "#aaa";
-  const borderCol = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
-  const hoverBg = isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)";
-  const activeBg = isDark ? "rgba(124,58,237,0.08)" : "rgba(124,58,237,0.06)";
-
   return (
-    <div style={{ borderBottom: `1px solid ${borderCol}` }}>
-      <button
-        onClick={() => setExpanded(v => !v)}
-        style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", background: "transparent", border: "none", cursor: "pointer", textAlign: "left" }}>
-        <span style={{ fontFamily: FH, fontSize: 15, fontWeight: 700, color: textCol, letterSpacing: "-0.01em" }}>{item.label}</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={isDark ? "#555" : "#bbb"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-          style={{ transition: "transform 0.25s", transform: expanded ? "rotate(180deg)" : "rotate(0)" }}>
-          <path d="M6 9l6 6 6-6"/>
-        </svg>
-      </button>
-      {expanded && (
-        <div style={{ paddingBottom: 8 }}>
-          {item.cols.map(col => (
-            <div key={col.heading} style={{ marginBottom: 8 }}>
-              <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: mutedCol, padding: "4px 20px 8px" }}>{col.heading}</div>
-              {col.items.map(link => (
-                <Link key={link.label} href={link.href} onClick={onClose}
-                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 20px", textDecoration: "none", borderRadius: 0, transition: "background 0.15s" }}
-                  onMouseEnter={e => e.currentTarget.style.background = hoverBg}
-                  onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
-                  <div>
-                    <div style={{ fontFamily: FO, fontSize: 14, fontWeight: 600, color: textCol, marginBottom: 1 }}>{link.label}</div>
-                    <div style={{ fontFamily: FO, fontSize: 11, color: mutedCol }}>{link.sub}</div>
-                  </div>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={isDark ? "#333" : "#ddd"} strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
-                </Link>
-              ))}
-            </div>
-          ))}
-        </div>
+    <Link href={href} onClick={onClose} style={{ display: "flex", alignItems: "center", gap: 16, padding: "15px 20px", textDecoration: "none", borderBottom: `1px solid ${isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`, transition: "background 0.15s", position: "relative" }}
+      onMouseEnter={e => e.currentTarget.style.background = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)"}
+      onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
+      <span style={{ color: isDark ? "#999" : "#888", display: "flex", flexShrink: 0 }}>{icon}</span>
+      <div style={{ flex: 1 }}>
+        <div style={{ fontFamily: FO, fontSize: 15, fontWeight: 600, color: isDark ? "#f0f0f0" : "#111", letterSpacing: "-0.01em" }}>{label}</div>
+        {sub && <div style={{ fontFamily: FO, fontSize: 11, color: isDark ? "#555" : "#aaa", marginTop: 1 }}>{sub}</div>}
+      </div>
+      {badge != null && badge > 0 && (
+        <span style={{ background: isDark ? "#fff" : "#111", color: isDark ? "#000" : "#fff", borderRadius: 20, minWidth: 20, height: 20, padding: "0 6px", fontSize: 10, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FO }}>{badge}</span>
       )}
-    </div>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={isDark ? "#333" : "#ccc"} strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
+    </Link>
   );
 }
 
-// ── Icons (auth) ───────────────────────────────────────────────────────────────
+// ── Nav icons ──────────────────────────────────────────────────────────────────
 
-const IconUser = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
-  </svg>
-);
-
-const IconUserPlus = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
-  </svg>
-);
+const IcoGrid   = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>;
+const IcoSpark  = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>;
+const IcoTag    = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/></svg>;
+const IcoHeart  = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>;
+const IcoBag    = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>;
+const IcoUser   = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
+const IcoInfo   = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>;
 
 // ── Main Navbar ────────────────────────────────────────────────────────────────
 
@@ -325,74 +298,50 @@ export default function Navbar() {
         display: "flex", flexDirection: "column", overflowY: "auto",
       }}>
 
-        {/* ── Header ── */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 20px 16px", borderBottom: `1px solid ${borderClr}`, flexShrink: 0 }}>
-          <Link href="/" onClick={() => setMobileOpen(false)}>
-            <img src="/logo.png" alt="CrazeFusion" style={{ height: 34, objectFit: "contain", filter: theme === "dark" ? "invert(1)" : "none" }} />
+        {/* ── Header: logo pill + close ── */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", flexShrink: 0 }}>
+          <Link href="/" onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", background: theme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)", borderRadius: 50, padding: "8px 20px 8px 14px", gap: 10, textDecoration: "none" }}>
+            <img src="/logo.png" alt="CrazeFusion" style={{ height: 28, objectFit: "contain", filter: theme === "dark" ? "invert(1)" : "none" }} />
           </Link>
-          <button onClick={() => setMobileOpen(false)} style={{ width: 34, height: 34, background: theme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)", border: "none", borderRadius: 10, cursor: "pointer", color: iconClr, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          <button onClick={() => setMobileOpen(false)} style={{ width: 36, height: 36, background: theme === "dark" ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.07)", border: "none", borderRadius: 50, cursor: "pointer", color: iconClr, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
           </button>
         </div>
 
-        {/* ── Auth Buttons ── */}
-        <div style={{ padding: "16px 20px", borderBottom: `1px solid ${borderClr}`, display: "flex", gap: 10, flexShrink: 0 }}>
-          <Link href="/login" onClick={() => setMobileOpen(false)} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 7, padding: "12px 0", background: "transparent", border: `1.5px solid ${theme === "dark" ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)"}`, borderRadius: 12, color: iconClr, fontFamily: FO, fontSize: 13, fontWeight: 700, textDecoration: "none", letterSpacing: "0.02em" }}>
-            <IconUser /> Log In
-          </Link>
-          <Link href="/signup" onClick={() => setMobileOpen(false)} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 7, padding: "12px 0", background: theme === "dark" ? "#fff" : "#111", border: `1.5px solid ${theme === "dark" ? "#fff" : "#111"}`, borderRadius: 12, color: theme === "dark" ? "#000" : "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, textDecoration: "none", letterSpacing: "0.02em" }}>
-            <IconUserPlus /> Sign Up
-          </Link>
-        </div>
-
-        {/* ── AI Studio spotlight ── */}
-        <div style={{ margin: "12px 20px", flexShrink: 0 }}>
-          <Link href="/create" onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 18px", background: theme === "dark" ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)", border: `1px solid ${borderClr}`, borderRadius: 14, textDecoration: "none" }}>
-            <div>
-              <div style={{ fontFamily: FH, fontSize: 14, fontWeight: 800, color: iconClr, letterSpacing: "-0.01em" }}>✦ AI Studio</div>
-              <div style={{ fontFamily: FO, fontSize: 11, color: theme === "dark" ? "#888" : "#999", marginTop: 2 }}>Generate posters in seconds</div>
-            </div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={theme === "dark" ? "#555" : "#bbb"} strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
-          </Link>
-        </div>
-
-        {/* ── Accordion nav sections ── */}
-        <div style={{ flex: 1 }}>
-          {NAV_ITEMS.map(item => (
-            <MobileAccordion key={item.label} item={item} onClose={() => setMobileOpen(false)} theme={theme} />
-          ))}
-
-          {/* Direct quick links */}
-          <div style={{ padding: "8px 0", borderBottom: `1px solid ${borderClr}` }}>
-            {[
-              { label: "Browse Collection", sub: "618+ wall art designs", href: "/collection" },
-              { label: "Sell Your Art",     sub: "Earn 30% per sale",      href: "/partner" },
-              { label: "My Cart",           sub: count > 0 ? `${count} item${count > 1 ? "s" : ""} in bag` : "Your shopping bag", href: "/cart" },
-            ].map(link => (
-              <Link key={link.label} href={link.href} onClick={() => setMobileOpen(false)}
-                style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", textDecoration: "none", transition: "background 0.15s" }}
-                onMouseEnter={e => e.currentTarget.style.background = theme === "dark" ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)"}
-                onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
-                <div>
-                  <div style={{ fontFamily: FO, fontSize: 14, fontWeight: 600, color: iconClr, marginBottom: 1 }}>{link.label}</div>
-                  <div style={{ fontFamily: FO, fontSize: 11, color: theme === "dark" ? "#555" : "#aaa" }}>{link.sub}</div>
-                </div>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={theme === "dark" ? "#333" : "#ddd"} strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
-              </Link>
-            ))}
+        {/* ── Guest profile card ── */}
+        <div style={{ margin: "4px 16px 12px", background: theme === "dark" ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)", borderRadius: 16, padding: "14px 16px", display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
+          <div style={{ width: 42, height: 42, borderRadius: 50, background: theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)", display: "flex", alignItems: "center", justifyContent: "center", color: theme === "dark" ? "#888" : "#aaa", flexShrink: 0 }}>
+            <IcoUser />
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: FH, fontSize: 14, fontWeight: 700, color: iconClr, letterSpacing: "-0.01em" }}>Welcome back</div>
+            <div style={{ fontFamily: FO, fontSize: 11, color: theme === "dark" ? "#555" : "#aaa", marginTop: 1 }}>Sign in to your account</div>
+          </div>
+          <div style={{ display: "flex", gap: 6 }}>
+            <Link href="/login" onClick={() => setMobileOpen(false)} style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, color: iconClr, textDecoration: "none", background: theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)", padding: "5px 12px", borderRadius: 50, whiteSpace: "nowrap" }}>Log in</Link>
+            <Link href="/signup" onClick={() => setMobileOpen(false)} style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, color: theme === "dark" ? "#000" : "#fff", textDecoration: "none", background: iconClr, padding: "5px 12px", borderRadius: 50, whiteSpace: "nowrap" }}>Sign up</Link>
           </div>
         </div>
 
-        {/* ── Bottom bar: theme + cart count ── */}
-        <div style={{ padding: "16px 20px 36px", borderTop: `1px solid ${borderClr}`, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0, gap: 12 }}>
-          <button onClick={toggle} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 0", background: theme === "dark" ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)", border: `1px solid ${borderClr}`, borderRadius: 12, cursor: "pointer", color: iconClr, fontFamily: FO, fontSize: 13, fontWeight: 600 }}>
-            {theme === "dark" ? <IconSun /> : <IconMoon />}
-            {theme === "dark" ? "Light Mode" : "Dark Mode"}
-          </button>
-          <Link href="/cart" onClick={() => setMobileOpen(false)} style={{ position: "relative", width: 46, height: 46, display: "flex", alignItems: "center", justifyContent: "center", color: iconClr, textDecoration: "none", background: theme === "dark" ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)", border: `1px solid ${borderClr}`, borderRadius: 12, flexShrink: 0 }}>
-            <IconBag />
-            {count > 0 && <span style={{ position: "absolute", top: -5, right: -5, background: iconClr, color: theme === "dark" ? "#000" : "#fff", borderRadius: "50%", width: 17, height: 17, fontSize: 9, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>{count}</span>}
+        {/* ── Nav rows ── */}
+        <div style={{ flex: 1 }}>
+          <SideNavItem href="/collection"   icon={<IcoGrid />}  label="All Posters"       sub="618+ designs"            onClose={() => setMobileOpen(false)} theme={theme} />
+          <SideNavItem href="/collection?cat=Movies" icon={<IcoHeart />} label="Movies & TV"  sub="Marvel, DC, classics"  onClose={() => setMobileOpen(false)} theme={theme} />
+          <SideNavItem href="/collection?cat=Cars"   icon={<IcoTag />}   label="Cars"          sub="Ferrari, Porsche, BMW"  onClose={() => setMobileOpen(false)} theme={theme} />
+          <SideNavItem href="/create"       icon={<IcoSpark />} label="AI Studio"        sub="Generate posters in seconds" onClose={() => setMobileOpen(false)} theme={theme} />
+          <SideNavItem href="/partner"      icon={<IcoInfo />}  label="Sell Your Art"    sub="Earn 30% per sale"       onClose={() => setMobileOpen(false)} theme={theme} />
+          <SideNavItem href="/cart"         icon={<IcoBag />}   label="My Cart"          sub={count > 0 ? `${count} item${count > 1 ? "s" : ""} in bag` : "Your shopping bag"} onClose={() => setMobileOpen(false)} theme={theme} badge={count} />
+        </div>
+
+        {/* ── Bottom CTAs ── */}
+        <div style={{ padding: "16px 16px 40px", display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
+          <Link href="/collection" onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "16px 0", background: iconClr, color: theme === "dark" ? "#000" : "#fff", fontFamily: FO, fontSize: 14, fontWeight: 800, letterSpacing: "0.02em", textDecoration: "none", borderRadius: 50 }}>
+            Browse Collection →
           </Link>
+          <button onClick={() => { toggle(); }} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "13px 0", background: "transparent", border: `1.5px solid ${borderClr}`, borderRadius: 50, cursor: "pointer", color: iconClr, fontFamily: FO, fontSize: 13, fontWeight: 600 }}>
+            {theme === "dark" ? <IconSun /> : <IconMoon />}
+            {theme === "dark" ? "Switch to Light" : "Switch to Dark"}
+          </button>
         </div>
       </div>
 
