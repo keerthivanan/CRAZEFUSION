@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/navbar/Navbar";
 import Hero from "@/components/hero/Hero";
+import GalleryStrip from "@/components/gallery/GalleryStrip";
 import BestSelling from "@/components/products/BestSelling";
 import MultiPosters from "@/components/products/MultiPosters";
 import TrendingProducts from "@/components/products/TrendingProducts";
@@ -28,6 +29,7 @@ export default function Home() {
     <main style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
       <Navbar />
       <Hero />
+      <GalleryStrip />
       <BestSelling />
       <MultiPosters />
       <TrendingProducts />
