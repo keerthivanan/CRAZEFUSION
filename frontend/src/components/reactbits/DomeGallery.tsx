@@ -417,7 +417,7 @@ export default function DomeGallery({
                     onClick={e => { if (draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
                     onPointerUp={e => { if ((e.nativeEvent as PointerEvent).pointerType!=='touch'||draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
                     style={{ position:'absolute', inset:'10px', borderRadius:imageBorderRadius, overflow:'hidden', cursor:'pointer', backfaceVisibility:'hidden' as any, transition:'transform 300ms', pointerEvents:'auto', transform:'translateZ(0)' }}>
-                    <img src={it.src} draggable={false} alt={it.alt} loading="lazy" decoding="async" style={{ width:'100%', height:'100%', objectFit:'cover', pointerEvents:'none', backfaceVisibility:'hidden' as any, filter: grayscale ? 'grayscale(1)' : 'none' }} />
+                    <img src={it.src} draggable={false} alt={it.alt} loading="eager" decoding="async" style={{ width:'100%', height:'100%', objectFit:'cover', pointerEvents:'none', backfaceVisibility:'hidden' as any, filter: grayscale ? 'grayscale(1)' : 'none' }} />
                   </div>
                 </div>
                 );

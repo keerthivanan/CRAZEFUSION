@@ -354,7 +354,14 @@ const STATS = [
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+    // Kick off all image fetches in parallel so the dome is fully populated on first spin
+    IMAGES.forEach(img => {
+      const i = new Image();
+      i.src = img.src;
+    });
+  }, []);
 
   return (
     <section style={{
@@ -370,7 +377,7 @@ export default function Hero() {
           fit={1.05}
           fitBasis="max"
           minRadius={700}
-          maxVerticalRotationDeg={40}
+          maxVerticalRotationDeg={30}
           segments={36}
           dragDampening={1.8}
           grayscale={false}
