@@ -391,13 +391,18 @@ const STATS = [
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
+  const [segments, setSegments] = useState(36);
   useEffect(() => {
     setMounted(true);
+    const updateSegments = () => setSegments(window.innerWidth >= 1024 ? 44 : 36);
+    updateSegments();
+    window.addEventListener('resize', updateSegments);
     // Kick off all image fetches in parallel so the dome is fully populated on first spin
     IMAGES.forEach(img => {
       const i = new Image();
       i.src = img.src;
     });
+    return () => window.removeEventListener('resize', updateSegments);
   }, []);
 
   return (
@@ -416,7 +421,7 @@ export default function Hero() {
           minRadius={480}
           maxRadius={2400}
           maxVerticalRotationDeg={30}
-          segments={36}
+          segments={segments}
           dragDampening={1.8}
           grayscale={false}
           autoRotate={true}
