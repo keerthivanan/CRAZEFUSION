@@ -55,7 +55,8 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
 }
 
 function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
-  const xCols = Array.from({ length: seg }, (_, i) => -37 + i * 2);
+  // Start at -(seg-1) so the front face (rotY≈0°) lands at the centre of the column array — symmetric layout
+  const xCols = Array.from({ length: seg }, (_, i) => -(seg - 1) + i * 2);
   // Auto-size rows so total tiles never exceed pool — guarantees zero image repeats
   const half = pool.length > 0 ? Math.max(1, Math.floor((pool.length / seg - 1) / 2)) : 4;
   const evenYs = Array.from({ length: half * 2 + 1 }, (_, i) => (i - half) * 2);
