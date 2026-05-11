@@ -255,8 +255,12 @@ class App {
   onTouchUp() { this.isDown = false; this.onCheck(); }
 
   onWheel(e: Event) {
+    e.preventDefault();
     const we = e as WheelEvent;
-    const delta = we.deltaY || (we as any).wheelDelta || (we as any).detail;
+    // prefer horizontal delta (trackpad swipe left/right), fall back to vertical
+    const delta = Math.abs(we.deltaX) > Math.abs(we.deltaY)
+      ? we.deltaX
+      : we.deltaY || (we as any).wheelDelta || (we as any).detail;
     this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2;
     this.onCheckDebounce();
   }
@@ -294,26 +298,28 @@ class App {
     this.boundOnTouchDown = this.onTouchDown.bind(this);
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
+    // resize stays on window
     window.addEventListener('resize', this.boundOnResize);
-    window.addEventListener('mousewheel', this.boundOnWheel);
-    window.addEventListener('wheel', this.boundOnWheel);
-    window.addEventListener('mousedown', this.boundOnTouchDown);
+    // wheel scoped to container so it doesn't hijack page scroll
+    this.container.addEventListener('wheel', this.boundOnWheel, { passive: false } as any);
+    // drag start/touch start scoped to container
+    this.container.addEventListener('mousedown', this.boundOnTouchDown);
+    this.container.addEventListener('touchstart', this.boundOnTouchDown, { passive: true } as any);
+    // move/end stay on window so drag outside container still works
     window.addEventListener('mousemove', this.boundOnTouchMove);
     window.addEventListener('mouseup', this.boundOnTouchUp);
-    window.addEventListener('touchstart', this.boundOnTouchDown);
-    window.addEventListener('touchmove', this.boundOnTouchMove);
+    window.addEventListener('touchmove', this.boundOnTouchMove, { passive: true } as any);
     window.addEventListener('touchend', this.boundOnTouchUp);
   }
 
   destroy() {
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener('resize', this.boundOnResize);
-    window.removeEventListener('mousewheel', this.boundOnWheel);
-    window.removeEventListener('wheel', this.boundOnWheel);
-    window.removeEventListener('mousedown', this.boundOnTouchDown);
+    this.container.removeEventListener('wheel', this.boundOnWheel);
+    this.container.removeEventListener('mousedown', this.boundOnTouchDown);
+    this.container.removeEventListener('touchstart', this.boundOnTouchDown);
     window.removeEventListener('mousemove', this.boundOnTouchMove);
     window.removeEventListener('mouseup', this.boundOnTouchUp);
-    window.removeEventListener('touchstart', this.boundOnTouchDown);
     window.removeEventListener('touchmove', this.boundOnTouchMove);
     window.removeEventListener('touchend', this.boundOnTouchUp);
     if (this.renderer?.gl?.canvas?.parentNode) {

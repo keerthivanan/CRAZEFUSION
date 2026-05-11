@@ -39,6 +39,7 @@ export default function GalleryStrip() {
           borderRadius={0.05}
           scrollSpeed={3}
           scrollEase={0.05}
+          font="bold 24px Poppins, sans-serif"
         />
       </div>
     </section>
