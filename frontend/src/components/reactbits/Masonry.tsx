@@ -125,24 +125,54 @@ const Masonry: React.FC<MasonryProps> = ({
   }, [grid]);
 
   const hasMounted = useRef(false);
+  const hasAnimated = useRef(false);
 
+  // Set initial hidden state as soon as grid is ready (before visible)
   useLayoutEffect(() => {
-    if (!imagesReady) return;
-    grid.forEach((item, index) => {
-      const selector = `[data-key="${item.id}"]`;
-      const animProps = { x: item.x, y: item.y, width: item.w, height: item.h };
-      if (!hasMounted.current) {
-        const start = getInitialPosition(item);
-        gsap.fromTo(selector,
-          { opacity: 0, x: start.x, y: start.y, width: item.w, height: item.h, ...(blurToFocus && { filter: 'blur(10px)' }) },
-          { opacity: 1, ...animProps, ...(blurToFocus && { filter: 'blur(0px)' }), duration: 0.8, ease: 'power3.out', delay: index * stagger }
-        );
-      } else {
-        gsap.to(selector, { ...animProps, duration, ease, overwrite: 'auto' });
-      }
+    if (!imagesReady || !grid.length) return;
+    if (hasMounted.current) {
+      // reflow only — reposition without animation
+      grid.forEach(item => {
+        gsap.set(`[data-key="${item.id}"]`, { x: item.x, y: item.y, width: item.w, height: item.h, overwrite: 'auto' });
+      });
+      return;
+    }
+    // Prime items off-screen so they're invisible before the observer fires
+    grid.forEach(item => {
+      const start = getInitialPosition(item);
+      gsap.set(`[data-key="${item.id}"]`, {
+        x: start.x, y: start.y, width: item.w, height: item.h,
+        opacity: 0, ...(blurToFocus && { filter: 'blur(10px)' })
+      });
     });
     hasMounted.current = true;
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [grid, imagesReady]);
+
+  // Fire entrance animation when section scrolls into view
+  useEffect(() => {
+    if (!imagesReady || !grid.length || !containerRef.current) return;
+    if (hasAnimated.current) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      hasAnimated.current = true;
+      observer.disconnect();
+      grid.forEach((item, index) => {
+        const animProps = { x: item.x, y: item.y, width: item.w, height: item.h };
+        gsap.to(`[data-key="${item.id}"]`, {
+          opacity: 1,
+          ...animProps,
+          ...(blurToFocus && { filter: 'blur(0px)' }),
+          duration: 0.8,
+          ease: 'power3.out',
+          delay: index * stagger,
+        });
+      });
+    }, { threshold: 0.05 });
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [grid, imagesReady, stagger, blurToFocus]);
 
   const handleMouseEnter = (id: string, element: HTMLElement) => {
     if (scaleOnHover) gsap.to(`[data-key="${id}"]`, { scale: hoverScale, duration: 0.3, ease: 'power2.out' });
