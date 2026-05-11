@@ -422,7 +422,7 @@ export default function Hero() {
           autoRotate={true}
           autoRotateSpeed={5}
           overlayBlurColor="#080808"
-          imageBorderRadius="4px"
+          imageBorderRadius="8px"
           openedImageBorderRadius="12px"
           openedImageWidth="320px"
           openedImageHeight="460px"

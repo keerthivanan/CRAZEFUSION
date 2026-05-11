@@ -386,7 +386,7 @@ export default function DomeGallery({
     .sphere-item { position:absolute;top:-999px;bottom:-999px;left:-999px;right:-999px;margin:auto;width:calc(var(--radius)*3.14*2*${itemPct}/100);height:calc(var(--radius)*3.14*2*${itemPct}/100);transform-origin:50% 50%;backface-visibility:hidden;transition:transform 300ms;background:transparent; }
     .sphere-root[data-enlarging="true"] .scrim { opacity:1 !important;pointer-events:all !important; }
     @media (max-aspect-ratio:1/1) { .viewer-frame { height:auto !important;width:100% !important; } }
-    .item__image { position:absolute;inset:1px;border-radius:var(--tile-radius,12px);overflow:hidden;cursor:pointer;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 300ms;pointer-events:auto;transform:translateZ(0);background:transparent; }
+    .item__image { position:absolute;inset:2px;border-radius:var(--tile-radius,12px);overflow:hidden;cursor:pointer;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 300ms;pointer-events:auto;transform:translateZ(0);background:transparent; }
     .item__image--reference { position:absolute;inset:10px;pointer-events:none; }
   `;
 
@@ -405,8 +405,8 @@ export default function DomeGallery({
                 // Compute rotations directly in JS — no CSS variable dependency
                 const rotY = deg * (it.x + (it.sizeX - 1) / 2);
                 const rotX = deg * (it.y - (it.sizeY - 1) / 2);
-                // Scale tiles by cos(latitude) so they shrink near poles and never collide
-                const latScale = +(Math.cos(rotX * Math.PI / 180) * 0.97).toFixed(4);
+                // Shrink tile WIDTH only by cos(latitude) — fills arc slot exactly, no gaps, no overlap
+                const latScale = +Math.cos(rotX * Math.PI / 180).toFixed(4);
                 return (
                 <div key={`${it.x},${it.y},${i}`}
                   className="sphere-item"
@@ -419,13 +419,13 @@ export default function DomeGallery({
                     transformOrigin: '50% 50%',
                     backfaceVisibility: 'hidden' as any,
                     transition: 'transform 300ms',
-                    // scale(latScale) shrinks each tile proportional to cos(lat) — prevents pole collision
-                    transform: `rotateY(calc(${rotY}deg + var(--rot-y-delta, 0deg))) rotateX(calc(${rotX}deg + var(--rot-x-delta, 0deg))) translateZ(var(--radius, 520px)) scale(${latScale})`,
+                    // scaleX(latScale) shrinks tile width to match sphere arc at this latitude — no gaps, no overlap
+                    transform: `rotateY(calc(${rotY}deg + var(--rot-y-delta, 0deg))) rotateX(calc(${rotX}deg + var(--rot-x-delta, 0deg))) translateZ(var(--radius, 520px)) scaleX(${latScale})`,
                   } as React.CSSProperties}>
                   <div className="item__image" role="button" tabIndex={0} aria-label={it.alt || 'Open image'}
                     onClick={e => { if (draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
                     onPointerUp={e => { if ((e.nativeEvent as PointerEvent).pointerType!=='touch'||draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
-                    style={{ position:'absolute', inset:'0', borderRadius:imageBorderRadius, overflow:'hidden', cursor:'pointer', backfaceVisibility:'hidden' as any, transition:'transform 300ms', pointerEvents:'auto', transform:'translateZ(0)' }}>
+                    style={{ position:'absolute', inset:'2px', borderRadius:imageBorderRadius, overflow:'hidden', cursor:'pointer', backfaceVisibility:'hidden' as any, transition:'transform 300ms', pointerEvents:'auto', transform:'translateZ(0)' }}>
                     <img src={it.src} draggable={false} alt={it.alt} loading="eager" decoding="async" style={{ width:'100%', height:'100%', objectFit:'cover', pointerEvents:'none', backfaceVisibility:'hidden' as any, filter: grayscale ? 'grayscale(1)' : 'none' }} />
                   </div>
                 </div>
