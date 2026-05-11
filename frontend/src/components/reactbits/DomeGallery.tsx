@@ -29,15 +29,7 @@ type DomeGalleryProps = {
 
 type ItemDef = { src: string; alt: string; x: number; y: number; sizeX: number; sizeY: number; };
 
-const DEFAULT_IMAGES: ImageItem[] = [
-  { src: 'https://images.unsplash.com/photo-1755331039789-7e5680e26e8f?q=80&w=774&auto=format&fit=crop', alt: 'Abstract art' },
-  { src: 'https://images.unsplash.com/photo-1755569309049-98410b94f66d?q=80&w=772&auto=format&fit=crop', alt: 'Modern sculpture' },
-  { src: 'https://images.unsplash.com/photo-1755497595318-7e5e3523854f?q=80&w=774&auto=format&fit=crop', alt: 'Digital artwork' },
-  { src: 'https://images.unsplash.com/photo-1755353985163-c2a0fe5ac3d8?q=80&w=774&auto=format&fit=crop', alt: 'Contemporary art' },
-  { src: 'https://images.unsplash.com/photo-1745965976680-d00be7dc0377?q=80&w=774&auto=format&fit=crop', alt: 'Geometric pattern' },
-  { src: 'https://images.unsplash.com/photo-1752588975228-21f44630bb3c?q=80&w=774&auto=format&fit=crop', alt: 'Textured surface' },
-  { src: 'https://pbs.twimg.com/media/Gyla7NnXMAAXSo_?format=jpg&name=large', alt: 'Social media image' }
-];
+const DEFAULT_IMAGES: ImageItem[] = [];
 
 const DEFAULTS = { maxVerticalRotationDeg: 5, dragSensitivity: 20, enlargeTransitionMs: 300, segments: 35 };
 
@@ -64,9 +56,10 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
 
 function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
   const xCols = Array.from({ length: seg }, (_, i) => -37 + i * 2);
-  // 9 rows → ±40° vertical coverage — true sphere feel
-  const evenYs = [-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10];
-  const oddYs  = [-9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11];
+  // Auto-size rows so total tiles never exceed pool — guarantees zero image repeats
+  const half = pool.length > 0 ? Math.max(1, Math.floor((pool.length / seg - 1) / 2)) : 4;
+  const evenYs = Array.from({ length: half * 2 + 1 }, (_, i) => (i - half) * 2);
+  const oddYs = Array.from({ length: half * 2 + 1 }, (_, i) => (i - half) * 2 + 1);
   const coords = xCols.flatMap((x, c) => { const ys = c % 2 === 0 ? evenYs : oddYs; return ys.map(y => ({ x, y, sizeX: 2, sizeY: 2 })); });
   const totalSlots = coords.length;
   if (pool.length === 0) return coords.map(c => ({ ...c, src: '', alt: '' }));
@@ -381,27 +374,27 @@ export default function DomeGallery({
     el.style.visibility = 'hidden'; (el.style as any).zIndex = 0;
     const overlay = document.createElement('div');
     overlay.className = 'enlarge';
-    overlay.style.cssText = `position:absolute;left:${frameR.left-mainR.left}px;top:${frameR.top-mainR.top}px;width:${frameR.width}px;height:${frameR.height}px;opacity:0;z-index:30;will-change:transform,opacity;transform-origin:top left;transition:transform ${enlargeTransitionMs}ms ease,opacity ${enlargeTransitionMs}ms ease;border-radius:${openedImageBorderRadius};overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);`;
+    overlay.style.cssText = `position:absolute;left:${frameR.left - mainR.left}px;top:${frameR.top - mainR.top}px;width:${frameR.width}px;height:${frameR.height}px;opacity:0;z-index:30;will-change:transform,opacity;transform-origin:top left;transition:transform ${enlargeTransitionMs}ms ease,opacity ${enlargeTransitionMs}ms ease;border-radius:${openedImageBorderRadius};overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);`;
     const rawSrc = parent.dataset.src || (el.querySelector('img') as HTMLImageElement)?.src || '';
     const rawAlt = parent.dataset.alt || (el.querySelector('img') as HTMLImageElement)?.alt || '';
     const img = document.createElement('img');
     img.src = rawSrc; img.alt = rawAlt; img.style.cssText = `width:100%;height:100%;object-fit:cover;filter:${grayscale ? 'grayscale(1)' : 'none'};`;
     overlay.appendChild(img); viewerRef.current!.appendChild(overlay);
-    const tx0 = tileR.left-frameR.left, ty0 = tileR.top-frameR.top;
-    const sx0 = tileR.width/frameR.width, sy0 = tileR.height/frameR.height;
-    overlay.style.transform = `translate(${tx0}px,${ty0}px) scale(${isFinite(sx0)&&sx0>0?sx0:1},${isFinite(sy0)&&sy0>0?sy0:1})`;
-    setTimeout(() => { if (!overlay.parentElement) return; overlay.style.opacity='1'; overlay.style.transform='translate(0px,0px) scale(1,1)'; rootRef.current?.setAttribute('data-enlarging','true'); }, 16);
+    const tx0 = tileR.left - frameR.left, ty0 = tileR.top - frameR.top;
+    const sx0 = tileR.width / frameR.width, sy0 = tileR.height / frameR.height;
+    overlay.style.transform = `translate(${tx0}px,${ty0}px) scale(${isFinite(sx0) && sx0 > 0 ? sx0 : 1},${isFinite(sy0) && sy0 > 0 ? sy0 : 1})`;
+    setTimeout(() => { if (!overlay.parentElement) return; overlay.style.opacity = '1'; overlay.style.transform = 'translate(0px,0px) scale(1,1)'; rootRef.current?.setAttribute('data-enlarging', 'true'); }, 16);
     if (openedImageWidth || openedImageHeight) {
       const onFirstEnd = (ev: TransitionEvent) => {
         if (ev.propertyName !== 'transform') return; overlay.removeEventListener('transitionend', onFirstEnd);
         const prev = overlay.style.transition; overlay.style.transition = 'none';
-        const tw = openedImageWidth||`${frameR.width}px`, th = openedImageHeight||`${frameR.height}px`;
+        const tw = openedImageWidth || `${frameR.width}px`, th = openedImageHeight || `${frameR.height}px`;
         overlay.style.width = tw; overlay.style.height = th;
         const nr = overlay.getBoundingClientRect();
-        overlay.style.width = frameR.width+'px'; overlay.style.height = frameR.height+'px'; void overlay.offsetWidth;
+        overlay.style.width = frameR.width + 'px'; overlay.style.height = frameR.height + 'px'; void overlay.offsetWidth;
         overlay.style.transition = `left ${enlargeTransitionMs}ms ease,top ${enlargeTransitionMs}ms ease,width ${enlargeTransitionMs}ms ease,height ${enlargeTransitionMs}ms ease`;
-        requestAnimationFrame(() => { overlay.style.left=`${frameR.left-mainR.left+(frameR.width-nr.width)/2}px`; overlay.style.top=`${frameR.top-mainR.top+(frameR.height-nr.height)/2}px`; overlay.style.width=tw; overlay.style.height=th; });
-        overlay.addEventListener('transitionend', () => { overlay.style.transition=prev; }, { once: true });
+        requestAnimationFrame(() => { overlay.style.left = `${frameR.left - mainR.left + (frameR.width - nr.width) / 2}px`; overlay.style.top = `${frameR.top - mainR.top + (frameR.height - nr.height) / 2}px`; overlay.style.width = tw; overlay.style.height = th; });
+        overlay.addEventListener('transitionend', () => { overlay.style.transition = prev; }, { once: true });
       };
       overlay.addEventListener('transitionend', onFirstEnd);
     }
@@ -419,7 +412,7 @@ export default function DomeGallery({
     .stage { width:100%;height:100%;display:grid;place-items:center;position:absolute;inset:0;margin:auto;perspective:calc(var(--radius)*2.4);perspective-origin:50% 50%; }
     @media (min-width:1024px){.stage{perspective:calc(var(--radius)*8);}}
     .sphere { transform:translateZ(calc(var(--radius)*-1));will-change:transform;position:absolute; }
-    .sphere-item { position:absolute;top:-999px;bottom:-999px;left:-999px;right:-999px;margin:auto;width:calc(var(--radius)*3.14*2*${itemPct}/100);height:calc(var(--radius)*3.14*2*${itemPct}/100);transform-origin:50% 50%;backface-visibility:hidden;transition:transform 300ms;background:transparent; }
+    .sphere-item { position:absolute;top:-999px;bottom:-999px;left:-999px;right:-999px;margin:auto;width:calc(var(--radius)*3.14*2*${itemPct}/100);height:calc(var(--radius)*3.14*2*${itemPct}/100*1.4);transform-origin:50% 50%;backface-visibility:hidden;transition:transform 300ms;background:transparent; }
     .sphere-root[data-enlarging="true"] .scrim { opacity:1 !important;pointer-events:all !important; }
     @media (max-aspect-ratio:1/1) { .viewer-frame { height:auto !important;width:100% !important; } }
     .item__image { position:absolute;inset:2px;border-radius:var(--tile-radius,12px);overflow:hidden;cursor:pointer;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 300ms;pointer-events:auto;transform:translateZ(0);background:transparent; }
@@ -444,38 +437,38 @@ export default function DomeGallery({
                 // Shrink tile WIDTH only by cos(latitude) — fills arc slot exactly, no gaps, no overlap
                 const latScale = +Math.cos(rotX * Math.PI / 180).toFixed(4);
                 return (
-                <div key={`${it.x},${it.y},${i}`}
-                  className="sphere-item"
-                  data-src={it.src} data-alt={it.alt}
-                  data-offset-x={it.x} data-offset-y={it.y}
-                  data-size-x={it.sizeX} data-size-y={it.sizeY}
-                  style={{
-                    position: 'absolute', top: '-999px', bottom: '-999px', left: '-999px', right: '-999px', margin: 'auto',
-                    transformStyle: 'preserve-3d' as any,
-                    transformOrigin: '50% 50%',
-                    backfaceVisibility: 'hidden' as any,
-                    transition: 'transform 300ms',
-                    // scaleX(latScale) shrinks tile width to match sphere arc at this latitude — no gaps, no overlap
-                    transform: `rotateY(calc(${rotY}deg + var(--rot-y-delta, 0deg))) rotateX(calc(${rotX}deg + var(--rot-x-delta, 0deg))) translateZ(var(--radius, 520px)) scaleX(${latScale})`,
-                  } as React.CSSProperties}>
-                  <div className="item__image" role="button" tabIndex={0} aria-label={it.alt || 'Open image'}
-                    onClick={e => { if (draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
-                    onPointerUp={e => { if ((e.nativeEvent as PointerEvent).pointerType!=='touch'||draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
-                    style={{ position:'absolute', inset:'2px', borderRadius:imageBorderRadius, overflow:'hidden', cursor:'pointer', backfaceVisibility:'hidden' as any, transition:'transform 300ms', pointerEvents:'auto', transform:'translateZ(0)' }}>
-                    <img src={it.src} draggable={false} alt={it.alt} loading="eager" decoding="async" style={{ width:'100%', height:'100%', objectFit:'cover', pointerEvents:'none', backfaceVisibility:'hidden' as any, filter: grayscale ? 'grayscale(1)' : 'none' }} />
+                  <div key={`${it.x},${it.y},${i}`}
+                    className="sphere-item"
+                    data-src={it.src} data-alt={it.alt}
+                    data-offset-x={it.x} data-offset-y={it.y}
+                    data-size-x={it.sizeX} data-size-y={it.sizeY}
+                    style={{
+                      position: 'absolute', top: '-999px', bottom: '-999px', left: '-999px', right: '-999px', margin: 'auto',
+                      transformStyle: 'preserve-3d' as any,
+                      transformOrigin: '50% 50%',
+                      backfaceVisibility: 'hidden' as any,
+                      transition: 'transform 300ms',
+                      // scaleX(latScale) shrinks tile width to match sphere arc at this latitude — no gaps, no overlap
+                      transform: `rotateY(calc(${rotY}deg + var(--rot-y-delta, 0deg))) rotateX(calc(${rotX}deg + var(--rot-x-delta, 0deg))) translateZ(var(--radius, 520px)) scaleX(${latScale})`,
+                    } as React.CSSProperties}>
+                    <div className="item__image" role="button" tabIndex={0} aria-label={it.alt || 'Open image'}
+                      onClick={e => { if (draggingRef.current || movedRef.current || performance.now() - lastDragEndAt.current < 80 || openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
+                      onPointerUp={e => { if ((e.nativeEvent as PointerEvent).pointerType !== 'touch' || draggingRef.current || movedRef.current || performance.now() - lastDragEndAt.current < 80 || openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
+                      style={{ position: 'absolute', inset: '2px', borderRadius: imageBorderRadius, overflow: 'hidden', cursor: 'pointer', backfaceVisibility: 'hidden' as any, transition: 'transform 300ms', pointerEvents: 'auto', transform: 'translateZ(0)' }}>
+                      <img src={it.src} draggable={false} alt={it.alt} loading="eager" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none', backfaceVisibility: 'hidden' as any, filter: grayscale ? 'grayscale(1)' : 'none' }} />
+                    </div>
                   </div>
-                </div>
                 );
               })}
             </div>
           </div>
-          <div className="absolute inset-0 m-auto z-[3] pointer-events-none" style={{ backgroundImage:`radial-gradient(rgba(235,235,235,0) 65%,var(--overlay-blur-color,${overlayBlurColor}) 100%)` }} />
-          <div className="absolute inset-0 m-auto z-[3] pointer-events-none" style={{ WebkitMaskImage:`radial-gradient(rgba(235,235,235,0) 70%,var(--overlay-blur-color,${overlayBlurColor}) 90%)`, maskImage:`radial-gradient(rgba(235,235,235,0) 70%,var(--overlay-blur-color,${overlayBlurColor}) 90%)`, backdropFilter:'blur(3px)' }} />
-          <div className="absolute left-0 right-0 top-0 h-[120px] z-[5] pointer-events-none rotate-180" style={{ background:`linear-gradient(to bottom,transparent,var(--overlay-blur-color,${overlayBlurColor}))` }} />
-          <div className="absolute left-0 right-0 bottom-0 h-[120px] z-[5] pointer-events-none" style={{ background:`linear-gradient(to bottom,transparent,var(--overlay-blur-color,${overlayBlurColor}))` }} />
-          <div ref={viewerRef} className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center" style={{ padding:'var(--viewer-pad)' }}>
-            <div ref={scrimRef} className="scrim absolute inset-0 z-10 pointer-events-none opacity-0 transition-opacity duration-500" style={{ background:'rgba(0,0,0,0.4)', backdropFilter:'blur(3px)' }} />
-            <div ref={frameRef} className="viewer-frame h-full aspect-square flex" style={{ borderRadius:`var(--enlarge-radius,${openedImageBorderRadius})` }} />
+          <div className="absolute inset-0 m-auto z-[3] pointer-events-none" style={{ backgroundImage: `radial-gradient(rgba(235,235,235,0) 65%,var(--overlay-blur-color,${overlayBlurColor}) 100%)` }} />
+          <div className="absolute inset-0 m-auto z-[3] pointer-events-none" style={{ WebkitMaskImage: `radial-gradient(rgba(235,235,235,0) 70%,var(--overlay-blur-color,${overlayBlurColor}) 90%)`, maskImage: `radial-gradient(rgba(235,235,235,0) 70%,var(--overlay-blur-color,${overlayBlurColor}) 90%)`, backdropFilter: 'blur(3px)' }} />
+          <div className="absolute left-0 right-0 top-0 h-[120px] z-[5] pointer-events-none rotate-180" style={{ background: `linear-gradient(to bottom,transparent,var(--overlay-blur-color,${overlayBlurColor}))` }} />
+          <div className="absolute left-0 right-0 bottom-0 h-[120px] z-[5] pointer-events-none" style={{ background: `linear-gradient(to bottom,transparent,var(--overlay-blur-color,${overlayBlurColor}))` }} />
+          <div ref={viewerRef} className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center" style={{ padding: 'var(--viewer-pad)' }}>
+            <div ref={scrimRef} className="scrim absolute inset-0 z-10 pointer-events-none opacity-0 transition-opacity duration-500" style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(3px)' }} />
+            <div ref={frameRef} className="viewer-frame h-full aspect-square flex" style={{ borderRadius: `var(--enlarge-radius,${openedImageBorderRadius})` }} />
           </div>
         </div>
       </div>

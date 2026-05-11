@@ -22,7 +22,6 @@ const KC_PLAN = {
   'vintage':              15,  // retro / classic
   'botanical':            12,  // floral / butterfly art
   'sneakerhead':          15,  // Jordan, sneaker art
-  'zodiac':               12,  // all 12 signs
   'k-pop':                15,  // BTS, K-pop idols
   'indie-aesthetics':      7,  // all indie
   'moodboard-aesthetics':  3,  // all moodboard

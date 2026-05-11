@@ -9,7 +9,7 @@ const DomeGallery = dynamic(() => import("@/components/reactbits/DomeGallery"), 
 const FH = "var(--font-epilogue-var,'Epilogue',sans-serif)";
 const FB = "var(--font-poppins-var,'Poppins',sans-serif)";
 
-// 369 images — keerthicollections aesthetic + newposters cars & anime only
+// 357 images — keerthicollections aesthetic (no zodiac) + newposters cars & anime only
 const IMAGES = [
   { src: "/dome-images/kc-art/1024_the_mona_lisa_art_poster_leonardo_da_vinci.webp", alt: "Fine Art" },
   { src: "/dome-images/kc-art/1032_claude_monet_s_water_lilies_poster.webp", alt: "Fine Art" },
@@ -158,18 +158,6 @@ const IMAGES = [
   { src: "/dome-images/kc-sneakerhead/701_sneakerhead_art_poster.webp", alt: "Sneakerhead" },
   { src: "/dome-images/kc-sneakerhead/705_sneakerhead_art_poster.webp", alt: "Sneakerhead" },
   { src: "/dome-images/kc-sneakerhead/709_sneakerhead_art_poster.webp", alt: "Sneakerhead" },
-  { src: "/dome-images/kc-zodiac/1012_aries_zodiac_poster.webp", alt: "Zodiac" },
-  { src: "/dome-images/kc-zodiac/1013_taurus_zodiac_sign_poster.webp", alt: "Zodiac" },
-  { src: "/dome-images/kc-zodiac/1014_gemini_zodiac_sign_poster.webp", alt: "Zodiac" },
-  { src: "/dome-images/kc-zodiac/1015_cancer_zodiac_sign_poster.webp", alt: "Zodiac" },
-  { src: "/dome-images/kc-zodiac/1016_leo_zodiac_sign_poster.webp", alt: "Zodiac" },
-  { src: "/dome-images/kc-zodiac/1017_virgo_zodiac_sign_poster.webp", alt: "Zodiac" },
-  { src: "/dome-images/kc-zodiac/1018_scorpio_zodiac_sign_poster.webp", alt: "Zodiac" },
-  { src: "/dome-images/kc-zodiac/1019_sagittarius_zodiac_sign_poster.webp", alt: "Zodiac" },
-  { src: "/dome-images/kc-zodiac/1020_capricorn_zodiac_sign_poster.webp", alt: "Zodiac" },
-  { src: "/dome-images/kc-zodiac/1021_aquarius_zodiac_sign_poster.webp", alt: "Zodiac" },
-  { src: "/dome-images/kc-zodiac/1022_pisces_zodiac_sign_poster.webp", alt: "Zodiac" },
-  { src: "/dome-images/kc-zodiac/1023_libra_zodiac_sign_poster.webp", alt: "Zodiac" },
   { src: "/dome-images/kc-k-pop/1058_bts_face_yourself_poster_k_pop_poster_bts_poster.webp", alt: "K-Pop" },
   { src: "/dome-images/kc-k-pop/1062_bt21_bts_poster_k_pop_poster_bts_poster.webp", alt: "K-Pop" },
   { src: "/dome-images/kc-k-pop/2894_bangtan_june_2011_poster.webp", alt: "K-Pop" },
