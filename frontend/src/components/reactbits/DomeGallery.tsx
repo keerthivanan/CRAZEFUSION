@@ -111,6 +111,8 @@ export default function DomeGallery({
   const openStartedAtRef = useRef(0);
   const lastDragEndAt = useRef(0);
   const scrollLockedRef = useRef(false);
+  const isSnappingRef = useRef(false);
+  const snapBackRAF = useRef<number | null>(null);
 
   const lockScroll = useCallback(() => {
     if (scrollLockedRef.current) return;
@@ -199,7 +201,7 @@ export default function DomeGallery({
   useEffect(() => {
     if (!autoRotate) return;
     const tick = (time: number) => {
-      const active = draggingRef.current || !!inertiaRAF.current || !!focusedElRef.current;
+      const active = draggingRef.current || !!inertiaRAF.current || !!focusedElRef.current || isSnappingRef.current;
       if (!active) {
         if (lastAutoTime.current) {
           const delta = Math.min((time - lastAutoTime.current) / 1000, 0.032); // cap at ~30fps delta
@@ -217,6 +219,38 @@ export default function DomeGallery({
     autoRotateRAF.current = requestAnimationFrame(tick);
     return () => { if (autoRotateRAF.current) cancelAnimationFrame(autoRotateRAF.current); };
   }, [autoRotate, autoRotateSpeed]);
+
+  // Snap back to default position 3 seconds after the last drag
+  useEffect(() => {
+    const SNAP_DELAY = 3000;
+    const K = 0.075; // lerp factor — smooth ~900ms return
+    const tick = () => {
+      if (draggingRef.current || !!inertiaRAF.current || !!focusedElRef.current) {
+        isSnappingRef.current = false;
+      } else if (isSnappingRef.current) {
+        const cx = rotationRef.current.x, cy = rotationRef.current.y;
+        const dy = wrapAngleSigned(-cy); // shortest angular delta to reach 0
+        const nx = cx * (1 - K);
+        const ny = cy + dy * K;
+        if (Math.abs(nx) < 0.08 && Math.abs(wrapAngleSigned(ny)) < 0.08) {
+          rotationRef.current = { x: 0, y: 0 };
+          applyTransform(0, 0);
+          lastDragEndAt.current = 0;
+          lastAutoTime.current = 0;
+          isSnappingRef.current = false;
+        } else {
+          rotationRef.current = { x: nx, y: ny };
+          applyTransform(nx, ny);
+          lastAutoTime.current = 0; // keep auto-rotate paused while snapping
+        }
+      } else if (lastDragEndAt.current > 0 && performance.now() - lastDragEndAt.current >= SNAP_DELAY) {
+        isSnappingRef.current = true;
+      }
+      snapBackRAF.current = requestAnimationFrame(tick);
+    };
+    snapBackRAF.current = requestAnimationFrame(tick);
+    return () => { if (snapBackRAF.current) cancelAnimationFrame(snapBackRAF.current); };
+  }, []);
 
   const stopInertia = useCallback(() => {
     if (inertiaRAF.current) { cancelAnimationFrame(inertiaRAF.current); inertiaRAF.current = null; }
@@ -246,6 +280,7 @@ export default function DomeGallery({
     onDragStart: ({ event }) => {
       if (focusedElRef.current) return;
       stopInertia();
+      isSnappingRef.current = false;
       const evt = event as PointerEvent;
       pointerTypeRef.current = (evt.pointerType as any) || 'mouse';
       if (pointerTypeRef.current === 'touch') { evt.preventDefault(); lockScroll(); }
