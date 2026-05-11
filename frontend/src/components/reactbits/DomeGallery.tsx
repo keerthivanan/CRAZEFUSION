@@ -373,10 +373,10 @@ export default function DomeGallery({
     .sphere,.sphere-item,.item__image { transform-style:preserve-3d; }
     .stage { width:100%;height:100%;display:grid;place-items:center;position:absolute;inset:0;margin:auto;perspective:calc(var(--radius)*1.4);perspective-origin:50% 50%; }
     .sphere { transform:translateZ(calc(var(--radius)*-1));will-change:transform;position:absolute; }
-    .sphere-item { position:absolute;top:-999px;bottom:-999px;left:-999px;right:-999px;margin:auto;width:calc(var(--radius)*3.14*2*${itemPct}/100);height:calc(var(--radius)*3.14*2*${itemPct}/100);transform-origin:50% 50%;backface-visibility:hidden;transition:transform 300ms; }
+    .sphere-item { position:absolute;top:-999px;bottom:-999px;left:-999px;right:-999px;margin:auto;width:calc(var(--radius)*3.14*2*${itemPct}/100);height:calc(var(--radius)*3.14*2*${itemPct}/100);transform-origin:50% 50%;backface-visibility:hidden;transition:transform 300ms;background:#000; }
     .sphere-root[data-enlarging="true"] .scrim { opacity:1 !important;pointer-events:all !important; }
     @media (max-aspect-ratio:1/1) { .viewer-frame { height:auto !important;width:100% !important; } }
-    .item__image { position:absolute;inset:10px;border-radius:var(--tile-radius,12px);overflow:hidden;cursor:pointer;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 300ms;pointer-events:auto;transform:translateZ(0); }
+    .item__image { position:absolute;inset:4px;border-radius:var(--tile-radius,12px);overflow:hidden;cursor:pointer;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 300ms;pointer-events:auto;transform:translateZ(0);background:#111; }
     .item__image--reference { position:absolute;inset:10px;pointer-events:none; }
   `;
 
