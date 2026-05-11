@@ -46,7 +46,10 @@ export interface MasonryItem {
 }
 
 interface GridItem extends MasonryItem {
-  x: number; y: number; w: number; h: number;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
 }
 
 interface MasonryProps {
@@ -70,7 +73,7 @@ const Masonry: React.FC<MasonryProps> = ({
   scaleOnHover = true,
   hoverScale = 0.95,
   blurToFocus = true,
-  colorShiftOnHover = false,
+  colorShiftOnHover = false
 }) => {
   const columns = useMedia(
     ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)'],
@@ -106,59 +109,71 @@ const Masonry: React.FC<MasonryProps> = ({
   const grid = useMemo<GridItem[]>(() => {
     if (!width) return [];
     const colHeights = new Array(columns).fill(0);
-    const gap = 12;
+    const gap = 16;
     const totalGaps = (columns - 1) * gap;
     const columnWidth = (width - totalGaps) / columns;
     const isMobile = width < 600;
     return items.map(child => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
-      const height = isMobile ? child.height / 3.5 : child.height / 2;
+      const height = isMobile ? child.height / 3.2 : child.height / 2;
       const y = colHeights[col];
       colHeights[col] += height + gap;
       return { ...child, x, y, w: columnWidth, h: height };
     });
   }, [columns, items, width]);
 
+  // Compute total height so container self-sizes (original used h-full which needs parent height)
   const totalHeight = useMemo(() => {
     if (!grid.length) return 0;
-    return Math.max(...grid.map(i => i.y + i.h)) + 12;
+    return Math.max(...grid.map(i => i.y + i.h)) + 16;
   }, [grid]);
 
   const hasMounted = useRef(false);
+  const hasPlayed = useRef(false);
 
+  // Set initial positions (hidden) as soon as grid is ready
   useLayoutEffect(() => {
-    if (!imagesReady) return;
-    grid.forEach((item, index) => {
-      const selector = `[data-key="${item.id}"]`;
-      const animProps = { x: item.x, y: item.y, width: item.w, height: item.h };
-      if (!hasMounted.current) {
-        const start = getInitialPosition(item);
-        gsap.fromTo(
-          selector,
-          {
-            opacity: 0,
-            x: start.x,
-            y: start.y,
-            width: item.w,
-            height: item.h,
-            ...(blurToFocus && { filter: 'blur(10px)' })
-          },
-          {
-            opacity: 1,
-            ...animProps,
-            ...(blurToFocus && { filter: 'blur(0px)' }),
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: index * stagger
-          }
-        );
-      } else {
-        gsap.to(selector, { ...animProps, duration, ease, overwrite: 'auto' });
-      }
+    if (!imagesReady || !grid.length) return;
+    if (hasMounted.current) {
+      // reflow: just reposition without re-animating
+      grid.forEach(item => {
+        gsap.set(`[data-key="${item.id}"]`, { x: item.x, y: item.y, width: item.w, height: item.h, overwrite: 'auto' });
+      });
+      return;
+    }
+    // Prime all items off-screen / invisible for the entrance animation
+    grid.forEach(item => {
+      const start = getInitialPosition(item);
+      gsap.set(`[data-key="${item.id}"]`, {
+        x: start.x, y: start.y, width: item.w, height: item.h,
+        opacity: 0, ...(blurToFocus && { filter: 'blur(10px)' })
+      });
     });
     hasMounted.current = true;
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [grid, imagesReady]);
+
+  // Play entrance when section scrolls into view
+  useEffect(() => {
+    if (!imagesReady || !grid.length || !containerRef.current || hasPlayed.current) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      hasPlayed.current = true;
+      observer.disconnect();
+      grid.forEach((item, index) => {
+        gsap.to(`[data-key="${item.id}"]`, {
+          opacity: 1,
+          x: item.x, y: item.y, width: item.w, height: item.h,
+          ...(blurToFocus && { filter: 'blur(0px)' }),
+          duration: 0.8,
+          ease: 'power3.out',
+          delay: index * stagger,
+        });
+      });
+    }, { threshold: 0.05 });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [grid, imagesReady, stagger, blurToFocus]);
 
   const handleMouseEnter = (id: string, element: HTMLElement) => {
     if (scaleOnHover) gsap.to(`[data-key="${id}"]`, { scale: hoverScale, duration: 0.3, ease: 'power2.out' });
@@ -184,7 +199,7 @@ const Masonry: React.FC<MasonryProps> = ({
           data-key={item.id}
           className="absolute box-content cursor-pointer"
           style={{ willChange: 'transform, width, height, opacity' }}
-          onClick={() => window.open(item.url, '_self')}
+          onClick={() => { window.location.href = item.url; }}
           onMouseEnter={e => handleMouseEnter(item.id, e.currentTarget)}
           onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}
         >
