@@ -169,7 +169,7 @@ function MobileAccordion({ item, onClose, theme }: { item: typeof NAV_ITEMS[0]; 
         <div style={{ paddingBottom: 8 }}>
           {item.cols.map(col => (
             <div key={col.heading} style={{ marginBottom: 8 }}>
-              <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#7c3aed", padding: "4px 20px 8px" }}>{col.heading}</div>
+              <div style={{ fontFamily: FO, fontSize: 9, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: mutedCol, padding: "4px 20px 8px" }}>{col.heading}</div>
               {col.items.map(link => (
                 <Link key={link.label} href={link.href} onClick={onClose}
                   style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 20px", textDecoration: "none", borderRadius: 0, transition: "background 0.15s" }}
@@ -340,19 +340,19 @@ export default function Navbar() {
           <Link href="/login" onClick={() => setMobileOpen(false)} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 7, padding: "12px 0", background: "transparent", border: `1.5px solid ${theme === "dark" ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)"}`, borderRadius: 12, color: iconClr, fontFamily: FO, fontSize: 13, fontWeight: 700, textDecoration: "none", letterSpacing: "0.02em" }}>
             <IconUser /> Log In
           </Link>
-          <Link href="/signup" onClick={() => setMobileOpen(false)} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 7, padding: "12px 0", background: "#7c3aed", border: "1.5px solid #7c3aed", borderRadius: 12, color: "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, textDecoration: "none", letterSpacing: "0.02em" }}>
+          <Link href="/signup" onClick={() => setMobileOpen(false)} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 7, padding: "12px 0", background: theme === "dark" ? "#fff" : "#111", border: `1.5px solid ${theme === "dark" ? "#fff" : "#111"}`, borderRadius: 12, color: theme === "dark" ? "#000" : "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, textDecoration: "none", letterSpacing: "0.02em" }}>
             <IconUserPlus /> Sign Up
           </Link>
         </div>
 
         {/* ── AI Studio spotlight ── */}
         <div style={{ margin: "12px 20px", flexShrink: 0 }}>
-          <Link href="/create" onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 18px", background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.25)", borderRadius: 14, textDecoration: "none" }}>
+          <Link href="/create" onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 18px", background: theme === "dark" ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)", border: `1px solid ${borderClr}`, borderRadius: 14, textDecoration: "none" }}>
             <div>
-              <div style={{ fontFamily: FH, fontSize: 14, fontWeight: 800, color: "#c084fc", letterSpacing: "-0.01em" }}>✦ AI Studio</div>
+              <div style={{ fontFamily: FH, fontSize: 14, fontWeight: 800, color: iconClr, letterSpacing: "-0.01em" }}>✦ AI Studio</div>
               <div style={{ fontFamily: FO, fontSize: 11, color: theme === "dark" ? "#888" : "#999", marginTop: 2 }}>Generate posters in seconds</div>
             </div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={theme === "dark" ? "#555" : "#bbb"} strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
           </Link>
         </div>
 
@@ -391,7 +391,7 @@ export default function Navbar() {
           </button>
           <Link href="/cart" onClick={() => setMobileOpen(false)} style={{ position: "relative", width: 46, height: 46, display: "flex", alignItems: "center", justifyContent: "center", color: iconClr, textDecoration: "none", background: theme === "dark" ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)", border: `1px solid ${borderClr}`, borderRadius: 12, flexShrink: 0 }}>
             <IconBag />
-            {count > 0 && <span style={{ position: "absolute", top: -5, right: -5, background: "#7c3aed", color: "#fff", borderRadius: "50%", width: 17, height: 17, fontSize: 9, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>{count}</span>}
+            {count > 0 && <span style={{ position: "absolute", top: -5, right: -5, background: iconClr, color: theme === "dark" ? "#000" : "#fff", borderRadius: "50%", width: 17, height: 17, fontSize: 9, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>{count}</span>}
           </Link>
         </div>
       </div>
