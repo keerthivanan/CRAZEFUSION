@@ -405,6 +405,8 @@ export default function DomeGallery({
                 // Compute rotations directly in JS — no CSS variable dependency
                 const rotY = deg * (it.x + (it.sizeX - 1) / 2);
                 const rotX = deg * (it.y - (it.sizeY - 1) / 2);
+                // Scale tiles by cos(latitude) so they shrink near poles and never collide
+                const latScale = +(Math.cos(rotX * Math.PI / 180) * 0.97).toFixed(4);
                 return (
                 <div key={`${it.x},${it.y},${i}`}
                   className="sphere-item"
@@ -417,8 +419,8 @@ export default function DomeGallery({
                     transformOrigin: '50% 50%',
                     backfaceVisibility: 'hidden' as any,
                     transition: 'transform 300ms',
-                    // Base transform hardcoded from JS; delta applied via CSS var on parent
-                    transform: `rotateY(calc(${rotY}deg + var(--rot-y-delta, 0deg))) rotateX(calc(${rotX}deg + var(--rot-x-delta, 0deg))) translateZ(var(--radius, 520px))`,
+                    // scale(latScale) shrinks each tile proportional to cos(lat) — prevents pole collision
+                    transform: `rotateY(calc(${rotY}deg + var(--rot-y-delta, 0deg))) rotateX(calc(${rotX}deg + var(--rot-x-delta, 0deg))) translateZ(var(--radius, 520px)) scale(${latScale})`,
                   } as React.CSSProperties}>
                   <div className="item__image" role="button" tabIndex={0} aria-label={it.alt || 'Open image'}
                     onClick={e => { if (draggingRef.current||movedRef.current||performance.now()-lastDragEndAt.current<80||openingRef.current) return; openItemFromElement(e.currentTarget as HTMLElement); }}
