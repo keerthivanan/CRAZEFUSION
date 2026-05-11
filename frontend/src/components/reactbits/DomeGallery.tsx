@@ -65,8 +65,8 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
 function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
   const xCols = Array.from({ length: seg }, (_, i) => -37 + i * 2);
   // 9 rows → ±40° vertical coverage — true sphere feel
-  const evenYs = [-8, -6, -4, -2, 0, 2, 4, 6, 8];
-  const oddYs  = [-7, -5, -3, -1, 1, 3, 5, 7, 9];
+  const evenYs = [-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10];
+  const oddYs  = [-9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11];
   const coords = xCols.flatMap((x, c) => { const ys = c % 2 === 0 ? evenYs : oddYs; return ys.map(y => ({ x, y, sizeX: 2, sizeY: 2 })); });
   const totalSlots = coords.length;
   if (pool.length === 0) return coords.map(c => ({ ...c, src: '', alt: '' }));
@@ -382,6 +382,7 @@ export default function DomeGallery({
     .sphere-root * { box-sizing:border-box; }
     .sphere,.sphere-item,.item__image { transform-style:preserve-3d; }
     .stage { width:100%;height:100%;display:grid;place-items:center;position:absolute;inset:0;margin:auto;perspective:calc(var(--radius)*2.4);perspective-origin:50% 50%; }
+    @media (min-width:1024px){.stage{perspective:calc(var(--radius)*8);}}
     .sphere { transform:translateZ(calc(var(--radius)*-1));will-change:transform;position:absolute; }
     .sphere-item { position:absolute;top:-999px;bottom:-999px;left:-999px;right:-999px;margin:auto;width:calc(var(--radius)*3.14*2*${itemPct}/100);height:calc(var(--radius)*3.14*2*${itemPct}/100);transform-origin:50% 50%;backface-visibility:hidden;transition:transform 300ms;background:transparent; }
     .sphere-root[data-enlarging="true"] .scrim { opacity:1 !important;pointer-events:all !important; }
