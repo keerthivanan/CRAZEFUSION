@@ -163,9 +163,9 @@ export default function CreatePage() {
     } catch (e: any) { setPubErr(e.message ?? "Publish failed."); setPubStep("details"); }
   };
 
-  const iF = (e: React.FocusEvent<HTMLInputElement>) => (e.currentTarget.style.borderColor = "#7c3aed");
-  const iB = (e: React.FocusEvent<HTMLInputElement>) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)");
-  const inp: React.CSSProperties = { width: "100%", padding: "12px 16px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 10, fontFamily: FO, fontSize: 13, color: "#fff", outline: "none", transition: "border-color 0.2s", boxSizing: "border-box" };
+  const iF = (e: React.FocusEvent<HTMLInputElement>) => (e.currentTarget.style.borderColor = "var(--c-text)");
+  const iB = (e: React.FocusEvent<HTMLInputElement>) => (e.currentTarget.style.borderColor = "var(--c-border)");
+  const inp: React.CSSProperties = { width: "100%", padding: "12px 16px", background: "var(--c-bg)", border: "1px solid var(--c-border)", borderRadius: 10, fontFamily: FO, fontSize: 13, color: "var(--c-text)", outline: "none", transition: "border-color 0.2s", boxSizing: "border-box" };
 
   const earnings = (sales * 19.99 * 0.3).toFixed(0);
 
@@ -181,23 +181,21 @@ export default function CreatePage() {
             {/* Header */}
             <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 32, flexWrap: "wrap", gap: 20 }}>
               <div>
-                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 12 }}>AI Poster Studio</div>
-                <h1 style={{ fontSize: "clamp(28px,4vw,52px)", fontWeight: 800, color: "#fff", margin: 0, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
+                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 12 }}>AI Poster Studio</div>
+                <h1 style={{ fontSize: "clamp(28px,4vw,52px)", fontWeight: 800, color: "var(--c-text)", margin: 0, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
                   Generate. Sell. Earn.
                 </h1>
-                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.35)", margin: "12px 0 0", maxWidth: 480, lineHeight: 1.7 }}>
+                <p style={{ fontSize: 14, color: "var(--c-text-muted)", margin: "12px 0 0", maxWidth: 480, lineHeight: 1.7 }}>
                   Describe any poster. AI generates it in seconds. Publish it to the shop and earn 30% every time someone buys it.
                 </p>
               </div>
               <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-                {partner && <span style={{ fontSize: 11, color: "#555" }}>{partner.email}</span>}
-                <div style={{ display: "flex", alignItems: "center", gap: 8, background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.2)", borderRadius: 50, padding: "8px 16px" }}>
-                  <span style={{ fontSize: 10, color: "#7c3aed", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>Credits</span>
-                  <span style={{ fontSize: 16, fontWeight: 800, color: "#7c3aed" }}>{credits}</span>
+                {partner && <span style={{ fontSize: 11, color: "var(--c-text-muted)" }}>{partner.email}</span>}
+                <div style={{ display: "flex", alignItems: "center", gap: 8, background: "var(--c-bg-card)", border: "1px solid var(--c-card-border)", borderRadius: 50, padding: "8px 16px" }}>
+                  <span style={{ fontSize: 10, color: "var(--c-text-muted)", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>Credits</span>
+                  <span style={{ fontSize: 16, fontWeight: 800, color: "var(--c-text)" }}>{credits}</span>
                 </div>
-                <Link href="/credits" style={{ padding: "9px 20px", background: "rgba(255,255,255,0.06)", color: "#fff", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50, border: "1px solid rgba(255,255,255,0.1)", transition: "all 0.2s" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}>
+                <Link href="/credits" style={{ padding: "9px 20px", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50, border: "1px solid var(--c-border)", transition: "all 0.2s" }}>
                   Buy Credits
                 </Link>
               </div>
@@ -207,8 +205,8 @@ export default function CreatePage() {
             <div style={{ display: "flex", gap: 24, paddingBottom: 32, flexWrap: "wrap" }}>
               {[["£6.00", "per sale you make"], ["30%", "commission rate"], ["Free", "to publish"], ["Auto", "prints & ships"]].map(([val, label]) => (
                 <div key={label} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <span style={{ fontSize: 16, fontWeight: 800, color: val === "Free" || val === "Auto" ? "#fff" : "#7c3aed" }}>{val}</span>
-                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", letterSpacing: "0.06em" }}>{label}</span>
+                  <span style={{ fontSize: 16, fontWeight: 800, color: "var(--c-text)" }}>{val}</span>
+                  <span style={{ fontSize: 11, color: "var(--c-text-muted)", letterSpacing: "0.06em" }}>{label}</span>
                 </div>
               ))}
             </div>
@@ -222,10 +220,10 @@ export default function CreatePage() {
           <div>
 
             {/* Mode tabs */}
-            <div style={{ display: "flex", gap: 4, background: "rgba(255,255,255,0.04)", borderRadius: 14, padding: 4, marginBottom: 28, width: "fit-content" }}>
+            <div style={{ display: "flex", gap: 4, background: "var(--c-bg-soft)", borderRadius: 14, padding: 4, marginBottom: 28, width: "fit-content", border: "1px solid var(--c-border)" }}>
               {[{ id: "generate", label: "Generate New" }, { id: "edit", label: "Edit a Poster" }].map(m => (
                 <button key={m.id} onClick={() => { setMode(m.id as "generate"|"edit"); setResult(null); setError(""); setPubStep("idle"); }}
-                  style={{ padding: "10px 22px", borderRadius: 10, border: "none", cursor: "pointer", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.05em", transition: "all 0.2s", background: mode === m.id ? "#fff" : "transparent", color: mode === m.id ? "#000" : "#666" }}>
+                  style={{ padding: "10px 22px", borderRadius: 10, border: "none", cursor: "pointer", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.05em", transition: "all 0.2s", background: mode === m.id ? "var(--c-btn-bg)" : "transparent", color: mode === m.id ? "var(--c-btn-text)" : "var(--c-text-muted)" }}>
                   {m.label}
                 </button>
               ))}
@@ -234,15 +232,15 @@ export default function CreatePage() {
             {/* Upload (edit mode) */}
             {mode === "edit" && (
               <div style={{ marginBottom: 20 }}>
-                <div onClick={() => fileRef.current?.click()} style={{ border: "2px dashed rgba(255,255,255,0.1)", borderRadius: 16, padding: "24px", cursor: "pointer", textAlign: "center", transition: "border-color 0.2s" }}
-                  onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(124,58,237,0.4)")}
-                  onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)")}>
+                <div onClick={() => fileRef.current?.click()} style={{ border: "2px dashed var(--c-border)", borderRadius: 16, padding: "24px", cursor: "pointer", textAlign: "center", transition: "border-color 0.2s" }}
+                  onMouseEnter={e => (e.currentTarget.style.borderColor = "var(--c-text)")}
+                  onMouseLeave={e => (e.currentTarget.style.borderColor = "var(--c-border)")}>
                   {uploadedImg
                     ? <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                         <img src={uploadedImg} alt="" style={{ width: 56, height: 75, objectFit: "cover", borderRadius: 6 }} />
-                        <div style={{ textAlign: "left" }}><div style={{ fontSize: 13, color: "#fff", fontWeight: 600 }}>{uploadName}</div><div style={{ fontSize: 11, color: "#555", marginTop: 2 }}>Click to change</div></div>
+                        <div style={{ textAlign: "left" }}><div style={{ fontSize: 13, color: "var(--c-text)", fontWeight: 600 }}>{uploadName}</div><div style={{ fontSize: 11, color: "var(--c-text-muted)", marginTop: 2 }}>Click to change</div></div>
                       </div>
-                    : <><div style={{ fontSize: 12, fontWeight: 700, color: "#555", letterSpacing: "0.1em", textTransform: "uppercase" }}>Upload Poster to Edit</div><div style={{ fontSize: 11, color: "#333", marginTop: 4 }}>JPG, PNG, WEBP — max 10MB</div></>
+                    : <><div style={{ fontSize: 12, fontWeight: 700, color: "var(--c-text-muted)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Upload Poster to Edit</div><div style={{ fontSize: 11, color: "var(--c-text-dim)", marginTop: 4 }}>JPG, PNG, WEBP — max 10MB</div></>
                   }
                 </div>
                 <input ref={fileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleUpload} />
@@ -250,18 +248,18 @@ export default function CreatePage() {
             )}
 
             {/* Prompt box */}
-            <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden", marginBottom: 4, transition: "border-color 0.2s" }}
-              onFocusCapture={e => (e.currentTarget.style.borderColor = "rgba(124,58,237,0.5)")}
-              onBlurCapture={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}>
+            <div style={{ background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", borderRadius: 20, overflow: "hidden", marginBottom: 4, transition: "border-color 0.2s" }}
+              onFocusCapture={e => (e.currentTarget.style.borderColor = "var(--c-text)")}
+              onBlurCapture={e => (e.currentTarget.style.borderColor = "var(--c-border)")}>
               <textarea value={prompt} onChange={e => { setPrompt(e.target.value); setError(""); }}
                 onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleGenerate(); } }}
                 placeholder={mode === "generate" ? "Describe your poster... e.g. Ferrari F40 in neon rain, dark cinematic mood" : "How should this poster be edited?"}
-                style={{ width: "100%", minHeight: 130, background: "transparent", border: "none", outline: "none", resize: "none", fontFamily: FO, fontSize: 14, color: "#fff", padding: "22px 22px 10px", boxSizing: "border-box", lineHeight: 1.75 }} />
+                style={{ width: "100%", minHeight: 130, background: "transparent", border: "none", outline: "none", resize: "none", fontFamily: FO, fontSize: 14, color: "var(--c-text)", padding: "22px 22px 10px", boxSizing: "border-box", lineHeight: 1.75 }} />
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 18px 16px" }}>
-                <span style={{ fontSize: 11, color: "#333", letterSpacing: "0.04em" }}>5 credits per generation</span>
+                <span style={{ fontSize: 11, color: "var(--c-text-dim)", letterSpacing: "0.04em" }}>5 credits per generation</span>
                 <button onClick={handleGenerate} disabled={loading || !prompt.trim()}
-                  style={{ padding: "11px 28px", background: loading ? "#1a1a1a" : "#7c3aed", color: loading ? "#555" : "#000", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", borderRadius: 50, cursor: loading || !prompt.trim() ? "not-allowed" : "pointer", transition: "all 0.2s", display: "flex", alignItems: "center", gap: 8, boxShadow: loading || !prompt.trim() ? "none" : "0 0 20px rgba(124,58,237,0.3)" }}>
-                  {loading ? <><span style={{ width: 13, height: 13, border: "2px solid #555", borderTopColor: "#7c3aed", borderRadius: "50%", display: "inline-block", animation: "spin 0.8s linear infinite" }} />Generating...</> : mode === "generate" ? "Generate" : "Edit Poster"}
+                  style={{ padding: "11px 28px", background: loading ? "var(--c-bg-card)" : "var(--c-btn-bg)", color: loading ? "var(--c-text-dim)" : "var(--c-btn-text)", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", borderRadius: 50, cursor: loading || !prompt.trim() ? "not-allowed" : "pointer", transition: "all 0.2s", display: "flex", alignItems: "center", gap: 8, boxShadow: loading || !prompt.trim() ? "none" : "0 4px 20px rgba(0,0,0,0.15)" }}>
+                  {loading ? <><span style={{ width: 13, height: 13, border: "2px solid var(--c-border)", borderTopColor: "var(--c-text)", borderRadius: "50%", display: "inline-block", animation: "spin 0.8s linear infinite" }} />Generating...</> : mode === "generate" ? "Generate" : "Edit Poster"}
                 </button>
               </div>
             </div>
@@ -270,11 +268,11 @@ export default function CreatePage() {
 
             {/* Style chips */}
             <div style={{ marginTop: 24, marginBottom: 28 }}>
-              <div style={{ fontSize: 10, color: "#444", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>Quick Style</div>
+              <div style={{ fontSize: 10, color: "var(--c-text-muted)", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>Quick Style</div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                 {STYLES.map(s => (
                   <button key={s} onClick={() => setStyle(style === s ? null : s)}
-                    style={{ padding: "7px 14px", borderRadius: 50, border: `1px solid ${style === s ? "#7c3aed" : "rgba(255,255,255,0.08)"}`, background: style === s ? "rgba(124,58,237,0.1)" : "transparent", color: style === s ? "#7c3aed" : "#666", fontFamily: FO, fontSize: 11, fontWeight: style === s ? 700 : 500, cursor: "pointer", transition: "all 0.15s" }}>
+                    style={{ padding: "7px 14px", borderRadius: 50, border: `1px solid ${style === s ? "var(--c-text)" : "var(--c-border)"}`, background: style === s ? "var(--c-bg-card)" : "transparent", color: style === s ? "var(--c-text)" : "var(--c-text-muted)", fontFamily: FO, fontSize: 11, fontWeight: style === s ? 700 : 500, cursor: "pointer", transition: "all 0.15s" }}>
                     {s}
                   </button>
                 ))}
@@ -283,14 +281,14 @@ export default function CreatePage() {
 
             {/* Example prompts */}
             <div>
-              <div style={{ fontSize: 10, color: "#444", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>Tap to Try</div>
+              <div style={{ fontSize: 10, color: "var(--c-text-muted)", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>Tap to Try</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
                 {EXAMPLES.map(ex => (
                   <button key={ex} onClick={() => setPrompt(ex)}
-                    style={{ textAlign: "left", padding: "11px 14px", borderRadius: 10, border: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.02)", color: "#666", fontFamily: FO, fontSize: 12, cursor: "pointer", transition: "all 0.15s" }}
-                    onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(124,58,237,0.25)"; e.currentTarget.style.color = "#bbb"; }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "#666"; }}>
-                    "{ex}"
+                    style={{ textAlign: "left", padding: "11px 14px", borderRadius: 10, border: "1px solid var(--c-border)", background: "var(--c-bg-soft)", color: "var(--c-text-muted)", fontFamily: FO, fontSize: 12, cursor: "pointer", transition: "all 0.15s" }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--c-text)"; e.currentTarget.style.color = "var(--c-text)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--c-border)"; e.currentTarget.style.color = "var(--c-text-muted)"; }}>
+                    &ldquo;{ex}&rdquo;
                   </button>
                 ))}
               </div>
@@ -301,19 +299,19 @@ export default function CreatePage() {
           <div style={{ position: "sticky", top: 100 }}>
 
             {/* Preview panel */}
-            <div style={{ borderRadius: 24, overflow: "hidden", marginBottom: 16, aspectRatio: "3/4", background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.06)", position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ borderRadius: 24, overflow: "hidden", marginBottom: 16, aspectRatio: "3/4", background: "var(--c-bg-card)", border: "1px solid var(--c-card-border)", position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
 
               {loading && (
-                <div style={{ position: "absolute", inset: 0, background: "#080808", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", zIndex: 2 }}>
+                <div style={{ position: "absolute", inset: 0, background: "var(--c-bg)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", zIndex: 2 }}>
                   <div style={{ position: "relative", width: 80, height: 80, marginBottom: 24 }}>
-                    <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: "2px solid rgba(124,58,237,0.1)", animation: "ripple 1.5s ease-out infinite" }} />
-                    <div style={{ position: "absolute", inset: 8, borderRadius: "50%", border: "2px solid rgba(124,58,237,0.15)", animation: "ripple 1.5s ease-out 0.5s infinite" }} />
+                    <div style={{ position: "absolute", inset: 0, borderRadius: "50%", border: "2px solid var(--c-border)", animation: "ripple 1.5s ease-out infinite" }} />
+                    <div style={{ position: "absolute", inset: 8, borderRadius: "50%", border: "2px solid var(--c-card-border)", animation: "ripple 1.5s ease-out 0.5s infinite" }} />
                     <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <div style={{ width: 36, height: 36, border: "3px solid rgba(124,58,237,0.2)", borderTopColor: "#7c3aed", borderRadius: "50%", animation: "spin 1s linear infinite" }} />
+                      <div style={{ width: 36, height: 36, border: "3px solid var(--c-border)", borderTopColor: "var(--c-text)", borderRadius: "50%", animation: "spin 1s linear infinite" }} />
                     </div>
                   </div>
-                  <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", fontWeight: 600, marginBottom: 6 }}>Generating your poster</div>
-                  <div style={{ fontSize: 11, color: "#333", letterSpacing: "0.06em" }}>Takes 10 — 20 seconds</div>
+                  <div style={{ fontSize: 14, color: "var(--c-text)", fontWeight: 600, marginBottom: 6 }}>Generating your poster</div>
+                  <div style={{ fontSize: 11, color: "var(--c-text-dim)", letterSpacing: "0.06em" }}>Takes 10 — 20 seconds</div>
                 </div>
               )}
 
@@ -330,8 +328,8 @@ export default function CreatePage() {
                     ))}
                   </div>
                   <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.4)" }}>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: "rgba(255,255,255,0.5)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>Your Poster Appears Here</div>
-                    <div style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: "0.06em" }}>Describe it on the left</div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: "rgba(255,255,255,0.7)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>Your Poster Appears Here</div>
+                    <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", letterSpacing: "0.06em" }}>Describe it on the left</div>
                   </div>
                 </>
               )}
@@ -341,19 +339,19 @@ export default function CreatePage() {
             {result && pubStep === "idle" && (
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 <button onClick={handleAddToCart}
-                  style={{ width: "100%", padding: "16px 0", background: added ? "#16a34a" : "#7c3aed", color: "#000", fontFamily: FO, fontSize: 13, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", borderRadius: 50, cursor: "pointer", transition: "all 0.2s", boxShadow: added ? "none" : "0 0 28px rgba(124,58,237,0.25)" }}>
+                  style={{ width: "100%", padding: "16px 0", background: added ? "#16a34a" : "var(--c-btn-bg)", color: added ? "#fff" : "var(--c-btn-text)", fontFamily: FO, fontSize: 13, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", borderRadius: 50, cursor: "pointer", transition: "all 0.2s", boxShadow: "0 4px 20px rgba(0,0,0,0.12)" }}>
                   {added ? "Added to Cart" : "Buy This Poster — £19.99"}
                 </button>
                 <button onClick={() => partner ? setPubStep("details") : setPubStep("auth")}
-                  style={{ width: "100%", padding: "15px 0", background: "transparent", color: "#fff", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 50, cursor: "pointer", transition: "all 0.2s" }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = "#7c3aed"; e.currentTarget.style.color = "#7c3aed"; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = "#fff"; }}>
+                  style={{ width: "100%", padding: "15px 0", background: "transparent", color: "var(--c-text)", fontFamily: FO, fontSize: 13, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", border: "1px solid var(--c-border)", borderRadius: 50, cursor: "pointer", transition: "all 0.2s" }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--c-text)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--c-border)"; }}>
                   Publish to Shop — Earn 30%
                 </button>
                 <button onClick={handleGenerate}
-                  style={{ width: "100%", padding: "12px 0", background: "transparent", color: "#444", fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", border: "1px solid rgba(255,255,255,0.05)", borderRadius: 50, cursor: "pointer", transition: "color 0.15s" }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "#777")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "#444")}>
+                  style={{ width: "100%", padding: "12px 0", background: "transparent", color: "var(--c-text-muted)", fontFamily: FO, fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", border: "1px solid var(--c-border)", borderRadius: 50, cursor: "pointer", transition: "color 0.15s" }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "var(--c-text)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "var(--c-text-muted)")}>
                   Regenerate (5 credits)
                 </button>
               </div>
@@ -361,17 +359,17 @@ export default function CreatePage() {
 
             {/* ── AUTH STEP ── */}
             {pubStep === "auth" && (
-              <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: 24 }}>
-                <div style={{ fontSize: 14, fontWeight: 800, color: "#fff", marginBottom: 4 }}>
+              <div style={{ background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", borderRadius: 20, padding: 24 }}>
+                <div style={{ fontSize: 14, fontWeight: 800, color: "var(--c-text)", marginBottom: 4 }}>
                   {authMode === "register" ? "Create a free account" : "Log in to publish"}
                 </div>
-                <div style={{ fontSize: 11, color: "#555", marginBottom: 20, lineHeight: 1.6 }}>
+                <div style={{ fontSize: 11, color: "var(--c-text-muted)", marginBottom: 20, lineHeight: 1.6 }}>
                   Earn £6.00 every time your poster sells. Only takes 30 seconds.
                 </div>
-                <div style={{ display: "flex", gap: 3, background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: 3, marginBottom: 16 }}>
+                <div style={{ display: "flex", gap: 3, background: "var(--c-bg-card)", borderRadius: 10, padding: 3, marginBottom: 16, border: "1px solid var(--c-border)" }}>
                   {(["register", "login"] as const).map(m => (
                     <button key={m} onClick={() => { setAuthMode(m); setAErr(""); }}
-                      style={{ flex: 1, padding: "9px 0", borderRadius: 8, border: "none", cursor: "pointer", fontFamily: FO, fontSize: 12, fontWeight: 700, transition: "all 0.2s", background: authMode === m ? "#fff" : "transparent", color: authMode === m ? "#000" : "#555" }}>
+                      style={{ flex: 1, padding: "9px 0", borderRadius: 8, border: "none", cursor: "pointer", fontFamily: FO, fontSize: 12, fontWeight: 700, transition: "all 0.2s", background: authMode === m ? "var(--c-btn-bg)" : "transparent", color: authMode === m ? "var(--c-btn-text)" : "var(--c-text-muted)" }}>
                       {m === "register" ? "New Account" : "Login"}
                     </button>
                   ))}
@@ -388,10 +386,10 @@ export default function CreatePage() {
                 </div>
                 {aErr && <div style={{ fontSize: 11, color: "#f87171", marginTop: 10 }}>{aErr}</div>}
                 <button onClick={handleAuth} disabled={aLoading}
-                  style={{ width: "100%", padding: "14px 0", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", borderRadius: 50, cursor: "pointer", marginTop: 14, opacity: aLoading ? 0.6 : 1, transition: "opacity 0.2s" }}>
+                  style={{ width: "100%", padding: "14px 0", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", borderRadius: 50, cursor: "pointer", marginTop: 14, opacity: aLoading ? 0.6 : 1, transition: "opacity 0.2s" }}>
                   {aLoading ? "Please wait..." : authMode === "register" ? "Create Account" : "Log In"}
                 </button>
-                <button onClick={() => setPubStep("idle")} style={{ width: "100%", padding: "9px 0", background: "transparent", color: "#444", fontFamily: FO, fontSize: 11, border: "none", cursor: "pointer", marginTop: 6, letterSpacing: "0.06em" }}>
+                <button onClick={() => setPubStep("idle")} style={{ width: "100%", padding: "9px 0", background: "transparent", color: "var(--c-text-muted)", fontFamily: FO, fontSize: 11, border: "none", cursor: "pointer", marginTop: 6, letterSpacing: "0.06em" }}>
                   Cancel
                 </button>
               </div>
@@ -399,25 +397,25 @@ export default function CreatePage() {
 
             {/* ── PUBLISH DETAILS ── */}
             {pubStep === "details" && (
-              <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: 24 }}>
-                <div style={{ fontSize: 14, fontWeight: 800, color: "#fff", marginBottom: 4 }}>Name your poster</div>
-                <div style={{ fontSize: 11, color: "#555", marginBottom: 20 }}>This is what customers see in the shop</div>
+              <div style={{ background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", borderRadius: 20, padding: 24 }}>
+                <div style={{ fontSize: 14, fontWeight: 800, color: "var(--c-text)", marginBottom: 4 }}>Name your poster</div>
+                <div style={{ fontSize: 11, color: "var(--c-text-muted)", marginBottom: 20 }}>This is what customers see in the shop</div>
                 <input placeholder="e.g. Neon Ferrari in the Rain" value={pubTitle} onChange={e => setPubTitle(e.target.value)} style={{ ...inp, marginBottom: 16 }} onFocus={iF} onBlur={iB}
                   onKeyDown={e => { if (e.key === "Enter") handlePublish(); }} />
 
                 {/* Earnings calculator */}
-                <BorderGlow backgroundColor="#0a0814" borderRadius={14} colors={["#c084fc", "#f472b6", "#38bdf8"]} glowColor="270 70 70" glowIntensity={1} glowRadius={32} edgeSensitivity={25} coneSpread={30} animated={false} className="mb-4">
-                  <div style={{ padding: 16 }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 12 }}>Earnings Calculator</div>
+                <BorderGlow backgroundColor="transparent" borderRadius={14} colors={["#888", "#aaa", "#666"]} glowColor="0 0 60" glowIntensity={0.6} glowRadius={28} edgeSensitivity={25} coneSpread={30} animated={false} className="mb-4">
+                  <div style={{ padding: 16, background: "var(--c-bg-card)", borderRadius: 14, border: "1px solid var(--c-card-border)" }}>
+                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 12 }}>Earnings Calculator</div>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
-                      <span style={{ fontSize: 12, color: "#555" }}>If {sales} people buy this:</span>
+                      <span style={{ fontSize: 12, color: "var(--c-text-muted)" }}>If {sales} people buy this:</span>
                       <span style={{ fontSize: 16, fontWeight: 800, color: "#16a34a" }}>£{earnings}</span>
                     </div>
                     <input type="range" min={1} max={100} value={sales} onChange={e => setSales(Number(e.target.value))}
-                      style={{ width: "100%", accentColor: "#7c3aed" }} />
+                      style={{ width: "100%", accentColor: "var(--c-text)" }} />
                     <div style={{ display: "flex", justifyContent: "space-between", marginTop: 10 }}>
-                      <span style={{ fontSize: 10, color: "#333" }}>Sale price: £19.99</span>
-                      <span style={{ fontSize: 10, color: "#333" }}>Your cut: 30% = £6.00</span>
+                      <span style={{ fontSize: 10, color: "var(--c-text-dim)" }}>Sale price: £19.99</span>
+                      <span style={{ fontSize: 10, color: "var(--c-text-dim)" }}>Your cut: 30% = £6.00</span>
                     </div>
                   </div>
                 </BorderGlow>
@@ -425,10 +423,10 @@ export default function CreatePage() {
                 {pubErr && <div style={{ fontSize: 11, color: "#f87171", marginBottom: 10 }}>{pubErr}</div>}
 
                 <button onClick={handlePublish}
-                  style={{ width: "100%", padding: "15px 0", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", borderRadius: 50, cursor: "pointer", transition: "all 0.2s", boxShadow: "0 0 24px rgba(124,58,237,0.25)" }}>
+                  style={{ width: "100%", padding: "15px 0", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", borderRadius: 50, cursor: "pointer", transition: "all 0.2s", boxShadow: "0 4px 20px rgba(0,0,0,0.12)" }}>
                   Publish to Shop
                 </button>
-                <button onClick={() => setPubStep("idle")} style={{ width: "100%", padding: "9px 0", background: "transparent", color: "#444", fontFamily: FO, fontSize: 11, border: "none", cursor: "pointer", marginTop: 6, letterSpacing: "0.06em" }}>
+                <button onClick={() => setPubStep("idle")} style={{ width: "100%", padding: "9px 0", background: "transparent", color: "var(--c-text-muted)", fontFamily: FO, fontSize: 11, border: "none", cursor: "pointer", marginTop: 6, letterSpacing: "0.06em" }}>
                   Cancel
                 </button>
               </div>
@@ -436,10 +434,10 @@ export default function CreatePage() {
 
             {/* ── UPLOADING ── */}
             {pubStep === "uploading" && (
-              <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: 32, textAlign: "center" }}>
-                <div style={{ width: 40, height: 40, border: "3px solid rgba(124,58,237,0.2)", borderTopColor: "#7c3aed", borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
-                <div style={{ fontSize: 13, color: "#aaa", fontWeight: 600 }}>Publishing your poster...</div>
-                <div style={{ fontSize: 11, color: "#333", marginTop: 6 }}>Uploading to the shop</div>
+              <div style={{ background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", borderRadius: 20, padding: 32, textAlign: "center" }}>
+                <div style={{ width: 40, height: 40, border: "3px solid var(--c-border)", borderTopColor: "var(--c-text)", borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
+                <div style={{ fontSize: 13, color: "var(--c-text)", fontWeight: 600 }}>Publishing your poster...</div>
+                <div style={{ fontSize: 11, color: "var(--c-text-dim)", marginTop: 6 }}>Uploading to the shop</div>
               </div>
             )}
 
@@ -447,16 +445,16 @@ export default function CreatePage() {
             {pubStep === "done" && (
               <div style={{ background: "linear-gradient(135deg, rgba(22,163,74,0.08), rgba(22,163,74,0.04))", border: "1px solid rgba(22,163,74,0.2)", borderRadius: 20, padding: 28, textAlign: "center" }}>
                 <div style={{ width: 52, height: 52, background: "#16a34a", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px", fontSize: 22, color: "#fff", fontWeight: 800 }}>✓</div>
-                <div style={{ fontSize: 16, fontWeight: 800, color: "#fff", marginBottom: 8 }}>Live in the Shop</div>
-                <div style={{ fontSize: 12, color: "#666", lineHeight: 1.7, marginBottom: 24 }}>
+                <div style={{ fontSize: 16, fontWeight: 800, color: "var(--c-text)", marginBottom: 8 }}>Live in the Shop</div>
+                <div style={{ fontSize: 12, color: "var(--c-text-muted)", lineHeight: 1.7, marginBottom: 24 }}>
                   Your poster is live. You earn <strong style={{ color: "#16a34a" }}>£6.00</strong> every time someone buys it — automatically.
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  <Link href="/collection" style={{ display: "block", padding: "13px 0", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50 }}>
+                  <Link href="/collection" style={{ display: "block", padding: "13px 0", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50 }}>
                     View in Shop
                   </Link>
                   <button onClick={() => { setResult(null); setPrompt(""); setPubStep("idle"); setPubTitle(""); }}
-                    style={{ padding: "12px 0", background: "transparent", color: "#555", fontFamily: FO, fontSize: 11, fontWeight: 700, border: "1px solid rgba(255,255,255,0.06)", borderRadius: 50, cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                    style={{ padding: "12px 0", background: "transparent", color: "var(--c-text-muted)", fontFamily: FO, fontSize: 11, fontWeight: 700, border: "1px solid var(--c-border)", borderRadius: 50, cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase" }}>
                     Create Another
                   </button>
                 </div>
@@ -474,20 +472,20 @@ export default function CreatePage() {
                 ].map(c => (
                   <BorderGlow
                     key={c.title}
-                    backgroundColor="#0d0d10"
+                    backgroundColor="transparent"
                     borderRadius={14}
-                    colors={["#c084fc", "#f472b6", "#38bdf8"]}
-                    glowColor="270 70 70"
-                    glowIntensity={1}
-                    glowRadius={32}
+                    colors={["#888", "#aaa", "#666"]}
+                    glowColor="0 0 60"
+                    glowIntensity={0.6}
+                    glowRadius={28}
                     edgeSensitivity={25}
                     coneSpread={30}
                     animated={false}
                   >
-                    <div style={{ padding: "16px 14px" }}>
-                      <div style={{ fontSize: 16, marginBottom: 6, opacity: 0.7 }}>{c.icon}</div>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: "#fff", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 6 }}>{c.title}</div>
-                      <div style={{ fontSize: 11, color: "#555", lineHeight: 1.6 }}>{c.body}</div>
+                    <div style={{ padding: "16px 14px", background: "var(--c-bg-soft)", borderRadius: 14, border: "1px solid var(--c-border)" }}>
+                      <div style={{ fontSize: 16, marginBottom: 6, opacity: 0.7, color: "var(--c-text)" }}>{c.icon}</div>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: "var(--c-text)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 6 }}>{c.title}</div>
+                      <div style={{ fontSize: 11, color: "var(--c-text-muted)", lineHeight: 1.6 }}>{c.body}</div>
                     </div>
                   </BorderGlow>
                 ))}
