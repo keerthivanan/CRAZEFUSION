@@ -77,7 +77,7 @@ export default function ProductPage() {
     <div style={{ background: "var(--c-bg)", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
       <Navbar />
       <div style={{ fontFamily: FO, fontSize: 32, fontWeight: 400, color: "var(--c-text)", paddingTop: 64 }}>Product not found</div>
-      <Link href="/collection" style={{ fontFamily: FO, fontSize: 13, color: "#7c3aed", textDecoration: "underline" }}>← Back to collection</Link>
+      <Link href="/collection" style={{ fontFamily: FO, fontSize: 13, color: "var(--c-text)", textDecoration: "underline" }}>← Back to collection</Link>
     </div>
   );
 
@@ -134,7 +134,7 @@ export default function ProductPage() {
             </h1>
 
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-              <div style={{ color: "#7c3aed", fontSize: 13, letterSpacing: 2 }}>★★★★★</div>
+              <div style={{ color: "var(--c-text)", fontSize: 13, letterSpacing: 2 }}>★★★★★</div>
               <span style={{ fontFamily: FO, fontSize: 12, color: "#aaa" }}>4.9 (2,400+ reviews)</span>
             </div>
 
@@ -247,7 +247,7 @@ export default function ProductPage() {
           <div style={{ borderTop: "1px solid var(--c-border)", padding: "64px 32px" }}>
             <div style={{ maxWidth: 1400, margin: "0 auto" }}>
               <div style={{ fontFamily: FO, fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "#aaa", marginBottom: 8 }}>You Might Also Like</div>
-              <h2 style={{ fontFamily: FO, fontSize: "clamp(22px,3vw,36px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 32 }}>Related <span style={{ color: "#7c3aed" }}>Posters</span></h2>
+              <h2 style={{ fontFamily: FO, fontSize: "clamp(22px,3vw,36px)", fontWeight: 700, color: "var(--c-text)", textTransform: "uppercase", marginBottom: 32 }}>Related Posters</h2>
               <div className="related-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 24 }}>
                 {related.map(r => (
                   <Link key={r.id} href={`/product/${r.id}`} style={{ textDecoration: "none" }}>

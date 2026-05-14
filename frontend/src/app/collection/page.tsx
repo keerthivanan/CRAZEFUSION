@@ -465,11 +465,11 @@ export default function CollectionPage() {
         {/* Product Grid */}
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "40px 32px" }}>
           {/* Offer Banner */}
-          <div style={{ background: "#111", color: "#fff", padding: "14px 24px", marginBottom: 32, display: "flex", alignItems: "center", justifyContent: "center", gap: 32, flexWrap: "wrap" }}>
+          <div style={{ background: "var(--c-btn-bg)", color: "var(--c-btn-text)", padding: "14px 24px", marginBottom: 32, display: "flex", alignItems: "center", justifyContent: "center", gap: 32, flexWrap: "wrap" }}>
             {[["BUY 4", "GET 3 FREE"], ["BUY 5", "GET 5 FREE"], ["BUY 6", "GET 12 FREE"]].map(([b, g]) => (
               <div key={b} style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 700, color: "#7c3aed" }}>{b}</span>
-                <span style={{ fontFamily: FO, fontSize: 11, color: "#aaa", letterSpacing: "0.1em" }}>{g}</span>
+                <span style={{ fontFamily: FO, fontSize: 14, fontWeight: 700, color: "var(--c-btn-text)" }}>{b}</span>
+                <span style={{ fontFamily: FO, fontSize: 11, color: "var(--c-btn-text)", opacity: 0.55, letterSpacing: "0.1em" }}>{g}</span>
               </div>
             ))}
             <span style={{ fontFamily: FO, fontSize: 11, color: "#888", letterSpacing: "0.1em" }}>· FREE UK DELIVERY ON ORDERS OVER £30 ·</span>

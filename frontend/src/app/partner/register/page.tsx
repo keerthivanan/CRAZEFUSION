@@ -12,7 +12,7 @@ const inputStyle: React.CSSProperties = {
   outline: "none", boxSizing: "border-box", borderRadius: 8,
   transition: "border-color 0.2s",
 };
-const iFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => (e.currentTarget.style.borderColor = "#7c3aed");
+const iFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => (e.currentTarget.style.borderColor = "var(--c-text)");
 const iBlur  = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => (e.currentTarget.style.borderColor = "var(--c-border)");
 
 const TERMS = [
@@ -51,7 +51,7 @@ export default function PartnerRegister() {
       <p style={{ fontFamily: FO, fontSize: 13, color: "#aaa", textAlign: "center", maxWidth: 400, lineHeight: 1.7 }}>
         We&apos;ll review your application and get back to you within 24 hours. Once approved, you&apos;ll have 3 days to submit your first design.
       </p>
-      <Link href="/" style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, color: "#7c3aed", textDecoration: "underline" }}>Back to store</Link>
+      <Link href="/" style={{ fontFamily: FO, fontSize: 12, fontWeight: 700, color: "var(--c-text)", textDecoration: "underline" }}>Back to store</Link>
     </div>
   );
 
@@ -109,7 +109,7 @@ export default function PartnerRegister() {
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
                 {TERMS.map((t, i) => (
                   <div key={i} style={{ display: "flex", gap: 10 }}>
-                    <span style={{ color: "#7c3aed", flexShrink: 0, fontWeight: 700, fontSize: 12 }}>→</span>
+                    <span style={{ color: "var(--c-text-muted)", flexShrink: 0, fontWeight: 700, fontSize: 12 }}>→</span>
                     <span style={{ fontFamily: FO, fontSize: 11, color: "var(--c-text-muted)", lineHeight: 1.6 }}>{t}</span>
                   </div>
                 ))}

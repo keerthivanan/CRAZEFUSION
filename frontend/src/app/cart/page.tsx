@@ -138,7 +138,7 @@ export default function CartPage() {
                 <div style={{ display: "flex" }}>
                   <input type="text" placeholder="Promo code" value={promoCode} onChange={e => setPromoCode(e.target.value)}
                     style={{ flex: 1, padding: "10px 14px", border: "1px solid var(--c-border)", borderRight: "none", fontFamily: F, fontSize: 12, color: "var(--c-text)", outline: "none", transition: "border-color 0.2s", borderRadius: "50px 0 0 50px" }}
-                    onFocus={e => (e.currentTarget.style.borderColor = "#7c3aed")}
+                    onFocus={e => (e.currentTarget.style.borderColor = "var(--c-text)")}
                     onBlur={e => (e.currentTarget.style.borderColor = "var(--c-border)")} />
                   <button onClick={() => {
                     const code = promoCode.trim().toUpperCase();

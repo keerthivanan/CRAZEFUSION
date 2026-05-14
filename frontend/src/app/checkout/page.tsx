@@ -53,7 +53,7 @@ export default function CheckoutPage() {
   };
   const inputStyle = (val: string): React.CSSProperties => ({ width: "100%", padding: "14px 18px", border: `1.5px solid ${val ? "var(--c-text)" : "var(--c-border)"}`, background: "var(--c-bg)", fontFamily: FO, fontSize: 13, color: "var(--c-text)", outline: "none", transition: "border-color 0.2s", boxSizing: "border-box", borderRadius: 8 });
   const labelStyle: React.CSSProperties = { fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 8, display: "block" };
-  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => (e.currentTarget.style.borderColor = "#7c3aed");
+  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => (e.currentTarget.style.borderColor = "var(--c-text)");
   const onBlur  = (e: React.FocusEvent<HTMLInputElement>, val: string) => (e.currentTarget.style.borderColor = val ? "var(--c-text)" : "var(--c-border)");
 
   const handlePlaceOrder = async () => {
@@ -109,7 +109,7 @@ export default function CheckoutPage() {
         name:        "CrazeFusion",
         description: `Order — ${cartItems.length} item${cartItems.length > 1 ? "s" : ""}`,
         prefill:     { name: form.name, email: form.email, contact: form.phone },
-        theme:       { color: "#7c3aed" },
+        theme:       { color: "#111111" },
         handler: async (response: any) => {
           const verRes  = await fetch("/api/payment/verify", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...response, orderData, items: cartItems }) });
           const verData = await verRes.json();
