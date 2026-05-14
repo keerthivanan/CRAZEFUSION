@@ -6,7 +6,7 @@ const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 // Password verified server-side via /api/admin/auth — never in client bundle
 
 const STATUS_COLOUR: Record<string, string> = {
-  pending:  "#7c3aed",
+  pending:  "#f59e0b",
   approved: "#16a34a",
   rejected: "#dc2626",
   removed:  "#888",
@@ -80,7 +80,7 @@ export default function AdminPanel() {
           style={{ width: "100%", padding: "13px 16px", border: "1px solid var(--c-border)", background: "var(--c-bg)", fontFamily: FO, fontSize: 14, color: "var(--c-text)", outline: "none", boxSizing: "border-box", borderRadius: 4, marginBottom: 12 }} />
         {pwErr && <div style={{ fontFamily: FO, fontSize: 12, color: "#dc2626", marginBottom: 12 }}>{pwErr}</div>}
         <button onClick={login}
-          style={{ width: "100%", padding: "14px 0", background: "#111", color: "#fff", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50 }}>
+          style={{ width: "100%", padding: "14px 0", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 12, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", cursor: "pointer", borderRadius: 50 }}>
           Enter Admin
         </button>
       </div>
@@ -94,12 +94,12 @@ export default function AdminPanel() {
     <div style={{ background: "var(--c-bg)", minHeight: "100vh" }}>
 
       {/* Top bar */}
-      <div style={{ background: "#111", padding: "0 32px" }}>
+      <div style={{ background: "var(--c-bg-soft)", borderBottom: "1px solid var(--c-border)", padding: "0 32px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div style={{ fontFamily: FO, fontSize: 14, fontWeight: 700, color: "#fff", letterSpacing: "0.1em", textTransform: "uppercase" }}>Admin Panel</div>
+          <div style={{ fontFamily: FO, fontSize: 14, fontWeight: 700, color: "var(--c-text)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Admin Panel</div>
           <div style={{ display: "flex", gap: 24 }}>
-            {pendingPartners > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#7c3aed" }}>{pendingPartners} partner{pendingPartners > 1 ? "s" : ""} pending</span>}
-            {pendingDesigns  > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#7c3aed" }}>{pendingDesigns} design{pendingDesigns > 1 ? "s" : ""} pending</span>}
+            {pendingPartners > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#f59e0b" }}>{pendingPartners} partner{pendingPartners > 1 ? "s" : ""} pending</span>}
+            {pendingDesigns  > 0 && <span style={{ fontFamily: FO, fontSize: 11, color: "#f59e0b" }}>{pendingDesigns} design{pendingDesigns > 1 ? "s" : ""} pending</span>}
           </div>
         </div>
       </div>
@@ -211,7 +211,7 @@ export default function AdminPanel() {
                   <div style={{ fontFamily: FO, fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>£{o.total.toFixed(2)}</div>
                   <div>{statusBadge(o.status)}</div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                    {(o.status === "pending" || o.status === "confirmed") && btn("Mark Printing", () => updateOrderStatus(o.id, "in_production"), "#7c3aed")}
+                    {(o.status === "pending" || o.status === "confirmed") && btn("Mark Printing", () => updateOrderStatus(o.id, "in_production"), "#111")}
                     {o.status === "in_production" && btn("Mark Shipped", () => updateOrderStatus(o.id, "shipped", trackingInputs[o.id] || undefined), "#2563eb")}
                     {o.status === "shipped"  && btn("Mark Delivered", () => updateOrderStatus(o.id, "delivered"), "#16a34a")}
                     {(o.status === "in_production" || o.status === "pending" || o.status === "confirmed") && (

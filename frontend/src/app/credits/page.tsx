@@ -7,9 +7,9 @@ import { supabase } from "@/lib/supabase";
 const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const PACKS = [
-  { id: "starter", name: "Starter", price: 2.99,  credits: 30,  edits: 6,  color: "rgba(255,255,255,0.03)", border: "rgba(255,255,255,0.1)", accentColor: "#fff",    tag: null },
-  { id: "creator", name: "Creator", price: 7.99,  credits: 100, edits: 20, color: "linear-gradient(135deg,#1a1200,#2a1e00)", border: "#7c3aed", accentColor: "#7c3aed", tag: "Most Popular" },
-  { id: "pro",     name: "Pro",     price: 14.99, credits: 250, edits: 50, color: "linear-gradient(135deg,#0a0a1a,#111128)", border: "#6366f1", accentColor: "#818cf8", tag: "Best Value" },
+  { id: "starter", name: "Starter", price: 2.99,  credits: 30,  edits: 6,  tag: null },
+  { id: "creator", name: "Creator", price: 7.99,  credits: 100, edits: 20, tag: "Most Popular" },
+  { id: "pro",     name: "Pro",     price: 14.99, credits: 250, edits: 50, tag: "Best Value" },
 ];
 
 const WHAT = [
@@ -80,7 +80,7 @@ export default function CreditsPage() {
         order_id:    data.razorpayOrderId,
         name:        "CrazeFusion AI Credits",
         description: `${pack.credits} Credits — ${pack.name} Pack`,
-        theme:       { color: "#7c3aed" },
+        theme:       { color: "#111111" },
         handler: async (response: any) => {
           const verRes  = await fetch("/api/credits/purchase", {
             method: "PUT",
@@ -112,22 +112,22 @@ export default function CreditsPage() {
 
         {/* Header */}
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px 64px", textAlign: "center" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.25)", borderRadius: 50, padding: "6px 16px", marginBottom: 28 }}>
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7c3aed", display: "inline-block" }} />
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#7c3aed" }}>AI Credits</span>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", borderRadius: 50, padding: "6px 16px", marginBottom: 28 }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--c-text)", display: "inline-block" }} />
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--c-text-muted)" }}>AI Credits</span>
           </div>
-          <h1 style={{ fontSize: "clamp(36px,5vw,64px)", fontWeight: 800, color: "#fff", margin: "0 0 16px", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
-            Power Your<br /><span style={{ color: "#7c3aed" }}>Creativity</span>
+          <h1 style={{ fontSize: "clamp(36px,5vw,64px)", fontWeight: 800, color: "var(--c-text)", margin: "0 0 16px", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+            Power Your<br />Creativity
           </h1>
-          <p style={{ fontSize: 15, color: "#666", maxWidth: 480, margin: "0 auto 24px", lineHeight: 1.7 }}>
+          <p style={{ fontSize: 15, color: "var(--c-text-muted)", maxWidth: 480, margin: "0 auto 24px", lineHeight: 1.7 }}>
             Buy credits once. Use them to generate and edit posters with AI. No subscription. No expiry.
           </p>
 
           {/* Balance badge */}
           {balance !== null && (
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(124,58,237,0.06)", border: "1px solid rgba(124,58,237,0.15)", borderRadius: 50, padding: "8px 20px" }}>
-              <span style={{ fontSize: 13, color: "#888" }}>Your balance:</span>
-              <span style={{ fontSize: 18, fontWeight: 800, color: "#7c3aed" }}>{balance} credits</span>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--c-bg-soft)", border: "1px solid var(--c-border)", borderRadius: 50, padding: "8px 20px" }}>
+              <span style={{ fontSize: 13, color: "var(--c-text-muted)" }}>Your balance:</span>
+              <span style={{ fontSize: 18, fontWeight: 800, color: "var(--c-text)" }}>{balance} credits</span>
             </div>
           )}
         </div>
@@ -136,7 +136,7 @@ export default function CreditsPage() {
         {success && (
           <div style={{ maxWidth: 480, margin: "0 auto 32px", padding: "16px 24px", background: "rgba(22,163,74,0.08)", border: "1px solid rgba(22,163,74,0.2)", borderRadius: 14, textAlign: "center" }}>
             <div style={{ fontSize: 14, fontWeight: 700, color: "#16a34a" }}>{success}</div>
-            <Link href="/create" style={{ fontSize: 12, color: "#7c3aed", textDecoration: "none", display: "block", marginTop: 8 }}>Go to AI Studio</Link>
+            <Link href="/create" style={{ fontSize: 12, color: "var(--c-text)", textDecoration: "none", display: "block", marginTop: 8 }}>Go to AI Studio</Link>
           </div>
         )}
 
@@ -150,32 +150,32 @@ export default function CreditsPage() {
         {/* Packs */}
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px 80px", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 20 }}>
           {PACKS.map((p, i) => (
-            <div key={p.name} style={{ background: p.color, border: `1px solid ${p.border}`, borderRadius: 20, padding: 32, position: "relative", overflow: "hidden", transition: "transform 0.2s" }}
-              onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-4px)")}
-              onMouseLeave={e => (e.currentTarget.style.transform = "translateY(0)")}>
+            <div key={p.name} style={{ background: i === 1 ? "var(--c-bg-soft)" : "var(--c-bg)", border: `1px solid ${i === 1 ? "var(--c-text)" : "var(--c-border)"}`, borderRadius: 20, padding: 32, position: "relative", overflow: "hidden", transition: "transform 0.2s, box-shadow 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 40px rgba(0,0,0,0.1)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
 
               {p.tag && (
-                <div style={{ position: "absolute", top: 16, right: 16, background: i === 1 ? "#7c3aed" : "#6366f1", color: i === 1 ? "#000" : "#fff", fontSize: 9, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", padding: "4px 10px", borderRadius: 50 }}>
+                <div style={{ position: "absolute", top: 16, right: 16, background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontSize: 9, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", padding: "4px 10px", borderRadius: 50 }}>
                   {p.tag}
                 </div>
               )}
 
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#666", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 12 }}>{p.name}</div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "var(--c-text-muted)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 12 }}>{p.name}</div>
 
-              <div style={{ fontSize: 52, fontWeight: 800, color: "#fff", lineHeight: 1, marginBottom: 4 }}>£{p.price}</div>
-              <div style={{ fontSize: 12, color: "#555", marginBottom: 28 }}>one-time · no expiry</div>
+              <div style={{ fontSize: "clamp(36px,4vw,52px)", fontWeight: 800, color: "var(--c-text)", lineHeight: 1, marginBottom: 4 }}>£{p.price}</div>
+              <div style={{ fontSize: 12, color: "var(--c-text-dim)", marginBottom: 28 }}>one-time · no expiry</div>
 
-              <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 12, padding: "16px 20px", marginBottom: 20 }}>
-                <div style={{ fontSize: 36, fontWeight: 800, color: p.accentColor, lineHeight: 1 }}>{p.credits}</div>
-                <div style={{ fontSize: 12, color: "#555", marginTop: 4 }}>credits = {p.edits} AI generations</div>
+              <div style={{ background: "var(--c-bg-card)", border: "1px solid var(--c-card-border)", borderRadius: 12, padding: "16px 20px", marginBottom: 20 }}>
+                <div style={{ fontSize: "clamp(24px,3.5vw,36px)", fontWeight: 800, color: "var(--c-text)", lineHeight: 1 }}>{p.credits}</div>
+                <div style={{ fontSize: 12, color: "var(--c-text-muted)", marginTop: 4 }}>credits = {p.edits} AI generations</div>
               </div>
 
-              <div style={{ fontSize: 11, color: "#444", marginBottom: 24, letterSpacing: "0.04em" }}>
+              <div style={{ fontSize: 11, color: "var(--c-text-muted)", marginBottom: 24, letterSpacing: "0.04em" }}>
                 £{(p.price / p.edits).toFixed(2)} per generation
               </div>
 
               <button onClick={() => handleBuy(p)} disabled={buying === p.id}
-                style={{ width: "100%", padding: "14px 0", background: buying === p.id ? "#333" : i === 1 ? "#7c3aed" : i === 2 ? "#6366f1" : "rgba(255,255,255,0.08)", color: buying === p.id ? "#666" : i === 1 ? "#000" : "#fff", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", borderRadius: 50, cursor: buying === p.id ? "not-allowed" : "pointer", transition: "all 0.2s" }}
+                style={{ width: "100%", padding: "14px 0", background: buying === p.id ? "var(--c-bg-card)" : "var(--c-btn-bg)", color: buying === p.id ? "var(--c-text-dim)" : "var(--c-btn-text)", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", border: "none", borderRadius: 50, cursor: buying === p.id ? "not-allowed" : "pointer", transition: "all 0.2s" }}
                 onMouseEnter={e => { if (buying !== p.id) e.currentTarget.style.opacity = "0.85"; }}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                 {buying === p.id ? "Processing..." : `Buy ${p.name} — £${p.price}`}
@@ -186,14 +186,14 @@ export default function CreditsPage() {
 
         {/* What credits do */}
         <div style={{ maxWidth: 640, margin: "0 auto", padding: "0 24px 80px" }}>
-          <h2 style={{ fontSize: 20, fontWeight: 700, color: "#fff", textAlign: "center", marginBottom: 24, letterSpacing: "-0.02em" }}>
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: "var(--c-text)", textAlign: "center", marginBottom: 24, letterSpacing: "-0.02em" }}>
             What You Can Do With Credits
           </h2>
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             {WHAT.map(w => (
-              <div key={w.action} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 18px", background: "rgba(255,255,255,0.02)", borderRadius: 10, border: "1px solid rgba(255,255,255,0.05)" }}>
-                <span style={{ fontSize: 13, color: "#aaa" }}>{w.action}</span>
-                <span style={{ fontSize: 12, fontWeight: 700, color: "#7c3aed", background: "rgba(124,58,237,0.08)", padding: "4px 12px", borderRadius: 20, whiteSpace: "nowrap", marginLeft: 16 }}>
+              <div key={w.action} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 18px", background: "var(--c-bg-soft)", borderRadius: 10, border: "1px solid var(--c-border)" }}>
+                <span style={{ fontSize: 13, color: "var(--c-text-muted)" }}>{w.action}</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: "var(--c-text)", background: "var(--c-bg-card)", border: "1px solid var(--c-card-border)", padding: "4px 12px", borderRadius: 20, whiteSpace: "nowrap", marginLeft: 16 }}>
                   {w.credits} credits
                 </span>
               </div>
@@ -203,9 +203,9 @@ export default function CreditsPage() {
 
         {/* CTA */}
         <div style={{ textAlign: "center", padding: "0 24px 100px" }}>
-          <Link href="/create" style={{ display: "inline-block", padding: "15px 40px", background: "#7c3aed", color: "#000", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50, boxShadow: "0 0 32px rgba(124,58,237,0.25)", transition: "all 0.2s" }}
-            onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 0 48px rgba(124,58,237,0.45)")}
-            onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 0 32px rgba(124,58,237,0.25)")}>
+          <Link href="/create" style={{ display: "inline-block", padding: "15px 40px", background: "var(--c-btn-bg)", color: "var(--c-btn-text)", fontFamily: FO, fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", textDecoration: "none", borderRadius: 50, boxShadow: "0 8px 32px rgba(0,0,0,0.12)", transition: "all 0.2s" }}
+            onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.2)")}
+            onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.12)")}>
             Try The AI Studio
           </Link>
         </div>

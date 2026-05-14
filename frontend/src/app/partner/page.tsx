@@ -61,7 +61,7 @@ export default function PartnerLanding() {
             {perks.map(({ num, title, desc }) => (
               <div key={num} style={{ background: "var(--c-bg-soft)", padding: "40px 28px" }}>
                 <div style={{ fontFamily: FO, fontSize: 48, fontWeight: 700, color: "var(--c-text)", opacity: 0.1, lineHeight: 1, marginBottom: 24 }}>{num}</div>
-                <div style={{ width: 28, height: 2, background: "#7c3aed", marginBottom: 18 }} />
+                <div style={{ width: 28, height: 2, background: "var(--c-text)", marginBottom: 18 }} />
                 <div style={{ fontFamily: FO, fontSize: 15, fontWeight: 700, color: "var(--c-text)", marginBottom: 12 }}>{title}</div>
                 <p style={{ fontFamily: FO, fontSize: 12, color: "var(--c-text-muted)", lineHeight: 1.8, margin: 0 }}>{desc}</p>
               </div>

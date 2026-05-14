@@ -39,18 +39,18 @@ export default function ReviewsPage() {
 
         {/* Hero */}
         <div style={{ background: "var(--c-bg-soft)", padding: "64px 32px", textAlign: "center" }}>
-          <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "#7c3aed", marginBottom: 12 }}>Customer Love</div>
+          <div style={{ fontFamily: F, fontSize: 10, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--c-text-muted)", marginBottom: 12 }}>Customer Love</div>
           <h1 style={{ fontFamily: FE, fontSize: "clamp(32px,5vw,72px)", fontWeight: 400, color: "var(--c-text)", textTransform: "uppercase", letterSpacing: "-0.04em", marginBottom: 12 }}>
-            10,000+ Happy <span style={{ color: "#7c3aed" }}>Walls</span>
+            10,000+ Happy Walls
           </h1>
           <p style={{ fontFamily: F, fontSize: 15, color: "#888", maxWidth: 440, margin: "0 auto 36px" }}>
             Real customers, real walls, real smiles. See what the UK is saying about us.
           </p>
           {/* Rating Summary */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
-            <div style={{ fontFamily: FE, fontSize: 56, fontWeight: 400, color: "var(--c-text)", lineHeight: 1 }}>4.9</div>
+            <div style={{ fontFamily: FE, fontSize: "clamp(36px,5vw,56px)", fontWeight: 400, color: "var(--c-text)", lineHeight: 1 }}>4.9</div>
             <div>
-              <div style={{ color: "#7c3aed", fontSize: 24, letterSpacing: 4, marginBottom: 4 }}>★★★★★</div>
+              <div style={{ color: "var(--c-text)", fontSize: 24, letterSpacing: 4, marginBottom: 4 }}>★★★★★</div>
               <div style={{ fontFamily: F, fontSize: 12, color: "#aaa", letterSpacing: "0.1em", textTransform: "uppercase" }}>2,400+ Reviews</div>
             </div>
           </div>
@@ -99,8 +99,8 @@ export default function ReviewsPage() {
                   onMouseEnter={e => { e.currentTarget.style.borderColor = "#888888"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(160,160,160,0.18)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = "#efefef"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.transform = "translateY(0)"; }}>
                   <div style={{ color: "var(--c-text)", fontSize: 13, marginBottom: 12, letterSpacing: 2 }}>{"★".repeat(r.stars)}</div>
-                  <p style={{ fontFamily: F, fontSize: 14, color: "#444", lineHeight: 1.7, marginBottom: 16 }}>"{r.text}"</p>
-                  <div style={{ height: 1, background: "#f0f0f0", marginBottom: 16 }} />
+                  <p style={{ fontFamily: F, fontSize: 14, color: "var(--c-text-muted)", lineHeight: 1.7, marginBottom: 16 }}>"{r.text}"</p>
+                  <div style={{ height: 1, background: "var(--c-border)", marginBottom: 16 }} />
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
                     <div>
                       <div style={{ fontFamily: FE, fontSize: 13, fontWeight: 700, color: "var(--c-text)" }}>{r.name}</div>
