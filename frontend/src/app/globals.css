@@ -1,10 +1,7 @@
 @import "tailwindcss";
 
-html { scroll-behavior: smooth; }
-
 /* ── Design Tokens ── */
 @theme {
-  --color-gold:        #7c3aed;
   --color-red:         #dc2626;
   --color-green:       #16a34a;
 
@@ -69,9 +66,7 @@ html { scroll-behavior: smooth; }
 /* Remove browser focus ring on mouse click — keep for keyboard nav */
 *:focus:not(:focus-visible) { outline: none !important; }
 *:focus { outline: none; }
-button, a, input, select, textarea { outline: none; }
-button:focus, a:focus, input:focus, select:focus, textarea:focus { outline: none; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
   background: var(--c-bg);
   color: var(--c-text);
@@ -114,13 +109,6 @@ body {
 }
 [data-theme="dark"] .ticker-strip span {
   color: #111 !important;
-}
-
-/* Headings that still use hardcoded #111 */
-[data-theme="dark"] h1,
-[data-theme="dark"] h2,
-[data-theme="dark"] h3 {
-  color: #f0f0f0 !important;
 }
 
 /* ══════════════════════════════════════════
@@ -314,8 +302,6 @@ body {
 /* ── Global heading defaults — let components control weight ── */
 h1, h2, h3, h4, h5, h6 { margin: 0; }
 
-/* Paragraphs */
-[data-theme="dark"] p { color: #999 !important; }
 
 /* Inputs */
 [data-theme="dark"] input { background: #111 !important; border-color: #333 !important; color: #f0f0f0 !important; }

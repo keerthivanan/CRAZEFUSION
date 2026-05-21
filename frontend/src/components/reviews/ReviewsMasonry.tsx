@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 import type { MasonryItem } from "@/components/reactbits/Masonry";
 
@@ -76,7 +77,7 @@ export default function ReviewsMasonry() {
 
         {/* CTA */}
         <div style={{ textAlign:"center", marginTop:64 }}>
-          <a href="/collection" style={{
+          <Link href="/collection" style={{
             display:"inline-flex", alignItems:"center", gap:8,
             padding:"16px 44px",
             background:"var(--c-btn-bg)", color:"var(--c-btn-text)",
@@ -86,10 +87,10 @@ export default function ReviewsMasonry() {
             transition:"transform 0.2s, box-shadow 0.2s",
             fontFamily:"'Poppins',sans-serif",
           }}
-          onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-2px)"; e.currentTarget.style.boxShadow="0 16px 48px rgba(0,0,0,0.25)"; }}
-          onMouseLeave={e=>{ e.currentTarget.style.transform=""; e.currentTarget.style.boxShadow="0 8px 32px rgba(0,0,0,0.15)"; }}>
+          onMouseEnter={e=>{ (e.currentTarget as HTMLAnchorElement).style.transform="translateY(-2px)"; (e.currentTarget as HTMLAnchorElement).style.boxShadow="0 16px 48px rgba(0,0,0,0.25)"; }}
+          onMouseLeave={e=>{ (e.currentTarget as HTMLAnchorElement).style.transform=""; (e.currentTarget as HTMLAnchorElement).style.boxShadow="0 8px 32px rgba(0,0,0,0.15)"; }}>
             Browse Full Collection →
-          </a>
+          </Link>
         </div>
 
       </div>

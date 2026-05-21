@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Epilogue, Poppins, Space_Grotesk } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
+import AnnouncementBar from "@/components/navbar/AnnouncementBar";
+import MobileBottomNav from "@/components/navbar/MobileBottomNav";
 import "./globals.css";
 
 const epilogue = Epilogue({
@@ -66,9 +68,6 @@ export const metadata: Metadata = {
     creator:     "@crazefusion",
   },
   alternates: { canonical: SITE_URL },
-  verification: {
-    google: "add-your-google-search-console-verification-here",
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -77,7 +76,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-        <link rel="canonical" href={SITE_URL} />
         {/* JSON-LD structured data */}
         <script
           type="application/ld+json"
@@ -113,7 +111,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body style={{ margin: 0, fontFamily: "var(--font-poppins-var,'Poppins',sans-serif)" }}>
         <ThemeProvider>
           <CartProvider>
+            <AnnouncementBar />
             {children}
+            <MobileBottomNav />
           </CartProvider>
         </ThemeProvider>
       </body>

@@ -540,7 +540,7 @@ export default function Hero() {
 
       {/* Drag hint */}
       <div style={{
-        position: "absolute", top: 90, left: "50%", transform: "translateX(-50%)",
+        position: "absolute", top: 126, left: "50%", transform: "translateX(-50%)",
         zIndex: 10, textAlign: "center",
         opacity: mounted ? 0.45 : 0, transition: "opacity 1s 1.2s",
         pointerEvents: "none",

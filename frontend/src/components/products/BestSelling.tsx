@@ -92,7 +92,7 @@ export default function BestSelling() {
           </Link>
         </div>
         <div ref={trackRef} className="no-scrollbar"
-          style={{ display: "flex", gap: GAP, overflowX: "auto", scrollSnapType: "x mandatory", padding: "4px 32px 8px", WebkitOverflowScrolling: "touch" as any }}>
+          style={{ display: "flex", gap: GAP, overflowX: "auto", scrollSnapType: "x mandatory", padding: "4px 32px 8px" }}>
           {products.map(p => <ProductCard key={p.id} p={p} />)}
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 20, marginTop: 28 }}>

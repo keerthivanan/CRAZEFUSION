@@ -1,8 +1,7 @@
 ﻿"use client";
 import Link from "next/link";
 import PaymentIcons from "@/components/ui/PaymentIcons";
-const F  = "var(--font-poppins-var,'Poppins',sans-serif)";
-const FO = "var(--font-poppins-var,'Poppins',sans-serif)";
+const F = "var(--font-poppins-var,'Poppins',sans-serif)";
 
 const links = {
   Shop: [
@@ -42,7 +41,7 @@ export default function Footer() {
                 onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
                 onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")} />
             </Link>
-            <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "#666", marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ fontFamily: F, fontSize: 11, fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "#666", marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ width: 16, height: 2, background: "#444" }} />
               Premium Quality Prints
             </div>
@@ -102,7 +101,7 @@ export default function Footer() {
           {/* Link columns */}
           {(Object.entries(links) as [string, string[][]][]).map(([cat, items]) => (
             <div key={cat} className="footer-links-col">
-              <div style={{ fontFamily: FO, fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#555", marginBottom: 28 }}>
+              <div style={{ fontFamily: F, fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#555", marginBottom: 28 }}>
                 {cat}
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>

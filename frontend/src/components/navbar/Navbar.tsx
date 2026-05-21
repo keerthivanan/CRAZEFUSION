@@ -207,7 +207,7 @@ export default function Navbar() {
   return (
     <>
       {/* ── Desktop Navbar ── */}
-      <div className="nav-wrapper" style={{ position: "fixed", top: 12, left: "50%", transform: "translateX(-50%)", width: "calc(100% - 24px)", maxWidth: 1200, zIndex: 1000 }}>
+      <div className="nav-wrapper" style={{ position: "fixed", top: 48, left: "50%", transform: "translateX(-50%)", width: "calc(100% - 24px)", maxWidth: 1200, zIndex: 1000 }}>
         <nav style={{ height: 60, borderRadius: 16, background: navBg, backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)", border: `1px solid ${borderClr}`, boxShadow: `0 8px 48px rgba(0,0,0,${theme === "dark" ? "0.5" : "0.1"})`, position: "relative", overflow: "visible" }}>
           <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 20px" }}>
 
@@ -361,7 +361,7 @@ export default function Navbar() {
           .nav-hamburger  { display: flex !important; }
           .nav-cta        { display: none !important; }
           .nav-theme-btn  { display: none !important; }
-          .nav-wrapper    { top: 12px !important; width: calc(100% - 16px) !important; }
+          .nav-wrapper    { top: 48px !important; width: calc(100% - 16px) !important; }
         }
         @media (max-width: 480px) {
           .nav-logo { height: 38px !important; }
